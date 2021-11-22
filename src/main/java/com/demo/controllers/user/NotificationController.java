@@ -10,6 +10,7 @@ public class NotificationController {
 	@RequestMapping( value = { "","index" })
 	public String index() {
 		return "notification/index" ; 
+
 	}
 	
 }

@@ -32,7 +32,9 @@ public class PackageController {
 		modelMap.put("postUrl", postUrl);
 		modelMap.put("returnUrl", returnUrl);
 		modelMap.put("business", business);
+
 		modelMap.put("packages", packageService.getAllByStatus());
+
 		return "package/index" ; 
 	}
 	
@@ -51,5 +53,6 @@ public class PackageController {
 		System.out.println("Item: " + payPalResult.getNum_cart_items());
 		return "demo/success";
 	}
+
 	
 }

@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.demo</groupId>
-	<artifactId>Project_Sem4_Music_Online</artifactId>
+	<artifactId>PS4_Music_Online_NTS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Project_Sem4_Music_Online</name>
+	<name>PS4_Music_Online_NTS</name>
 	<description>Demo project for Spring Boot Data JPA</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -28,6 +28,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+			
 			<optional>true</optional>
 		</dependency>
 
@@ -51,6 +52,15 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
