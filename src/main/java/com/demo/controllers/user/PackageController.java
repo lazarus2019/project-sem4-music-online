@@ -18,7 +18,8 @@ import com.demo.services.PackageService;
 @RequestMapping(value = { "package"} )
 public class PackageController {
 	
-	/*private PackageService packageService;
+	@Autowired
+	private PackageService packageService;
 	
 	@Autowired
 	private Environment environment;
@@ -31,7 +32,7 @@ public class PackageController {
 		modelMap.put("postUrl", postUrl);
 		modelMap.put("returnUrl", returnUrl);
 		modelMap.put("business", business);
-		modelMap.put("packages", packageService.findAll());
+		modelMap.put("packages", packageService.getAllByStatus());
 		return "package/index" ; 
 	}
 	
@@ -49,6 +50,6 @@ public class PackageController {
 		System.out.println("Gross: " + payPalResult.getPayment_gross());
 		System.out.println("Item: " + payPalResult.getNum_cart_items());
 		return "demo/success";
-	}*/
+	}
 	
 }

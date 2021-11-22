@@ -5,26 +5,35 @@
 	<tlib-version>1.0</tlib-version>
 	<short-name>mytags</short-name>
 	<uri>http://mytags.com</uri>
-<!-- 	<tag>
-		<name>mycart</name>
-		<tag-class>com.demo.mytags.MyCart</tag-class>
+
+	<tag>
+		<name>weeklyChart</name>
+		<tag-class>com.demo.mytags.WeeklyChartTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
+
 	<tag>
-		<name>partner</name>
-		<tag-class>com.demo.mytags.Partners</tag-class>
-		<body-content>empty</body-content>
-	</tag> -->
-	
-	
-	<tag>
-		<name>promotion</name>
-		<tag-class>com.demo.mytags.PromotionTag</tag-class>
+		<name>popularArtists</name>
+		<tag-class>com.demo.mytags.PopularArtistsTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
+
 	<tag>
-		<name>categories</name>
-		<tag-class>com.demo.mytags.CategoriesTag</tag-class>
+		<name>banner</name>
+		<tag-class>com.demo.mytags.BannerTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
+
+	<tag>
+		<name>newReleases</name>
+		<tag-class>com.demo.mytags.NewReleaseTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>upcommingAlbumn</name>
+		<tag-class>com.demo.mytags.UpcommingAlbumTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
 </taglib>
