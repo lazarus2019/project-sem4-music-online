@@ -1,4 +1,4 @@
-package com.demo.controllers.users;
+package com.demo.controllers.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

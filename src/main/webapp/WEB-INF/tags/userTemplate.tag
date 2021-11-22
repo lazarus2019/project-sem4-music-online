@@ -860,7 +860,7 @@
 
 	<!-- audio -->
 	<audio id="audio" src=""></audio>
-	<audio src="${pageContext.request.contextPath }\resources\static\user\audio\advertisement\premium_sound.mp3" id="advertisement"></audio>
+	<audio src="${pageContext.request.contextPath }\resources\user\audio\advertisement\premium_sound.mp3" id="advertisement"></audio>
 	<!-- audio end-->
 
 	<!-- timer -->
@@ -901,72 +901,6 @@
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container-fluid">
-			<!-- <div class="row">
-				<div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 order-4 order-md-1 order-lg-4 order-xl-1">
-					<div class="footer__logo">
-						<img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
-					</div>
-					<p class="footer__tagline">Record Label & Internet Radio,<br> Online music HTML Template.</p>
-					<div class="footer__links">
-						<a href="mailto:support@volna.template"><svg xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 24 24">
-								<path
-									d="M19,4H5A3,3,0,0,0,2,7V17a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm-.41,2-5.88,5.88a1,1,0,0,1-1.42,0L5.41,6ZM20,17a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V7.41l5.88,5.88a3,3,0,0,0,4.24,0L20,7.41Z" />
-							</svg> support@volna.template</a>
-						<a href="tel:82345678900"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path
-									d="M19.44,13c-.22,0-.45-.07-.67-.12a9.44,9.44,0,0,1-1.31-.39,2,2,0,0,0-2.48,1l-.22.45a12.18,12.18,0,0,1-2.66-2,12.18,12.18,0,0,1-2-2.66L10.52,9a2,2,0,0,0,1-2.48,10.33,10.33,0,0,1-.39-1.31c-.05-.22-.09-.45-.12-.68a3,3,0,0,0-3-2.49h-3a3,3,0,0,0-3,3.41A19,19,0,0,0,18.53,21.91l.38,0a3,3,0,0,0,2-.76,3,3,0,0,0,1-2.25v-3A3,3,0,0,0,19.44,13Zm.5,6a1,1,0,0,1-.34.75,1.05,1.05,0,0,1-.82.25A17,17,0,0,1,4.07,5.22a1.09,1.09,0,0,1,.25-.82,1,1,0,0,1,.75-.34h3a1,1,0,0,1,1,.79q.06.41.15.81a11.12,11.12,0,0,0,.46,1.55l-1.4.65a1,1,0,0,0-.49,1.33,14.49,14.49,0,0,0,7,7,1,1,0,0,0,.76,0,1,1,0,0,0,.57-.52l.62-1.4a13.69,13.69,0,0,0,1.58.46q.4.09.81.15a1,1,0,0,1,.79,1Z" />
-							</svg> 8 234 567-89-00</a>
-					</div>
-				</div>
-
-				<div
-					class="col-6 col-md-4 col-lg-3 col-xl-2 order-1 order-md-2 order-lg-1 order-xl-2 offset-md-2 offset-lg-0">
-					<h6 class="footer__title">The Volna</h6>
-					<div class="footer__nav">
-						<a href="about.html">About</a>
-						<a href="profile.html">My profile</a>
-						<a href="pricing.html">Pricing plans</a>
-						<a href="contacts.html">Contacts</a>
-					</div>
-				</div>
-
-				<div class="col-12 col-md-8 col-lg-6 col-xl-4 order-3 order-lg-2 order-md-3 order-xl-3">
-					<div class="row">
-						<div class="col-12">
-							<h6 class="footer__title">Browse</h6>
-						</div>
-
-						<div class="col-6">
-							<div class="footer__nav">
-								<a href="artists.html">Artists</a>
-								<a href="releases.html">Releases</a>
-								<a href="events.html">Events</a>
-								<a href="podcasts.html">Podcasts</a>
-							</div>
-						</div>
-
-						<div class="col-6">
-							<div class="footer__nav">
-								<a href="news.html">News</a>
-								<a href="store.html">Store</a>
-								<a href="#">Music</a>
-								<a href="#">Video</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-6 col-md-4 col-lg-3 col-xl-2 order-2 order-lg-3 order-md-4 order-xl-4">
-					<h6 class="footer__title">Help</h6>
-					<div class="footer__nav">
-						<a href="privacy.html">Account & Billing</a>
-						<a href="privacy.html">Plans & Pricing</a>
-						<a href="privacy.html">Supported devices</a>
-						<a href="privacy.html">Accessibility</a>
-					</div>
-				</div>
-			</div> -->
 
 			<div class="row">
 				<div class="col-12">

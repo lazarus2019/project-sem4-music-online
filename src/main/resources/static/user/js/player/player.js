@@ -526,8 +526,10 @@ const app = {
         if (this.startTime != 0) {
             audio.currentTime = this.startTime
         }
-
-        this.loadCurrentSong()
+		
+               if(songPlaylist.length > 0){
+            this.loadCurrentSong()
+        }
 
         this.isPlaying = this.config.isPlaying || false
         if (this.isPlaying) {
