@@ -30,9 +30,9 @@
 //     })
 // }
 
-// function togglePlaylist() {
-//     document.querySelector('.playlist__box').classList.toggle('show');
-// }
+ function togglePlaylist() {
+     document.querySelector('.playlist__box').classList.toggle('show');
+ }
 
 // function toggleLyrics(){
 //     document.querySelector('.lyric-box').classList.toggle('show');
