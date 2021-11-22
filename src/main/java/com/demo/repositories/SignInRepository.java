@@ -8,12 +8,14 @@ import org.springframework.stereotype.Repository;
 import com.demo.entities.Account;
 import com.demo.entities.SignIn;
 
-@Repository("accountRepository")
-public interface AccountRepository extends CrudRepository<Account, Integer>  {
+@Repository("signInRepository")
+public interface SignInRepository extends CrudRepository<SignIn, Integer>  {
 
-	@Query("from Account where username = :username")
-	public Account find(@Param("username") String username);
+	@Query("from SignIn where username = :username")
+	public SignIn find(@Param("username") String username);
 	
-	@Query("from Account where email = :email")
-	public Account findByEmail(@Param("email") String email);
+	@Query("from SignIn where email = :email")
+	public SignIn findByEmail(@Param("email") String email);
+	
+	
 }

@@ -1,4 +1,5 @@
 package com.demo.entities;
+// Generated Nov 21, 2021, 7:14:54 AM by Hibernate Tools 5.1.10.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +21,7 @@ public class Banner implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
-	private Set<Setting> settings = new HashSet<Setting>(0); 
+	private Set<Setting> settings = new HashSet<Setting>(0);
 
 	public Banner() {
 	}

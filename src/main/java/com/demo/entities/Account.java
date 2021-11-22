@@ -1,14 +1,15 @@
 package com.demo.entities;
+// Generated Nov 21, 2021, 7:14:54 AM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -39,7 +40,10 @@ public class Account implements java.io.Serializable {
 	private int follower;
 	private String description;
 	private boolean status;
-	private String authProvider;
+	
+	@Enumerated(EnumType.STRING)
+	private AuthenticationProvider authProvider ;
+	
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<PackageInfo> packageInfos = new HashSet<PackageInfo>(0);
 	private Set<Notification> notifications = new HashSet<Notification>(0);
@@ -53,7 +57,7 @@ public class Account implements java.io.Serializable {
 
 	public Account(String username, String password, String nickname, String firstname, String lastname, String email,
 			Date birthday, String gender, String image, Date joinDate, boolean isArtist, String country, int follower,
-			String description, boolean status, String authProvider) {
+			String description, boolean status) {
 		this.username = username;
 		this.password = password;
 		this.nickname = nickname;
@@ -69,12 +73,11 @@ public class Account implements java.io.Serializable {
 		this.follower = follower;
 		this.description = description;
 		this.status = status;
-		this.authProvider = authProvider;
 	}
 
 	public Account(String username, String password, String nickname, String firstname, String lastname, String email,
 			Date birthday, String gender, String image, Date joinDate, boolean isArtist, String country, int follower,
-			String description, boolean status, String authProvider, Set<Comment> comments,
+			String description, boolean status, Set<Comment> comments,
 			Set<PackageInfo> packageInfos, Set<Notification> notifications, Set<AccountPlaylist> accountPlaylists,
 			Set<AccountRole> accountRoles, Set<ArtistTrack> artistTracks, Set<AccountSetting> accountSettings) {
 		this.username = username;
@@ -92,7 +95,6 @@ public class Account implements java.io.Serializable {
 		this.follower = follower;
 		this.description = description;
 		this.status = status;
-		this.authProvider = authProvider;
 		this.comments = comments;
 		this.packageInfos = packageInfos;
 		this.notifications = notifications;
@@ -132,7 +134,7 @@ public class Account implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "nickname", nullable = false, length = 250)
+	@Column(name = "nickname", length = 250)
 	public String getNickname() {
 		return this.nickname;
 	}
@@ -141,7 +143,7 @@ public class Account implements java.io.Serializable {
 		this.nickname = nickname;
 	}
 
-	@Column(name = "firstname", nullable = false, length = 250)
+	@Column(name = "firstname", length = 250)
 	public String getFirstname() {
 		return this.firstname;
 	}
@@ -150,7 +152,7 @@ public class Account implements java.io.Serializable {
 		this.firstname = firstname;
 	}
 
-	@Column(name = "lastname", nullable = false, length = 250)
+	@Column(name = "lastname", length = 250)
 	public String getLastname() {
 		return this.lastname;
 	}
@@ -169,7 +171,7 @@ public class Account implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "birthday", nullable = false, length = 10)
+	@Column(name = "birthday", length = 10)
 	public Date getBirthday() {
 		return this.birthday;
 	}
@@ -178,7 +180,7 @@ public class Account implements java.io.Serializable {
 		this.birthday = birthday;
 	}
 
-	@Column(name = "gender", nullable = false, length = 250)
+	@Column(name = "gender", length = 250)
 	public String getGender() {
 		return this.gender;
 	}
@@ -187,7 +189,7 @@ public class Account implements java.io.Serializable {
 		this.gender = gender;
 	}
 
-	@Column(name = "image", nullable = false, length = 250)
+	@Column(name = "image", length = 250)
 	public String getImage() {
 		return this.image;
 	}
@@ -206,7 +208,7 @@ public class Account implements java.io.Serializable {
 		this.joinDate = joinDate;
 	}
 
-	@Column(name = "is_artist", nullable = false)
+	@Column(name = "isArtist", nullable = false)
 	public boolean isIsArtist() {
 		return this.isArtist;
 	}
@@ -215,7 +217,7 @@ public class Account implements java.io.Serializable {
 		this.isArtist = isArtist;
 	}
 
-	@Column(name = "country", nullable = false, length = 250)
+	@Column(name = "country", length = 250)
 	public String getCountry() {
 		return this.country;
 	}
@@ -233,7 +235,7 @@ public class Account implements java.io.Serializable {
 		this.follower = follower;
 	}
 
-	@Column(name = "description", nullable = false, length = 65535)
+	@Column(name = "description", length = 65535)
 	public String getDescription() {
 		return this.description;
 	}
@@ -251,12 +253,12 @@ public class Account implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@Column(name = "auth_provider", nullable = false, length = 25)
-	public String getAuthProvider() {
-		return this.authProvider;
+	@Column(name = "auth_provider" , nullable = false, length = 25)
+	public AuthenticationProvider getAuthProvider() {
+		return authProvider;
 	}
 
-	public void setAuthProvider(String authProvider) {
+	public void setAuthProvider(AuthenticationProvider authProvider) {
 		this.authProvider = authProvider;
 	}
 
