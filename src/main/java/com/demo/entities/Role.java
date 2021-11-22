@@ -1,4 +1,5 @@
 package com.demo.entities;
+// Generated Nov 21, 2021, 7:14:54 AM by Hibernate Tools 5.1.10.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +22,7 @@ public class Role implements java.io.Serializable {
 	private Integer id;
 	private String name;
 	private Set<AccountRole> accountRoles = new HashSet<AccountRole>(0);
+	private Set<SignIn> signIns = new HashSet<SignIn>(0);
 
 	public Role() {
 	}
@@ -29,9 +31,10 @@ public class Role implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Role(String name, Set<AccountRole> accountRoles) {
+	public Role(String name, Set<AccountRole> accountRoles, Set<SignIn> signIns) {
 		this.name = name;
 		this.accountRoles = accountRoles;
+		this.signIns = signIns;
 	}
 
 	@Id
@@ -62,6 +65,15 @@ public class Role implements java.io.Serializable {
 
 	public void setAccountRoles(Set<AccountRole> accountRoles) {
 		this.accountRoles = accountRoles;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
+	public Set<SignIn> getSignIns() {
+		return this.signIns;
+	}
+
+	public void setSignIns(Set<SignIn> signIns) {
+		this.signIns = signIns;
 	}
 
 }

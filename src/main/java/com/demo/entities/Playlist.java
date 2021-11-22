@@ -1,4 +1,5 @@
 package com.demo.entities;
+// Generated Nov 21, 2021, 7:14:54 AM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,7 +31,7 @@ public class Playlist implements java.io.Serializable {
 	private Date publishDate;
 	private Date lastUpdated;
 	private String description;
-	private boolean status;
+	private boolean isHidden;
 	private Set<PlaylistTrack> playlistTracks = new HashSet<PlaylistTrack>(0);
 	private Set<AccountPlaylist> accountPlaylists = new HashSet<AccountPlaylist>(0);
 
@@ -38,18 +39,18 @@ public class Playlist implements java.io.Serializable {
 	}
 
 	public Playlist(PlaylistCategory playlistCategory, String title, String thumbnail, Date publishDate,
-			Date lastUpdated, String description, boolean status) {
+			Date lastUpdated, String description, boolean isHidden) {
 		this.playlistCategory = playlistCategory;
 		this.title = title;
 		this.thumbnail = thumbnail;
 		this.publishDate = publishDate;
 		this.lastUpdated = lastUpdated;
 		this.description = description;
-		this.status = status;
+		this.isHidden = isHidden;
 	}
 
 	public Playlist(PlaylistCategory playlistCategory, String title, String thumbnail, Date publishDate,
-			Date lastUpdated, String description, boolean status, Set<PlaylistTrack> playlistTracks,
+			Date lastUpdated, String description, boolean isHidden, Set<PlaylistTrack> playlistTracks,
 			Set<AccountPlaylist> accountPlaylists) {
 		this.playlistCategory = playlistCategory;
 		this.title = title;
@@ -57,7 +58,7 @@ public class Playlist implements java.io.Serializable {
 		this.publishDate = publishDate;
 		this.lastUpdated = lastUpdated;
 		this.description = description;
-		this.status = status;
+		this.isHidden = isHidden;
 		this.playlistTracks = playlistTracks;
 		this.accountPlaylists = accountPlaylists;
 	}
@@ -131,13 +132,13 @@ public class Playlist implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "status", nullable = false)
-	public boolean isStatus() {
-		return this.status;
+	@Column(name = "isHidden", nullable = false)
+	public boolean isIsHidden() {
+		return this.isHidden;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setIsHidden(boolean isHidden) {
+		this.isHidden = isHidden;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "playlist")
@@ -157,4 +158,5 @@ public class Playlist implements java.io.Serializable {
 	public void setAccountPlaylists(Set<AccountPlaylist> accountPlaylists) {
 		this.accountPlaylists = accountPlaylists;
 	}
+
 }

@@ -1,11 +1,12 @@
 package com.demo.entities;
+// Generated Nov 21, 2021, 7:03:46 PM by Hibernate Tools 5.1.10.Final
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,32 +18,34 @@ import javax.persistence.Table;
 @Table(name = "account_role", catalog = "music_app")
 public class AccountRole implements java.io.Serializable {
 
-	private Integer id;
+	private AccountRoleId id;
 	private Account account;
 	private Role role;
 
 	public AccountRole() {
 	}
 
-	public AccountRole(Account account, Role role) {
+	public AccountRole(AccountRoleId id, Account account, Role role) {
+		this.id = id;
 		this.account = account;
 		this.role = role;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@EmbeddedId
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	@AttributeOverrides({
+			@AttributeOverride(name = "accountId", column = @Column(name = "account_id", nullable = false)),
+			@AttributeOverride(name = "roleId", column = @Column(name = "role_id", nullable = false)) })
+	public AccountRoleId getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(AccountRoleId id) {
 		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "account_id", nullable = false)
+	@JoinColumn(name = "account_id", nullable = false, insertable = false, updatable = false)
 	public Account getAccount() {
 		return this.account;
 	}
@@ -52,7 +55,7 @@ public class AccountRole implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id", nullable = false)
+	@JoinColumn(name = "role_id", nullable = false, insertable = false, updatable = false)
 	public Role getRole() {
 		return this.role;
 	}

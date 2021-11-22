@@ -1,10 +1,16 @@
 package com.demo.entities;
+// Generated Nov 21, 2021, 7:14:54 AM by Hibernate Tools 5.1.10.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,19 +21,36 @@ import javax.persistence.Table;
 public class SignIn implements java.io.Serializable {
 
 	private Integer id;
+	private Role role;
 	private int accountId;
+	private String email;
 	private String username;
 	private String password;
-	private int roleId;
+	
+	@Enumerated(EnumType.STRING)
+	private AuthenticationProvider authProvider ; 
+	
 
 	public SignIn() {
 	}
 
-	public SignIn(int accountId, String username, String password, int roleId) {
+	public SignIn(Role role, int accountId, String email, String username, String password) {
+		this.role = role;
 		this.accountId = accountId;
+		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.roleId = roleId;
+	}
+
+	
+
+	@Column(name = "auth_provider" , nullable = false, length = 25)
+	public AuthenticationProvider getAuthProvider() {
+		return authProvider;
+	}
+
+	public void setAuthProvider(AuthenticationProvider authProvider) {
+		this.authProvider = authProvider;
 	}
 
 	@Id
@@ -42,6 +65,16 @@ public class SignIn implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "role_id", nullable = false)
+	public Role getRole() {
+		return this.role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	@Column(name = "account_id", nullable = false)
 	public int getAccountId() {
 		return this.accountId;
@@ -49,6 +82,15 @@ public class SignIn implements java.io.Serializable {
 
 	public void setAccountId(int accountId) {
 		this.accountId = accountId;
+	}
+	
+	@Column(name = "email", nullable = false, length = 250)
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Column(name = "username", nullable = false, length = 250)
@@ -67,15 +109,6 @@ public class SignIn implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	@Column(name = "role_id", nullable = false)
-	public int getRoleId() {
-		return this.roleId;
-	}
-
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
 	}
 
 }

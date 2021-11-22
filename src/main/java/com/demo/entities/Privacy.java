@@ -1,5 +1,5 @@
 package com.demo.entities;
-
+// Generated Nov 21, 2021, 7:14:54 AM by Hibernate Tools 5.1.10.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Privacy implements java.io.Serializable {
 
 	private Integer id;
-	private String description; 
+	private String description;
 
 	public Privacy() {
 	}

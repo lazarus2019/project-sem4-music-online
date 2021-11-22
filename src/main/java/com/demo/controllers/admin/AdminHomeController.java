@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = {"admin/home"} )
 public class AdminHomeController {
 
-	@RequestMapping( value = {"","admin" } , method = RequestMethod.GET )
+	@RequestMapping( value = {"","index" } , method = RequestMethod.GET )
 	public String index() {
 		return "admin/home/index" ; 
 	}
