@@ -1185,6 +1185,53 @@
 	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/player/player.js"></script>
 	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/my_custom.js"></script>
+	
+	<!-- Main Search -->
+	<script>
+	$(document).ready(function() {
+		$('.input-search').input(function(){
+			var keyword = $('.input-search').val();
+
+			/* Artist */
+			$.ajax({
+				type : 'GET',
+				data: {
+					keyword: keyword
+					},
+				url : '${pageContext.request.contextPath }/home/searchArtist',
+				success : function(artists) {
+							console.log(artists)
+						}
+				})
+			})
+			
+			/* Track */
+			$.ajax({
+				type : 'GET',
+				data: {
+					keyword: keyword
+					},
+				url : '${pageContext.request.contextPath }/home/searchTrack',
+				success : function(tracks) {
+							console.log(tracks)
+						}
+				})
+			})
+			
+			/* Album */
+			$.ajax({
+				type : 'GET',
+				data: {
+					keyword: keyword
+					},
+				url : '${pageContext.request.contextPath }/home/searchAlbum',
+				success : function(albums) {
+							console.log(data)
+						}
+				})
+			})
+		}
+	</script>
 </body>
 
 <!-- Mirrored from dmitryvolkov.me/demo/volna/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Nov 2021 02:17:54 GMT -->
