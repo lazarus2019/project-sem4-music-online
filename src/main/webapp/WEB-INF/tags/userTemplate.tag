@@ -29,6 +29,9 @@
 	<!-- My custom CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/my_custom.css">
 
+	<!-- Sweetalert CSS -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
+
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
@@ -392,7 +395,7 @@
 	<!-- player -->
 	<div class="player" id="audioPlayer">
 		<div class="progressbar">
-			<input type="range" class="audio-progress" oninput="changeProgressSong(this)">
+			<input type="range" class="audio-progress" max="100" min="0" value="0" step="0.01">
 			<span class="bar"></span>
 		</div>
 		<div class="audio">
@@ -407,8 +410,8 @@
 		</div>
 		<div class="audio-controls">
 			<div class="audio-controls-left">
-				<button class="btn-loop-song default-btn">
-					<i class="las la-sync audio__icon selected"></i>
+				<button class="btn-loop-song default-btn active">
+					<i class="las la-sync audio__icon"></i>
 				</button>
 			</div>
 			<div class="audio-controls-main">
@@ -431,10 +434,10 @@
 		</div>
 		<div class="audio-info">
 			<button id="lyrics" class="default-btn" onclick="toggleLyrics()">
-				<i class="las la-file-alt audio__icon audio__icon"></i>
+				<i class="las la-file-alt audio__icon"></i>
 			</button>
 			<span class="duration-info">
-				<span class="current-minute">00</span>:<span class="current-second">00</span> /
+				<span class="current-time">00:00</span> /
 				<span class="base-duration">03:22</span>
 			</span>
 			<div class="audio-control-volume">
@@ -442,7 +445,7 @@
 					<i class="las la-volume-up audio__icon"></i>
 				</button>
 				<div class="dropdown-volume-range">
-					<input type="range" class="audio-volume" min="0" max="100" value="50"
+					<input type="range" class="audio-volume" min="0" max="100" value="50" step="1"
 						oninput="changeVolumeIcon(this)">
 				</div>
 			</div>
@@ -545,7 +548,14 @@
 
 	<!-- Playlist box -->
 	<div class="playlist__box">
-		<div class="playlist-title">Listen Special</div>
+		<div class="playlist-title">
+			<div class="playlist-title-content">
+				Listen Special
+			</div>
+			<button class="default-btn show-timer-btn" onclick="showTimer()">
+				<i class="las la-stopwatch audio__icon"></i>
+			</button>
+		</div>
 		<ul class="playlist__list">
 			<li class="playlist__list-item">
 				<div class="playlist__item-desc">
@@ -847,6 +857,36 @@
 		</ul>
 	</div>
 	<!-- end Playlist box -->
+
+	<!-- audio -->
+	<audio id="audio" src=""></audio>
+	<audio src="${pageContext.request.contextPath }\resources\static\user\audio\advertisement\premium_sound.mp3" id="advertisement"></audio>
+	<!-- audio end-->
+
+	<!-- timer -->
+	<div class="set-timer">
+		<div class="timer-layout">
+			<p>Set Stop Playing Countdown</p>
+			<select name="" id="timer-countdown">
+				<option value="1" selected>1 minute</option>
+				<option value="5">5 minutes</option>
+				<option value="15">15 minutes</option>
+				<option value="30">30 minutes</option>
+				<option value="60">60 minutes</option>
+				<option value="120">120 minutes</option>
+			</select>
+			<button class="btn-set-timer">Save</button>
+			<button class="btn-timer-cancel">Cancel</button>
+		</div>
+	</div>
+
+	<div class="timer">
+		<i class="las la-stopwatch"></i>
+		<span class="timer-left">05:00</span>
+		<i class="las la-times-circle remove-timer large__icon"></i>
+	</div>
+	<!-- timer end -->
+
 	<!-- end player -->
 
 	<!-- main content -->
@@ -1029,7 +1069,7 @@
 									<path d="M13.5 18V13L17.5 15.5001L13.5 18Z" fill="#FF0000" />
 								</svg></a>
 						</div>
-						<small class="footer__copyright">© Volna, 2021. Created by <a
+						<small class="footer__copyright">ï¿½ Volna, 2021. Created by <a
 								href="../../../themeforest.net/user/dmitryvolkov/portfolio.html" target="_blank">Dmitry
 								Volkov</a>.</small>
 					</div>
@@ -1207,6 +1247,9 @@
 	<script src="${pageContext.request.contextPath }/resources/user/js/main.js"></script>
 
 	<!-- My custom JS -->
+	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
+	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/player/player.js"></script>
+	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/my_custom.js"></script>
 </body>
 
