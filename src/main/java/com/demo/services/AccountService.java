@@ -1,0 +1,10 @@
+package com.demo.services;
+
+import java.util.*;
+import com.demo.entities.*;
+
+public interface AccountService {
+
+	public List<Account> getAllPopularArtists();
+	
+}

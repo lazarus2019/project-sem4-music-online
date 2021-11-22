@@ -22,6 +22,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/slider-radio.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/plyr.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/main.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/adminlte.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/icheck-bootstrap.min.css">
 
 	<!-- CSS Listen -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/1.3.0/css/line-awesome.min.css">
@@ -70,7 +73,7 @@
 						<a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
 						<a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
 						<a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
-						<a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+						<a href="${pageContext.request.contextPath }/record-chart/index"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 					</div>
 				</li>
 
@@ -279,7 +282,7 @@
 						</svg></a>
 
 					<div class="header__drop">
-						<a href="#" class="header__all">View all</a>
+						<a href="${pageContext.request.contextPath }/notification/index" class="header__all">View all</a>
 						<div class="header__note header__note--succ">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 								<path
@@ -366,7 +369,7 @@
 								<a href="artist_album.html">
 									<i class="las la-record-vinyl"></i> Your Albums
 								</a>
-								<a href="#">
+								<a href="${pageContext.request.contextPath }/package/index">
 									<i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
 										class="las la-crown yellow__icon"></i>
 								</a>

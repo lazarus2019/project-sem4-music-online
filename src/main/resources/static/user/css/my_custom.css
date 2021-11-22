@@ -880,3 +880,36 @@ a.form-btn:hover{
 .flex-4>div {
     flex: 25%;
 }
+
+/* Playlist Chart */
+
+.chart__list {
+	margin-top: 50px;
+  	background-color: #170f23;
+  	border-radius: 1rem; 
+  	padding: 30px;
+}
+
+.chart__header {
+	justify-content: flex-start;
+	color: var(--white) !important;
+	padding-top: 5px;
+	
+}
+
+.chart__header h3{
+	font-size: 65px;
+}
+
+/* Notification */
+.m-0-auto {
+	margin: 0 auto;
+}
+
+/* Chart */
+.top__list {
+	margin: 0 auto !important;
+	height: auto !important;
+	background-color: #170f23;
+	border-radius: 0.5rem;
+}

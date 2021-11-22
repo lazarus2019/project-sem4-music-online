@@ -1413,7 +1413,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .main__title h2 a {
-  color: var(--dark);
+  color: #fff;
 }
 
 .main__title h2 a:hover {
@@ -4709,7 +4709,7 @@ body::-webkit-scrollbar-thumb {
 .plan__title {
   position: relative;
   z-index: 2;
-  font-size: 18px;
+  font-size: 28px;
   color: #fff;
   line-height: 100%;
   display: block;
@@ -4766,7 +4766,7 @@ body::-webkit-scrollbar-thumb {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 32px;
-  color: #fff;
+  color: bisque;
   margin-bottom: 20px;
   padding-bottom: 15px;
   border-bottom: 1px solid #222227;
