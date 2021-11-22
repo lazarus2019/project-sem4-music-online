@@ -860,7 +860,7 @@
 
 	<!-- audio -->
 	<audio id="audio" src=""></audio>
-	<audio src="${pageContext.request.contextPath }\resources\static\user\audio\advertisement\premium_sound.mp3" id="advertisement"></audio>
+	<audio src="${pageContext.request.contextPath }\resources\user\audio\advertisement\premium_sound.mp3" id="advertisement"></audio>
 	<!-- audio end-->
 
 	<!-- timer -->
