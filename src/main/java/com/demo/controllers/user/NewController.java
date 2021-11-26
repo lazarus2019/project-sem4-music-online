@@ -17,6 +17,8 @@ public class NewController {
 		System.out.println("them 1 dong moi nhaaaaaaaaa");
 		System.out.println("them 2 dong moi nhaaaaaaaaa");
 		System.out.println("them 3 dong moi nhaaaaaaaaa");
+		
+		System.out.println("t thich thi t them nhaaaa");
 		return "notification/index";
 
 	}
