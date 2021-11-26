@@ -9,13 +9,13 @@ import com.demo.models.AlbumInfo;
 @RequestMapping(value = { "notification"} )
 public class NotificationController {
 	
-	AlbumInfo albumInfo = new AlbumInfo();
-	/*
-	 * @RequestMapping( value = { "","index" }) public String index() { return
-	 * "notification/index" ;
-	 * 
-	 * }
-	 */
+	//AlbumInfo albumInfo = new AlbumInfo();
+	
+	  @RequestMapping( value = { "","index" }) public String index() { return
+	  "notification/index" ;
+	  
+	  }
+	 
 	//ahihihihi
 	
 }
