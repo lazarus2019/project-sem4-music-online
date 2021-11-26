@@ -24,16 +24,16 @@ public class Notification implements java.io.Serializable {
 	private Account account;
 	private String message;
 	private Date date;
-	private boolean status;
+	private boolean isRead;
 
 	public Notification() {
 	}
 
-	public Notification(Account account, String message, Date date, boolean status) {
+	public Notification(Account account, String message, Date date, boolean isRead) {
 		this.account = account;
 		this.message = message;
 		this.date = date;
-		this.status = status;
+		this.isRead = isRead;
 	}
 
 	@Id
@@ -67,8 +67,8 @@ public class Notification implements java.io.Serializable {
 		this.message = message;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date", nullable = false, length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date", nullable = false, length = 19)
 	public Date getDate() {
 		return this.date;
 	}
@@ -77,13 +77,13 @@ public class Notification implements java.io.Serializable {
 		this.date = date;
 	}
 
-	@Column(name = "status", nullable = false)
-	public boolean isStatus() {
-		return this.status;
+	@Column(name = "is_read", nullable = false)
+	public boolean isIsRead() {
+		return this.isRead;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setIsRead(boolean isRead) {
+		this.isRead = isRead;
 	}
 
 }

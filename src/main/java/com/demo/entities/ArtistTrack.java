@@ -1,11 +1,11 @@
 package com.demo.entities;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,32 +17,36 @@ import javax.persistence.Table;
 @Table(name = "artist_track", catalog = "music_app")
 public class ArtistTrack implements java.io.Serializable {
 
-	private Integer id;
+	private ArtistTrackId id;
 	private Account account;
 	private Track track;
+	private boolean isOwn;
 
 	public ArtistTrack() {
 	}
 
-	public ArtistTrack(Account account, Track track) {
+	public ArtistTrack(ArtistTrackId id, Account account, Track track, boolean isOwn) {
+		this.id = id;
 		this.account = account;
 		this.track = track;
+		this.isOwn = isOwn;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@EmbeddedId
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	@AttributeOverrides({
+			@AttributeOverride(name = "accountId", column = @Column(name = "account_id", nullable = false)),
+			@AttributeOverride(name = "trackId", column = @Column(name = "track_id", nullable = false)) })
+	public ArtistTrackId getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(ArtistTrackId id) {
 		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "account_id", nullable = false)
+	@JoinColumn(name = "account_id", nullable = false, insertable = false, updatable = false)
 	public Account getAccount() {
 		return this.account;
 	}
@@ -52,13 +56,22 @@ public class ArtistTrack implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "track_id", nullable = false)
+	@JoinColumn(name = "track_id", nullable = false, insertable = false, updatable = false)
 	public Track getTrack() {
 		return this.track;
 	}
 
 	public void setTrack(Track track) {
 		this.track = track;
+	}
+
+	@Column(name = "is_own", nullable = false)
+	public boolean isIsOwn() {
+		return this.isOwn;
+	}
+
+	public void setIsOwn(boolean isOwn) {
+		this.isOwn = isOwn;
 	}
 
 }

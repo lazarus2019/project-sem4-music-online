@@ -8,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +22,7 @@ public class Role implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
-	private Set<AccountRole> accountRoles = new HashSet<AccountRole>(0);
+	private Set<Account> accounts = new HashSet<Account>(0);
 
 	public Role() {
 	}
@@ -29,9 +31,9 @@ public class Role implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Role(String name, Set<AccountRole> accountRoles) {
+	public Role(String name, Set<Account> accounts) {
 		this.name = name;
-		this.accountRoles = accountRoles;
+		this.accounts = accounts;
 	}
 
 	@Id
@@ -55,13 +57,16 @@ public class Role implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set<AccountRole> getAccountRoles() {
-		return this.accountRoles;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "account_role", catalog = "music_app", joinColumns = {
+			@JoinColumn(name = "role_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "account_id", nullable = false, updatable = false) })
+	public Set<Account> getAccounts() {
+		return this.accounts;
 	}
 
-	public void setAccountRoles(Set<AccountRole> accountRoles) {
-		this.accountRoles = accountRoles;
+	public void setAccounts(Set<Account> accounts) {
+		this.accounts = accounts;
 	}
 
 }
