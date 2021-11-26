@@ -18,6 +18,8 @@ public class NotificationController {
 		
 		
 		System.out.println("ccccccccccccccc");
+		
+		System.out.println("them 1 dong moi");
 		return "notification/index";
 
 	}
