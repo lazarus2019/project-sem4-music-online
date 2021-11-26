@@ -1,12 +1,12 @@
 package com.demo.entities;
 
 import java.util.Date;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @Table(name = "comment", catalog = "music_app")
 public class Comment implements java.io.Serializable {
 
-	private Integer id;
+	private CommentId id;
 	private Account account;
 	private Track track;
 	private String message;
@@ -29,27 +29,29 @@ public class Comment implements java.io.Serializable {
 	public Comment() {
 	}
 
-	public Comment(Account account, Track track, String message, Date date) {
+	public Comment(CommentId id, Account account, Track track, String message, Date date) {
+		this.id = id;
 		this.account = account;
 		this.track = track;
 		this.message = message;
 		this.date = date;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@EmbeddedId
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	@AttributeOverrides({
+			@AttributeOverride(name = "accountId", column = @Column(name = "account_id", nullable = false)),
+			@AttributeOverride(name = "trackId", column = @Column(name = "track_id", nullable = false)) })
+	public CommentId getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(CommentId id) {
 		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "account_id", nullable = false)
+	@JoinColumn(name = "account_id", nullable = false, insertable = false, updatable = false)
 	public Account getAccount() {
 		return this.account;
 	}
@@ -59,7 +61,7 @@ public class Comment implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "track_id", nullable = false)
+	@JoinColumn(name = "track_id", nullable = false, insertable = false, updatable = false)
 	public Track getTrack() {
 		return this.track;
 	}

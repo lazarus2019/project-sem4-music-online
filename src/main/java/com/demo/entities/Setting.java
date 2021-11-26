@@ -1,13 +1,14 @@
 package com.demo.entities;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,15 +19,19 @@ import javax.persistence.Table;
 public class Setting implements java.io.Serializable {
 
 	private Integer id;
-	private Banner banner;
 	private int showTopChart;
+	private Set<Banner> banners = new HashSet<Banner>(0);
 
 	public Setting() {
 	}
 
-	public Setting(Banner banner, int showTopChart) {
-		this.banner = banner;
+	public Setting(int showTopChart) {
 		this.showTopChart = showTopChart;
+	}
+
+	public Setting(int showTopChart, Set<Banner> banners) {
+		this.showTopChart = showTopChart;
+		this.banners = banners;
 	}
 
 	@Id
@@ -41,16 +46,6 @@ public class Setting implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "banner_id", nullable = false)
-	public Banner getBanner() {
-		return this.banner;
-	}
-
-	public void setBanner(Banner banner) {
-		this.banner = banner;
-	}
-
 	@Column(name = "show_top_chart", nullable = false)
 	public int getShowTopChart() {
 		return this.showTopChart;
@@ -58,6 +53,15 @@ public class Setting implements java.io.Serializable {
 
 	public void setShowTopChart(int showTopChart) {
 		this.showTopChart = showTopChart;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "setting")
+	public Set<Banner> getBanners() {
+		return this.banners;
+	}
+
+	public void setBanners(Set<Banner> banners) {
+		this.banners = banners;
 	}
 
 }

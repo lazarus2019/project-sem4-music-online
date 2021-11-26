@@ -20,20 +20,15 @@ public class AccountSetting implements java.io.Serializable {
 	private Integer id;
 	private Account account;
 	private boolean newFollower;
-	private boolean newComment;
-	private boolean newPackage;
-	private boolean specialDiscount;
+	private boolean packageOutDate;
 
 	public AccountSetting() {
 	}
 
-	public AccountSetting(Account account, boolean newFollower, boolean newComment, boolean newPackage,
-			boolean specialDiscount) {
+	public AccountSetting(Account account, boolean newFollower, boolean packageOutDate) {
 		this.account = account;
 		this.newFollower = newFollower;
-		this.newComment = newComment;
-		this.newPackage = newPackage;
-		this.specialDiscount = specialDiscount;
+		this.packageOutDate = packageOutDate;
 	}
 
 	@Id
@@ -67,31 +62,13 @@ public class AccountSetting implements java.io.Serializable {
 		this.newFollower = newFollower;
 	}
 
-	@Column(name = "new_comment", nullable = false)
-	public boolean isNewComment() {
-		return this.newComment;
+	@Column(name = "package_out_date", nullable = false)
+	public boolean isPackageOutDate() {
+		return this.packageOutDate;
 	}
 
-	public void setNewComment(boolean newComment) {
-		this.newComment = newComment;
-	}
-
-	@Column(name = "new_package", nullable = false)
-	public boolean isNewPackage() {
-		return this.newPackage;
-	}
-
-	public void setNewPackage(boolean newPackage) {
-		this.newPackage = newPackage;
-	}
-
-	@Column(name = "special_discount", nullable = false)
-	public boolean isSpecialDiscount() {
-		return this.specialDiscount;
-	}
-
-	public void setSpecialDiscount(boolean specialDiscount) {
-		this.specialDiscount = specialDiscount;
+	public void setPackageOutDate(boolean packageOutDate) {
+		this.packageOutDate = packageOutDate;
 	}
 
 }
