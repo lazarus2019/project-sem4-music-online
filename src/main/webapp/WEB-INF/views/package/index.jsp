@@ -40,10 +40,10 @@
 											<input type="hidden" name="business" value="${business }" />
 					
 											
-											<input type="hidden" name="item_number_${i.index + 1 }" value="${pack.id }">
-											<input type="hidden" name="item_name_${i.index + 1 }" value="${pack.name }"> 
-											<input type="hidden" name="amount_${i.index + 1 }" value="${pack.price }"> 
-											<input type="hidden" name="quantity_${i.index + 1 }" value="1">
+											<input type="hidden" name="item_number_1" value="${pack.id }">
+											<input type="hidden" name="item_name_1" value="${pack.name }"> 
+											<input type="hidden" name="amount_1" value="${pack.price }"> 
+											<input type="hidden" name="quantity_1" value="1">
 											
 											<button class="plan__btn" type="submit">Buy Now!</button>
 										</form>

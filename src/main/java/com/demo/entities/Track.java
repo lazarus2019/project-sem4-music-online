@@ -241,11 +241,5 @@ public class Track implements java.io.Serializable {
 	public void setArtistTracks(Set<ArtistTrack> artistTracks) {
 		this.artistTracks = artistTracks;
 	}
-	public Set<Account> findArtists() {
-		Set<Account> accounts = new HashSet<Account>(0) ; 
-		for(ArtistTrack artistTrack : artistTracks) {
-			accounts.add(artistTrack.getAccount()) ; 
-		}
-		return accounts ;
-	}
+
 }

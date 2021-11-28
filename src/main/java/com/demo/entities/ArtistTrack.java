@@ -50,7 +50,7 @@ public class ArtistTrack implements java.io.Serializable {
 	public Account getAccount() {
 		return this.account;
 	}
-	
+
 	public void setAccount(Account account) {
 		this.account = account;
 	}

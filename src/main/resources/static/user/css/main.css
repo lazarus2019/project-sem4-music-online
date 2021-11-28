@@ -393,7 +393,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .header__action--note span {
-  background-color: #2f80ed;
+  /* background-color: #2f80ed; */
 }
 
 .header__action--cart .header__drop {
@@ -643,19 +643,19 @@ body::-webkit-scrollbar-thumb {
   margin-top: 5px;
 }
 
-.header__note--succ svg {
+.header__note--succ  {
   fill: var(--indigo);
 }
 
-.header__note--fail svg {
+.header__note--fail  {
   fill: #eb5757;
 }
 
-.header__note--info svg {
+.header__note--info  {
   fill: #c0c0c0;
 }
 
-.header__note--gift svg {
+.header__note--gift  {
   fill: #8051d4;
 }
 
@@ -789,7 +789,7 @@ body::-webkit-scrollbar-thumb {
     display: block;
     white-space: nowrap;
     color: #c0c0c0;
-    font-size: 16px;
+    font-size: 26px;
     margin-right: 10px;
     font-family: 'Inter', sans-serif;
     transition: color 0.5s ease;
@@ -3368,6 +3368,10 @@ body::-webkit-scrollbar-thumb {
 
 .single-item:hover {
   background-color: #3a3344;
+}
+
+.single-item-chart:hover {
+  background-color: #320346;
 }
 
 .single-item:last-child {
@@ -7199,6 +7203,7 @@ body::-webkit-scrollbar-thumb {
 .select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[aria-selected]:hover{
 	background-color: var(--indigo) !important; 
 }
+
 /*==============================
 	Scrollbar-track
 ==============================*/
@@ -7702,7 +7707,6 @@ body::-webkit-scrollbar-thumb {
   display: block;
   pointer-events: auto;
 }
-
 
 .btn-add-new-track {
   background: var(--indigo);

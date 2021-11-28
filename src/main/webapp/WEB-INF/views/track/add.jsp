@@ -3,6 +3,11 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <mt:userTemplate title="Add New Track">
 	<jsp:attribute name="content">
@@ -187,4 +192,8 @@
 	</jsp:attribute>
 
 </mt:userTemplate>
-
+<script>
+	$(document).ready(function() {
+		$('.js-example-basic-multiple').select2();
+	});
+</script>

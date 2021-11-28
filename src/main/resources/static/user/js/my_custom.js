@@ -101,7 +101,7 @@ if (form !== null) {
   // When form is submitted console log the value of the select field
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('Selected country:', form.querySelector('[name="genres"]').value);
+    //console.log('Selected country:', form.querySelector('[name="genres"]').value);
   });
 }
 

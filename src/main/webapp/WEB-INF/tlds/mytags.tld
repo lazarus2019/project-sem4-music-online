@@ -36,4 +36,34 @@
 		<body-content>empty</body-content>
 	</tag>
 
+	<tag>
+		<name>notification</name>
+		<tag-class>com.demo.mytags.NotificationTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>timeAgo</name>
+		<tag-class>com.demo.mytags.TimeAgoTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+		    <name>pastDate</name>
+		    <required>true</required>
+		    <rtexprvalue>true</rtexprvalue>
+		    <type>java.util.Date</type>
+   		</attribute>
+	</tag>
+
+	<tag>
+		<name>trackTime</name>
+		<tag-class>com.demo.mytags.TrackTimeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+		    <name>totalSeconds</name>
+		    <required>true</required>
+		    <rtexprvalue>true</rtexprvalue>
+		    <type>int</type>
+   		</attribute>
+	</tag>
+
 </taglib>
