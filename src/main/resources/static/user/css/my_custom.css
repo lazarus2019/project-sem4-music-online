@@ -913,3 +913,8 @@ a.form-btn:hover{
 	background-color: #170f23;
 	border-radius: 0.5rem;
 }
+
+/* hidden */
+.hide{
+	display: none
+}

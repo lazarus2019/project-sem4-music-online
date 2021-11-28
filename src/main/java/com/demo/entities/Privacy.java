@@ -1,6 +1,5 @@
 package com.demo.entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 public class Privacy implements java.io.Serializable {
 
 	private Integer id;
-	private String description; 
+	private String description;
 
 	public Privacy() {
 	}

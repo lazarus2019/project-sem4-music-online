@@ -39,9 +39,9 @@
 								<a href="release.html">${newRelease.title }</a>
 							</h3>
 							<span>
+								<%-- <a href="artist.html">${newRelease.artists }</a> & 
 								<a href="artist.html">${newRelease.artists }</a> & 
-								<a href="artist.html">${newRelease.artists }</a> & 
-								<a href="artist.html">${newRelease.artists }</a>
+								<a href="artist.html">${newRelease.artists }</a> --%>
 							</span>
 						</div>
 					</div>

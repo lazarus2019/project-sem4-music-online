@@ -24,26 +24,30 @@ public class ServicePackage implements java.io.Serializable {
 	private int duration;
 	private boolean status;
 	private String description;
+	private boolean isDelete;
 	private Set<PackageInfo> packageInfos = new HashSet<PackageInfo>(0);
 
 	public ServicePackage() {
 	}
 
-	public ServicePackage(String name, double price, int duration, boolean status, String description) {
+	public ServicePackage(String name, double price, int duration, boolean status, String description,
+			boolean isDelete) {
 		this.name = name;
 		this.price = price;
 		this.duration = duration;
 		this.status = status;
 		this.description = description;
+		this.isDelete = isDelete;
 	}
 
-	public ServicePackage(String name, double price, int duration, boolean status, String description,
+	public ServicePackage(String name, double price, int duration, boolean status, String description, boolean isDelete,
 			Set<PackageInfo> packageInfos) {
 		this.name = name;
 		this.price = price;
 		this.duration = duration;
 		this.status = status;
 		this.description = description;
+		this.isDelete = isDelete;
 		this.packageInfos = packageInfos;
 	}
 
@@ -102,6 +106,15 @@ public class ServicePackage implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Column(name = "is_delete", nullable = false)
+	public boolean isIsDelete() {
+		return this.isDelete;
+	}
+
+	public void setIsDelete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "servicePackage")
