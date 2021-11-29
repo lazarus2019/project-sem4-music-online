@@ -21,7 +21,7 @@ public class PlaylistCategoryServiceImpl implements PlaylistCategoryService {
 	private PlaylistCategoryRepository playlistCategoryRepository;
 
 	@Override
-	public List<PlaylistCategory> getAllPlaylist() {
+	public List<PlaylistCategory> getAllPlaylistCategories() {
 		List<PlaylistCategory> allList = (List<PlaylistCategory>) playlistCategoryRepository.findAll();
 		List<PlaylistCategory> playlistCategories = new ArrayList<PlaylistCategory>();
 

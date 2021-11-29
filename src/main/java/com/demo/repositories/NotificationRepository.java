@@ -20,6 +20,6 @@ public interface NotificationRepository extends CrudRepository<Notification, Int
 	@Query(value = "select * from Notification where account_id = :accountId and is_read = true order by date desc limit :n", nativeQuery = true)
 	public List<Notification> getAllReadByStatus(@Param("accountId") int accountId, @Param("n") int n);
 
-	@Query("from Notification where account_id = :accountId")
+	@Query("from Notification where account_id = :accountId order by date desc")
 	public List<Notification> getAllByAccountId(@Param("accountId") int accountId);
 }

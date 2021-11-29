@@ -11,7 +11,7 @@
 	        <!-- /.col -->
 	        <div class="col-md-9 m-0-auto">
 	          <div class="card card-primary card-outline">
-	            <div class="card-header">
+	            <div class="card-header notification">
 	              <h3 class="card-title">Notifications</h3>
 	            </div>
 	            <!-- /.card-header -->
@@ -114,6 +114,7 @@
 		      }
 		      $(this).data('clicks', !clicks)
 		    })
+		    console.log("b")
 		  })
 		</script>
 	</jsp:attribute>

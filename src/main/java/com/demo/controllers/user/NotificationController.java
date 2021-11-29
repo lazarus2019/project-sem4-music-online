@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.demo.services.CookieService;
 import com.demo.services.NotificationService;
 
 @Controller
@@ -18,10 +19,14 @@ public class NotificationController {
 
 	@Autowired
 	private NotificationService notificationService;
+	
+	@Autowired
+	private CookieService cookieService ; 
 
 	@RequestMapping(value = { "", "index" })
 	public String index(ModelMap modelMap) {
-		modelMap.put("notifications", notificationService.getAllByAccountId(1));
+		int accountId = Integer.parseInt(cookieService.getValue("acc_id", null)) ;
+		modelMap.put("notifications", notificationService.getAllByAccountId(accountId));
 		return "notification/index";
 	}
 

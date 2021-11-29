@@ -130,18 +130,8 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public List<Track> getTopWeekly(int statusId, int n) {
-		return trackRepository.getTopWeekly(statusId, n);
-	}
-
-	@Override
 	public Track save(Track track) {
 		return trackRepository.save(track);
-	}
-
-	@Override
-	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId) {
-		return trackRepository.getTopWeeklyByGenre(statusId, n, genresId);
 	}
 
 	@Override
@@ -169,4 +159,19 @@ public class TrackServiceImpl implements TrackService {
 		return trackRepository.findById(id).get();
 	}
 
+	@Override
+	public List<Track> getTopAllWeekly(int statusId, int n) {
+		return trackRepository.getTopAllWeekly(statusId, n);
+	}
+	@Override
+	public List<Track> getTopUsUkWeekly(int statusId, int n, int genresId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Track> getTopVnWeekly(int statusId, int n, int genresId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

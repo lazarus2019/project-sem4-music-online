@@ -7,8 +7,15 @@ import org.springframework.data.domain.Pageable;
 import com.demo.entities.*;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-public interface AccountService {
+import com.demo.entities.Account;
+import com.demo.entities.AuthenticationProvider;
+
+public interface AccountService{
 
 	public List<Account> getAllPopularArtists();
 	

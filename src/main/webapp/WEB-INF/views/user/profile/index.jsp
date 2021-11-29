@@ -136,8 +136,7 @@
                                 <img src=""${pageContext.request.contextPath }/resources/user/img/avatar.svg" alt="">
                             </div>
                             <div class="profile__meta">
-                                <h3>John Doe</h3>
-                                <span>Volna ID: 11104</span>
+                                <h3>${accountSignined.lastname}  ${accountSignined.firstname}</h3>
                             </div>
                         </div>
 
@@ -181,8 +180,16 @@
 
                                 <div class="col-12 col-lg-6 col-xl-3">
                                     <div class="stats">
-                                        <span>Premium plan</span>
-                                        <p><b>$39.99</b>/month</p>
+                                        <span>${accountPackage.servicePackage.name } Plan 
+                                        	<c:if test="${accountPackage.servicePackage.name != 'Basic' }">
+                                         		|  Expiration Date 
+                                         	</c:if>
+                                        </span>
+                                        <p><b>${accountPackage.servicePackage.price }</b>/month 
+                                        	<c:if test="${accountPackage.servicePackage.name != 'Basic' }">
+                                       			 |  <fmt:formatDate pattern = "dd-MM-yyyy" value ="${accountPackage.expirationDate }" />  
+                                        	</c:if>
+                                        </p>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9,10a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V11A1,1,0,0,0,9,10Zm12,1a1,1,0,0,0,1-1V6a1,1,0,0,0-1-1H3A1,1,0,0,0,2,6v4a1,1,0,0,0,1,1,1,1,0,0,1,0,2,1,1,0,0,0-1,1v4a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1,1,1,0,0,1,0-2ZM20,9.18a3,3,0,0,0,0,5.64V17H10a1,1,0,0,0-2,0H4V14.82A3,3,0,0,0,4,9.18V7H8a1,1,0,0,0,2,0H20Z"/></svg>
                                     </div>
                                 </div>
@@ -212,7 +219,10 @@
                                 <div class="col-12 col-lg-6">
                                     <div class="dashbox">
                                         <div class="dashbox__title">
-                                            <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.05566,2h-14a3.00328,3.00328,0,0,0-3,3V19a3.00328,3.00328,0,0,0,3,3h14a3.00328,3.00328,0,0,0,3-3V5A3.00328,3.00328,0,0,0,19.05566,2Zm-14,2h14a1.001,1.001,0,0,1,1,1v8H17.59082a1.99687,1.99687,0,0,0-1.66406.89062L14.52051,16H9.59082L8.18457,13.89062A1.99687,1.99687,0,0,0,6.52051,13H4.05566V5A1.001,1.001,0,0,1,5.05566,4Zm14,16h-14a1.001,1.001,0,0,1-1-1V15H6.52051l1.40625,2.10938A1.99687,1.99687,0,0,0,9.59082,18h4.92969a1.99687,1.99687,0,0,0,1.66406-.89062L17.59082,15h2.46484v4A1.001,1.001,0,0,1,19.05566,20Z"/></svg>                                                Notifications <span>17</span></h3>
+                                            <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.05566,2h-14a3.00328,3.00328,0,0,0-3,3V19a3.00328,3.00328,0,0,0,3,3h14a3.00328,3.00328,0,0,0,3-3V5A3.00328,3.00328,0,0,0,19.05566,2Zm-14,2h14a1.001,1.001,0,0,1,1,1v8H17.59082a1.99687,1.99687,0,0,0-1.66406.89062L14.52051,16H9.59082L8.18457,13.89062A1.99687,1.99687,0,0,0,6.52051,13H4.05566V5A1.001,1.001,0,0,1,5.05566,4Zm14,16h-14a1.001,1.001,0,0,1-1-1V15H6.52051l1.40625,2.10938A1.99687,1.99687,0,0,0,9.59082,18h4.92969a1.99687,1.99687,0,0,0,1.66406-.89062L17.59082,15h2.46484v4A1.001,1.001,0,0,1,19.05566,20Z"/></svg>
+                                            	Notifications <span>17</span>
+                                            
+                                            </h3>
 
                                             <div class="dashbox__wrap">
                                                 <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10,0,0,0,5.12,4.77V3a1,1,0,0,0-2,0V7.5a1,1,0,0,0,1,1H8.62a1,1,0,0,0,0-2H6.22A8,8,0,1,1,4,12a1,1,0,0,0-2,0A10,10,0,1,0,12,2Zm0,6a1,1,0,0,0-1,1v3a1,1,0,0,0,1,1h2a1,1,0,0,0,0-2H13V9A1,1,0,0,0,12,8Z"/></svg></a>
@@ -400,115 +410,40 @@
                                                     <thead>
                                                         <tr>
                                                             <th></th>
-                                                            <th><a href="#">Product <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.71,10.21,12,7.91l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42l-3-3a1,1,0,0,0-1.42,0l-3,3a1,1,0,0,0,1.42,1.42Zm4.58,4.58L12,17.09l-2.29-2.3a1,1,0,0,0-1.42,1.42l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z"/></svg></a></th>
+                                                            <th><a href="#">No. <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.71,10.21,12,7.91l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42l-3-3a1,1,0,0,0-1.42,0l-3,3a1,1,0,0,0,1.42,1.42Zm4.58,4.58L12,17.09l-2.29-2.3a1,1,0,0,0-1.42,1.42l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z"/></svg></a></th>
                                                             <th><a href="#" class="active">Title <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17,13.41,12.71,9.17a1,1,0,0,0-1.42,0L7.05,13.41a1,1,0,0,0,0,1.42,1,1,0,0,0,1.41,0L12,11.29l3.54,3.54a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29A1,1,0,0,0,17,13.41Z"/></svg></a></th>
                                                             <th><a href="#" class="active">Date <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z"/></svg></a></th>
-                                                            <th><a href="#">Quantity <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.71,10.21,12,7.91l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42l-3-3a1,1,0,0,0-1.42,0l-3,3a1,1,0,0,0,1.42,1.42Zm4.58,4.58L12,17.09l-2.29-2.3a1,1,0,0,0-1.42,1.42l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z"/></svg></a></th>
                                                             <th><a href="#">Total <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.71,10.21,12,7.91l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42l-3-3a1,1,0,0,0-1.42,0l-3,3a1,1,0,0,0,1.42,1.42Zm4.58,4.58L12,17.09l-2.29-2.3a1,1,0,0,0-1.42,1.42l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z"/></svg></a></th>
                                                             <th><a href="#">Status <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.71,10.21,12,7.91l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42l-3-3a1,1,0,0,0-1.42,0l-3,3a1,1,0,0,0,1.42,1.42Zm4.58,4.58L12,17.09l-2.29-2.3a1,1,0,0,0-1.42,1.42l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z"/></svg></a></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <c:forEach var="order" items="${accountOrder}" varStatus="loop">
                                                         <tr>
                                                             <td>
-                                                                <div class="main__table-text main__table-text--number"><a href="#modal-info" class="open-modal">631</a></div>
+                                                                <div class="main__table-text ">${loop.index + 1}</div>
                                                             </td>
                                                             <td>
                                                                 <div class="main__table-img">
-                                                                    <img src=""${pageContext.request.contextPath }/resources/user/img/store/item3.jpg" alt="">
+                                                                    <img src="${pageContext.request.contextPath }/resources/user/img/store/item3.jpg" alt="">
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="main__table-text"><a href="#">Music Blank</a></div>
+                                                                <div class="main__table-text"><a href="#">${order.servicePackage.name  }</a></div>
                                                             </td>
                                                             <td>
-                                                                <div class="main__table-text">Aug 21, 2021</div>
+                                                                <div class="main__table-text"><fmt:formatDate pattern = "dd-MM-yyyy" value ="${order.purchaseDate }" /></div>
                                                             </td>
                                                             <td>
-                                                                <div class="main__table-text">17</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--price">$67.83</div>
+                                                                <div class="main__table-text main__table-text--price">$ ${order.servicePackage.price}</div>
                                                             </td>
                                                             <td>
                                                                 <div class="main__table-text main__table-text--green"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/></svg>                                                                    Delivered</div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--number"><a href="#modal-info" class="open-modal">632</a></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-img">
-                                                                    <img src=""${pageContext.request.contextPath }/resources/user/img/store/item3.jpg" alt="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text"><a href="#">Music Blank</a></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text">Aug 21, 2021</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text">17</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--price">$67.83</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--red"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z"/></svg>                                                                    Canceled</div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--number"><a href="#modal-info" class="open-modal">708</a></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-img">
-                                                                    <img src=""${pageContext.request.contextPath }/resources/user/img/store/item4.jpg" alt="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text"><a href="#">Headphones ZR-991</a></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text">Aug 14, 2021</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text">1</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--price">$199</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--grey"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20ZM14.09814,9.63379,13,10.26807V7a1,1,0,0,0-2,0v5a1.00025,1.00025,0,0,0,1.5.86621l2.59814-1.5a1.00016,1.00016,0,1,0-1-1.73242Z"/></svg>                                                                    On the way</div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--number"><a href="#modal-info" class="open-modal">750</a></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-img">
-                                                                    <img src=""${pageContext.request.contextPath }/resources/user/img/store/item1.jpg" alt="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text"><a href="#">Vinyl Player</a></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text">Aug 5, 2021</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text">1</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--price">$11 899</div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="main__table-text main__table-text--green"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/></svg>                                                                    Delivered</div>
-                                                            </td>
-                                                        </tr>
+                                                        </c:forEach>
+                                                        
+                                                      
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -583,7 +518,7 @@
                                 <!-- details form -->
                                 <c:set var="classProfile" value="${accountSignined.authProvider != auth ? 'col-12 col-lg-6' : 'col-12 col-lg-12'} " />
                                 <div class="${classProfile} " >
-                                    <s:form action="${pageContext.request.contextPath }/user/profile/updateAccountFromSetting" 
+                                    <s:form action="${pageContext.request.contextPath }/profile/updateAccountFromSetting" 
                                     	class="sign__form sign__form--profile" method="POST" modelAttribute="accountUpdate" >
                                         <div class="row">
                                             <div class="col-12">
@@ -679,7 +614,7 @@
                                                 <div class="sign__group">
                                                     <label class="sign__label" for="oldpass">Old password</label>                                                    
                                                     <input id="oldpass" type="password" name="oldpass" class="sign__input" required="required">
-                                                    
+                                                    <span id="checkStatus"></span>
                                                 </div>
                                             </div>
 
@@ -700,7 +635,7 @@
                                           
 
                                             <div class="col-12">
-                                            <input type="submit" value="Change" class="sign__btn" />
+                                            <input type="button" value="Change" id="changePasswordSubmit" onclick="checkPass()"  class="sign__btn" />
                                             </div>
                                         </div>
                                     </s:form>
@@ -719,23 +654,32 @@
        	<link 	rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
   		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   		<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-         <script>
-         
-         	function checkform() {
-        	    if(document.changePassword.password.value == "") {
-        	        alert("please enter start_date");
-        	        return false;
-        	    } else {
-					
-            	    
-        	    }
-        	}
+         <script>         
+         	
         	
   			$( function() {
-   				 $("#birthdayPicker" ).datepicker({ dateFormat: "dd/mm/yy" }).val();
+   				 $("#birthdayPicker").datepicker({ dateFormat: "dd/mm/yy" }).val();
   			} );
+
+
+  			function checkPass(){
+					var pass = $('#oldpass').val() ; 
+					console.log(pass)
+
+			         $.ajax({
+			            type: 'GET',
+			            data: {
+			            	pass: pass
+			            },
+			            url: '${pageContext.request.contextPath}/profile/checkPass',
+			            success: function (status) {
+				            console.log(status) ;
+			                $("#checkStatus").html(status.toString());
+			            }
+			        }) 
+			}
+  	  		
   		</script>
-        
 	</jsp:attribute>
 	
 </mt:userTemplate>

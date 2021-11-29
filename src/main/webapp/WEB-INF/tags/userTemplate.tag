@@ -1,4 +1,4 @@
-<%@ tag language="java" pageEncoding="ISO-8859-1"%>
+<%@ tag language="java" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
 <%@ taglib prefix="t" uri="http://mytags.com" %>
@@ -424,7 +424,7 @@
 									<path d="M13.5 18V13L17.5 15.5001L13.5 18Z" fill="#FF0000" />
 								</svg></a>
 						</div>
-						<small class="footer__copyright">ï¿½ Volna, 2021. Created by <a
+						<small class="footer__copyright">© Volna, 2021. Created by <a
 								href="../../../themeforest.net/user/dmitryvolkov/portfolio.html" target="_blank">Dmitry
 								Volkov</a>.</small>
 					</div>

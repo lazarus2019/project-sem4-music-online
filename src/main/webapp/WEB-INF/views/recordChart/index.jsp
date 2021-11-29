@@ -14,7 +14,7 @@
 				<div class="top__list">
 					<h3 class="top__list__header text-primary">Top ${topCount } Tracks </h3>
                         <ul class="main__list main__list--playlist main__list--dashbox">
-							<c:forEach var="top100Track" items="${top100Tracks }" varStatus="i">
+							<c:forEach var="topTrack" items="${topTracks }" varStatus="i">
                                 <li class="single-item single-item-chart item">
                                     <a data-playlist data-title="1. Got What I Got" data-artist="Jason Aldean"
 										data-img="${pageContext.request.contextPath }/resources/user/img/covers/cover3.jpg"
@@ -30,10 +30,12 @@
                                         </svg>
                                     </a>
                                     <div class="single-item__title">
-                                        <h4><a href="#">${i.index + 1 }. ${top100Track.title }</a></h4>
-                                        <span><a href="#">${top100Track.publishDate }</a></span>
+                                        <h4><a href="#">${i.index + 1 }. ${topTrack.title }</a></h4>
+                                        <c:forEach var="nickname" items="${topTrack.artistNicknames }">
+                                        	<span><a href="#">${nickname}</a></span>, 
+                                        </c:forEach>
                                     </div>
-                                    <span class="single-item__time"><t:trackTime totalSeconds="${top100Track.duration }"/></span>
+                                    <span class="single-item__time"><t:trackTime totalSeconds="${topTrack.duration }"/></span>
                                     <a href="#" class="single-item__add">
                                     	<!-- add to play list icon -->
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
