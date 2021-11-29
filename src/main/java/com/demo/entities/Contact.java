@@ -96,7 +96,7 @@ public class Contact implements java.io.Serializable {
 		this.content = content;
 	}
 
-	@Column(name = "isRead", nullable = false)
+	@Column(name = "is_read", nullable = false)
 	public boolean isIsRead() {
 		return this.isRead;
 	}

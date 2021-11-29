@@ -1,80 +1,87 @@
+function showResultContainer(){
+  document.querySelector('.result-layout-fixed-bg').classList.add("show")
+  document.querySelector('.result-layout').classList.add("show")
+}
+function hideResultContainer(){
+  document.querySelector('.result-layout-fixed-bg').classList.remove("show")
+  document.querySelector('.result-layout').classList.remove("show")
+}
 
+function togglePlayer() {
+    document.querySelector('#audioPlayer').classList.toggle('show');
+    document.querySelector('.dropdown-song-menu').classList.remove('show');
+    document.querySelector('.dropdown-volume-range').classList.remove('show');
+}
 
-// function togglePlayer() {
-//     document.querySelector('#audioPlayer').classList.toggle('show');
-//     document.querySelector('.dropdown-song-menu').classList.remove('show');
-//     document.querySelector('.dropdown-volume-range').classList.remove('show');
-// }
+let isPlaying = true;
 
-// let isPlaying = true;
+function audioControl(e) {
+    document.querySelector('#audioPlayer').classList.toggle('playing');
+    isPlaying = !isPlaying;
+}
 
-// function audioControl(e) {
-//     document.querySelector('#audioPlayer').classList.toggle('playing');
-//     isPlaying = !isPlaying;
-// }
+function changeProgressSong(e) {
+    document.querySelector('.progressbar .bar').style.width = e.value + "%";
+}
 
-// function changeProgressSong(e) {
-//     document.querySelector('.progressbar .bar').style.width = e.value + "%";
-// }
+function toggleMenuVolume(elementName) {
+    document.querySelector(`.${elementName}`).classList.toggle('show');
+}
 
-// function toggleMenuVolume(elementName) {
-//     document.querySelector(`.${elementName}`).classList.toggle('show');
-// }
+function toggleMenuSong(elementName, elementLink) {
+    document.querySelector(`.${elementName}`).classList.toggle('show');
+    document.querySelectorAll(`.${elementLink}`).forEach(el => {
+        el.addEventListener('click', () => {
+            document.querySelector(`.${elementName}`).classList.remove('show');
+        })
+    })
+}
 
-// function toggleMenuSong(elementName, elementLink) {
-//     document.querySelector(`.${elementName}`).classList.toggle('show');
-//     document.querySelectorAll(`.${elementLink}`).forEach(el => {
-//         el.addEventListener('click', () => {
-//             document.querySelector(`.${elementName}`).classList.remove('show');
-//         })
-//     })
-// }
+function togglePlaylist() {
+    document.querySelector('.playlist__box').classList.toggle('show');
+}
 
-// function togglePlaylist() {
-//     document.querySelector('.playlist__box').classList.toggle('show');
-// }
+function toggleLyrics(){
+    document.querySelector('.lyric-box').classList.toggle('show');
+}
 
-// function toggleLyrics(){
-//     document.querySelector('.lyric-box').classList.toggle('show');
-// }
+function hideLyrics(){
+    document.querySelector('.lyric-box').classList.remove('show');
+}
 
-// function hideLyrics(){
-//     document.querySelector('.lyric-box').classList.remove('show');
-// }
+function changeVolumeIcon(e) {
+    let value = e.value;
+    const iconVolume = document.querySelector('.btn-toggle-volume i');
+    if (value == 0) {
+        iconVolume.classList = "las la-volume-mute audio__icon";
+    } else if (value < 50) {
+        iconVolume.classList = "las la-volume-down audio__icon";
+    } else {
+        iconVolume.classList = "las la-volume-up audio__icon";
+    }
+}
 
-// function changeVolumeIcon(e) {
-//     let value = e.value;
-//     const iconVolume = document.querySelector('.btn-toggle-volume i');
-//     if (value == 0) {
-//         iconVolume.classList = "las la-volume-mute audio__icon";
-//     } else if (value < 50) {
-//         iconVolume.classList = "las la-volume-down audio__icon";
-//     } else {
-//         iconVolume.classList = "las la-volume-up audio__icon";
-//     }
-// }
+function showTimer(){
+    document.querySelector('.set-timer').classList.add('show')
+}
 
-// function showTimer(){
-//     document.querySelector('.set-timer').classList.add('show')
-// }
-
-// const shareLink = document.querySelector('.share-link');
-// shareLink.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     navigator.clipboard.writeText(shareLink.getAttribute("href"));
-// })
-// const favoriteLink = document.querySelector('.favorite-link');
-// favoriteLink.addEventListener('click', () => {
-//     if (favoriteLink.getAttribute('data-favorite') === "yes") {
-//         favoriteLink.innerHTML = `<i class="las la-heart"></i>
-//         <span>Favorite</span>`;
-//         favoriteLink.setAttribute('data-favorite', 'no');
-//     } else {
-//         favoriteLink.innerHTML = `<i class="lar la-heart"></i>
-//         <span>Favorite</span>`;
-//         favoriteLink.setAttribute('data-favorite', 'yes');
-//     }
-// })
+const shareLink = document.querySelector('.share-link');
+shareLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(shareLink.getAttribute("href"));
+})
+const favoriteLink = document.querySelector('.favorite-link');
+favoriteLink.addEventListener('click', () => {
+    if (favoriteLink.getAttribute('data-favorite') === "yes") {
+        favoriteLink.innerHTML = `<i class="las la-heart"></i>
+        <span>Favorite</span>`;
+        favoriteLink.setAttribute('data-favorite', 'no');
+    } else {
+        favoriteLink.innerHTML = `<i class="lar la-heart"></i>
+        <span>Favorite</span>`;
+        favoriteLink.setAttribute('data-favorite', 'yes');
+    }
+})
 
 // Dropdown select
 // Get dropdowns and form
@@ -94,7 +101,7 @@ if (form !== null) {
   // When form is submitted console log the value of the select field
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('Selected country:', form.querySelector('[name="genres"]').value);
+    //console.log('Selected country:', form.querySelector('[name="genres"]').value);
   });
 }
 
@@ -361,3 +368,8 @@ function createSearchFunc(e, parentName, childName, tagName){
   })
 }
 
+  function renderLyrics(lyrics) {
+    let htmls = lyrics.split("/n").map(line => `<p>${line}</p>`)
+
+    return htmls.join('')
+}

@@ -1,7 +1,8 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
-<%@ taglib prefix="mt" uri="http://mytags.com" %>
+<%@ taglib prefix="t" uri="http://mytags.com" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +26,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/adminlte.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/icheck-bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
 
 	<!-- CSS Listen -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/1.3.0/css/line-awesome.min.css">
@@ -58,13 +60,13 @@
 
 			<ul class="header__nav">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="${pageContext.request.contextPath }/">Home</a>
 				</li>
 				<!-- <a href="profile.html">Profile</a>
 				<a href="about.html">About</a>
 				<a href="contacts.html">Contacts</a> -->
 				<li>
-					<a href="genres.html">Genres</a>
+					<a href="${pageContext.request.contextPath }/genres">Genres</a>
 				</li>
 				<li class="dropdown-btn">
 					<a href="#" class="link">Library</a>
@@ -73,14 +75,15 @@
 						<a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
 						<a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
 						<a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
-						<a href="${pageContext.request.contextPath }/record-chart/index"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+						<a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 					</div>
 				</li>
 
 
-				<a href="artists.html">Artist</a>
+				<a href="${pageContext.request.contextPath }/artist">Artist</a>
 			</ul>
-
+			
+			<!-- search box -->
 			<form action="#" class="header__search">
 				<input type="text" placeholder="Artist, track or podcast" class="input-search">
 				<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -91,7 +94,7 @@
 						<path
 							d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
 					</svg></button>
-					<div class="result-layout-fixed-bg">						
+					<div class="result-layout-fixed-bg" onclick="hideResultContainer()"></div>						
 					</div>
 				<div class="result-layout">
 					<div class="artists-result result-box">
@@ -99,7 +102,7 @@
 							<h3>Artists</h3>
 							<a href="#">View All</a>
 						</div>
-						<div class="result-content grid-tl-6 mt-3 mb-3">
+						<div class="result-content grid-tl-6 mt-3 mb-3" id="artist-container">
 							<div class="artist-box">
 								<div class="artist-image-box">
 									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
@@ -143,7 +146,7 @@
 							<h3>Track</h3>
 							<a href="#">View All</a>
 						</div>
-						<div class="result-content grid-tl-3 mt-3 mb-3">
+						<div class="result-content grid-tl-3 mt-3 mb-3" id="track-container">
 							<div class="track-box">
 								<div class="track-box-image">
 									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
@@ -205,7 +208,7 @@
 							<h3>Albums</h3>
 							<a href="#">View All</a>
 						</div>
-						<div class="result-content grid-tl-3 mt-3 mb-3">
+						<div class="result-content grid-tl-3 mt-3 mb-3" id="album-container">
 							<div class="album-box">
 								<div class="album-box-image">
 									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
@@ -264,7 +267,7 @@
 					</div>
 				</div>
 			</form>
-
+			
 			<div class="header__actions">
 				<div class="header__action header__action--search">
 					<button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg"
@@ -272,95 +275,33 @@
 							<path
 								d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
 						</svg></button>
-				</div>
+			</div>
+			<!-- end search box -->
 
-				<div class="header__action header__action--note">
-					<span>17</span>
-					<a href="#" class="header__action-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path
-								d="M19.05566,2h-14a3.00328,3.00328,0,0,0-3,3V19a3.00328,3.00328,0,0,0,3,3h14a3.00328,3.00328,0,0,0,3-3V5A3.00328,3.00328,0,0,0,19.05566,2Zm-14,2h14a1.001,1.001,0,0,1,1,1v8H17.59082a1.99687,1.99687,0,0,0-1.66406.89062L14.52051,16H9.59082L8.18457,13.89062A1.99687,1.99687,0,0,0,6.52051,13H4.05566V5A1.001,1.001,0,0,1,5.05566,4Zm14,16h-14a1.001,1.001,0,0,1-1-1V15H6.52051l1.40625,2.10938A1.99687,1.99687,0,0,0,9.59082,18h4.92969a1.99687,1.99687,0,0,0,1.66406-.89062L17.59082,15h2.46484v4A1.001,1.001,0,0,1,19.05566,20Z" />
-						</svg></a>
-
-					<div class="header__drop">
-						<a href="${pageContext.request.contextPath }/notification/index" class="header__all">View all</a>
-						<div class="header__note header__note--succ">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path
-									d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" />
-							</svg>
-							<p><a href="#modal-info2" class="open-modal">Payment #51</a> was successful!</p>
-							<span>1 hour ago</span>
-						</div>
-						<div class="header__note header__note--fail">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path
-									d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z" />
-							</svg>
-							<p><a href="#modal-info3" class="open-modal">Payment #50</a> failed!</p>
-							<span>2 hours ago</span>
-						</div>
-						<div class="header__note header__note--info">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path
-									d="M12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Zm0-8.5a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0v-3A1,1,0,0,0,12,11.5Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,7.5Z" />
-							</svg>
-							<p><a href="#modal-info4" class="open-modal">Example</a> of notification.</p>
-							<span>2 hours ago</span>
-						</div>
-						<div class="header__note header__note--gift">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path
-									d="M18,7h-.35A3.45,3.45,0,0,0,18,5.5a3.49,3.49,0,0,0-6-2.44A3.49,3.49,0,0,0,6,5.5,3.45,3.45,0,0,0,6.35,7H6a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H5v6a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V13h1a1,1,0,0,0,1-1V10A3,3,0,0,0,18,7ZM11,20H8a1,1,0,0,1-1-1V13h4Zm0-9H5V10A1,1,0,0,1,6,9h5Zm0-4H9.5A1.5,1.5,0,1,1,11,5.5Zm2-1.5A1.5,1.5,0,1,1,14.5,7H13ZM17,19a1,1,0,0,1-1,1H13V13h4Zm2-8H13V9h5a1,1,0,0,1,1,1Z" />
-							</svg>
-							<p><a href="#modal-info5" class="open-modal">You have received a gift!</a></p>
-							<span>4 hours ago</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- <div class="header__action header__action--cart">
-					<span>3</span>
-					<a class="header__action-btn" href="cart.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.5,19A1.5,1.5,0,1,0,10,20.5,1.5,1.5,0,0,0,8.5,19ZM19,16H7a1,1,0,0,1,0-2h8.49121A3.0132,3.0132,0,0,0,18.376,11.82422L19.96143,6.2749A1.00009,1.00009,0,0,0,19,5H6.73907A3.00666,3.00666,0,0,0,3.92139,3H3A1,1,0,0,0,3,5h.92139a1.00459,1.00459,0,0,1,.96142.7251l.15552.54474.00024.00506L6.6792,12.01709A3.00006,3.00006,0,0,0,7,18H19a1,1,0,0,0,0-2ZM17.67432,7l-1.2212,4.27441A1.00458,1.00458,0,0,1,15.49121,12H8.75439l-.25494-.89221L7.32642,7ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Z"/></svg></a>
-
-					<div class="header__drop">
-						<a href="cart.html" class="header__all">Go to cart</a>
-						<div class="header__product">
-							<img src="${pageContext.request.contextPath }/resources/user/img/store/item4.jpg" alt="">
-							<p><a href="product.html">Headphones ZR-991</a></p>
-							<span>$199</span>
-							<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-						</div>
-						<div class="header__product">
-							<img src="${pageContext.request.contextPath }/resources/user/img/store/item3.jpg" alt="">
-							<p><a href="product.html">Music Blank</a></p>
-							<span>$3.99</span>
-							<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-						</div>
-						<div class="header__product">
-							<img src="${pageContext.request.contextPath }/resources/user/img/store/item2.jpg" alt="">
-							<p><a href="product.html">Microphone R4</a></p>
-							<span>$799</span>
-							<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-						</div>
-					</div>
-				</div> -->
+				<!-- notification button -->
+				<t:notification/>
+				<!-- end notification button -->
 
 				<div class="header__action header__action--signin">
-					<a class="header__action-btn" href="signin.html">
+					<c:if test="${pageContext.request.userPrincipal.name == null}">
+					<a class="header__action-btn" href="${pageContext.request.contextPath }/user/login/login">
 						<span>Sign in</span>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 							<path
 								d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
 						</svg>
 					</a>
+					</c:if>
 					<div class="header__action-btn">
-						<span>John Doe</span>
+						<c:if test="${pageContext.request.userPrincipal.name  != null }">
+						<span>${ accountSignined.nickname }</span>					
+					
 						<div class="user__box">
 							<i class="las la-crown"></i>
 							<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
 								alt="" class="user__avatar">
 							<div class="dropdown__user-menu">
-								<a href="profile.html">
+								<a href="${pageContext.request.contextPath }/user/profile/index">
 									<i class="lar la-user-circle"></i> Profile
 								</a>
 								<a href="artist_tracks.html">
@@ -369,18 +310,19 @@
 								<a href="artist_album.html">
 									<i class="las la-record-vinyl"></i> Your Albums
 								</a>
-								<a href="${pageContext.request.contextPath }/package/index">
+								<a href="#">
 									<i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
 										class="las la-crown yellow__icon"></i>
 								</a>
 								<a href="#">
 									<i class="las la-user-cog"></i> Settings
 								</a>
-								<a href="#">
+								<a href="${pageContext.request.contextPath }/user/login/logout">
 									<i class="las la-sign-out-alt"></i> Log out
 								</a>
 							</div>
 						</div>
+					</c:if> 
 					</div>
 				</div>
 			</div>
@@ -1188,6 +1130,122 @@
 	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/player/player.js"></script>
 	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/my_custom.js"></script>
+	
+	<!-- Main Search -->
+	<script>
+	$(document).ready(function() {
+	    $('.input-search').keyup(function () {
+	        var keyword = $('.input-search').val();
+
+	        /* Top Artist */
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                keyword: keyword
+	            },
+	            url: '${pageContext.request.contextPath}/home/searchTopArtist',
+	            success: function (artists) {
+	                var htmls = "";
+	                for (var i = 0; i < artists.length; i++) {
+
+	                    htmls += "<a href='${pageContext.request.contextPath}/artist/" + artists[i].id + "' class='artist-box'><div class='artist-image-box'>" +
+	                        "<img src='${pageContext.request.contextPath}/resources/user/img/artists/" + artists[i].image + "'></div>" +
+	                        "<p class='artist-name'>" + artists[i].nickname + "</p></a>"
+	                }
+	                $("#artist-container").html(htmls);
+	            }
+	        })
+
+	        /* Top Track */
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                keyword: keyword
+	            },
+	            url: '${pageContext.request.contextPath}/home/searchTopTrack',
+	            success: function (tracks) {
+	                var htmls = "";
+               for (var i = 0; i < tracks.length; i++) {
+	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "'><div class='track-box-image'>" +
+	                        "<img src='${pageContext.request.contextPath}/resources/user/img/tracks/" + tracks[i].thumbnail + "' /></div>" +
+	                        "<div class='track-box-content'><p>" + tracks[i].title + "</p><span>"+ "aritst" + "</span></div></div>"
+	                }
+	                $("#track-container").html(htmls);
+	            }
+	        })
+
+	        /* Top Album */
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                keyword: keyword
+	            },
+	            url: '${pageContext.request.contextPath }/home/searchTopAlbum',
+	            success: function (albums) {
+	                var htmls = "";
+	                for (var i = 0; i < albums.length; i++) {
+	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "'><div class='album-box-image'>" +
+	                        "<img src='${pageContext.request.contextPath}/resources/user/img/playlist/" + albums[i].thumbnail + "'/></div>" +
+	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
+	                }
+	                $("#album-container").html(htmls);
+	            }
+	        })
+	    })
+
+	    /* Show All Artist */
+	    $("#artist-result-all").click(function () {
+	        var keyword = $('.input-search').val();
+			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=artist'
+	        window.location.replace(url);
+	    })
+
+	    /* Show All Track */
+	    $("#track-result-all").click(function () {
+	        var keyword = $('.input-search').val();
+			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=track'
+	        window.location.replace(url);
+	    })
+
+	    /* Show All Album */
+	    $("#album-result-all").click(function () {
+	        var keyword = $('.input-search').val();
+			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=album'
+	        window.location.replace(url);
+	    })
+	    /* Button get track by id */
+	    $(".btn-track-id").click(function () {
+	        var trackId = $(".btn-track-id").data("id");
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                trackId: trackId
+	            },
+	            url: '${pageContext.request.contextPath }/home/getTrackById',
+	            success: function (track) {
+	                if (track) {
+	                    console.log("playing track:" + track.title)
+	                    $.ajax({
+	                        type: 'GET',
+	                        data: {
+	                            trackId: track.id,
+	                            genresId: track.genresId
+	                        },
+	                        url: '${pageContext.request.contextPath }/home/getWaitingTrack',
+	                        success: function (data) {
+	                            console.log("waiting track:" + data.title)
+	                            var lyrics = renderLyrics(data.lyrics)
+	                            var songTitle = "<p>Song: " + data.title + " - " + data.artists + "</p>"
+	                            $(".lyric-content").html(songTitle + lyrics)
+	                        }
+	                    })
+	                }
+	            }
+	        })
+	    })
+	})
+	</script>
+	
 </body>
 
 <!-- Mirrored from dmitryvolkov.me/demo/volna/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Nov 2021 02:17:54 GMT -->

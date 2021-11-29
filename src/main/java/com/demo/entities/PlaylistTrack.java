@@ -1,11 +1,11 @@
 package com.demo.entities;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,32 +17,34 @@ import javax.persistence.Table;
 @Table(name = "playlist_track", catalog = "music_app")
 public class PlaylistTrack implements java.io.Serializable {
 
-	private Integer id;
+	private PlaylistTrackId id;
 	private Playlist playlist;
 	private Track track;
 
 	public PlaylistTrack() {
 	}
 
-	public PlaylistTrack(Playlist playlist, Track track) {
+	public PlaylistTrack(PlaylistTrackId id, Playlist playlist, Track track) {
+		this.id = id;
 		this.playlist = playlist;
 		this.track = track;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@EmbeddedId
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	@AttributeOverrides({
+			@AttributeOverride(name = "playlistId", column = @Column(name = "playlist_id", nullable = false)),
+			@AttributeOverride(name = "trackId", column = @Column(name = "track_id", nullable = false)) })
+	public PlaylistTrackId getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(PlaylistTrackId id) {
 		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "playlist_id", nullable = false)
+	@JoinColumn(name = "playlist_id", nullable = false, insertable = false, updatable = false)
 	public Playlist getPlaylist() {
 		return this.playlist;
 	}
@@ -52,7 +54,7 @@ public class PlaylistTrack implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "track_id", nullable = false)
+	@JoinColumn(name = "track_id", nullable = false, insertable = false, updatable = false)
 	public Track getTrack() {
 		return this.track;
 	}
