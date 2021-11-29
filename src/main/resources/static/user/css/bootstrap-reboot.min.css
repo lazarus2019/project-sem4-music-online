@@ -34,6 +34,13 @@ body {
 	background-color: #fff
 }
 
+<<<<<<< HEAD
+=======
+.text-white {
+	color: #2893ff !important; 
+}
+
+>>>>>>> bdff0b746d5565cee4b2588a3890a29ecd444482
 [tabindex="-1"]:focus:not(:focus-visible) {
 	outline: 0 !important
 }
@@ -299,8 +306,11 @@ template {
 [hidden] {
 	display: none !important
 }
+<<<<<<< HEAD
 
 .text-white {
 	color: #2893ff !important; 
 }
+=======
+>>>>>>> bdff0b746d5565cee4b2588a3890a29ecd444482
 /*# sourceMappingURL=bootstrap-reboot.min.css.map */

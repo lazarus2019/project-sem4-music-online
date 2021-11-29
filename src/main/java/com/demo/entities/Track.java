@@ -1,4 +1,5 @@
 package com.demo.entities;
+// Generated Nov 21, 2021, 7:14:54 AM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -37,6 +38,7 @@ public class Track implements java.io.Serializable {
 	private int weeklyListens;
 	private boolean isPremium;
 	private Date publishDate;
+	private boolean isHidden;
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<PlaylistTrack> playlistTracks = new HashSet<PlaylistTrack>(0);
 	private Set<ArtistTrack> artistTracks = new HashSet<ArtistTrack>(0);
@@ -196,7 +198,7 @@ public class Track implements java.io.Serializable {
 		this.weeklyListens = weeklyListens;
 	}
 
-	@Column(name = "is_premium", nullable = false)
+	@Column(name = "isPremium", nullable = false)
 	public boolean isIsPremium() {
 		return this.isPremium;
 	}
@@ -213,6 +215,15 @@ public class Track implements java.io.Serializable {
 
 	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
+	}
+
+	@Column(name = "isHidden", nullable = false)
+	public boolean isIsHidden() {
+		return this.isHidden;
+	}
+
+	public void setIsHidden(boolean isHidden) {
+		this.isHidden = isHidden;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "track")
