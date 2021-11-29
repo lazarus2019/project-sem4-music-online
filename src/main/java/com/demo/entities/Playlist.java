@@ -171,4 +171,12 @@ public class Playlist implements java.io.Serializable {
 		this.accountPlaylists = accountPlaylists;
 	}
 
+	public Set<Account> findAccountThroughAccountPlaylist() {
+		Set<Account> accounts = new HashSet<Account>(0) ; 
+		for(AccountPlaylist accountPlaylist : accountPlaylists) {
+			accounts.add(accountPlaylist.getAccount()) ; 
+		}
+		return accounts ;
+	}
+	
 }

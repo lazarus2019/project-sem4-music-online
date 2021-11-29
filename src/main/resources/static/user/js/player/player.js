@@ -1,45 +1,5 @@
 import Song from "./Song.js";
 
-// document.querySelector('.duration-btn').addEventListener('click', () => {
-//     let file = document.querySelector('.file').files[0];
-//     computeLength(file)
-//         .then((result) => {
-//             let secondDuration = Number.parseInt(result.duration);
-//             if (secondDuration < 3600) {
-//                 document.querySelector('.result').innerHTML = new Date(secondDuration * 1000).toISOString().substr(14, 5);
-//             } else {
-//                 document.querySelector('.result').innerHTML = new Date(secondDuration * 1000).toISOString().substr(11, 8);
-//             }
-//         })
-// })
-
-// function computeLength(file) {
-//     return new Promise((resolve) => {
-//         var objectURL = URL.createObjectURL(file);
-//         var mySound = new Audio([objectURL]);
-//         mySound.addEventListener(
-//             "canplaythrough",
-//             () => {
-//                 URL.revokeObjectURL(objectURL);
-//                 resolve({
-//                     file,
-//                     duration: mySound.duration
-//                 });
-//             },
-//             false,
-//         );
-//     });
-// }
-
-// const urlBase = "https://docs.google.com/uc?export=download&id=";
-
-// document.querySelector('.load-url-btn').addEventListener('click', (e) => {
-//     const source = document.querySelector('.audio source');
-//     source.src = urlBase + document.querySelector('.input-url').value;
-//     document.querySelector('.audio').load();
-// })
-
-
 const PlAYER_STORAGE_KEY = "MUSIC_APP"
 const PLAYLIST_STORAGE_KEY = "MUSIC_APP_PLAYLIST"
 const WAITING_PLAYLIST_STORAGE_KEY = "MUSIC_APP_WAITING_PLAYLIST"
@@ -668,6 +628,7 @@ const appPremium = {
     },
     handleEvents: function () {
         const _this = this;
+<<<<<<< HEAD
 
         // Xử lý khi click play
         playBtn.onclick = () => {
@@ -939,6 +900,279 @@ const appPremium = {
             }
         }
 
+=======
+
+        // Xử lý khi click play
+        playBtn.onclick = () => {
+            _this.setConfig('isPlaying', !_this.isPlaying)
+            if (_this.isPlaying) {
+                audio.pause()
+            } else {
+                audio.play()
+            }
+        }
+
+        // Khi song được play
+        audio.onplay = () => {
+            _this.isPlaying = true
+            player.classList.add('playing')
+        }
+
+        // Khi song bị pause
+        audio.onpause = () => {
+            _this.isPlaying = false
+            player.classList.remove('playing')
+        }
+
+        // Khi tiến độ bài hát thay đổi
+        audio.ontimeupdate = () => {
+            if (audio.duration) {
+                _this.startTime = audio.currentTime
+                _this.setConfig('startTime', _this.startTime)
+                const progressPercent = Math.floor(audio.currentTime / audio.duration * 100 * 100) / 100
+                progress.value = progressPercent
+                progressBar.style.width = progressPercent + '%';
+                trackTime.innerHTML = _this.audioCalTime(audio.currentTime)
+            }
+        }
+
+        // Xử lý khi tua song
+        progress.oninput = (e) => {
+            const seekTime = Math.floor(audio.duration / 100 * e.target.value * 100) / 100
+            audio.currentTime = seekTime
+            progressBar.style.width = e.target.value + '%';
+        }
+
+        // Khi next song
+        nextBtn.onclick = () => {
+            if (_this.isRandom) {
+                _this.playRandomSong()
+            } else {
+                _this.nextSong()
+            }
+            audio.play()
+        }
+
+        // Khi prev song
+        prevBtn.onclick = () => {
+            if (_this.isRandom) {
+                _this.playRandomSong()
+            } else {
+                _this.prevSong()
+            }
+            audio.play()
+        }
+
+        // Xử lý random bật tắt
+        randomBtn.onclick = () => {
+            _this.isRandom = !_this.isRandom
+            _this.setConfig('isRandom', _this.isRandom)
+            randomBtn.classList.toggle('active', _this.isRandom)
+        }
+
+        // Xử lý phát lặp lại một song
+        repeatBtn.onclick = () => {
+            _this.isRepeat = !_this.isRepeat
+            _this.setConfig('isRepeat', _this.isRepeat)
+            repeatBtn.classList.toggle('active', _this.isRepeat)
+        }
+
+        // Xử lý next song khi audio ended
+        audio.onended = () => {
+            if (_this.isRepeat) {
+                audio.play()
+            } else {
+                if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
+                    addSongs(waitingPlaylist[0])
+                    playSong(waitingPlaylist[0].id)
+                } else {
+                    nextBtn.click()
+                }
+            }
+        }
+
+        // Lắng nghe hành vi click vào playlist
+        playlist.onclick = (e) => {
+            const songNode = e.target.closest('.playlist__list-item');
+            if (songNode && !e.target.closest('.btn-dropdown-playlist-menu')) {
+                // Xử lý khi click vào song
+                // if (songNode) {
+                // console.log('songnode')
+                // audio.src = songNode.dataset.filename
+                const id = Number(songNode.dataset.id)
+                const currentSong = songPlaylist.find(song => song.id === id)
+                _this.currentIndex = songPlaylist.indexOf(currentSong)
+                // _this.currentIndex = Number(songNode.dataset.id)
+                _this.loadCurrentSong()
+                // }
+
+                // Xử lý khi click vào song option
+                if (e.target.closest('.btn-dropdown-playlist-menu')) {
+
+                }
+            }
+        }
+
+        // Thay đổi âm lượng audio
+        audioVolume.oninput = (e) => {
+            const volume = e.target.value / 100
+            audio.volume = volume
+            _this.setConfig('volume', volume)
+        }
+
+        // Set timer cho trình phát nhạc
+        setTimerBtn.onclick = () => {
+            clearInterval(_this.timer)
+            _this.secondsTimerLeft = timerSelect.value * 60;
+            _this.countDownTimer()
+            _this.closeTimer()
+        }
+
+        // Tắt trình countdown
+        cancelTimerLayout.onclick = () => {
+            _this.closeTimer()
+        }
+
+        // Xóa timer countdown
+        removeTimer.onclick = () => {
+            _this.removeCountDown()
+        }
+    },
+    audioCalTime: function (time) {
+        const duration = Number.parseInt(time)
+        if (duration < 3600) {
+            return new Date(duration * 1000).toISOString().substr(14, 5)
+        } else {
+            return new Date(duration * 1000).toISOString().substr(11, 8)
+        }
+    },
+    countDownTimer: function () {
+        timerLeft.innerHTML = this.audioCalTime(this.secondsTimerLeft)
+        this.setCountdownToStorage(true)
+        timerCountDown.classList.add('show')
+        this.timer = setInterval(() => {
+            this.secondsTimerLeft--
+            this.setConfig('secondsTimerLeft', this.secondsTimerLeft)
+            timerLeft.innerHTML = this.audioCalTime(this.secondsTimerLeft)
+            if (this.secondsTimerLeft == 0) {
+                this.removeCountDown()
+                this.setCountdownToStorage(false)
+                audio.pause()
+                this.setConfig('isPlaying', false)
+                this.playAlarmTimer()
+            }
+        }, 1000)
+    },
+    setCountdownToStorage: function (status) {
+        this.isCountdown = status;
+        this.setConfig('isCountdown', this.isCountdown)
+    },
+    playAlarmTimer: function () {
+
+    },
+    closeTimer: function () {
+        $('.set-timer').classList.remove('show')
+    },
+    removeCountDown: function () {
+        this.secondsTimerLeft = 0
+        this.setConfig('secondsTimerLeft', this.secondsTimerLeft)
+        clearInterval(this.timer)
+        timerCountDown.classList.remove('show')
+    },
+    loadCurrentSong: function () {
+        this.activeSong()
+
+        audio.src = this.currentSong.path
+        cdThumb.src = `${this.currentSong.image}`
+        songName.textContent = this.currentSong.title;
+        songArtist.textContent = this.currentSong.singer
+        baseDuration.innerHTML = this.audioCalTime(this.currentSong.duration)
+        if (this.isPlaying) {
+            audio.load()
+            audio.autoplay = true
+        }
+        this.renderLyrics()
+        lyricThumbnail.src = `${this.currentSong.image}`
+    },
+    activeSong: function () {
+        const oldSong = $('.playlist__list-item.active')
+        if (oldSong) {
+            oldSong.classList.remove('active')
+        }
+        const songActive = $(`.playlist__list-item[data-id='${this.currentSong.id}']`)
+        if (songActive) {
+            songActive.classList.add('active')
+        }
+    },
+    renderLyrics: function () {
+        let htmls = lyrics.map(line => `<p>${line}</p>`)
+
+        lyricContent.innerHTML = htmls.join('')
+    },
+    loadConfig: function () {
+        this.currentIndex = this.config.currentIndex || 0
+        this.currentSong = this.config.currentSong || songPlaylist[this.currentIndex] || {}
+
+        this.volume = this.config.volume || .5
+        audioVolume.value = this.volume * 100
+        audio.volume = this.volume
+
+        this.startTime = this.config.startTime || 0
+        if (this.startTime != 0) {
+            audio.currentTime = this.startTime
+        }
+        if (songPlaylist.length > 0) {
+            this.loadCurrentSong()
+        }
+
+        this.isPlaying = this.config.isPlaying || false
+        if (this.isPlaying) {
+            audio.autoplay = true
+        }
+
+        this.isRandom = this.config.isRandom || false
+        this.isRepeat = this.config.isRepeat || false
+        this.isCountdown = this.config.isCountdown || false
+        this.secondsTimerLeft = this.config.secondsTimerLeft || 0
+        if (this.secondsTimerLeft != 0 && this.isCountdown) {
+            this.countDownTimer()
+        }
+
+    },
+    nextSong: function () {
+        this.currentIndex++
+        if (this.currentIndex >= songPlaylist.length) {
+            this.currentIndex = 0
+        }
+        this.loadCurrentSong()
+    },
+    prevSong: function () {
+        this.currentIndex--
+        if (this.currentIndex < 0) {
+            this.currentIndex = songPlaylist.length - 1
+        }
+        this.loadCurrentSong()
+    },
+    playRandomSong: function () {
+        let newIndex
+        do {
+            newIndex = Math.floor(Math.random() * songPlaylist.length)
+        } while (newIndex === this.currentIndex);
+
+        this.currentIndex = newIndex
+        this.loadCurrentSong()
+    },
+    addNewSong: function (songs) {
+        if (songs.isArray()) {
+
+        } else {
+            if (songPlaylist.indexOf(newSong) === -1) {
+                songPlaylist.push(newSong)
+                this.updatePlaylist(songPlaylist)
+            }
+        }
+
+>>>>>>> Viet_Branch
     },
     findSong: function (id) {
         return songPlaylist.find(song => song.id === id) || null
@@ -1079,4 +1313,8 @@ function playSong(songId) {
 //     })
 // }
 
+<<<<<<< HEAD
 // replaceNewPlaylist(waitingPlaylist)
+=======
+// replaceNewPlaylist(waitingPlaylist)
+>>>>>>> Viet_Branch

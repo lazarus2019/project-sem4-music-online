@@ -1,7 +1,8 @@
-<%@ tag language="java" pageEncoding="ISO-8859-1"%>
+<%@ tag language="java" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
-<%@ taglib prefix="mt" uri="http://mytags.com" %>
+<%@ taglib prefix="t" uri="http://mytags.com" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,15 +26,13 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/adminlte.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/icheck-bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
 
 	<!-- CSS Listen -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/1.3.0/css/line-awesome.min.css">
 
 	<!-- My custom CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/my_custom.css">
-
-	<!-- Sweetalert CSS -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
 
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
@@ -58,13 +57,13 @@
 
 			<ul class="header__nav">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="${pageContext.request.contextPath }/">Home</a>
 				</li>
 				<!-- <a href="profile.html">Profile</a>
 				<a href="about.html">About</a>
 				<a href="contacts.html">Contacts</a> -->
 				<li>
-					<a href="genres.html">Genres</a>
+					<a href="${pageContext.request.contextPath }/genres">Genres</a>
 				</li>
 				<li class="dropdown-btn">
 					<a href="#" class="link">Library</a>
@@ -73,14 +72,15 @@
 						<a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
 						<a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
 						<a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
-						<a href="${pageContext.request.contextPath }/record-chart/index"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+						<a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 					</div>
 				</li>
 
 
-				<a href="artists.html">Artist</a>
+				<a href="${pageContext.request.contextPath }/artist">Artist</a>
 			</ul>
-
+			
+			<!-- search box -->
 			<form action="#" class="header__search">
 				<input type="text" placeholder="Artist, track or podcast" class="input-search">
 				<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -91,7 +91,7 @@
 						<path
 							d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
 					</svg></button>
-					<div class="result-layout-fixed-bg">						
+					<div class="result-layout-fixed-bg" onclick="hideResultContainer()"></div>						
 					</div>
 				<div class="result-layout">
 					<div class="artists-result result-box">
@@ -99,7 +99,7 @@
 							<h3>Artists</h3>
 							<a href="#">View All</a>
 						</div>
-						<div class="result-content grid-tl-6 mt-3 mb-3">
+						<div class="result-content grid-tl-6 mt-3 mb-3" id="artist-container">
 							<div class="artist-box">
 								<div class="artist-image-box">
 									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
@@ -143,7 +143,7 @@
 							<h3>Track</h3>
 							<a href="#">View All</a>
 						</div>
-						<div class="result-content grid-tl-3 mt-3 mb-3">
+						<div class="result-content grid-tl-3 mt-3 mb-3" id="track-container">
 							<div class="track-box">
 								<div class="track-box-image">
 									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
@@ -205,7 +205,7 @@
 							<h3>Albums</h3>
 							<a href="#">View All</a>
 						</div>
-						<div class="result-content grid-tl-3 mt-3 mb-3">
+						<div class="result-content grid-tl-3 mt-3 mb-3" id="album-container">
 							<div class="album-box">
 								<div class="album-box-image">
 									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
@@ -264,7 +264,7 @@
 					</div>
 				</div>
 			</form>
-
+			
 			<div class="header__actions">
 				<div class="header__action header__action--search">
 					<button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg"
@@ -272,6 +272,8 @@
 							<path
 								d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
 						</svg></button>
+			</div>
+			<!-- end search box -->
 				</div>
 
 				<div class="header__action header__action--note">
@@ -282,7 +284,7 @@
 						</svg></a>
 
 					<div class="header__drop">
-						<a href="${pageContext.request.contextPath }/notification/index" class="header__all">View all</a>
+						<a href="#" class="header__all">View all</a>
 						<div class="header__note header__note--succ">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 								<path
@@ -318,49 +320,29 @@
 					</div>
 				</div>
 
-				<!-- <div class="header__action header__action--cart">
-					<span>3</span>
-					<a class="header__action-btn" href="cart.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.5,19A1.5,1.5,0,1,0,10,20.5,1.5,1.5,0,0,0,8.5,19ZM19,16H7a1,1,0,0,1,0-2h8.49121A3.0132,3.0132,0,0,0,18.376,11.82422L19.96143,6.2749A1.00009,1.00009,0,0,0,19,5H6.73907A3.00666,3.00666,0,0,0,3.92139,3H3A1,1,0,0,0,3,5h.92139a1.00459,1.00459,0,0,1,.96142.7251l.15552.54474.00024.00506L6.6792,12.01709A3.00006,3.00006,0,0,0,7,18H19a1,1,0,0,0,0-2ZM17.67432,7l-1.2212,4.27441A1.00458,1.00458,0,0,1,15.49121,12H8.75439l-.25494-.89221L7.32642,7ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Z"/></svg></a>
-
-					<div class="header__drop">
-						<a href="cart.html" class="header__all">Go to cart</a>
-						<div class="header__product">
-							<img src="${pageContext.request.contextPath }/resources/user/img/store/item4.jpg" alt="">
-							<p><a href="product.html">Headphones ZR-991</a></p>
-							<span>$199</span>
-							<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-						</div>
-						<div class="header__product">
-							<img src="${pageContext.request.contextPath }/resources/user/img/store/item3.jpg" alt="">
-							<p><a href="product.html">Music Blank</a></p>
-							<span>$3.99</span>
-							<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-						</div>
-						<div class="header__product">
-							<img src="${pageContext.request.contextPath }/resources/user/img/store/item2.jpg" alt="">
-							<p><a href="product.html">Microphone R4</a></p>
-							<span>$799</span>
-							<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-						</div>
-					</div>
-				</div> -->
+				<!-- notification button -->
+				<t:notification/>
+				<!-- end notification button -->
 
 				<div class="header__action header__action--signin">
-					<a class="header__action-btn" href="signin.html">
+					<c:if test="${pageContext.request.userPrincipal.name == null}">
+					<a class="header__action-btn" href="${pageContext.request.contextPath }/user/login/login">
 						<span>Sign in</span>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 							<path
 								d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
 						</svg>
 					</a>
-					<div class="header__action-btn">
-						<span>John Doe</span>
+					</c:if>
+						<c:if test="${pageContext.request.userPrincipal.name  != null }">
+						<span>${ accountSignined.nickname }</span>					
+					
 						<div class="user__box">
 							<i class="las la-crown"></i>
 							<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
 								alt="" class="user__avatar">
 							<div class="dropdown__user-menu">
-								<a href="profile.html">
+								<a href="${pageContext.request.contextPath }/user/profile/index">
 									<i class="lar la-user-circle"></i> Profile
 								</a>
 								<a href="artist_tracks.html">
@@ -369,18 +351,19 @@
 								<a href="artist_album.html">
 									<i class="las la-record-vinyl"></i> Your Albums
 								</a>
-								<a href="${pageContext.request.contextPath }/package/index">
+								<a href="#">
 									<i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
 										class="las la-crown yellow__icon"></i>
 								</a>
 								<a href="#">
 									<i class="las la-user-cog"></i> Settings
 								</a>
-								<a href="#">
+								<a href="${pageContext.request.contextPath }/user/login/logout">
 									<i class="las la-sign-out-alt"></i> Log out
 								</a>
 							</div>
 						</div>
+					</c:if> 
 					</div>
 				</div>
 			</div>
@@ -398,7 +381,7 @@
 	<!-- player -->
 	<div class="player" id="audioPlayer">
 		<div class="progressbar">
-			<input type="range" class="audio-progress" max="100" min="0" value="0" step="0.01">
+			<input type="range" class="audio-progress" oninput="changeProgressSong(this)">
 			<span class="bar"></span>
 		</div>
 		<div class="audio">
@@ -413,8 +396,8 @@
 		</div>
 		<div class="audio-controls">
 			<div class="audio-controls-left">
-				<button class="btn-loop-song default-btn active">
-					<i class="las la-sync audio__icon"></i>
+				<button class="btn-loop-song default-btn">
+					<i class="las la-sync audio__icon selected"></i>
 				</button>
 			</div>
 			<div class="audio-controls-main">
@@ -437,10 +420,10 @@
 		</div>
 		<div class="audio-info">
 			<button id="lyrics" class="default-btn" onclick="toggleLyrics()">
-				<i class="las la-file-alt audio__icon"></i>
+				<i class="las la-file-alt audio__icon audio__icon"></i>
 			</button>
 			<span class="duration-info">
-				<span class="current-time">00:00</span> /
+				<span class="current-minute">00</span>:<span class="current-second">00</span> /
 				<span class="base-duration">03:22</span>
 			</span>
 			<div class="audio-control-volume">
@@ -448,7 +431,7 @@
 					<i class="las la-volume-up audio__icon"></i>
 				</button>
 				<div class="dropdown-volume-range">
-					<input type="range" class="audio-volume" min="0" max="100" value="50" step="1"
+					<input type="range" class="audio-volume" min="0" max="100" value="50"
 						oninput="changeVolumeIcon(this)">
 				</div>
 			</div>
@@ -551,14 +534,7 @@
 
 	<!-- Playlist box -->
 	<div class="playlist__box">
-		<div class="playlist-title">
-			<div class="playlist-title-content">
-				Listen Special
-			</div>
-			<button class="default-btn show-timer-btn" onclick="showTimer()">
-				<i class="las la-stopwatch audio__icon"></i>
-			</button>
-		</div>
+		<div class="playlist-title">Listen Special</div>
 		<ul class="playlist__list">
 			<li class="playlist__list-item">
 				<div class="playlist__item-desc">
@@ -860,36 +836,6 @@
 		</ul>
 	</div>
 	<!-- end Playlist box -->
-
-	<!-- audio -->
-	<audio id="audio" src=""></audio>
-	<audio src="${pageContext.request.contextPath }\resources\user\audio\advertisement\premium_sound.mp3" id="advertisement"></audio>
-	<!-- audio end-->
-
-	<!-- timer -->
-	<div class="set-timer">
-		<div class="timer-layout">
-			<p>Set Stop Playing Countdown</p>
-			<select name="" id="timer-countdown">
-				<option value="1" selected>1 minute</option>
-				<option value="5">5 minutes</option>
-				<option value="15">15 minutes</option>
-				<option value="30">30 minutes</option>
-				<option value="60">60 minutes</option>
-				<option value="120">120 minutes</option>
-			</select>
-			<button class="btn-set-timer">Save</button>
-			<button class="btn-timer-cancel">Cancel</button>
-		</div>
-	</div>
-
-	<div class="timer">
-		<i class="las la-stopwatch"></i>
-		<span class="timer-left">05:00</span>
-		<i class="las la-times-circle remove-timer large__icon"></i>
-	</div>
-	<!-- timer end -->
-
 	<!-- end player -->
 
 	<!-- main content -->
@@ -904,6 +850,72 @@
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container-fluid">
+			<!-- <div class="row">
+				<div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 order-4 order-md-1 order-lg-4 order-xl-1">
+					<div class="footer__logo">
+						<img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
+					</div>
+					<p class="footer__tagline">Record Label & Internet Radio,<br> Online music HTML Template.</p>
+					<div class="footer__links">
+						<a href="mailto:support@volna.template"><svg xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24">
+								<path
+									d="M19,4H5A3,3,0,0,0,2,7V17a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm-.41,2-5.88,5.88a1,1,0,0,1-1.42,0L5.41,6ZM20,17a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V7.41l5.88,5.88a3,3,0,0,0,4.24,0L20,7.41Z" />
+							</svg> support@volna.template</a>
+						<a href="tel:82345678900"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path
+									d="M19.44,13c-.22,0-.45-.07-.67-.12a9.44,9.44,0,0,1-1.31-.39,2,2,0,0,0-2.48,1l-.22.45a12.18,12.18,0,0,1-2.66-2,12.18,12.18,0,0,1-2-2.66L10.52,9a2,2,0,0,0,1-2.48,10.33,10.33,0,0,1-.39-1.31c-.05-.22-.09-.45-.12-.68a3,3,0,0,0-3-2.49h-3a3,3,0,0,0-3,3.41A19,19,0,0,0,18.53,21.91l.38,0a3,3,0,0,0,2-.76,3,3,0,0,0,1-2.25v-3A3,3,0,0,0,19.44,13Zm.5,6a1,1,0,0,1-.34.75,1.05,1.05,0,0,1-.82.25A17,17,0,0,1,4.07,5.22a1.09,1.09,0,0,1,.25-.82,1,1,0,0,1,.75-.34h3a1,1,0,0,1,1,.79q.06.41.15.81a11.12,11.12,0,0,0,.46,1.55l-1.4.65a1,1,0,0,0-.49,1.33,14.49,14.49,0,0,0,7,7,1,1,0,0,0,.76,0,1,1,0,0,0,.57-.52l.62-1.4a13.69,13.69,0,0,0,1.58.46q.4.09.81.15a1,1,0,0,1,.79,1Z" />
+							</svg> 8 234 567-89-00</a>
+					</div>
+				</div>
+
+				<div
+					class="col-6 col-md-4 col-lg-3 col-xl-2 order-1 order-md-2 order-lg-1 order-xl-2 offset-md-2 offset-lg-0">
+					<h6 class="footer__title">The Volna</h6>
+					<div class="footer__nav">
+						<a href="about.html">About</a>
+						<a href="profile.html">My profile</a>
+						<a href="pricing.html">Pricing plans</a>
+						<a href="contacts.html">Contacts</a>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-8 col-lg-6 col-xl-4 order-3 order-lg-2 order-md-3 order-xl-3">
+					<div class="row">
+						<div class="col-12">
+							<h6 class="footer__title">Browse</h6>
+						</div>
+
+						<div class="col-6">
+							<div class="footer__nav">
+								<a href="artists.html">Artists</a>
+								<a href="releases.html">Releases</a>
+								<a href="events.html">Events</a>
+								<a href="podcasts.html">Podcasts</a>
+							</div>
+						</div>
+
+						<div class="col-6">
+							<div class="footer__nav">
+								<a href="news.html">News</a>
+								<a href="store.html">Store</a>
+								<a href="#">Music</a>
+								<a href="#">Video</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-6 col-md-4 col-lg-3 col-xl-2 order-2 order-lg-3 order-md-4 order-xl-4">
+					<h6 class="footer__title">Help</h6>
+					<div class="footer__nav">
+						<a href="privacy.html">Account & Billing</a>
+						<a href="privacy.html">Plans & Pricing</a>
+						<a href="privacy.html">Supported devices</a>
+						<a href="privacy.html">Accessibility</a>
+					</div>
+				</div>
+			</div> -->
 
 			<div class="row">
 				<div class="col-12">
@@ -1006,7 +1018,7 @@
 									<path d="M13.5 18V13L17.5 15.5001L13.5 18Z" fill="#FF0000" />
 								</svg></a>
 						</div>
-						<small class="footer__copyright">ï¿½ Volna, 2021. Created by <a
+						<small class="footer__copyright">© Volna, 2021. Created by <a
 								href="../../../themeforest.net/user/dmitryvolkov/portfolio.html" target="_blank">Dmitry
 								Volkov</a>.</small>
 					</div>
@@ -1184,10 +1196,123 @@
 	<script src="${pageContext.request.contextPath }/resources/user/js/main.js"></script>
 
 	<!-- My custom JS -->
-	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
-	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/player/player.js"></script>
-	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/my_custom.js"></script>
+	
+	<!-- Main Search -->
+	<script>
+	$(document).ready(function() {
+	    $('.input-search').keyup(function () {
+	        var keyword = $('.input-search').val();
+
+	        /* Top Artist */
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                keyword: keyword
+	            },
+	            url: '${pageContext.request.contextPath}/home/searchTopArtist',
+	            success: function (artists) {
+	                var htmls = "";
+	                for (var i = 0; i < artists.length; i++) {
+
+	                    htmls += "<a href='${pageContext.request.contextPath}/artist/" + artists[i].id + "' class='artist-box'><div class='artist-image-box'>" +
+	                        "<img src='${pageContext.request.contextPath}/resources/user/img/artists/" + artists[i].image + "'></div>" +
+	                        "<p class='artist-name'>" + artists[i].nickname + "</p></a>"
+	                }
+	                $("#artist-container").html(htmls);
+	            }
+	        })
+
+	        /* Top Track */
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                keyword: keyword
+	            },
+	            url: '${pageContext.request.contextPath}/home/searchTopTrack',
+	            success: function (tracks) {
+	                var htmls = "";
+               for (var i = 0; i < tracks.length; i++) {
+	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "'><div class='track-box-image'>" +
+	                        "<img src='${pageContext.request.contextPath}/resources/user/img/tracks/" + tracks[i].thumbnail + "' /></div>" +
+	                        "<div class='track-box-content'><p>" + tracks[i].title + "</p><span>"+ "aritst" + "</span></div></div>"
+	                }
+	                $("#track-container").html(htmls);
+	            }
+	        })
+
+	        /* Top Album */
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                keyword: keyword
+	            },
+	            url: '${pageContext.request.contextPath }/home/searchTopAlbum',
+	            success: function (albums) {
+	                var htmls = "";
+	                for (var i = 0; i < albums.length; i++) {
+	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "'><div class='album-box-image'>" +
+	                        "<img src='${pageContext.request.contextPath}/resources/user/img/playlist/" + albums[i].thumbnail + "'/></div>" +
+	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
+	                }
+	                $("#album-container").html(htmls);
+	            }
+	        })
+	    })
+
+	    /* Show All Artist */
+	    $("#artist-result-all").click(function () {
+	        var keyword = $('.input-search').val();
+			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=artist'
+	        window.location.replace(url);
+	    })
+
+	    /* Show All Track */
+	    $("#track-result-all").click(function () {
+	        var keyword = $('.input-search').val();
+			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=track'
+	        window.location.replace(url);
+	    })
+
+	    /* Show All Album */
+	    $("#album-result-all").click(function () {
+	        var keyword = $('.input-search').val();
+			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=album'
+	        window.location.replace(url);
+	    })
+	    /* Button get track by id */
+	    $(".btn-track-id").click(function () {
+	        var trackId = $(".btn-track-id").data("id");
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                trackId: trackId
+	            },
+	            url: '${pageContext.request.contextPath }/home/getTrackById',
+	            success: function (track) {
+	                if (track) {
+	                    console.log("playing track:" + track.title)
+	                    $.ajax({
+	                        type: 'GET',
+	                        data: {
+	                            trackId: track.id,
+	                            genresId: track.genresId
+	                        },
+	                        url: '${pageContext.request.contextPath }/home/getWaitingTrack',
+	                        success: function (data) {
+	                            console.log("waiting track:" + data.title)
+	                            var lyrics = renderLyrics(data.lyrics)
+	                            var songTitle = "<p>Song: " + data.title + " - " + data.artists + "</p>"
+	                            $(".lyric-content").html(songTitle + lyrics)
+	                        }
+	                    })
+	                }
+	            }
+	        })
+	    })
+	})
+	</script>
+	
 </body>
 
 <!-- Mirrored from dmitryvolkov.me/demo/volna/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Nov 2021 02:17:54 GMT -->
