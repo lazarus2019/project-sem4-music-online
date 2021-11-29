@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,9 +33,7 @@ public class PackageController {
 		modelMap.put("postUrl", postUrl);
 		modelMap.put("returnUrl", returnUrl);
 		modelMap.put("business", business);
-
 		modelMap.put("packages", packageService.getAllByStatus());
-
 		return "package/index" ; 
 	}
 	
@@ -51,8 +50,9 @@ public class PackageController {
 		System.out.println("Payment fee: " + payPalResult.getPayment_fee());
 		System.out.println("Gross: " + payPalResult.getPayment_gross());
 		System.out.println("Item: " + payPalResult.getNum_cart_items());
-		return "demo/success";
+		System.out.println("Item number: " + payPalResult.getItem_number());
+		System.out.println("success");
+		return "package/success";
 	}
-
 	
 }

@@ -24,14 +24,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/responsive.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
+    
 </head>
 
 <body>
     <!-- loader Start -->
-    <div id="loading">
+   <!--  <div id="loading">
         <div id="loading-center">
         </div>
-    </div>
+    </div> -->
     <!-- loader END -->
     <!-- Wrapper Start -->
     <div class="wrapper">
@@ -55,17 +58,10 @@
             <div id="sidebar-scrollbar">
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
-                        <!-- <li class="active active-menu">
-                     <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span
-                           class="ripple rippleEffect"></span><i
-                           class="las la-home iq-arrow-left"></i><span>Dashboard</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                     <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                        <li class="active"><a href="index.html"><i class="las la-house-damage"></i>Home</a></li>
-                        <li><a href="latest.html"><i class="las la-headphones"></i>Latest</a></li>
-                        <li><a href="albums.html"><i class="lar la-file-audio"></i>Albums</a></li>
-                     </ul>
-                  </li> -->
+                  		<li>
+                  			<a href="${pageContext.request.contextPath }/admin/dashboard"><i class="las la-house-damage"></i>Dashboard</a>
+                  		</li>
+                  		
                         <li>
                             <a href="#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
                            class="ripple rippleEffect"></span><i
@@ -79,37 +75,13 @@
                                 <li><a href="admin-song.html"><i class="las la-play-circle"></i>Music</a></li>
                             </ul>
                         </li>
-                        <li class="albums  nav-parent " data-toggle="collapse">
-                            <a href="#albums" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-album-line iq-arrow-left"></i><span>Albums</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="albums" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li>
-                                    <a class="nav-link" href="admin-album.html">
-                                        <span>Albums</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="admin-add-song.html">
-                                        <span>Add Album</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class="nav-link" href="/zestreact/appnew/music/edit-album"><span>Edit Album</span></a>
-                                </li>
-
-                                <li><a class="nav-link" href="/zestreact/appnew/music/album-view"><span>View Album</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
 
                         <li>
-                            <a href="calendar.html" class="iq-waves-effect"><i
-                           class="las la-calendar iq-arrow-left"></i><span>Events</span></a>
+                            <a href="${pageContext.request.contextPath }/admin/playlist" class="iq-waves-effect">
+                            	<i class="ri-album-line iq-arrow-left"></i><span>Playlist</span>
+                            </a>
                         </li>
+                        
                         <li class="artists nav-parent " data-toggle="collapse">
                             <a href="#artist" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
                            class="ripple rippleEffect"></span><i

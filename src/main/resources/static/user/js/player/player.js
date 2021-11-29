@@ -1,45 +1,5 @@
 import Song from "./Song.js";
 
-// document.querySelector('.duration-btn').addEventListener('click', () => {
-//     let file = document.querySelector('.file').files[0];
-//     computeLength(file)
-//         .then((result) => {
-//             let secondDuration = Number.parseInt(result.duration);
-//             if (secondDuration < 3600) {
-//                 document.querySelector('.result').innerHTML = new Date(secondDuration * 1000).toISOString().substr(14, 5);
-//             } else {
-//                 document.querySelector('.result').innerHTML = new Date(secondDuration * 1000).toISOString().substr(11, 8);
-//             }
-//         })
-// })
-
-// function computeLength(file) {
-//     return new Promise((resolve) => {
-//         var objectURL = URL.createObjectURL(file);
-//         var mySound = new Audio([objectURL]);
-//         mySound.addEventListener(
-//             "canplaythrough",
-//             () => {
-//                 URL.revokeObjectURL(objectURL);
-//                 resolve({
-//                     file,
-//                     duration: mySound.duration
-//                 });
-//             },
-//             false,
-//         );
-//     });
-// }
-
-// const urlBase = "https://docs.google.com/uc?export=download&id=";
-
-// document.querySelector('.load-url-btn').addEventListener('click', (e) => {
-//     const source = document.querySelector('.audio source');
-//     source.src = urlBase + document.querySelector('.input-url').value;
-//     document.querySelector('.audio').load();
-// })
-
-
 const PlAYER_STORAGE_KEY = "MUSIC_APP"
 const PLAYLIST_STORAGE_KEY = "MUSIC_APP_PLAYLIST"
 const WAITING_PLAYLIST_STORAGE_KEY = "MUSIC_APP_WAITING_PLAYLIST"

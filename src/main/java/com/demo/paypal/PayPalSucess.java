@@ -29,9 +29,12 @@ public class PayPalSucess {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(req.getInputStream()));
 			res = in.readLine();
+			System.out.println("res: " + res);
 			if (res.equals("SUCCESS")) {
+				System.out.println("aaaaa");
 				while ((res = in.readLine()) != null) {
 					temp = res.split("=");
+					System.out.println("temp: " + temp[0]);
 					if (temp.length == 1)
 						continue;
 					temp[1] = URLDecoder.decode(temp[1], "UTF-8");
@@ -172,6 +175,10 @@ public class PayPalSucess {
 					if (temp[0].equals("payment_gross")) {
 						payPalResult.setPayment_gross(temp[1]);
 					}
+					/*
+					 * if (temp[0].equals("item_number_1")) {
+					 * payPalResult.setItem_number(Integer.parseInt(temp[1])); }
+					 */
 				}
 				in.close();
 			}

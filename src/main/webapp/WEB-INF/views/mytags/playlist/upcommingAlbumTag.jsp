@@ -15,7 +15,7 @@
 					<div class="main__carousel-wrap">
 						<div class="main__carousel main__carousel--events owl-carousel" id="events">
 							<c:forEach var="upcommingAlbum" items="${upcommingAlbums }">
-								<div class="event" data-bg="${pageContext.request.contextPath }/resources/user/img/events/${upcommingAlbum.thumbnail }">
+								<div class="event" data-bg="${pageContext.request.contextPath }/uploads/images/playlist/${upcommingAlbum.thumbnail }">
 									<span class="event__date"><fmt:formatDate value="${upcommingAlbum.publishDate }" type="date" pattern="MMM-dd-yyyy"/></span>
 									<h3 class="event__title">
 										<a href="event.html">${upcommingAlbum.title }</a>

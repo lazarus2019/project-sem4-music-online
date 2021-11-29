@@ -1,3 +1,12 @@
+function showResultContainer(){
+  document.querySelector('.result-layout-fixed-bg').classList.add("show")
+  document.querySelector('.result-layout').classList.add("show")
+}
+function hideResultContainer(){
+  document.querySelector('.result-layout-fixed-bg').classList.remove("show")
+  document.querySelector('.result-layout').classList.remove("show")
+}
+
 function togglePlayer() {
     document.querySelector('#audioPlayer').classList.toggle('show');
     document.querySelector('.dropdown-song-menu').classList.remove('show');
@@ -92,7 +101,7 @@ if (form !== null) {
   // When form is submitted console log the value of the select field
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('Selected country:', form.querySelector('[name="genres"]').value);
+    //console.log('Selected country:', form.querySelector('[name="genres"]').value);
   });
 }
 
@@ -359,3 +368,8 @@ function createSearchFunc(e, parentName, childName, tagName){
   })
 }
 
+  function renderLyrics(lyrics) {
+    let htmls = lyrics.split("/n").map(line => `<p>${line}</p>`)
+
+    return htmls.join('')
+}
