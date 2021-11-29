@@ -19,6 +19,30 @@ public class PackageServiceImpl implements PackageService {
 		return packageRepository.getAllByStatus();
 	}
 
+	@Override
+	public ServicePackage save(ServicePackage servicePackage) {
+		return packageRepository.save(servicePackage);
+	}
+
+	@Override
+	public void delete(int id) {
+		try {
+			packageRepository.deleteById(id);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public Iterable<ServicePackage> findAll() {
+		return packageRepository.findAll();
+	}
+
+	@Override
+	public ServicePackage findById(int id) {
+		return packageRepository.findById(id).get();
+	}
+
 	
 	
 }

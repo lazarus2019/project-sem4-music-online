@@ -30,6 +30,7 @@ import com.demo.security.oauth2.CustomOAuth2User;
 import com.demo.services.AccountPlaylistService;
 import com.demo.services.AccountService;
 import com.demo.services.AlbumService;
+import com.demo.services.ArtistTrackService;
 import com.demo.services.CookieService;
 import com.demo.services.NotificationService;
 import com.demo.services.PlaylistService;
@@ -55,7 +56,11 @@ public class HomeController {
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
 	
-	@Autowired PlaylistService playlistService;
+	@Autowired 
+	private PlaylistService playlistService;
+	
+	@Autowired
+	private ArtistTrackService artistTrackService;
 
 	/*
 	 * @RequestMapping(value = { "", "index" }, method = RequestMethod.GET) public
@@ -99,10 +104,6 @@ public class HomeController {
 			}
 		}
 
-		modelMap.addAttribute("popularArtists", accountService.getPopularArtists(PageRequest.of(0, 6)));
-		modelMap.addAttribute("newReleaseTracks", trackService.getNewRelease(1, 6));
-		modelMap.addAttribute("upcomingAlbums", playlistService.getAllUpcommingAlbum());
-
 		return "home/index";
 	}
 	
@@ -119,6 +120,9 @@ public class HomeController {
 	@RequestMapping(value = { "searchTopTrack" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TrackInfo>> searchTopTrack(@RequestParam("keyword") String keyword, ModelMap modelMap) {
 		List<TrackInfo> trackInfos = trackService.searchByTitle(keyword, PageRequest.of(0, 6));
+		for(TrackInfo trackInfo : trackInfos) {
+			trackInfo.setArtists(artistTrackService.getAccountByTrackId(trackInfo.getId()));
+		}
 		try {
 			return new ResponseEntity<List<TrackInfo>>(trackInfos, HttpStatus.OK);
 		} catch (Exception e) {
@@ -139,11 +143,34 @@ public class HomeController {
 		}
 	}
 	
+	// Get album contains tracks by id
+	@RequestMapping(value = { "getAlbumWithTracksById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AlbumInfo> getAlbumWithTracksById(@RequestParam("albumId") int albumId, ModelMap modelMap) {
+		System.out.println("albumId: " + albumId);
+		AlbumInfo albumInfo = albumService.findAlbumById(albumId);
+		for(Track track : playlistService.find(albumId).findTracks()) {
+			TrackInfo trackInfo = new TrackInfo();
+			trackInfo.setDuration(track.getDuration());
+			trackInfo.setId(track.getId());
+			trackInfo.setThumbnail(track.getThumbnail());
+			trackInfo.setFileName(track.getFileName());
+			trackInfo.setLyrics(track.getLyrics());
+			trackInfo.setArtists(artistTrackService.getAccountByTrackId(track.getId()));
+			
+			albumInfo.getTrackInfos().add(trackInfo);
+		}
+		try {
+			return new ResponseEntity<AlbumInfo>(albumInfo, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<AlbumInfo>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	// Get track by id
 	@RequestMapping(value = { "getTrackById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TrackInfo> getTrackById(@RequestParam("trackId") int trackId, ModelMap modelMap) {
 		TrackInfo track = trackService.findByTrackId(trackId);
-
+		
 		try {
 			return new ResponseEntity<TrackInfo>(track, HttpStatus.OK);
 		} catch (Exception e) {

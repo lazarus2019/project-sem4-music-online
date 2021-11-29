@@ -164,4 +164,9 @@ public class TrackServiceImpl implements TrackService {
 		return trackRepository.getWaitingTrackByGenres(id, genresId, pageable);
 	}
 
+	@Override
+	public Track findById(int id) {
+		return trackRepository.findById(id).get();
+	}
+
 }

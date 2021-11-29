@@ -33,6 +33,22 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<AlbumInfo> getAlbumsByArtistId(int id) {
+		List<AlbumInfo> result = new ArrayList<AlbumInfo>();
+		List<AccountPlaylist> accountPlaylists = accountPlaylistRepository.getAlbumsOfArtistId(id);
+		if(accountPlaylists != null) {
+			for(AccountPlaylist accountPlaylist : accountPlaylists) {
+				AlbumInfo albumInfo = new AlbumInfo();
+				albumInfo.setTitle(accountPlaylist.getPlaylist().getTitle());
+				albumInfo.setStatusId(accountPlaylist.getPlaylist().getStatus().getId());
+				// Check track is on this album or not
+				result.add(albumInfo);	
+			}			
+		}
+		return result;
+	}
 	
 	
 }

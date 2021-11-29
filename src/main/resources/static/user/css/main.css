@@ -7053,14 +7053,10 @@ body::-webkit-scrollbar-thumb {
 ==============================*/
 
 .select2-container {
-    height: 40px;
     cursor: pointer;
-    transition: box-shadow .3s ease;
-    background-color: #222227;
-    border-radius: 12px;
-    height: 46px;
-
+    transition: box-shadow .3s ease;   
     font-family: 'Inter', sans-serif;
+    height: auto;
 }
 
 .select2-container .select2-selection--single {
@@ -7081,7 +7077,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__rendered{
-	padding: 0 20px !important;
+	padding: 10px 20px !important;
+	background-color: #222227;
+	border-radius: 12px;
 }
 
 .select2-container .select2-selection--single[aria-expanded="true"] {

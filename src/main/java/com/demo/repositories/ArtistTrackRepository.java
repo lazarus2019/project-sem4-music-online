@@ -13,4 +13,5 @@ public interface ArtistTrackRepository extends CrudRepository<ArtistTrack, Integ
 	
 	@Query(value = "SELECT account_id FROM artist_track WHERE track_id = :id", nativeQuery = true)
 	public List<Integer> getAccountByTrackId(@Param("id") int id);
+	
 }

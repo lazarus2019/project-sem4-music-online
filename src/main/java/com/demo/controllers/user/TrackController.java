@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.demo.entities.Track;
+import com.demo.models.TrackInfo;
 import com.demo.models.TrackInfor;
+import com.demo.services.AccountPlaylistService;
 import com.demo.services.AccountService;
 import com.demo.services.GenresService;
 import com.demo.services.TrackService;
@@ -28,6 +31,9 @@ public class TrackController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private AccountPlaylistService accountPlaylistService;
 	
 	@RequestMapping( value = {"index/{id}" } , method = RequestMethod.GET )
 	public String index( @PathVariable("id") int id , ModelMap modelMap) {
@@ -48,14 +54,23 @@ public class TrackController {
 	
 	@RequestMapping( value = { "add" })
 	public String add(ModelMap modelMap) {
-//		modelMap.addAttribute("artists", artistService.getArtistWithoutId(1));
+		modelMap.addAttribute("artists", accountService.getArtistWithoutId(1));
 		modelMap.addAttribute("genres", genresService.findAll());
+		modelMap.addAttribute("albums", accountPlaylistService.getAlbumsByArtistId(5));
 		return "track/add" ; 
 	}
 	
-	@RequestMapping( value = { "edit" })
-	public String edit() {
+	@RequestMapping( value = { "edit/{id}" })
+	public String edit(@PathVariable("id")int trackId) {
+		TrackInfo track = trackService.findByTrackId(trackId);
+		Track track2 = trackService.findById(trackId);
 		return "track/edit" ; 
+	}
+	
+	@RequestMapping( value = { "update/{id}" })
+	public String update(@PathVariable("id")int trackId) {
+		
+		return "redirect:track/index" ; 
 	}
 	
 	

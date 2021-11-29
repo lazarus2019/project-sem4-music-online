@@ -3,17 +3,12 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-	rel="stylesheet" />
-<script
-	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <mt:userTemplate title="Add New Track">
 	<jsp:attribute name="content">
 	
 	<!-- FORM -->
-            <form action="">
+            <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
                 <div class="row row--grid">
                     <div class="col-6">
                         <div class="step non-hidden">
@@ -48,14 +43,14 @@
                                 <div
 								class="flex-box justify-content-between align-items-center mb-2">
                                     <div class="form-heading clr-white">Lyrics (separate line with /n)</div>
-                                    <input type="file" name="lyricTrack"
-									id="lyricTrack" style="display: none;" accept="text/plain">
-                                    <label for="lyricTrack"
+                                    <input type="file" name="lyricsTrack"
+									id="lyricsTrack" style="display: none;" accept="text/plain" onchange="callFile(this)">
+                                    <label for="lyricsTrack"
 									class="form-btn">Import Lyrics</label>
                                 </div>
                                 <div class="sign__group">
                                     <textarea type="text"
-									class="form__textarea" placeholder="Track Lyrics" name="artist"></textarea>
+									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics"></textarea>
                                 </div>
                                 
 
@@ -79,6 +74,7 @@
 											accept=".mp3,audio/*" onchange="uploadTrack(this)">
                                             <label for="audioTrack"
 											class="form-btn">Upload Audio</label>
+											<input type="hidden" name="duration" id="duration">
                                         </div>
                                         <div
 										class="audio-upload-progress">
@@ -140,13 +136,13 @@
 										class="sign__group sign__group--checkbox mb-0">
                                             <input id="isPremium"
 											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Is Premium</label>
+                                            <label for="isPremium">Is Premium <i class="las la-crown yellow__icon"></i></label>
                                         </div>
-                                        <div class="public-date-box">
+                                       <!--  <div class="public-date-box">
                                             <input type="date"
 											class="sign__input" placeholder="Password" name="publishDate"
 											value="">
-                                        </div>
+                                        </div> -->
                                         <div
 										class="sign__group sign__group--checkbox mb-0">
                                             <input id="isHidden"
@@ -157,30 +153,13 @@
                                     <div class="form-heading clr-white">Add to Albums:</div>
                                     <div
 									class="flex-box align-items-start flex-wrap flex-4">
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Goodbye & Good Riddance</label>
+									<c:forEach items="${albums }" var="album">
+									    <div class="sign__group sign__group--checkbox mb-1">
+                                            <input id="album-artist-${album.id }"
+											name="albums" type="checkbox">
+                                            <label for="album-artist-${album.id }">${album.title }</label>
                                         </div>
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Death Race for Love</label>
-                                        </div>
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Legends Never Die</label>
-                                        </div>
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Fighting Demons</label>
-                                        </div>                                        
+									</c:forEach>                                  
                                     </div>
                                 </div>
                             </div>
@@ -192,8 +171,3 @@
 	</jsp:attribute>
 
 </mt:userTemplate>
-<script>
-	$(document).ready(function() {
-		$('.js-example-basic-multiple').select2();
-	});
-</script>
