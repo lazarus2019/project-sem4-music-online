@@ -25,39 +25,42 @@ public class Playlist implements java.io.Serializable {
 
 	private Integer id;
 	private PlaylistCategory playlistCategory;
+	private Status status;
 	private String title;
 	private String thumbnail;
 	private Date publishDate;
 	private Date lastUpdated;
 	private String description;
-	private boolean status;
+	private int likes;
 	private Set<PlaylistTrack> playlistTracks = new HashSet<PlaylistTrack>(0);
 	private Set<AccountPlaylist> accountPlaylists = new HashSet<AccountPlaylist>(0);
 
 	public Playlist() {
 	}
 
-	public Playlist(PlaylistCategory playlistCategory, String title, String thumbnail, Date publishDate,
-			Date lastUpdated, String description, boolean status) {
+	public Playlist(PlaylistCategory playlistCategory, Status status, String title, String thumbnail, Date publishDate,
+			Date lastUpdated, String description, int likes) {
 		this.playlistCategory = playlistCategory;
+		this.status = status;
 		this.title = title;
 		this.thumbnail = thumbnail;
 		this.publishDate = publishDate;
 		this.lastUpdated = lastUpdated;
 		this.description = description;
-		this.status = status;
+		this.likes = likes;
 	}
 
-	public Playlist(PlaylistCategory playlistCategory, String title, String thumbnail, Date publishDate,
-			Date lastUpdated, String description, boolean status, Set<PlaylistTrack> playlistTracks,
+	public Playlist(PlaylistCategory playlistCategory, Status status, String title, String thumbnail, Date publishDate,
+			Date lastUpdated, String description, int likes, Set<PlaylistTrack> playlistTracks,
 			Set<AccountPlaylist> accountPlaylists) {
 		this.playlistCategory = playlistCategory;
+		this.status = status;
 		this.title = title;
 		this.thumbnail = thumbnail;
 		this.publishDate = publishDate;
 		this.lastUpdated = lastUpdated;
 		this.description = description;
-		this.status = status;
+		this.likes = likes;
 		this.playlistTracks = playlistTracks;
 		this.accountPlaylists = accountPlaylists;
 	}
@@ -82,6 +85,16 @@ public class Playlist implements java.io.Serializable {
 
 	public void setPlaylistCategory(PlaylistCategory playlistCategory) {
 		this.playlistCategory = playlistCategory;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "status_id", nullable = false)
+	public Status getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Column(name = "title", nullable = false, length = 250)
@@ -131,13 +144,13 @@ public class Playlist implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "status", nullable = false)
-	public boolean isStatus() {
-		return this.status;
+	@Column(name = "likes", nullable = false)
+	public int getLikes() {
+		return this.likes;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "playlist")
@@ -157,4 +170,13 @@ public class Playlist implements java.io.Serializable {
 	public void setAccountPlaylists(Set<AccountPlaylist> accountPlaylists) {
 		this.accountPlaylists = accountPlaylists;
 	}
+
+	public Set<Account> findAccountThroughAccountPlaylist() {
+		Set<Account> accounts = new HashSet<Account>(0) ; 
+		for(AccountPlaylist accountPlaylist : accountPlaylists) {
+			accounts.add(accountPlaylist.getAccount()) ; 
+		}
+		return accounts ;
+	}
+	
 }
