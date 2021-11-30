@@ -14,7 +14,7 @@ public interface AccountPlaylistRepository extends PagingAndSortingRepository<Ac
 
 	@Query("FROM AccountPlaylist WHERE is_own = true AND playlist_id = :id")
 	public AccountPlaylist checkAlbum(@Param("id")int playlistId);
-	
+
 	@Query("FROM AccountPlaylist WHERE is_own = true AND account_id = :id")
 	public List<AccountPlaylist> getAlbumsOfArtistId(@Param("id") int id);
 

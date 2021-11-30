@@ -97,33 +97,6 @@
                                  </div>
                               </li>
                               <li>
-<<<<<<< HEAD
-                                 <div
-									class="d-flex align-items-center justify-content-between mb-3">
-                                    <h6>Join Date</h6>
-                                    <p class="mb-0">
-										<fmt:formatDate pattern="dd-MM-yyyy"
-											value="${accountSignined.joinDate }" />
-									</p>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div
-									class="d-flex align-items-center justify-content-between mb-3">
-                                    <h6>Country</h6>
-                                    <p class="mb-0"> 
-                                    	<c:if
-											test="${accountSignined.country == null }">Not selected yet</c:if> 
-                                    		${accountSignined.country.countryName }</p>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div
-									class="d-flex align-items-center justify-content-between mb-3">
-                                    <h6>Follower</h6>
-                                    <p class="mb-0">
-										<c:if test="${accountSignined.follower == null }">Not selected yet</c:if> 
-=======
                                  <div class="d-flex align-items-center justify-content-between mb-3">
                                     <h6>Join Date</h6>
                                     <p class="mb-0"><fmt:formatDate pattern = "dd-MM-yyyy" value ="${accountSignined.joinDate }" /></p>
@@ -141,7 +114,6 @@
                                  <div class="d-flex align-items-center justify-content-between mb-3">
                                     <h6>Follower</h6>
                                     <p class="mb-0"><c:if test="${accountSignined.follower == null }">Not selected yet</c:if> 
->>>>>>> nts
                                     		${accountSignined.follower }</p>
                                  </div>
                               </li>
@@ -184,7 +156,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Settings</a>
-         </li>
+                            </li>
                         </ul>
                         <!-- end tabs nav -->
 
@@ -259,111 +231,6 @@
 
                                         <div class="dashbox__list-wrap">
                                             <div class="dashbox__scroll">
-<<<<<<< HEAD
-                                                <div
-													class="dashbox__note dashbox__note--succ">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" /></svg>
-                                                    <p>
-														<a href="#modal-info2" class="open-modal">Payment #51</a> was successful!</p>
-                                                    <span>1 hour ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--fail">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z" /></svg>
-                                                    <p>
-														<a href="#modal-info3" class="open-modal">Payment #50</a> failed!</p>
-                                                    <span>2 hours ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--info">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Zm0-8.5a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0v-3A1,1,0,0,0,12,11.5Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,7.5Z" /></svg>
-                                                    <p>
-														<a href="#modal-info4" class="open-modal">Example</a> of notification.</p>
-                                                    <span>2 hours ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--gift">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M18,7h-.35A3.45,3.45,0,0,0,18,5.5a3.49,3.49,0,0,0-6-2.44A3.49,3.49,0,0,0,6,5.5,3.45,3.45,0,0,0,6.35,7H6a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H5v6a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V13h1a1,1,0,0,0,1-1V10A3,3,0,0,0,18,7ZM11,20H8a1,1,0,0,1-1-1V13h4Zm0-9H5V10A1,1,0,0,1,6,9h5Zm0-4H9.5A1.5,1.5,0,1,1,11,5.5Zm2-1.5A1.5,1.5,0,1,1,14.5,7H13ZM17,19a1,1,0,0,1-1,1H13V13h4Zm2-8H13V9h5a1,1,0,0,1,1,1Z" /></svg>
-                                                    <p>
-														<a href="#modal-info5" class="open-modal">You have received a gift!</a>
-													</p>
-                                                    <span>4 hours ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--gift">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M18,7h-.35A3.45,3.45,0,0,0,18,5.5a3.49,3.49,0,0,0-6-2.44A3.49,3.49,0,0,0,6,5.5,3.45,3.45,0,0,0,6.35,7H6a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H5v6a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V13h1a1,1,0,0,0,1-1V10A3,3,0,0,0,18,7ZM11,20H8a1,1,0,0,1-1-1V13h4Zm0-9H5V10A1,1,0,0,1,6,9h5Zm0-4H9.5A1.5,1.5,0,1,1,11,5.5Zm2-1.5A1.5,1.5,0,1,1,14.5,7H13ZM17,19a1,1,0,0,1-1,1H13V13h4Zm2-8H13V9h5a1,1,0,0,1,1,1Z" /></svg>
-                                                    <p>
-														<a href="#modal-info5" class="open-modal">You have received a gift!</a>
-													</p>
-                                                    <span>5 hours ago</span>
-                                                </div>
-
-                                                <div
-													class="dashbox__note dashbox__note--succ">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" /></svg>
-                                                    <p>
-														<a href="#modal-info2" class="open-modal">Payment #51</a> was successful!</p>
-                                                    <span>1 hour ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--fail">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z" /></svg>
-                                                    <p>
-														<a href="#modal-info3" class="open-modal">Payment #50</a> failed!</p>
-                                                    <span>2 hours ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--info">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Zm0-8.5a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0v-3A1,1,0,0,0,12,11.5Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,7.5Z" /></svg>
-                                                    <p>
-														<a href="#modal-info4" class="open-modal">Example</a> of notification.</p>
-                                                    <span>2 hours ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--gift">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M18,7h-.35A3.45,3.45,0,0,0,18,5.5a3.49,3.49,0,0,0-6-2.44A3.49,3.49,0,0,0,6,5.5,3.45,3.45,0,0,0,6.35,7H6a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H5v6a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V13h1a1,1,0,0,0,1-1V10A3,3,0,0,0,18,7ZM11,20H8a1,1,0,0,1-1-1V13h4Zm0-9H5V10A1,1,0,0,1,6,9h5Zm0-4H9.5A1.5,1.5,0,1,1,11,5.5Zm2-1.5A1.5,1.5,0,1,1,14.5,7H13ZM17,19a1,1,0,0,1-1,1H13V13h4Zm2-8H13V9h5a1,1,0,0,1,1,1Z" /></svg>
-                                                    <p>
-														<a href="#modal-info5" class="open-modal">You have received a gift!</a>
-													</p>
-                                                    <span>4 hours ago</span>
-                                                </div>
-                                                <div
-													class="dashbox__note dashbox__note--gift">
-                                                    <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M18,7h-.35A3.45,3.45,0,0,0,18,5.5a3.49,3.49,0,0,0-6-2.44A3.49,3.49,0,0,0,6,5.5,3.45,3.45,0,0,0,6.35,7H6a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H5v6a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V13h1a1,1,0,0,0,1-1V10A3,3,0,0,0,18,7ZM11,20H8a1,1,0,0,1-1-1V13h4Zm0-9H5V10A1,1,0,0,1,6,9h5Zm0-4H9.5A1.5,1.5,0,1,1,11,5.5Zm2-1.5A1.5,1.5,0,1,1,14.5,7H13ZM17,19a1,1,0,0,1-1,1H13V13h4Zm2-8H13V9h5a1,1,0,0,1,1,1Z" /></svg>
-                                                    <p>
-														<a href="#modal-info5" class="open-modal">You have received a gift!</a>
-													</p>
-=======
                                                 <div class="dashbox__note dashbox__note--succ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/></svg>
                                                     <p><a href="#modal-info2" class="open-modal">Payment #51</a> was successful!</p>
@@ -413,7 +280,6 @@
                                                 <div class="dashbox__note dashbox__note--gift">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18,7h-.35A3.45,3.45,0,0,0,18,5.5a3.49,3.49,0,0,0-6-2.44A3.49,3.49,0,0,0,6,5.5,3.45,3.45,0,0,0,6.35,7H6a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H5v6a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V13h1a1,1,0,0,0,1-1V10A3,3,0,0,0,18,7ZM11,20H8a1,1,0,0,1-1-1V13h4Zm0-9H5V10A1,1,0,0,1,6,9h5Zm0-4H9.5A1.5,1.5,0,1,1,11,5.5Zm2-1.5A1.5,1.5,0,1,1,14.5,7H13ZM17,19a1,1,0,0,1-1,1H13V13h4Zm2-8H13V9h5a1,1,0,0,1,1,1Z"/></svg>
                                                     <p><a href="#modal-info5" class="open-modal">You have received a gift!</a></p>
->>>>>>> nts
                                                     <span>5 hours ago</span>
                                                 </div>
                                             </div>
@@ -426,243 +292,15 @@
                                 <div class="col-12 col-lg-6">
                                     <div class="dashbox">
                                         <div class="dashbox__title">
-<<<<<<< HEAD
-                                            <h3>
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-													<path
-														d="M21.65,2.24a1,1,0,0,0-.8-.23l-13,2A1,1,0,0,0,7,5V15.35A3.45,3.45,0,0,0,5.5,15,3.5,3.5,0,1,0,9,18.5V10.86L20,9.17v4.18A3.45,3.45,0,0,0,18.5,13,3.5,3.5,0,1,0,22,16.5V3A1,1,0,0,0,21.65,2.24ZM5.5,20A1.5,1.5,0,1,1,7,18.5,1.5,1.5,0,0,1,5.5,20Zm13-2A1.5,1.5,0,1,1,20,16.5,1.5,1.5,0,0,1,18.5,18ZM20,7.14,9,8.83v-3L20,4.17Z" /></svg>                                                New items for you</h3>
-
-                                            <div class="dashbox__wrap">
-                                                <a
-													class="dashbox__refresh" href="#"><svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-														<path
-															d="M12,2A10,10,0,0,0,5.12,4.77V3a1,1,0,0,0-2,0V7.5a1,1,0,0,0,1,1H8.62a1,1,0,0,0,0-2H6.22A8,8,0,1,1,4,12a1,1,0,0,0-2,0A10,10,0,1,0,12,2Zm0,6a1,1,0,0,0-1,1v3a1,1,0,0,0,1,1h2a1,1,0,0,0,0-2H13V9A1,1,0,0,0,12,8Z" /></svg></a>
-                                                <a class="dashbox__more"
-													href="#">View All</a>
-=======
                                             <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.65,2.24a1,1,0,0,0-.8-.23l-13,2A1,1,0,0,0,7,5V15.35A3.45,3.45,0,0,0,5.5,15,3.5,3.5,0,1,0,9,18.5V10.86L20,9.17v4.18A3.45,3.45,0,0,0,18.5,13,3.5,3.5,0,1,0,22,16.5V3A1,1,0,0,0,21.65,2.24ZM5.5,20A1.5,1.5,0,1,1,7,18.5,1.5,1.5,0,0,1,5.5,20Zm13-2A1.5,1.5,0,1,1,20,16.5,1.5,1.5,0,0,1,18.5,18ZM20,7.14,9,8.83v-3L20,4.17Z"/></svg>                                                New items for you</h3>
 
                                             <div class="dashbox__wrap">
                                                 <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10,0,0,0,5.12,4.77V3a1,1,0,0,0-2,0V7.5a1,1,0,0,0,1,1H8.62a1,1,0,0,0,0-2H6.22A8,8,0,1,1,4,12a1,1,0,0,0-2,0A10,10,0,1,0,12,2Zm0,6a1,1,0,0,0-1,1v3a1,1,0,0,0,1,1h2a1,1,0,0,0,0-2H13V9A1,1,0,0,0,12,8Z"/></svg></a>
                                                 <a class="dashbox__more" href="#">View All</a>
->>>>>>> nts
                                             </div>
                                         </div>
 
                                         <div class="dashbox__list-wrap">
-<<<<<<< HEAD
-                                            <ul
-												class="main__list main__list--dashbox">
-                                                <li class="single-item">
-                                                    <a data-link
-													data-title="Got What I Got" data-artist="Jason Aldean"
-													data-img=""
-													${pageContext.request.contextPath }/resources/user/img/covers/cover.svg" href="../blast2.0/audio/12071151_epic-cinematic-trailer_by_audiopizza_preview.mp3"
-													class="single-item__cover">
-                                                        <img src=""
-														${pageContext.request.contextPath }/resources/user/img/covers/cover.svg" alt="">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" /></svg>
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z" /></svg>
-                                                    </a>
-                                                    <div
-														class="single-item__title">
-                                                        <h4>
-															<a href="#">Got What I Got</a>
-														</h4>
-                                                        <span><a
-															href="artist.html">Jason Aldean</a></span>
-                                                    </div>
-                                                    <a href="#"
-													class="single-item__add">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z" /></svg>
-                                                    </a>
-                                                    <a href="#"
-													class="single-item__export">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z" /></svg>
-                                                    </a>
-                                                    <span
-													class="single-item__time">2:58</span>
-                                                </li>
-                                                <li class="single-item">
-                                                    <a data-link
-													data-title="Supalonely" data-artist="BENEE Featuring"
-													data-img=""
-													${pageContext.request.contextPath }/resources/user/img/covers/cover7.jpg" href="../blast2.0/audio/9106709_epic-adventure-cinematic-trailer_by_audiopizza_preview.mp3"
-													class="single-item__cover">
-                                                        <img src=""
-														${pageContext.request.contextPath }/resources/user/img/covers/cover7.jpg" alt="">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" /></svg>
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z" /></svg>
-                                                    </a>
-                                                    <div
-														class="single-item__title">
-                                                        <h4>
-															<a href="#">Supalonely</a>
-														</h4>
-                                                        <span><a
-															href="artist.html">BENEE Featuring</a></span>
-                                                    </div>
-                                                    <a href="#"
-													class="single-item__add">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z" /></svg>
-                                                    </a>
-                                                    <a href="#"
-													class="single-item__export">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z" /></svg>
-                                                    </a>
-                                                    <span
-													class="single-item__time">3:14</span>
-                                                </li>
-                                                <li class="single-item">
-                                                    <a data-link
-													data-title="Girls In The Hood" data-artist="Megan Thee"
-													data-img=""
-													${pageContext.request.contextPath }/resources/user/img/covers/cover8.jpg" href="../blast2.0/audio/10938456_inspiring-epic-motivational-cinematic-trailer_by_audiopizza_preview.mp3"
-													class="single-item__cover">
-                                                        <img src=""
-														${pageContext.request.contextPath }/resources/user/img/covers/cover8.jpg" alt="">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" /></svg>
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z" /></svg>
-                                                    </a>
-                                                    <div
-														class="single-item__title">
-                                                        <h4>
-															<a href="#">Girls In The Hood</a>
-														</h4>
-                                                        <span><a
-															href="artist.html">Megan Thee</a></span>
-                                                    </div>
-                                                    <a href="#"
-													class="single-item__add">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z" /></svg>
-                                                    </a>
-                                                    <a href="#"
-													class="single-item__export">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z" /></svg>
-                                                    </a>
-                                                    <span
-													class="single-item__time">3:21</span>
-                                                </li>
-                                                <li class="single-item">
-                                                    <a data-link
-													data-title="Got It On Me" data-artist="Summer Walker"
-													data-img=""
-													${pageContext.request.contextPath }/resources/user/img/covers/cover9.jpg" href="../blast2.0/audio/16412111_upbeat-rock_by_audiopizza_preview.mp3"
-													class="single-item__cover">
-                                                        <img src=""
-														${pageContext.request.contextPath }/resources/user/img/covers/cover9.jpg" alt="">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" /></svg>
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z" /></svg>
-                                                    </a>
-                                                    <div
-														class="single-item__title">
-                                                        <h4>
-															<a href="#">Got It On Me</a>
-														</h4>
-                                                        <span><a
-															href="artist.html">Summer Walker</a></span>
-                                                    </div>
-                                                    <a href="#"
-													class="single-item__add">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z" /></svg>
-                                                    </a>
-                                                    <a href="#"
-													class="single-item__export">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z" /></svg>
-                                                    </a>
-                                                    <span
-													class="single-item__time">3:12</span>
-                                                </li>
-                                                <li class="single-item">
-                                                    <a data-link
-													data-title="Righteous" data-artist="Juice WRLD" data-img=""
-													${pageContext.request.contextPath }/resources/user/img/covers/cover10.jpg" href="../blast2.0/audio/19478377_ambient-pop_by_audiopizza_preview.mp3"
-													class="single-item__cover">
-                                                        <img src=""
-														${pageContext.request.contextPath }/resources/user/img/covers/cover10.jpg" alt="">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" /></svg>
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z" /></svg>
-                                                    </a>
-                                                    <div
-														class="single-item__title">
-                                                        <h4>
-															<a href="#">Righteous</a>
-														</h4>
-                                                        <span><a
-															href="artist.html">Juice WRLD</a></span>
-                                                    </div>
-                                                    <a href="#"
-													class="single-item__add">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z" /></svg>
-                                                    </a>
-                                                    <a href="#"
-													class="single-item__export">
-                                                        <svg
-															xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-															<path
-																d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z" /></svg>
-                                                    </a>
-                                                    <span
-													class="single-item__time">5:04</span>
-=======
                                             <ul class="main__list main__list--dashbox">
                                                 <li class="single-item">
                                                     <a data-link data-title="Got What I Got" data-artist="Jason Aldean" data-img=""${pageContext.request.contextPath }/resources/user/img/covers/cover.svg" href="../blast2.0/audio/12071151_epic-cinematic-trailer_by_audiopizza_preview.mp3" class="single-item__cover">
@@ -753,7 +391,6 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z"/></svg>
                                                     </a>
                                                     <span class="single-item__time">5:04</span>
->>>>>>> nts
                                                 </li>
                                             </ul>
                                         </div>
@@ -806,6 +443,7 @@
                                                         </tr>
                                                         </c:forEach>
                                                         
+                                                      
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -814,6 +452,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="tab-3" role="tabpanel">
                             <div class="row row--grid">
                                 <div class="col-12 col-md-6 col-lg-4 order-md-2 order-lg-1">
@@ -873,10 +512,6 @@
                             </div>
                         </div>
 
-<<<<<<< HEAD
-                        <div class="tab-pane fade" id="tab-4"
-							role="tabpanel">
-                            <div class="row row--grid">
                         <div class="tab-pane fade" id="tab-4" role="tabpanel">
                             <div class="row row--grid">
                                 <c:set var="auth"  value="FACEBOOK"/>
@@ -889,7 +524,6 @@
                                             <div class="col-12">
                                                 <h4 class="sign__title">Profile details</h4>
                                             </div>
-<<<<<<< HEAD
 											<c:if test="${accountSignined.authProvider != auth }">
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
@@ -956,7 +590,6 @@
                                                 </div>
                                             </div>      
                                             <div class="col-12">
-
                                             	<input type="submit" class="sign__btn" value="Save" />
                                             </div>
                                         </div>
@@ -977,35 +610,6 @@
                                             <div class="col-12">
                                                 <h4 class="sign__title">Change password</h4>
                                             </div>
-<<<<<<< HEAD
-                                            <div
-														class="col-6 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="sign__group">
-                                                    <label
-																class="sign__label" for="oldpass">Old password</label>                                                    
-                                                    <input id="oldpass"
-																type="password" name="oldpass" class="sign__input"
-																required="required">
-                                                    
-                                                </div>
-                                            </div>
-
-                                            <div
-																class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="sign__group">
-                                                    <label
-																		class="sign__label" for="newpass">New password</label>
-                                                    <input id="newpass"
-																		type="password" name="newpass" class="sign__input"
-																		required="required">
-                                                </div>
-                                            </div>
-
-                                            <div
-																class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="sign__group">
-                                                    <label
-																		class="sign__label" for="confirmpass">Confirm new password</label>
                                             <div class="col-6 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="sign__group">
                                                     <label class="sign__label" for="oldpass">Old password</label>                                                    
@@ -1077,4 +681,5 @@
   	  		
   		</script>
 	</jsp:attribute>
+	
 </mt:userTemplate>

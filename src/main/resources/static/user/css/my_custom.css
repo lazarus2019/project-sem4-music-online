@@ -790,11 +790,14 @@ audio {
 	opacity: 1;
 }
 
+<<<<<<< HEAD
 .circle-icon-sm i{
     color: var(--white);
     font-size: 15px;
 }
 
+=======
+>>>>>>> origin/Thu_Branch3
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
@@ -942,6 +945,7 @@ a.form-btn:hover {
 
 .item {
 	padding: 6px 20px !important;
+<<<<<<< HEAD
 }
 
 /* hidden */
@@ -979,3 +983,11 @@ a.form-btn:hover {
 .tabs-2{
     width: 50% !important;
     margin: 0 30px !important;
+=======
+}
+
+/* hidden */
+.hide{
+	display: none
+}
+>>>>>>> origin/Thu_Branch3

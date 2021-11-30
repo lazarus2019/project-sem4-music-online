@@ -17,6 +17,7 @@ import com.demo.repositories.AccountRepository;
 @Service("accountPlaylistService")
 public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 
+
 	@Autowired
 	private AccountPlaylistRepository accountPlaylistRepository;
 
@@ -57,4 +58,5 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 	public AccountPlaylist getOwnerPlaylist(int playlistId) {
 		return accountPlaylistRepository.checkAlbum(playlistId);
 	}
+
 }

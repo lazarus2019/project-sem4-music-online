@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function showResultContainer() {
 	document.querySelector('.result-layout-fixed-bg').classList.add("show")
 	document.querySelector('.result-layout').classList.add("show")
@@ -5,6 +6,15 @@ function showResultContainer() {
 function hideResultContainer() {
 	document.querySelector('.result-layout-fixed-bg').classList.remove("show")
 	document.querySelector('.result-layout').classList.remove("show")
+=======
+function showResultContainer(){
+  document.querySelector('.result-layout-fixed-bg').classList.add("show")
+  document.querySelector('.result-layout').classList.add("show")
+}
+function hideResultContainer(){
+  document.querySelector('.result-layout-fixed-bg').classList.remove("show")
+  document.querySelector('.result-layout').classList.remove("show")
+>>>>>>> origin/Thu_Branch3
 }
 
 function togglePlayer() {
@@ -98,11 +108,19 @@ if (dropdowns.length > 0) {
 
 // Check if form element exist on page
 if (form !== null) {
+<<<<<<< HEAD
 	// When form is submitted console log the value of the select field
 	form.addEventListener('submit', (e) => {
 		e.preventDefault();
 		//console.log('Selected country:', form.querySelector('[name="genres"]').value);
 	});
+=======
+  // When form is submitted console log the value of the select field
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    //console.log('Selected country:', form.querySelector('[name="genres"]').value);
+  });
+>>>>>>> origin/Thu_Branch3
 }
 
 // Create custom dropdown
@@ -376,6 +394,7 @@ function renderLyrics(lyrics) {
 	return htmls.join('')
 }
 
+<<<<<<< HEAD
 /*function readTextFile(file) {
 	var rawFile = new XMLHttpRequest();
 	rawFile.open("GET", file, false);
@@ -398,4 +417,10 @@ function callFile(e) {
     if (node) { node.value = text; }
   };
   reader.readAsText(e.files[0]);
+=======
+  function renderLyrics(lyrics) {
+    let htmls = lyrics.split("/n").map(line => `<p>${line}</p>`)
+
+    return htmls.join('')
+>>>>>>> origin/Thu_Branch3
 }

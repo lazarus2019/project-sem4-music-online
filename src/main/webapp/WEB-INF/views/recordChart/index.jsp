@@ -15,6 +15,7 @@
 					<h3 class="top__list__header text-primary">Top ${topCount } Tracks </h3>
                         <ul class="main__list main__list--playlist main__list--dashbox">
 							<c:forEach var="topTrack" items="${topTracks }" varStatus="i">
+
                                 <li class="single-item single-item-chart item">
                                     <a data-playlist data-title="1. Got What I Got" data-artist="Jason Aldean"
 										data-img="${pageContext.request.contextPath }/resources/user/img/covers/cover3.jpg"
@@ -36,6 +37,7 @@
                                         </c:forEach>
                                     </div>
                                     <span class="single-item__time"><t:trackTime totalSeconds="${topTrack.duration }"/></span>
+
                                     <a href="#" class="single-item__add">
                                     	<!-- add to play list icon -->
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

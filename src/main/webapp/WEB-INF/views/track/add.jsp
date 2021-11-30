@@ -3,11 +3,19 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <mt:userTemplate title="Add New Track">
 	<jsp:attribute name="content">
 	
 	<!-- FORM -->
             <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
+
                 <div class="row row--grid">
                     <div class="col-6">
                         <div class="step non-hidden">
@@ -45,11 +53,13 @@
                                     <input type="file" name="lyricsTrack"
 									id="lyricsTrack" style="display: none;" accept="text/plain" onchange="callFile(this)">
                                     <label for="lyricsTrack"
+
 									class="form-btn">Import Lyrics</label>
                                 </div>
                                 <div class="sign__group">
                                     <textarea type="text"
 									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics"></textarea>
+
                                 </div>
                                 
 
@@ -137,11 +147,7 @@
 											name="isPremium" type="checkbox" checked="checked">
                                             <label for="isPremium">Is Premium <i class="las la-crown yellow__icon"></i></label>
                                         </div>
-                                       <!--  <div class="public-date-box">
-                                            <input type="date"
-											class="sign__input" placeholder="Password" name="publishDate"
-											value="">
-                                        </div> -->
+
                                         <div
 										class="sign__group sign__group--checkbox mb-0">
                                             <input id="isHidden"
@@ -159,6 +165,7 @@
                                             <label for="album-artist-${album.id }">${album.title }</label>
                                         </div>
 									</c:forEach>                                  
+
                                     </div>
                                 </div>
                             </div>
@@ -170,3 +177,9 @@
 	</jsp:attribute>
 
 </mt:userTemplate>
+
+<script>
+	$(document).ready(function() {
+		$('.js-example-basic-multiple').select2();
+	});
+</script>

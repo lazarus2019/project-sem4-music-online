@@ -11,7 +11,7 @@ public interface PlaylistService {
 	public Playlist save(Playlist playlist);
 
 	public Playlist find(int id);
-	
+
 	public void delete(int id);
 	
 	public List<Playlist> getAllPlaylist();
@@ -19,4 +19,5 @@ public interface PlaylistService {
 	public List<Playlist> getAllAlbum();
 	
 	public List<PlaylistModel> getPlaylistModel(List<Playlist> playlists);
+
 }

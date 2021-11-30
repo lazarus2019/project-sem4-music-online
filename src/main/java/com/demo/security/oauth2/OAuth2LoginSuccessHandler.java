@@ -19,7 +19,7 @@ import com.demo.services.CookieService;
 
 @Component
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-	
+
 	@Autowired
 	private AccountService accountService ;
 	

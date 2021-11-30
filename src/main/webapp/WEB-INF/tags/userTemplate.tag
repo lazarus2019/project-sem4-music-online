@@ -49,8 +49,6 @@
 </head>
 
 <body>
-
-	
 <!-- header -->
 <header class="header">
     <div class="header__content">
@@ -125,10 +123,10 @@
                                 <a href="${pageContext.request.contextPath }/user/profile/index">
                                     <i class="lar la-user-circle"></i> Profile
                                 </a>
-                                <a href="artist_tracks.html">
+                                <a href="${pageContext.request.contextPath }/artist/yourtrack">
                                     <i class="las la-music"></i> Your Tracks
                                 </a>
-                                <a href="artist_album.html">
+                                <a href="${pageContext.request.contextPath }/artist/youralbum">
                                     <i class="las la-record-vinyl"></i> Your Albums
                                 </a>
                                 <a href="#">
@@ -145,6 +143,8 @@
                         </div>
                     </c:if>
                 </div>
+            
+            
             </div>
         </div>
     
@@ -156,7 +156,6 @@
     </div>
 </header>
 <!-- end header -->
-
 	<!-- player -->
 	<div class="player" id="audioPlayer">
 		<div class="progressbar">
@@ -1687,7 +1686,7 @@
 	
 		/* Set select2 */
 		$('.js-example-basic-multiple').select2();
-		
+
 	    $('.input-search').keyup(function () {
 	        var keyword = $('.input-search').val();
 
@@ -1732,6 +1731,7 @@
 	                var htmls = "";
                for (var i = 0; i < tracks.length; i++) {
 	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "' onclick='getTrackById(this)'><div class='track-box-image'>" +
+
 	                        "<img src='${pageContext.request.contextPath}/resources/user/img/tracks/" + tracks[i].thumbnail + "' /></div>" +
 	                        "<div class='track-box-content'><p>" + tracks[i].title + "</p><span>"+ "aritst" + "</span></div></div>"
 	                }
@@ -1755,6 +1755,7 @@
 	                var htmls = "";
 	                for (var i = 0; i < albums.length; i++) {
 	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "' onclick='getListTrackByAlbumId(this)'><div class='album-box-image'>" +
+
 	                        "<img src='${pageContext.request.contextPath}/resources/user/img/playlist/" + albums[i].thumbnail + "'/></div>" +
 	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
 	                }

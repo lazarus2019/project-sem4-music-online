@@ -1,8 +1,7 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
-<%@ taglib prefix="mt" uri="http://mytags.com" %>
-
+<%@ taglib prefix="t" uri="http://mytags.com" %>
 
 <!doctype html>
 <html lang="en">

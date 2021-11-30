@@ -20,7 +20,6 @@ public class AlbumServiceImpl implements AlbumService{
 		return albumRepository.searchByKeyword(keyword);
 	}
 
-
 	@Override
 	public AlbumInfo findAlbumById(int id) {
 		return albumRepository.findAlbumById(id);

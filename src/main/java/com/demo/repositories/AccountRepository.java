@@ -40,6 +40,7 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id = :id")
 	public ArtistInfo getArtistById(@Param("id")int id);
+
 	
 	@Query("from Account where username = :username")
 	public Account find(@Param("username") String username);

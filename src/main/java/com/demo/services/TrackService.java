@@ -29,6 +29,8 @@ public interface TrackService {
 
 	public List<Track> getTopVnWeekly(int statusId, int n, int genresId);
 
+	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId);
+
 	public List<Track> getTopAll(int n);
 
 	public List<TrackInfor> findTrackByGenresId(int id);

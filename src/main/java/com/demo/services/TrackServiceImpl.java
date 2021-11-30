@@ -41,6 +41,7 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public List<Track> getNewRelease(int statusId, int n) {
 		return trackRepository.getNewRelease(statusId, n);
+
 	}
 
 	@Override
@@ -175,5 +176,12 @@ public class TrackServiceImpl implements TrackService {
 	public Track findById(int id) {
 		return trackRepository.findById(id).get();
 	}
+
+	@Override
+	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId) {
+		return null;
+	}
+
+
 
 }
