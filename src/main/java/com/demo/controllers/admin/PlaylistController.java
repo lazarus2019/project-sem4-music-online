@@ -59,6 +59,7 @@ public class PlaylistController implements ServletContextAware {
 			playlistModel.setTitle(playlist.getTitle());
 			playlistModel.setPublishDate(playlist.getPublishDate());
 			playlistModel.setLikes(playlist.getLikes());
+			playlistModel.setPlaylistCategory(playlist.getPlaylistCategory().getName());
 			playlistModel.setStatus(playlist.getStatus().getId());
 			playlistModel.setDescription(playlist.getDescription());
 			List<Account> accounts = new ArrayList<Account>();
@@ -91,7 +92,7 @@ public class PlaylistController implements ServletContextAware {
 		FileUploadHelper fileHelper = new FileUploadHelper();
 		PlaylistCategory playlistCategory = new PlaylistCategory();
 		Status status = new Status();
-		String fileName = fileHelper.uploadImage(photo, servletContext);
+		String fileName = fileHelper.uploadImage(photo, servletContext, "playlist");
 		playlist.setThumbnail(fileName);
 		playlist.setPublishDate(new Date());
 		playlist.setLastUpdated(new Date());
@@ -119,7 +120,7 @@ public class PlaylistController implements ServletContextAware {
 		Playlist newPlaylist = playlistService.find(playlist.getId());
 		if (!photo.isEmpty() && photo.getSize() > 0) {
 			FileUploadHelper fileHelper = new FileUploadHelper();
-			String fileName = fileHelper.uploadImage(photo, servletContext);
+			String fileName = fileHelper.uploadImage(photo, servletContext, "playlist");
 			newPlaylist.setThumbnail(fileName);
 		}
 		if (playlist.getPlaylistCategory() == null) {
@@ -139,13 +140,13 @@ public class PlaylistController implements ServletContextAware {
 		Playlist playlist = playlistService.find(id);
 		playlistService.delete(id);
 		FileUploadHelper fileHelper = new FileUploadHelper();
-		fileHelper.deleteImage(playlist.getThumbnail(), servletContext);
+		fileHelper.deleteImage(playlist.getThumbnail(), servletContext, "playlist");
 		return "redirect:/admin/playlist/index";
 	}
 
 	@RequestMapping(value = {
 			"edit-status" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PlaylistModel> editStatus(@RequestParam(value = "id", required = false) int id) {
+	public ResponseEntity<Integer> editStatus(@RequestParam(value = "id", required = false) int id) {
 		try {
 			Playlist playlist = playlistService.find(id);
 			Status status = new Status();
@@ -157,24 +158,9 @@ public class PlaylistController implements ServletContextAware {
 				playlist.setStatus(status);
 			}
 			playlistService.save(playlist);
-
-			PlaylistModel playlistModel = new PlaylistModel();
-			List<Account> accounts = new ArrayList<Account>();
-			playlistModel.setId(playlist.getId());
-			playlistModel.setThumbnail(playlist.getThumbnail());
-			playlistModel.setTitle(playlist.getTitle());
-			playlistModel.setPublishDate(playlist.getPublishDate());
-			playlistModel.setLikes(playlist.getLikes());
-			playlistModel.setPlaylistCategory(playlist.getPlaylistCategory().getName());
-			playlistModel.setStatus(playlist.getStatus().getId());
-			playlistModel.setDescription(playlist.getDescription());
-			for (Account account : playlist.findAccountThroughAccountPlaylist()) {
-				accounts.add(account);
-			}
-			playlistModel.setAccounts(accounts);
-			return new ResponseEntity<PlaylistModel>(playlistModel, HttpStatus.OK);
+			return new ResponseEntity<Integer>(status.getId(), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<PlaylistModel>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

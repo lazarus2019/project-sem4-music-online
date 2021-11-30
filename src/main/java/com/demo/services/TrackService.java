@@ -13,6 +13,12 @@ public interface TrackService {
 
 	public Track save(Track track);
 
+	public Track find(int id);
+
+	public void delete(int id);
+
+	public List<Track> findAll();
+
 	public List<Track> getNewRelease(int statusId, int n);
 
 	public List<Track> getAllByStatus(int statusId);

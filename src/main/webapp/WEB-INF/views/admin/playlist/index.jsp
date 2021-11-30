@@ -14,11 +14,11 @@
 						<!-- tabs nav -->
 						<ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link active" data-toggle="tab" href="#playlist-tab" role="tab" aria-controls="playlist-tab" aria-selected="true">Playlist</a>
+								<a class="nav-link active" data-toggle="tab" href="#playlist-tab" role="tab" aria-controls="playlist-tab" aria-selected="true">Playlists</a>
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#album-tab" role="tab" aria-controls="album-tab" aria-selected="false">Album</a>
+								<a class="nav-link" data-toggle="tab" href="#album-tab" role="tab" aria-controls="album-tab" aria-selected="false">Albums</a>
 							</li>
 
 						</ul>
@@ -37,7 +37,7 @@
                            						<h4 class="card-title">Playlist</h4>
                         					</div>
                         					<div class="iq-card-header-toolbar d-flex align-items-center">
-					                           <a href="${pageContext.request.contextPath }/admin/aboutus/add" class="btn btn-primary">Add New Playlist</a>
+					                           <a href="${pageContext.request.contextPath }/admin/playlist/add" class="btn btn-primary">Add New Playlist</a>
 					                        </div>
                      				 	</div>
 				                     <div class="iq-card-body">
@@ -46,13 +46,13 @@
 				                              <thead>
 				                                 <tr>
 				                                    <th style="width: 5%; height: 50px;">No</th>
-				                                    <th style="width: 15%; height: 50px;">Thumnail</th>
+				                                    <th style="width: 13%; height: 50px;">Thumnail</th>
 				                                    <th style="width: 15%; height: 50px;">Title</th>
 				                                    <th style="width: 8%; height: 50px;">Publish date</th>
 				                                    <th style="width: 9%; height: 50px;">Liked</th>
 				                                    <th style="width: 10%; height: 50px;">Playlist category</th>
 				                                    <th style="width: 4%; height: 50px;">Status</th>
-				                                    <th style="width: 29%; height: 50px;">Description</th>
+				                                    <th style="width: 31%; height: 50px;">Description</th>
 				                                    <th style="width: 5%; height: 50px;">Action</th>
 				                                 </tr>
 				                              </thead>
@@ -66,7 +66,7 @@
 					                                    <td>${playlist.title }</td>
 					                                    <td class="text-center"><fmt:formatDate value="${playlist.publishDate }" type="date" pattern="MM/dd/yyyy"/></td>
 					                                    <td>${playlist.likes } <i class="fas fa-heart clr-red"></i></td>
-					                                    <td class="text-center"><fmt:formatDate value="${playlist.lastUpdated }" type="date" pattern="MM/dd/yyyy"/></td>
+					                                    <td class="text-center">${playlist.playlistCategory.name }</td>
 					                                    <td class="text-center">
 					                                    	<c:if test="${playlist.status.id == 1 }"><a id="status-btn" class="badge iq-bg-info toggle-playlist-status" data-id="${playlist.id}">Public</a>
 					                                    	</c:if>
@@ -119,13 +119,13 @@
 				                              <thead>
 				                                 <tr>
 				                                    <th style="width: 3%;">No</th>
-				                                    <th style="width: 15%;">Thumbnail</th>
+				                                    <th style="width: 13%;">Thumbnail</th>
 				                                    <th style="width: 15%;">Title</th>
 				                                    <th style="width: 14%;">Artist</th>
 				                                    <th style="width: 8%;">Publish date</th>
 				                                    <th style="width: 10%;">Liked</th>
 				                                    <th style="width: 3%;">Status</th>
-				                                    <th style="width: 27%;">Description</th>
+				                                    <th style="width: 29%;">Description</th>
 				                                    <th style="width: 5%;">Action</th>
 
 				                                 </tr>
@@ -193,14 +193,11 @@
 			            id: id
 			        },
 			        url: '${pageContext.request.contextPath}/admin/playlist/edit-status',
-			        success: function (playlist) {
-			            var status = "";
-			                if (playlist.status == 1) {
+			        success: function (status) {
+			                if (status == 1) {
 			                	self.text('Public');
-			                	/* self.attr('data-badge', 'iq-bg-info'); */
-			                } else if (playlist.status == 3) {
+			                } else if (status == 3) {
 			                	self.text('Hidden') 
-			                	self.attr('data-badge', 'iq-bg-danger');
 			                }
 			            
 			        }
@@ -212,21 +209,17 @@
 		    $(this).on("click", function(){
 		        var id = $(this).data("id")
 		        var self = $(this);
-		        console.log("test")
 			    $.ajax({
 			    	type: 'GET',
 			        data: {
 			            id: id
 			        },
 			        url: '${pageContext.request.contextPath}/admin/playlist/edit-status',
-			        success: function (playlist) {
-			            var status = "";
-			            
-			                if (playlist.status == 1) {
+			        success: function (status) {
+			                if (status == 1) {
 			                	self.text('Public');
-			                } else if (playlist.status == 3) {
+			                } else if (status == 3) {
 			                	self.text('Hidden') 
-			                	self.attr('data-badge', 'iq-bg-danger');
 			                } 
 			            
 			        }

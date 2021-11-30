@@ -22,12 +22,12 @@
                               <s:input path="title" class="form-control" id="title"></s:input>
                            </div>
                            <div class="form-group">
-                              <label>Playlist Category:</label>
+                              <label id="category">Playlist Category:</label>
                               <c:if test="${categoryId == 3 }">
                                  <input type="text" class="form-control" readonly="readonly" value="Album">
                               </c:if>
                               <c:if test="${categoryId != 3 }">
-                                 <select class="form-control" id="exampleFormControlSelect1" name="playlistCategory.id">
+                                 <select class="form-control" id="category" name="playlistCategory.id">
                               	    <c:forEach var="playlistCategory" items="${playlistCategories }">
 	                                    <option value="${playlistCategory.id }">${playlistCategory.name }</option>
                               	    </c:forEach>

@@ -17,13 +17,13 @@ import com.demo.models.TrackInfor;
 @Repository("trackRepository")
 public interface TrackRepository extends PagingAndSortingRepository<Track, Integer> {
 
-	@Query(value = "select * from Track where status_id = :statusId order by id desc limit :n", nativeQuery = true) 
+	@Query(value = "select * from Track where status_id = :statusId and is_delete = false order by id desc limit :n", nativeQuery = true) 
 	public List<Track> getNewRelease(@Param("statusId") int statusId, @Param("n") int n);
 	
-	@Query(value = "select * from Track where status_id = :statusId", nativeQuery = true) 
+	@Query(value = "select * from Track where status_id = :statusId and is_delete = false", nativeQuery = true) 
 	public List<Track> getAllByStatus(@Param("statusId") int statusId);
 	
-	@Query(value = "select * from Track where status_id = :statusId order by weekly_listens desc limit :n", nativeQuery = true) 
+	@Query(value = "select * from Track where status_id = :statusId and is_delete = false order by weekly_listens desc limit :n", nativeQuery = true) 
 	public List<Track> getTopAllWeekly(@Param("statusId") int statusId, @Param("n") int n);
 
 	@Query(" select new com.demo.models.TrackInfor(id, title, fileName, lyrics, thumbnail, likes, listens) from Track where genres.id = :id ")

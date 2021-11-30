@@ -171,5 +171,20 @@ public class TrackServiceImpl implements TrackService {
 		return trackRepository.getWaitingTrackByGenres(id, genresId, pageable);
 	}
 
+	@Override
+	public List<Track> findAll() {
+		return (List<Track>) trackRepository.findAll();
+	}
+
+	@Override
+	public Track find(int id) {
+		return trackRepository.findById(id).get();
+	}
+
+	@Override
+	public void delete(int id) {
+		trackRepository.deleteById(id);
+	}
+
 
 }

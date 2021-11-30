@@ -80,7 +80,13 @@
 
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/playlist" class="iq-waves-effect">
-                            	<i class="ri-album-line iq-arrow-left"></i><span>Playlist</span>
+                            	<i class="ri-function-line"></i><span>Manage Playlist</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/manage-track" class="iq-waves-effect">
+                            	<i class="ri-album-line iq-arrow-left"></i><span>Manage Track</span>
                             </a>
                         </li>
                         
