@@ -45,7 +45,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	public List<Playlist> getAllAlbum() {
 		return playlistRepository.getAllAlbum();
 	}
-
+	
 	@Override
 	public void delete(int id) {
 		playlistRepository.deleteById(id);
@@ -73,7 +73,5 @@ public class PlaylistServiceImpl implements PlaylistService {
 		}
 		return playlistModelies;
 	}
-	
-	
 	
 }

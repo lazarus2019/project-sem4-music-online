@@ -628,7 +628,6 @@ const appPremium = {
     },
     handleEvents: function () {
         const _this = this;
-<<<<<<< HEAD
 
         // Xử lý khi click play
         playBtn.onclick = () => {
@@ -900,7 +899,139 @@ const appPremium = {
             }
         }
 
-=======
+    },
+    findSong: function (id) {
+        return songPlaylist.find(song => song.id === id) || null
+    },
+    deleteSong: function (songId) {
+        const song = this.findSong(songId)
+        if (song) {
+            songPlaylist.splice(songs.indexOf(song), 1)
+        }
+    },
+    getPlaylist: function () {
+
+    },
+    updatePlaylist: function (playlist) {
+        localStorage.setItem(PLAYLIST_STORAGE_KEY, JSON.stringify(playlist))
+    },
+    start: function () {
+        //RenderFirstTime playlist
+        this.renderFirstTime()
+
+        // Load cấu hình được lưu trong Local Storage
+        this.loadConfig()
+
+        //Định nghĩa các thuộc tính cho object
+        this.defineProperties()
+
+        //Lắng nghe / xử lý các sự kiện (DOM events)
+        this.handleEvents()
+
+        //Tải bài hát đầu tiên vào UI của ứng dụng
+        // this.loadCurrentSong()
+
+        // this.updatePlaylist(songPlaylist)
+
+        // Hiển thị trạng thái ban đầu của button repeat & random
+        randomBtn.classList.toggle('active', this.isRandom)
+        repeatBtn.classList.toggle('active', this.isRepeat)
+    }
+}
+
+if (isPremium) {
+    appPremium.start()
+} else {
+    app.start()
+}
+function renderSong(data) {
+    const song = new Song(data.id, data.title, data.singer, data.path, data.image, data.duration)
+    playlist.appendChild(song.elements.root)
+}
+
+        // Khi song được play
+        audio.onplay = () => {
+            _this.isPlaying = true
+            player.classList.add('playing')
+        }
+
+        // Khi song bị pause
+        audio.onpause = () => {
+            _this.isPlaying = false
+            player.classList.remove('playing')
+        }
+
+
+        // Khi next song
+        nextBtn.onclick = () => {
+            if (_this.isRandom) {
+                _this.playRandomSong()
+            } else {
+                _this.nextSong()
+            }
+            audio.play()
+        }
+
+        // Khi prev song
+        prevBtn.onclick = () => {
+            if (_this.isRandom) {
+                _this.playRandomSong()
+            } else {
+                _this.prevSong()
+            }
+            audio.play()
+        playlist.splice(songs.indexOf(song), 1)
+        updatePlaylist(songPlaylist)
+        const songActive = playlist.querySelector('.playlist__list-item.active')
+        if (songActive) {
+            const currentSong = findSong(songActive.dataset.id)
+            if (currentSong) app.currentIndex = songPlaylist.indexOf(currentSong)
+        }
+
+        // Xử lý random bật tắt
+        randomBtn.onclick = () => {
+            _this.isRandom = !_this.isRandom
+            _this.setConfig('isRandom', _this.isRandom)
+            randomBtn.classList.toggle('active', _this.isRandom)
+        }
+
+        // Xử lý phát lặp lại một song
+        repeatBtn.onclick = () => {
+            _this.isRepeat = !_this.isRepeat
+            _this.setConfig('isRepeat', _this.isRepeat)
+            repeatBtn.classList.toggle('active', _this.isRepeat)
+        }
+
+        // Xử lý next song khi audio ended
+        audio.onended = () => {
+            if (_this.isRepeat) {
+                audio.play()
+            } else {
+                if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
+                    addSongs(waitingPlaylist[0])
+                    playSong(waitingPlaylist[0].id)
+                } else {
+                    nextBtn.click()
+                }
+            }
+        }
+
+
+        // Lắng nghe hành vi click vào playlist
+        playlist.onclick = (e) => {
+            const songNode = e.target.closest('.playlist__list-item');
+            if (songNode && !e.target.closest('.btn-dropdown-playlist-menu')) {
+                // Xử lý khi click vào song
+                // if (songNode) {
+                // console.log('songnode')
+                // audio.src = songNode.dataset.filename
+                const id = Number(songNode.dataset.id)
+                const currentSong = songPlaylist.find(song => song.id === id)
+                _this.currentIndex = songPlaylist.indexOf(currentSong)
+                // _this.currentIndex = Number(songNode.dataset.id)
+                _this.loadCurrentSong()
+                // }
+
 
         // Xử lý khi click play
         playBtn.onclick = () => {
@@ -1172,7 +1303,6 @@ const appPremium = {
             }
         }
 
->>>>>>> Viet_Branch
     },
     findSong: function (id) {
         return songPlaylist.find(song => song.id === id) || null
@@ -1313,8 +1443,3 @@ function playSong(songId) {
 //     })
 // }
 
-<<<<<<< HEAD
-// replaceNewPlaylist(waitingPlaylist)
-=======
-// replaceNewPlaylist(waitingPlaylist)
->>>>>>> Viet_Branch

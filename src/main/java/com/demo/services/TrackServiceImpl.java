@@ -129,7 +129,7 @@ public class TrackServiceImpl implements TrackService {
 		}
 	}
 
-	@Override
+
 	public List<Track> getTopAllWeekly(int statusId, int n) {
 		return trackRepository.getTopAllWeekly(statusId, n);
 	}
@@ -171,5 +171,9 @@ public class TrackServiceImpl implements TrackService {
 		return trackRepository.getWaitingTrackByGenres(id, genresId, pageable);
 	}
 
+	@Override
+	public Track findById(int id) {
+		return trackRepository.findById(id).get();
+	}
 
 }

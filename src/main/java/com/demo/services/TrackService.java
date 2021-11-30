@@ -12,6 +12,8 @@ import com.demo.models.TrackInfor;
 public interface TrackService {
 
 	public Track save(Track track);
+	
+	public Track findById(int id);
 
 	public List<Track> getNewRelease(int statusId, int n);
 

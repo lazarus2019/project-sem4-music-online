@@ -43,6 +43,12 @@
 	</tag>
 
 	<tag>
+		<name>baseSearch</name>
+		<tag-class>com.demo.mytags.BaseSearchTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
 		<name>timeAgo</name>
 		<tag-class>com.demo.mytags.TimeAgoTag</tag-class>
 		<body-content>empty</body-content>

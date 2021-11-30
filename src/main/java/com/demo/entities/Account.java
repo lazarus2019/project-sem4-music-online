@@ -1,6 +1,4 @@
 package com.demo.entities;
-// Generated Nov 26, 2021, 4:51:11 PM by Hibernate Tools 5.1.10.Final
-
 
 import java.util.Date;
 import java.util.HashSet;
@@ -56,6 +54,7 @@ public class Account implements java.io.Serializable {
 	private String description;
 	private boolean isActive;
 	private boolean isRequest;
+
 	@Enumerated(EnumType.STRING)
 	private AuthenticationProvider authProvider ;
 	
@@ -273,6 +272,7 @@ public class Account implements java.io.Serializable {
 	public AuthenticationProvider getAuthProvider() {
 		return authProvider;
 	}
+
 	public void setAuthProvider(AuthenticationProvider authProvider) {
 		this.authProvider = authProvider;
 	}

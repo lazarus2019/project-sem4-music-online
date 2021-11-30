@@ -6976,8 +6976,10 @@ body::-webkit-scrollbar-thumb {
 ==============================*/
 
 .select2-container {
-  width: auto !important;
-  margin-right: 30px;
+    cursor: pointer;
+    transition: box-shadow .3s ease;   
+    font-family: 'Inter', sans-serif;
+    height: auto;
 }
 
 .select2-container .select2-selection--single {
@@ -6995,6 +6997,12 @@ body::-webkit-scrollbar-thumb {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   transition: 0.5s ease;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered{
+	padding: 10px 20px !important;
+	background-color: #222227;
+	border-radius: 12px;
 }
 
 .select2-container .select2-selection--single[aria-expanded="true"] {
@@ -7072,6 +7080,49 @@ body::-webkit-scrollbar-thumb {
 .select2-container--open .select2-dropdown--above {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+}
+
+.select2-container--default .select2-selection--multiple{
+	background: transparent !important;
+	border: none !important;
+}
+.select2-search__field{
+	    color: #fff;
+    font-size: 16px;
+    padding: 0 20px;
+}
+
+
+
+
+.select2-container--default .select2-dropdown.select2-dropdown--below::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: var(--indigo);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.select2-container--default .select2-dropdown.select2-dropdown--below::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: var(--indigo);
+    cursor: pointer;
+}
+
+.select2-container--default .select2-dropdown.select2-dropdown--below::-moz-range-progress {
+    background: var(--indigo);
+    height: 3px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+	background-color: var(--indigo) !important; 
+    border: none !important;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[aria-selected]:hover{
+	background-color: var(--indigo) !important; 
 }
 
 /*==============================
@@ -7566,26 +7617,37 @@ body::-webkit-scrollbar-thumb {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .result-layout-fixed-bg.show {
 =======
 .input-search:focus ~ .result-layout-fixed-bg{
 >>>>>>> bdff0b746d5565cee4b2588a3890a29ecd444482
+=======
+.result-layout-fixed-bg.show {
+>>>>>>> nts
   opacity: 1;
   display: block;
   pointer-events: auto;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .result-layout.show {
 =======
 .input-search:focus ~ .result-layout{
 >>>>>>> bdff0b746d5565cee4b2588a3890a29ecd444482
+=======
+.result-layout.show {
+>>>>>>> nts
   opacity: 1;
   display: block;
   pointer-events: auto;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> nts
 .btn-add-new-track {
 =======
 

@@ -31,6 +31,17 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
+	public List<ArtistInfo> getPopularArtists(Pageable pageable) {
+		return accountRepository.getPopularArtists(pageable);
+	}
+
+	@Override
+	public List<ArtistInfo> getArtistWithoutId(int id) {
+		return accountRepository.getArtistsWithoutId(id);
+	}
+
+	@Override
+
 	public Iterable<Account> findAll() {
 		return accountRepository.findAll();
 	}
@@ -138,6 +149,4 @@ public class AccountServiceImpl implements AccountService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 }

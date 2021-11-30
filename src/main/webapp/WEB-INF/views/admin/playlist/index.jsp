@@ -37,7 +37,7 @@
                            						<h4 class="card-title">Playlist</h4>
                         					</div>
                         					<div class="iq-card-header-toolbar d-flex align-items-center">
-					                           <a href="${pageContext.request.contextPath }/admin/aboutus/add" class="btn btn-primary">Add New Playlist</a>
+					                           <a href="${pageContext.request.contextPath }/admin/playlist/add" class="btn btn-primary">Add New Playlist</a>
 					                        </div>
                      				 	</div>
 				                     <div class="iq-card-body">

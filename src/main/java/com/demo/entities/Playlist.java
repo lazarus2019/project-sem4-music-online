@@ -1,7 +1,9 @@
 package com.demo.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -171,6 +173,15 @@ public class Playlist implements java.io.Serializable {
 		this.accountPlaylists = accountPlaylists;
 	}
 
+	public List<Track> findTracks(){
+		List<Track> tracks = new ArrayList<Track>();
+		for(PlaylistTrack playlistTrack : this.playlistTracks) {
+			tracks.add(playlistTrack.getTrack());
+		}
+		return tracks;
+	}
+
+
 	public Set<Account> findAccountThroughAccountPlaylist() {
 		Set<Account> accounts = new HashSet<Account>(0) ; 
 		for(AccountPlaylist accountPlaylist : accountPlaylists) {
@@ -178,5 +189,4 @@ public class Playlist implements java.io.Serializable {
 		}
 		return accounts ;
 	}
-	
 }
