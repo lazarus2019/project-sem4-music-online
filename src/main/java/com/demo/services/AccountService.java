@@ -15,10 +15,9 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
 
-public interface AccountService extends UserDetailsService {
+public interface AccountService {
 	public List<Account> getAllPopularArtists();
 
-	/* extends UserDetailsService */
 	public Iterable<Account> findAll();
 
 	public Account findById(int id);

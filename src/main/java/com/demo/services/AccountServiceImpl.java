@@ -127,16 +127,10 @@ public class AccountServiceImpl implements AccountService {
 	public List<ArtistsInfor> getallArtists() {
 		return accountRepository.getallArtists();
 	}
-	
+
 	@Override
 	public List<ArtistInfo> searchByKeyword(String keyword, Pageable pageable) {
 		return accountRepository.searchByKeyword(keyword, pageable);
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
