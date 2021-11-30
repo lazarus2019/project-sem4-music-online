@@ -1,5 +1,5 @@
 package com.demo.entities;
-
+// Generated Nov 26, 2021, 4:51:11 PM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -56,8 +56,6 @@ public class Account implements java.io.Serializable {
 	private boolean isActive;
 	private boolean isRequest;
 
-	private boolean status;
-
 	@Enumerated(EnumType.STRING)
 	private AuthenticationProvider authProvider ;
 	
@@ -72,11 +70,22 @@ public class Account implements java.io.Serializable {
 	public Account() {
 	}
 
-	public Account(String username, String password, String nickname, String firstname, String lastname, String email,
-			Date birthday, String gender, String image, Date joinDate, boolean isArtist, String country, int follower,
-			String description, boolean status, Set<Comment> comments,
-			Set<PackageInfo> packageInfos, Set<Notification> notifications, Set<AccountPlaylist> accountPlaylists,
-			Set<AccountRole> accountRoles, Set<ArtistTrack> artistTracks, Set<AccountSetting> accountSettings) {
+	public Account(String email, Date joinDate, boolean isArtist, int follower, boolean isActive, boolean isRequest) {
+		this.email = email;
+		this.joinDate = joinDate;
+		this.isArtist = isArtist;
+		this.follower = follower;
+		this.isActive = isActive;
+		this.isRequest = isRequest;
+	}
+
+	public Account(Country country, String username, String password, String nickname, String firstname,
+			String lastname, String email, Date birthday, String gender, String image, Date joinDate, boolean isArtist,
+			int follower, String description, boolean isActive, boolean isRequest,
+			Set<Comment> comments, Set<PackageInfo> packageInfos, Set<Notification> notifications,
+			Set<AccountPlaylist> accountPlaylists, Set<Role> roles, Set<ArtistTrack> artistTracks,
+			Set<AccountSetting> accountSettings) {
+		this.country = country;
 		this.username = username;
 		this.password = password;
 		this.nickname = nickname;
@@ -92,7 +101,6 @@ public class Account implements java.io.Serializable {
 		this.description = description;
 		this.isActive = isActive;
 		this.isRequest = isRequest;
-		this.status = status;
 		this.comments = comments;
 		this.packageInfos = packageInfos;
 		this.notifications = notifications;
@@ -216,7 +224,7 @@ public class Account implements java.io.Serializable {
 		this.joinDate = joinDate;
 	}
 
-	@Column(name = "isArtist", nullable = false)
+	@Column(name = "is_artist", nullable = false)
 	public boolean isIsArtist() {
 		return this.isArtist;
 	}
@@ -259,6 +267,11 @@ public class Account implements java.io.Serializable {
 
 	public void setIsRequest(boolean isRequest) {
 		this.isRequest = isRequest;
+	}
+
+	@Column(name = "auth_provider" , nullable = false, length = 25)
+	public AuthenticationProvider getAuthProvider() {
+		return authProvider;
 	}
 
 	public void setAuthProvider(AuthenticationProvider authProvider) {

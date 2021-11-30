@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/slider-radio.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/plyr.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Favicons -->
@@ -242,19 +243,11 @@
 								<c:if test="${msg != null }"><span class="sign__text"> ${msg } </span></c:if>
 								
                                 <div class="sign__group">
-<<<<<<< HEAD
                                     <input type="text" class="sign__input form-control" name="email" placeholder="Email">
                                 </div>
 
                                 <div class="sign__group">
                                     <input type="password" class="sign__input form-control" name="password" placeholder="Password">
-=======
-                                    <input type="text" class="sign__input" name="email" placeholder="Email">
-                                </div>
-
-                                <div class="sign__group">
-                                    <input type="password" class="sign__input" name="password" placeholder="Password">
->>>>>>> bdff0b746d5565cee4b2588a3890a29ecd444482
                                 </div>
 
                                 <div class="sign__group sign__group--checkbox">
@@ -455,11 +448,8 @@
 
     <!-- JS -->
     <script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
-<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-=======
->>>>>>> bdff0b746d5565cee4b2588a3890a29ecd444482
     <script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/user/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/user/js/jquery.magnific-popup.min.js"></script>
