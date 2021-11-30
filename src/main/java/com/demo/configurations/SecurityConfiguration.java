@@ -14,11 +14,6 @@ import com.demo.security.database.DatabaseLoginSuccessHandler;
 import com.demo.security.oauth2.CustomOAuth2UserService;
 import com.demo.security.oauth2.OAuth2LoginSuccessHandler;
 import com.demo.services.AccountService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.demo.security.oauth2.CustomOAuth2UserService;
-import com.demo.security.oauth2.OAuth2LoginSuccessHandler;
-import com.demo.services.AccountService;
 
 @EnableWebSecurity
 @Configuration
@@ -26,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private AccountService accountService;
-
+	
 	@Autowired
 	private UserDetailsService userDetailsService ; 
 
@@ -36,7 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable() ; 
 		
 		http.authorizeRequests()
-			.antMatchers("/user/**").permitAll() 
 			.antMatchers("/oauth2/**").permitAll() 
 			
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
@@ -75,7 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
 	@Autowired
 	private CustomOAuth2UserService oauth2UserService ;
 	
@@ -84,5 +78,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private DatabaseLoginSuccessHandler databaseLoginSuccessHandler ; 
-
 }

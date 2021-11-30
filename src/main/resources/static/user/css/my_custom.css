@@ -1,4 +1,3 @@
-
 :root { 
 	--indigo: #753fdc;
 }
@@ -352,31 +351,30 @@ audio {
 	position: relative;
 }
 
-
-.dropdown-song-menu , .song__menu-list, .dropdown-track-menu-artist{
-    position: absolute;
-    right: 40px;
-    min-width: 180px;
-    border-radius: 15px;
-    list-style-type: none;
-    background-color: #fff;
-    box-shadow: 0 2px 6px 2px rgb(34 38 41 / 15%);
-    padding: 0;
-    overflow: hidden;
-    transform: translateY(10%);
-    opacity: 0;
-    transition: all .3s ease;
-    visibility: hidden;
-    z-index: 104;
+.dropdown-song-menu, .song__menu-list, .dropdown-track-menu-artist {
+	position: absolute;
+	right: 40px;
+	min-width: 180px;
+	border-radius: 15px;
+	list-style-type: none;
+	background-color: #fff;
+	box-shadow: 0 2px 6px 2px rgb(34 38 41/ 15%);
+	padding: 0;
+	overflow: hidden;
+	transform: translateY(10%);
+	opacity: 0;
+	transition: all .3s ease;
+	visibility: hidden;
+	z-index: 104;
 }
 
-.dropdown-song-menu{
-    bottom: 0;
+.dropdown-song-menu {
+	bottom: 0;
 }
 
-.song__menu-list, .dropdown-track-menu-artist{
-    top: 0;
-    display: none;
+.song__menu-list, .dropdown-track-menu-artist {
+	top: 0;
+	display: none;
 }
 
 .dropdown-song-menu.show, .song__menu-list.show,
@@ -408,7 +406,6 @@ audio {
 	cursor: pointer;
 	color: var(--dark);
 	text-decoration: none;
-
 }
 
 .dropdown-song-menu a:hover, .song__menu-list a:hover,
@@ -462,12 +459,6 @@ audio {
 
 .show-timer-btn i, .show-timer-btn:hover i {
 	color: var(--white);
-    border-top-left-radius: 1rem;
-    padding: 1rem 1.5rem;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--white);
-    background-color: var(--indigo);
 }
 
 .playlist__list {
@@ -511,15 +502,17 @@ audio {
 .playlist__list-item.active {
 	background-color: rgb(248, 248, 248);
 }
+
 .playlist__item-desc {
 	display: flex;
 }
 
 .playlist__list-item-image {
-    width: 60px;
-    height: 60px;
-    padding: 5px;
-    margin-right: 10px;
+	min-width: 60px;
+	width: 60px;
+	height: 60px;
+	padding: 5px;
+	margin-right: 10px;
 }
 
 .playlist__list-item-image img {
@@ -549,7 +542,6 @@ audio {
 	white-space: nowrap;
 	width: 200px;
 	overflow: hidden;
-
 }
 
 .btn-dropdown-playlist-menu {
@@ -563,44 +555,6 @@ audio {
 
 .btn-dropdown__playlist-menu-child {
 	position: relative;
-}
-
-.dropdown__playlist-item-menu, .dropdown__playlist-menu-child {
-	position: absolute;
-	top: 0;
-	right: 40px;
-	min-width: 180px;
-	border-radius: 15px;
-	background-color: #fff;
-	box-shadow: 0 2px 6px 2px rgb(34 38 41/ 15%);
-	padding: 0;
-	overflow: hidden;
-	opacity: 0;
-	transition: all .3s ease;
-	z-index: 103;
-	display: none;
-}
-
-.btn-dropdown-playlist-menu:focus>.dropdown__playlist-item-menu,
-	.btn-dropdown__playlist-menu-child:focus>.dropdown__playlist-menu-child
-	{
-	transform: translateY(0);
-	opacity: 1;
-	display: block;
-}
-
-.btn-song-menu:focus>.song__menu-list {
-	transform: translateY(0);
-	opacity: 1;
-	visibility: visible;
-	display: block;
-}
-
-.btn-dropdown-track-menu-artist:focus>.dropdown-track-menu-artist {
-	transform: translateY(0);
-	opacity: 1;
-	visibility: visible;
-	display: block;
 }
 
 .dropdown__playlist-item-menu, .dropdown__playlist-menu-child {
@@ -695,10 +649,6 @@ audio {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-}
-.circle-icon-lg i{
-    color: var(--white);
-    font-size: 25px;
 }
 
 .circle-icon-lg i {
@@ -844,10 +794,12 @@ audio {
     color: var(--white);
     font-size: 15px;
 }
+
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
 }
+
 .clr-dark {
 	color: var(--dark) !important;
 }
@@ -1026,8 +978,4 @@ a.form-btn:hover {
 /* Layout */
 .tabs-2{
     width: 50% !important;
-
     margin: 0 30px !important;
-
-}
-

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
 
-
 public interface AccountService{
 
 	public List<Account> getAllPopularArtists();

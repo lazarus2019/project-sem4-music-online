@@ -223,7 +223,7 @@ public class Account implements java.io.Serializable {
 		this.joinDate = joinDate;
 	}
 
-	@Column(name = "isArtist", nullable = false)
+	@Column(name = "is_artist", nullable = false)
 	public boolean isIsArtist() {
 		return this.isArtist;
 	}

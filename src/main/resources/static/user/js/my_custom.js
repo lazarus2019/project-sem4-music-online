@@ -1,7 +1,3 @@
-function togglePlayer() {
-    document.querySelector('#audioPlayer').classList.toggle('show');
-    document.querySelector('.dropdown-song-menu').classList.remove('show');
-    document.querySelector('.dropdown-volume-range').classList.remove('show');
 function showResultContainer() {
 	document.querySelector('.result-layout-fixed-bg').classList.add("show")
 	document.querySelector('.result-layout').classList.add("show")
@@ -357,6 +353,7 @@ const dateInputs = document.querySelectorAll('input[type="date"]')
 if (dateInputs) {
 	setMinForAllDateInput(dateInputs)
 }
+
 
 function createSearchFunc(e, parentName, childName, tagName) {
 	const keyword = e.value.trim().toLowerCase()

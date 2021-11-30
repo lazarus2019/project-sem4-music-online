@@ -30,15 +30,10 @@ import com.demo.security.oauth2.CustomOAuth2User;
 import com.demo.services.AccountPlaylistService;
 import com.demo.services.AccountService;
 import com.demo.services.AlbumService;
-<<<<<<< HEAD
-import com.demo.services.CookieService;
-import com.demo.services.NotificationService;
-=======
 import com.demo.services.ArtistTrackService;
 import com.demo.services.CookieService;
 import com.demo.services.NotificationService;
 import com.demo.services.PlaylistService;
->>>>>>> nts
 import com.demo.services.SessionService;
 import com.demo.services.TrackService;
 

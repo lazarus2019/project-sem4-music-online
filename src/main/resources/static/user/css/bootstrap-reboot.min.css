@@ -34,10 +34,6 @@ body {
 	background-color: #fff
 }
 
-.text-white {
-	color: #2893ff !important; 
-}
-
 [tabindex="-1"]:focus:not(:focus-visible) {
 	outline: 0 !important
 }
@@ -303,17 +299,8 @@ template {
 [hidden] {
 	display: none !important
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> nts
 
 .text-white {
 	color: #2893ff !important; 
 }
-<<<<<<< HEAD
-=======
->>>>>>> bdff0b746d5565cee4b2588a3890a29ecd444482
-=======
->>>>>>> nts
 /*# sourceMappingURL=bootstrap-reboot.min.css.map */
