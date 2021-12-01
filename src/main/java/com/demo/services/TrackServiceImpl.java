@@ -174,4 +174,14 @@ public class TrackServiceImpl implements TrackService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void delete(int id) {
+		try {
+			Track track = findById(id);
+			trackRepository.delete(track);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

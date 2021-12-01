@@ -38,4 +38,6 @@ public interface TrackService {
 	public TrackInfo findByTrackId(int trackId);
 
 	public List<TrackInfo> getWaitingTrackByGenres(int id, int genresId, Pageable pageable);
+	
+	public void delete(int id);
 }

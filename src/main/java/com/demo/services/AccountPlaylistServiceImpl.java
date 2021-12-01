@@ -41,6 +41,7 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService{
 		if(accountPlaylists != null) {
 			for(AccountPlaylist accountPlaylist : accountPlaylists) {
 				AlbumInfo albumInfo = new AlbumInfo();
+				albumInfo.setId(accountPlaylist.getPlaylist().getId());
 				albumInfo.setTitle(accountPlaylist.getPlaylist().getTitle());
 				albumInfo.setStatusId(accountPlaylist.getPlaylist().getStatus().getId());
 				// Check track is on this album or not
