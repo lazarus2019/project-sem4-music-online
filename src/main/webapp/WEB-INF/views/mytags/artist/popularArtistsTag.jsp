@@ -23,8 +23,12 @@
 							<c:forEach var="popularArtist" items="${popularArtists }">
 								<a href="artist.html" class="artist">
 									<div class="artist__cover">
+<<<<<<< HEAD
 										<img src="${pageContext.request.contextPath }/uploads/images/artist/${popularArtist.image }" alt="">
 
+=======
+										<img src="${pageContext.request.contextPath }/uploads/images/artists/${popularArtist.image }" alt="">
+>>>>>>> origin/NTanh_Branch
 									</div>
 									<h3 class="artist__title">${popularArtist.nickname }</h3>	
 								</a> 

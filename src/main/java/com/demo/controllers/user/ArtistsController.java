@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ import com.demo.services.AccountService;
 import com.demo.services.CookieService;
 
 
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 @Controller
 @RequestMapping(value = { "artist" })
 public class ArtistsController {
@@ -34,7 +38,6 @@ public class ArtistsController {
 
 	@Autowired
 	CookieService cookieService ;
-	
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
@@ -117,5 +120,20 @@ public class ArtistsController {
 		return "artist/youralbum" ; 
 	}
 
+
+	
+	//New
+	
+	@RequestMapping( value = {"search" } , method = RequestMethod.GET )
+	public String search(@RequestParam("keyword") String keyword ,ModelMap modelMap) {
+		try {
+			List<ArtistsInfor> searchArtis = accountService.getSearchArtis(keyword);
+			modelMap.put("arti", searchArtis );
+		} catch (Exception e) {
+			modelMap.put("erro", e.getMessage());
+		}
+		
+		return "artist/index";
+	}
 
 }

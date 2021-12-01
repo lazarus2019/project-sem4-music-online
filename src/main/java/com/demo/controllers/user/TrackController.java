@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import com.demo.entities.Track;
 import com.demo.models.TrackInfo;
 import com.demo.models.TrackInfor;
@@ -36,8 +37,10 @@ public class TrackController {
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
 	
-	@RequestMapping( value = {"index/{id}" } , method = RequestMethod.GET )
+	@RequestMapping( value = {"id/{id}" } , method = RequestMethod.GET )
 	public String index( @PathVariable("id") int id , ModelMap modelMap) {
+		
+		modelMap.put("na", genresService.getNameById(id));
 		modelMap.put("listtrack", trackService.findTrackByGenresId(id));
 		return "track/index" ; 
 	}
@@ -55,6 +58,7 @@ public class TrackController {
 	
 	@RequestMapping( value = { "add" })
 	public String add(ModelMap modelMap) {
+
 		modelMap.addAttribute("artists", accountService.getArtistWithoutId(1));
 		modelMap.addAttribute("genres", genresService.findAll());
 		modelMap.addAttribute("albums", accountPlaylistService.getAlbumsByArtistId(5));
@@ -73,7 +77,7 @@ public class TrackController {
 		
 		return "redirect:track/index" ; 
 	}
-	
+
 	@RequestMapping( value = { "manage" })
 	public String manage() {
 		return "track/manage" ; 

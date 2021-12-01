@@ -39,4 +39,6 @@ public interface AccountService{
 	
 	public List<ArtistInfo> getArtistWithoutId(int id);
 
+	public List<ArtistsInfor> getSearchArtis(String keyword);
+	
 }

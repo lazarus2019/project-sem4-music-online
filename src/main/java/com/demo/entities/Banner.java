@@ -62,4 +62,3 @@ public class Banner implements java.io.Serializable {
 
 }
 
-

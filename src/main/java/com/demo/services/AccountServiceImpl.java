@@ -144,5 +144,9 @@ public class AccountServiceImpl implements AccountService {
 	public List<ArtistInfo> searchByKeyword(String keyword, Pageable pageable) {
 		return accountRepository.searchByKeyword(keyword, pageable);
 	}
-
+	
+	@Override
+	public List<ArtistsInfor> getSearchArtis(String keyword) {
+		return accountRepository.getSearchArtis(keyword);
+	}
 }

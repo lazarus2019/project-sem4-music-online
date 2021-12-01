@@ -791,6 +791,7 @@ audio {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .circle-icon-sm i{
     color: var(--white);
     font-size: 15px;
@@ -798,6 +799,8 @@ audio {
 
 =======
 >>>>>>> origin/Thu_Branch3
+=======
+>>>>>>> origin/NTanh_Branch
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
@@ -946,6 +949,7 @@ a.form-btn:hover {
 .item {
 	padding: 6px 20px !important;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 /* hidden */
@@ -991,3 +995,11 @@ a.form-btn:hover {
 	display: none
 }
 >>>>>>> origin/Thu_Branch3
+=======
+}
+
+/* hidden */
+.hide{
+	display: none
+}
+>>>>>>> origin/NTanh_Branch

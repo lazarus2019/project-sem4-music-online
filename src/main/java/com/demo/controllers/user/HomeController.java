@@ -42,7 +42,6 @@ import com.demo.services.TrackService;
 @Controller
 
 @RequestMapping(value = { "", "home" })
-
 public class HomeController {
 
 	@Autowired
@@ -65,7 +64,6 @@ public class HomeController {
 	
 	@Autowired
 	private ArtistTrackService artistTrackService;
-
 
 	/*
 	 * @RequestMapping(value = { "", "index" }, method = RequestMethod.GET) public
@@ -150,7 +148,6 @@ public class HomeController {
 		}
 	}
 	
-
 	// Get album contains tracks by id
 	@RequestMapping(value = { "getAlbumWithTracksById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AlbumInfo> getAlbumWithTracksById(@RequestParam("albumId") int albumId, ModelMap modelMap) {

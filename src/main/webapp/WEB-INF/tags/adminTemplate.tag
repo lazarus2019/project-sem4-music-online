@@ -26,8 +26,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
     
+<<<<<<< HEAD
    	<!-- jQuery -->
    	<script src="${pageContext.request.contextPath }/resources/admin/js/jquery.min.js"></script>
+=======
+>>>>>>> origin/NTanh_Branch
 </head>
 
 <body>

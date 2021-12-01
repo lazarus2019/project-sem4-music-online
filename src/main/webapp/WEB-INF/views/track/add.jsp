@@ -3,7 +3,10 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/NTanh_Branch
 <link
 	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
 	rel="stylesheet" />
@@ -14,8 +17,12 @@
 	<jsp:attribute name="content">
 	
 	<!-- FORM -->
+<<<<<<< HEAD
             <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
 
+=======
+            <form action="">
+>>>>>>> origin/NTanh_Branch
                 <div class="row row--grid">
                     <div class="col-6">
                         <div class="step non-hidden">
@@ -50,16 +57,26 @@
                                 <div
 								class="flex-box justify-content-between align-items-center mb-2">
                                     <div class="form-heading clr-white">Lyrics (separate line with /n)</div>
+<<<<<<< HEAD
                                     <input type="file" name="lyricsTrack"
 									id="lyricsTrack" style="display: none;" accept="text/plain" onchange="callFile(this)">
                                     <label for="lyricsTrack"
 
+=======
+                                    <input type="file" name="lyricTrack"
+									id="lyricTrack" style="display: none;" accept="text/plain">
+                                    <label for="lyricTrack"
+>>>>>>> origin/NTanh_Branch
 									class="form-btn">Import Lyrics</label>
                                 </div>
                                 <div class="sign__group">
                                     <textarea type="text"
+<<<<<<< HEAD
 									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics"></textarea>
 
+=======
+									class="form__textarea" placeholder="Track Lyrics" name="artist"></textarea>
+>>>>>>> origin/NTanh_Branch
                                 </div>
                                 
 
@@ -83,7 +100,10 @@
 											accept=".mp3,audio/*" onchange="uploadTrack(this)">
                                             <label for="audioTrack"
 											class="form-btn">Upload Audio</label>
+<<<<<<< HEAD
 											<input type="hidden" name="duration" id="duration">
+=======
+>>>>>>> origin/NTanh_Branch
                                         </div>
                                         <div
 										class="audio-upload-progress">
@@ -145,9 +165,19 @@
 										class="sign__group sign__group--checkbox mb-0">
                                             <input id="isPremium"
 											name="isPremium" type="checkbox" checked="checked">
+<<<<<<< HEAD
                                             <label for="isPremium">Is Premium <i class="las la-crown yellow__icon"></i></label>
                                         </div>
 
+=======
+                                            <label for="isPremium">Is Premium</label>
+                                        </div>
+                                        <div class="public-date-box">
+                                            <input type="date"
+											class="sign__input" placeholder="Password" name="publishDate"
+											value="">
+                                        </div>
+>>>>>>> origin/NTanh_Branch
                                         <div
 										class="sign__group sign__group--checkbox mb-0">
                                             <input id="isHidden"
@@ -158,6 +188,7 @@
                                     <div class="form-heading clr-white">Add to Albums:</div>
                                     <div
 									class="flex-box align-items-start flex-wrap flex-4">
+<<<<<<< HEAD
 									<c:forEach items="${albums }" var="album">
 									    <div class="sign__group sign__group--checkbox mb-1">
                                             <input id="album-artist-${album.id }"
@@ -166,6 +197,32 @@
                                         </div>
 									</c:forEach>                                  
 
+=======
+                                        <div
+										class="sign__group sign__group--checkbox mb-1">
+                                            <input id="isPremium"
+											name="isPremium" type="checkbox" checked="checked">
+                                            <label for="isPremium">Goodbye & Good Riddance</label>
+                                        </div>
+                                        <div
+										class="sign__group sign__group--checkbox mb-1">
+                                            <input id="isPremium"
+											name="isPremium" type="checkbox" checked="checked">
+                                            <label for="isPremium">Death Race for Love</label>
+                                        </div>
+                                        <div
+										class="sign__group sign__group--checkbox mb-1">
+                                            <input id="isPremium"
+											name="isPremium" type="checkbox" checked="checked">
+                                            <label for="isPremium">Legends Never Die</label>
+                                        </div>
+                                        <div
+										class="sign__group sign__group--checkbox mb-1">
+                                            <input id="isPremium"
+											name="isPremium" type="checkbox" checked="checked">
+                                            <label for="isPremium">Fighting Demons</label>
+                                        </div>                                        
+>>>>>>> origin/NTanh_Branch
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +234,10 @@
 	</jsp:attribute>
 
 </mt:userTemplate>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/NTanh_Branch
 <script>
 	$(document).ready(function() {
 		$('.js-example-basic-multiple').select2();

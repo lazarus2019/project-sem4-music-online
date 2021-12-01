@@ -241,6 +241,7 @@ public class Track implements java.io.Serializable {
 	public void setArtistTracks(Set<ArtistTrack> artistTracks) {
 		this.artistTracks = artistTracks;
 	}
+
 	public Set<Account> findAccountThroughAtristTrack() {
 		Set<Account> accounts = new HashSet<Account>(0) ; 
 		for(ArtistTrack artistTrack: artistTracks) {
@@ -248,4 +249,5 @@ public class Track implements java.io.Serializable {
 		}
 		return accounts ;
 	}
+
 }
