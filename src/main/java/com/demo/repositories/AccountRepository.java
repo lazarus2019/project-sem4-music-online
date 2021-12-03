@@ -41,6 +41,7 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id = :id")
 	public ArtistInfo getArtistById(@Param("id")int id);
 
+
 	@Query("select new com.demo.models.ArtistsInfor(id, nickname, image, follower) from Account where nickname like %:keyword% and isArtist = true ")
 	public List<ArtistsInfor> getSearchArtis(@Param("keyword") String keyword);
 	

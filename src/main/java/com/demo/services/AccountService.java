@@ -40,5 +40,13 @@ public interface AccountService{
 	public List<ArtistInfo> getArtistWithoutId(int id);
 
 	public List<ArtistsInfor> getSearchArtis(String keyword);
+
+	public boolean sendRequestArtist(Account account) ; 
 	
+	public boolean updateImageAccount(Account account) ; 
+	
+	public boolean acceptOrRejectArtist(Account account) ; 
+	
+	public void forgotPassword(Account account); 
+
 }

@@ -142,15 +142,19 @@
                                     <img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
                                 </a>
                                 
-                                <h3 class="mb-4 text-white" >Sign In</h3>
-								<c:if test="${msg != null }"><span class="sign__text"> ${msg } </span></c:if>
+                                <h3 class="mb-4 text-blue" >Sign In</h3>
+								<c:if test="${msg != null }">
+								<div class="sign__group">
+                                    <span class="sign__text"> ${msg }</span>
+                                </div>
+								 </c:if>
 								
                                 <div class="sign__group">
-                                    <input type="text" class="sign__input form-control" name="email" placeholder="Email">
+                                    <input type="email" class="sign__input form-control" value="${email}" required="required" name="email" placeholder="Email">
                                 </div>
 
                                 <div class="sign__group">
-                                    <input type="password" class="sign__input form-control" name="password" placeholder="Password">
+                                    <input type="password" class="sign__input form-control" name="password" required="required" placeholder="Password">
                                 </div>
 
                                 <div class="sign__group sign__group--checkbox">
@@ -170,7 +174,7 @@
 
                                 <span class="sign__text">Don't have an account? <a href="${pageContext.request.contextPath }/user/login/signup">Sign up!</a></span>
 
-                                <span class="sign__text"><a href="forgot.html">Forgot password?</a></span>
+                                <span class="sign__text"><a href="${pageContext.request.contextPath }/login/forgotPw">Forgot password?</a></span>
                             </form>
                             <!-- end authorization form -->
                         </div>

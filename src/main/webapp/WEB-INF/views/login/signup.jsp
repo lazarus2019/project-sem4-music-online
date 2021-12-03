@@ -124,7 +124,7 @@
                 <div class="col-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb__item"><a href="/">Home</a></li>
-                        <li class="breadcrumb__item breadcrumb__item--active">Sign in</li>
+                        <li class="breadcrumb__item breadcrumb__item--active">Sign up</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -140,20 +140,20 @@
                                 <a href="index.html" class="sign__logo">
                                     <img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
                                 </a>
-                                <h3 class="mb-4 text-white" >Sign Up</h3>
+                                <h3 class="mb-4 text-blue" >Sign Up</h3>
 								<c:if test="${msg != null }"><span class="sign__text"> ${msg } </span></c:if>
 								
                                 <div class="sign__group">
-                                    <s:input class="sign__input" path="nickname" placeholder="Name"/>
+                                    <s:input class="sign__input" path="nickname" placeholder="Name" required="required"/>
                                 </div>
                                 <div class="sign__group">
-                                    <s:input class="sign__input" path="email" placeholder="Email"/>
+                                    <s:input class="sign__input" path="email" type="email" placeholder="Email" required="required"/>
                                 </div>
 
                                 <div class="sign__group">
-                                    <s:password class="sign__input" path="password" placeholder="Password"/>
+                                    <s:password class="sign__input" path="password" placeholder="Password" required="required"/>
                                 </div>
-
+								
 
                                 <input class="sign__btn" type="submit" value="Sign Up"></input>
 

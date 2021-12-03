@@ -26,7 +26,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/adminlte.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/icheck-bootstrap.min.css">
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
+	
+	    <!-- Remix Icon -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/remixicon.css">
 
 	<!-- CSS Listen -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/1.3.0/css/line-awesome.min.css">
@@ -100,52 +104,8 @@
             <!-- notification button -->
             <t:notification />
             <!-- end notification button -->
-    
-            <div class="header__action header__action--signin">
-                <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <a class="header__action-btn" href="${pageContext.request.contextPath }/user/login/login">
-                        <span>Sign in</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
-                        </svg>
-                    </a>
-                </c:if>
-                <div class="header__action-btn">
-                    <c:if test="${pageContext.request.userPrincipal.name  != null }">
-                        <span>${ accountSignined.nickname }</span>
-    
-                        <div class="user__box">
-                            <i class="las la-crown"></i>
-                            <img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-                                alt="" class="user__avatar">
-                            <div class="dropdown__user-menu">
-                                <a href="${pageContext.request.contextPath }/user/profile/index">
-                                    <i class="lar la-user-circle"></i> Profile
-                                </a>
-                                <a href="${pageContext.request.contextPath }/artist/yourtrack">
-                                    <i class="las la-music"></i> Your Tracks
-                                </a>
-                                <a href="${pageContext.request.contextPath }/artist/youralbum">
-                                    <i class="las la-record-vinyl"></i> Your Albums
-                                </a>
-                                <a href="#">
-                                    <i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
-                                        class="las la-crown yellow__icon"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="las la-user-cog"></i> Settings
-                                </a>
-                                <a href="${pageContext.request.contextPath }/user/login/logout">
-                                    <i class="las la-sign-out-alt"></i> Log out
-                                </a>
-                            </div>
-                        </div>
-                    </c:if>
-                </div>
-            
-            
-            </div>
+
+    		<t:nickname/> 
         </div>
     
         <button class="header__btn" type="button">
@@ -590,6 +550,8 @@
 
 	<!-- JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.magnific-popup.min.js"></script>

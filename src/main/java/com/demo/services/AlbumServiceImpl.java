@@ -24,5 +24,4 @@ public class AlbumServiceImpl implements AlbumService{
 	public AlbumInfo findAlbumById(int id) {
 		return albumRepository.findAlbumById(id);
 	}
-
 }

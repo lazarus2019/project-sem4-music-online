@@ -58,5 +58,4 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 	public AccountPlaylist getOwnerPlaylist(int playlistId) {
 		return accountPlaylistRepository.checkAlbum(playlistId);
 	}
-
 }

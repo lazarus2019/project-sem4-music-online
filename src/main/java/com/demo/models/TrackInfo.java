@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-
 import java.util.Set;
 
 import com.demo.entities.Account;
@@ -31,7 +30,6 @@ public class TrackInfo {
 	private Date publishDate;
 	private List<Account> account = new ArrayList<Account>();
 	private List<ArtistInfo> artists = new ArrayList<ArtistInfo>();
-
 
 	public TrackInfo(Integer id, int genresId, String title, String thumbnail) {
 		super();
@@ -152,6 +150,9 @@ public class TrackInfo {
 	}
 	public void setArtists(List<ArtistInfo> artists) {
 		this.artists = artists;
+
 	}
+
+
 
 }

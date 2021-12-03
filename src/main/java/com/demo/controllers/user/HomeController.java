@@ -42,6 +42,7 @@ import com.demo.services.TrackService;
 @Controller
 
 @RequestMapping(value = { "", "home" })
+
 public class HomeController {
 
 	@Autowired
@@ -65,17 +66,6 @@ public class HomeController {
 	@Autowired
 	private ArtistTrackService artistTrackService;
 
-	/*
-	 * @RequestMapping(value = { "", "index" }, method = RequestMethod.GET) public
-	 * String index() {
-	 * 
-	 * Calendar c = Calendar.getInstance(); c.set(Calendar.DAY_OF_WEEK,
-	 * Calendar.MONDAY); System.out.println("today: " + new Date());
-	 * System.out.println("Date " + c.getTime());
-	 * 
-	 * 
-	 * return "home/index"; }
-	 */
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap, @RequestParam(value = "local", required = false) String local,
@@ -84,7 +74,7 @@ public class HomeController {
 		// Authentication authentication =
 		// SecurityContextHolder.getContext().getAuthentication() ;
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-
+			
 		} else {
 			String loginType = cookieService.getValue("login_type", "");
 
@@ -104,6 +94,8 @@ public class HomeController {
 
 				modelMap.put("accountSignined", account);
 				cookieService.add("acc_id", String.valueOf(account.getId()), 5);
+				//cookieService.add("acc_nickname", account.getNickname(), 5 ) ; 
+				
 			}
 		}
 
@@ -148,6 +140,7 @@ public class HomeController {
 		}
 	}
 	
+
 	// Get album contains tracks by id
 	@RequestMapping(value = { "getAlbumWithTracksById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AlbumInfo> getAlbumWithTracksById(@RequestParam("albumId") int albumId, ModelMap modelMap) {

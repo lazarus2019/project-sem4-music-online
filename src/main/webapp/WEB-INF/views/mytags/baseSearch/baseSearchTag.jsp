@@ -83,7 +83,7 @@
                             <c:if test="${i.index < 6 }">
                                 <div class="album-box" data-id="${ album.id}" onclick="getListTrackByAlbumId(this)">
                                     <div class="album-box-image">
-                                        <img src="${pageContext.request.contextPath}/playlist/${album.thumbnail}"
+                                        <img src="${pageContext.request.contextPath}/uploads/images/playlist/${album.thumbnail}"
                                             alt="">
                                     </div>
                                     <div class="album-box-content">

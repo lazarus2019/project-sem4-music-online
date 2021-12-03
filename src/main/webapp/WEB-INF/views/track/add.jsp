@@ -3,10 +3,6 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/NTanh_Branch
 <link
 	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
 	rel="stylesheet" />
@@ -18,11 +14,16 @@
 	
 	<!-- FORM -->
 <<<<<<< HEAD
+<<<<<<< HEAD
             <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
 
 =======
             <form action="">
 >>>>>>> origin/NTanh_Branch
+=======
+            <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
+
+>>>>>>> origin/Thu_Branch3
                 <div class="row row--grid">
                     <div class="col-6">
                         <div class="step non-hidden">
@@ -58,25 +59,36 @@
 								class="flex-box justify-content-between align-items-center mb-2">
                                     <div class="form-heading clr-white">Lyrics (separate line with /n)</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Thu_Branch3
                                     <input type="file" name="lyricsTrack"
 									id="lyricsTrack" style="display: none;" accept="text/plain" onchange="callFile(this)">
                                     <label for="lyricsTrack"
 
+<<<<<<< HEAD
 =======
                                     <input type="file" name="lyricTrack"
 									id="lyricTrack" style="display: none;" accept="text/plain">
                                     <label for="lyricTrack"
 >>>>>>> origin/NTanh_Branch
+=======
+>>>>>>> origin/Thu_Branch3
 									class="form-btn">Import Lyrics</label>
                                 </div>
                                 <div class="sign__group">
                                     <textarea type="text"
+<<<<<<< HEAD
 <<<<<<< HEAD
 									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics"></textarea>
 
 =======
 									class="form__textarea" placeholder="Track Lyrics" name="artist"></textarea>
 >>>>>>> origin/NTanh_Branch
+=======
+									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics"></textarea>
+
+>>>>>>> origin/Thu_Branch3
                                 </div>
                                 
 
@@ -101,9 +113,13 @@
                                             <label for="audioTrack"
 											class="form-btn">Upload Audio</label>
 <<<<<<< HEAD
+<<<<<<< HEAD
 											<input type="hidden" name="duration" id="duration">
 =======
 >>>>>>> origin/NTanh_Branch
+=======
+											<input type="hidden" name="duration" id="duration">
+>>>>>>> origin/Thu_Branch3
                                         </div>
                                         <div
 										class="audio-upload-progress">
@@ -166,6 +182,7 @@
                                             <input id="isPremium"
 											name="isPremium" type="checkbox" checked="checked">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             <label for="isPremium">Is Premium <i class="las la-crown yellow__icon"></i></label>
                                         </div>
 
@@ -178,6 +195,11 @@
 											value="">
                                         </div>
 >>>>>>> origin/NTanh_Branch
+=======
+                                            <label for="isPremium">Is Premium <i class="las la-crown yellow__icon"></i></label>
+                                        </div>
+
+>>>>>>> origin/Thu_Branch3
                                         <div
 										class="sign__group sign__group--checkbox mb-0">
                                             <input id="isHidden"
@@ -189,11 +211,15 @@
                                     <div
 									class="flex-box align-items-start flex-wrap flex-4">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Thu_Branch3
 									<c:forEach items="${albums }" var="album">
 									    <div class="sign__group sign__group--checkbox mb-1">
                                             <input id="album-artist-${album.id }"
 											name="albums" type="checkbox">
                                             <label for="album-artist-${album.id }">${album.title }</label>
+<<<<<<< HEAD
                                         </div>
 									</c:forEach>                                  
 
@@ -223,6 +249,11 @@
                                             <label for="isPremium">Fighting Demons</label>
                                         </div>                                        
 >>>>>>> origin/NTanh_Branch
+=======
+                                        </div>
+									</c:forEach>                                  
+
+>>>>>>> origin/Thu_Branch3
                                     </div>
                                 </div>
                             </div>
@@ -235,9 +266,13 @@
 
 </mt:userTemplate>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> origin/NTanh_Branch
+=======
+
+>>>>>>> origin/Thu_Branch3
 <script>
 	$(document).ready(function() {
 		$('.js-example-basic-multiple').select2();

@@ -2,10 +2,13 @@ package com.demo.services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -16,6 +19,7 @@ import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
 import com.demo.entities.Role;
 import com.demo.entities.ServicePackage;
+import com.demo.helpers.SendMailHelper;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 import com.demo.repositories.AccountRepository;
@@ -26,6 +30,10 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
+
+	
+	@Autowired
+    public JavaMailSender emailSender;
 
 	@Override
 	public List<Account> getAllPopularArtists() {
@@ -122,9 +130,25 @@ public class AccountServiceImpl implements AccountService {
 		Role role = new Role();
 		role.setId(1);
 		account.getRoles().add(role);
-
+		int i = ThreadLocalRandom.current().nextInt(100000, 1000000) ; 
+		System.out.println(i);
+		account.setEmailCode(String.valueOf(i));
 		account.setFollower(0);
+		account.setIsActive(false);
+		
 		account.setAuthProvider(authProvider);
+		SendMailHelper mailHelper = new SendMailHelper() ;
+		String emailContent = "<h3>Confirm your email address</h3> <br> Dear "  ;
+		emailContent += "To finish signing up for your Muzik account, we are send you a code to confirm your email address. </br>";
+		emailContent += "Your code here : <b><i>" + account.getEmailCode() + "</b></i>"; 
+		
+		String subject = " Activate your Muzik account" ; 
+		
+		try {
+			mailHelper.sendSimpleEmail(account.getEmail(), subject, emailContent , emailSender);
+		} catch (MessagingException e) {
+			System.err.println(e.getMessage());
+		}
 		accountRepository.save(account);
 
 	}
@@ -144,9 +168,52 @@ public class AccountServiceImpl implements AccountService {
 	public List<ArtistInfo> searchByKeyword(String keyword, Pageable pageable) {
 		return accountRepository.searchByKeyword(keyword, pageable);
 	}
-	
+
 	@Override
 	public List<ArtistsInfor> getSearchArtis(String keyword) {
 		return accountRepository.getSearchArtis(keyword);
 	}
+
+
+	@Override
+	public boolean sendRequestArtist(Account account) {
+		account.setIsRequest(true);
+		return accountRepository.save(account) != null; 
+	}
+
+	@Override
+	public boolean updateImageAccount(Account account) {
+		return accountRepository.save(account) != null;
+	}
+
+	@Override
+	public boolean acceptOrRejectArtist(Account account) {
+		return accountRepository.save(account) != null;
+	}
+
+	@Override
+	public void forgotPassword(Account account) {
+		
+
+		int i = ThreadLocalRandom.current().nextInt(100000, 1000000) ; 
+		account.setPassword(new BCryptPasswordEncoder().encode(String.valueOf(i)));
+		SendMailHelper mailHelper = new SendMailHelper() ;
+		String emailContent = "<h3>Confirm your email address</h3> <br> "  ;
+		emailContent += "Dear " + account.getNickname() + " <br> We are send you a new your password. <br>";
+		emailContent += "Your password here : <b><i>" + i + "</b></i>"; 
+		
+		String subject = " Reset your Muzik account" ; 
+		
+		try {
+			mailHelper.sendSimpleEmail(account.getEmail(), subject, emailContent , emailSender);
+		} catch (MessagingException e) {
+			System.err.println(e.getMessage());
+		}
+		
+		accountRepository.save(account);
+		
+	}
+	
+	
+
 }

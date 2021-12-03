@@ -109,8 +109,7 @@
                         					<div class="iq-header-title">
                            						<h4 class="card-title">Album of Artists</h4>
                         					</div>
-                        					<div class="iq-card-header-toolbar d-flex align-items-center">
-					                           
+                        					<div class="iq-card-header-toolbar d-flex align-items-center">					                           
 					                        </div>
                      					</div>
 				                     <div class="iq-card-body">

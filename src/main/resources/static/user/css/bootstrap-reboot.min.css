@@ -301,6 +301,9 @@ template {
 }
 
 .text-white {
+	color: rgb(255, 255, 255) !important; 
+}
+.text-blue {
 	color: #2893ff !important; 
 }
 /*# sourceMappingURL=bootstrap-reboot.min.css.map */

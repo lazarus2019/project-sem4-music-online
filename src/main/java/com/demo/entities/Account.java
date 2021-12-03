@@ -1,5 +1,4 @@
 package com.demo.entities;
-// Generated Nov 26, 2021, 4:51:11 PM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -55,6 +54,7 @@ public class Account implements java.io.Serializable {
 	private String description;
 	private boolean isActive;
 	private boolean isRequest;
+	private String emailCode;
 
 	@Enumerated(EnumType.STRING)
 	private AuthenticationProvider authProvider ;
@@ -278,6 +278,15 @@ public class Account implements java.io.Serializable {
 		this.authProvider = authProvider;
 	}
 
+	@Column(name = "email_code", length = 10)
+	public String getEmailCode() {
+		return this.emailCode;
+	}
+
+	public void setEmailCode(String emailCode) {
+		this.emailCode = emailCode;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
 	public Set<Comment> getComments() {
 		return this.comments;

@@ -19,5 +19,4 @@ public interface PlaylistService {
 	public List<Playlist> getAllAlbum();
 	
 	public List<PlaylistModel> getPlaylistModel(List<Playlist> playlists);
-
 }

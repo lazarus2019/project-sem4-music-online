@@ -33,104 +33,7 @@
 
 <body>
 
-    <!-- header -->
-    <!-- <header class="header">
-        <div class="header__content">
-            <div class="header__logo">
-                <a href="index.html">
-                    <img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
-                </a>
-            </div>
-
-            <nav class="header__nav">
-                <a href="profile.html">Profile</a>
-                <a href="about.html">About</a>
-                <a href="contacts.html">Contacts</a>
-            </nav>
-
-            <form action="#" class="header__search">
-                <input type="text" placeholder="Artist, track or podcast">
-                <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z"/></svg></button>
-                <button type="button" class="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-            </form>
-
-            <div class="header__actions">
-                <div class="header__action header__action--search">
-                    <button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z"/></svg></button>
-                </div>
-
-                <div class="header__action header__action--note">
-                    <span>17</span>
-                    <a href="#" class="header__action-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.05566,2h-14a3.00328,3.00328,0,0,0-3,3V19a3.00328,3.00328,0,0,0,3,3h14a3.00328,3.00328,0,0,0,3-3V5A3.00328,3.00328,0,0,0,19.05566,2Zm-14,2h14a1.001,1.001,0,0,1,1,1v8H17.59082a1.99687,1.99687,0,0,0-1.66406.89062L14.52051,16H9.59082L8.18457,13.89062A1.99687,1.99687,0,0,0,6.52051,13H4.05566V5A1.001,1.001,0,0,1,5.05566,4Zm14,16h-14a1.001,1.001,0,0,1-1-1V15H6.52051l1.40625,2.10938A1.99687,1.99687,0,0,0,9.59082,18h4.92969a1.99687,1.99687,0,0,0,1.66406-.89062L17.59082,15h2.46484v4A1.001,1.001,0,0,1,19.05566,20Z"/></svg></a>
-
-                    <div class="header__drop">
-                        <a href="#" class="header__all">View all</a>
-                        <div class="header__note header__note--succ">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/></svg>
-                            <p><a href="#modal-info2" class="open-modal">Payment #51</a> was successful!</p>
-                            <span>1 hour ago</span>
-                        </div>
-                        <div class="header__note header__note--fail">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.71,8.29a1,1,0,0,0-1.42,0L12,10.59,9.71,8.29A1,1,0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,12l2.3-2.29A1,1,0,0,0,15.71,8.29Zm3.36-3.36A10,10,0,1,0,4.93,19.07,10,10,0,1,0,19.07,4.93ZM17.66,17.66A8,8,0,1,1,20,12,7.95,7.95,0,0,1,17.66,17.66Z"/></svg>
-                            <p><a href="#modal-info3" class="open-modal">Payment #50</a> failed!</p>
-                            <span>2 hours ago</span>
-                        </div>
-                        <div class="header__note header__note--info">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20Zm0-8.5a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0v-3A1,1,0,0,0,12,11.5Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,7.5Z"/></svg>
-                            <p><a href="#modal-info4" class="open-modal">Example</a> of notification.</p>
-                            <span>2 hours ago</span>
-                        </div>
-                        <div class="header__note header__note--gift">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18,7h-.35A3.45,3.45,0,0,0,18,5.5a3.49,3.49,0,0,0-6-2.44A3.49,3.49,0,0,0,6,5.5,3.45,3.45,0,0,0,6.35,7H6a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H5v6a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V13h1a1,1,0,0,0,1-1V10A3,3,0,0,0,18,7ZM11,20H8a1,1,0,0,1-1-1V13h4Zm0-9H5V10A1,1,0,0,1,6,9h5Zm0-4H9.5A1.5,1.5,0,1,1,11,5.5Zm2-1.5A1.5,1.5,0,1,1,14.5,7H13ZM17,19a1,1,0,0,1-1,1H13V13h4Zm2-8H13V9h5a1,1,0,0,1,1,1Z"/></svg>
-                            <p><a href="#modal-info5" class="open-modal">You have received a gift!</a></p>
-                            <span>4 hours ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="header__action header__action--cart">
-                    <span>3</span>
-                    <a class="header__action-btn" href="cart.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.5,19A1.5,1.5,0,1,0,10,20.5,1.5,1.5,0,0,0,8.5,19ZM19,16H7a1,1,0,0,1,0-2h8.49121A3.0132,3.0132,0,0,0,18.376,11.82422L19.96143,6.2749A1.00009,1.00009,0,0,0,19,5H6.73907A3.00666,3.00666,0,0,0,3.92139,3H3A1,1,0,0,0,3,5h.92139a1.00459,1.00459,0,0,1,.96142.7251l.15552.54474.00024.00506L6.6792,12.01709A3.00006,3.00006,0,0,0,7,18H19a1,1,0,0,0,0-2ZM17.67432,7l-1.2212,4.27441A1.00458,1.00458,0,0,1,15.49121,12H8.75439l-.25494-.89221L7.32642,7ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Z"/></svg></a>
-
-                    <div class="header__drop">
-                        <a href="cart.html" class="header__all">Go to cart</a>
-                        <div class="header__product">
-                            <img src="${pageContext.request.contextPath }/resources/user/img/store/item4.jpg" alt="">
-                            <p><a href="product.html">Headphones ZR-991</a></p>
-                            <span>$199</span>
-                            <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-                        </div>
-                        <div class="header__product">
-                            <img src="${pageContext.request.contextPath }/resources/user/img/store/item3.jpg" alt="">
-                            <p><a href="product.html">Music Blank</a></p>
-                            <span>$3.99</span>
-                            <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-                        </div>
-                        <div class="header__product">
-                            <img src="${pageContext.request.contextPath }/resources/user/img/store/item2.jpg" alt="">
-                            <p><a href="product.html">Microphone R4</a></p>
-                            <span>$799</span>
-                            <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="header__action header__action--signin">
-                    <a class="header__action-btn" href="signin.html">
-                        <span>Sign in</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z"/></svg>
-                    </a>
-                </div>
-            </div>
-
-            <button class="header__btn" type="button">
-				<span></span>
-				<span></span>
-				<span></span>
-			</button>
-        </div>
-    </header> -->
-    <!-- end header -->
+  
 
     <!-- sidebar -->
     <div class="sidebar">
@@ -222,8 +125,8 @@
                 <!-- breadcrumb -->
                 <div class="col-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb__item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb__item breadcrumb__item--active">Sign in</li>
+                        <li class="breadcrumb__item"><a href="/">Home</a></li>
+                        <li class="breadcrumb__item breadcrumb__item--active">Confirm Email</li>
                     </ul>
                 </div>
                 <!-- end breadcrumb -->
@@ -234,40 +137,30 @@
                         <div class="sign__content">
                             <!-- authorization form -->
                             
-                            <form action="${pageContext.request.contextPath }/user/login/processlogin" class="sign__form" method="post">
+                            <form action="${pageContext.request.contextPath }/login/forgotPassword" class="sign__form" method="post">
                                 <a href="index.html" class="sign__logo">
                                     <img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
                                 </a>
                                 
-                                <h3 class="mb-4 text-white" >Sign In</h3>
-								<c:if test="${msg != null }"><span class="sign__text"> ${msg } </span></c:if>
+                                <h3 class="mb-4 text-blue " >Find your password</h3>
+								<c:if test="${msg != null }">
+									<div class="sign__group">
+                                    	<span class="sign__text"> ${msg }</span>
+                               		</div>
+								 </c:if>
 								
                                 <div class="sign__group">
-                                    <input type="text" class="sign__input form-control" name="email" placeholder="Email">
+                                    <h5 class="text-white"></h5>
                                 </div>
-
+		
                                 <div class="sign__group">
-                                    <input type="password" class="sign__input form-control" name="password" placeholder="Password">
-                                </div>
+                                    <input type="email" class="sign__input form-control" required="required" name="email" placeholder="Your Email">
+                                    
+                                   
+                                </div>                             
 
-                                <div class="sign__group sign__group--checkbox">
-                                    <input id="remember" name="remember" type="checkbox" checked="checked">
-                                    <label for="remember">Remember Me</label>
-                                </div>
+                                <input class="sign__btn" type="submit" value="Find"></input>
 
-                                <input class="sign__btn" type="submit" value="Sign In"></input>
-
-                                <span class="sign__delimiter">or</span>
-
-                                <div class="sign__social">
-                                    <a class="fb" href="${pageContext.request.contextPath }/oauth2/authorization/facebook"><svg viewBox="0 0 9 17" fill="none" xmlns="../../../www.w3.org/2000/svg.html"><path d="M5.56341 16.8197V8.65888H7.81615L8.11468 5.84663H5.56341L5.56724 4.43907C5.56724 3.70559 5.63693 3.31257 6.69042 3.31257H8.09873V0.5H5.84568C3.1394 0.5 2.18686 1.86425 2.18686 4.15848V5.84695H0.499939V8.6592H2.18686V16.8197H5.56341Z"/></svg></a>
-                                    <a class="tw" href="#"><svg viewBox="0 0 16 12" fill="none" xmlns="../../../www.w3.org/2000/svg.html"><path d="M7.55075 3.19219L7.58223 3.71122L7.05762 3.64767C5.14804 3.40404 3.47978 2.57782 2.06334 1.1902L1.37085 0.501686L1.19248 1.01013C0.814766 2.14353 1.05609 3.34048 1.843 4.14552C2.26269 4.5904 2.16826 4.65396 1.4443 4.38914C1.19248 4.3044 0.972149 4.24085 0.951164 4.27263C0.877719 4.34677 1.12953 5.31069 1.32888 5.69202C1.60168 6.22165 2.15777 6.74068 2.76631 7.04787L3.28043 7.2915L2.67188 7.30209C2.08432 7.30209 2.06334 7.31268 2.12629 7.53512C2.33613 8.22364 3.16502 8.95452 4.08833 9.2723L4.73884 9.49474L4.17227 9.8337C3.33289 10.321 2.34663 10.5964 1.36036 10.6175C0.888211 10.6281 0.5 10.6705 0.5 10.7023C0.5 10.8082 1.78005 11.4014 2.52499 11.6344C4.75983 12.3229 7.41435 12.0264 9.40787 10.8506C10.8243 10.0138 12.2408 8.35075 12.9018 6.74068C13.2585 5.88269 13.6152 4.315 13.6152 3.56293C13.6152 3.07567 13.6467 3.01212 14.2343 2.42953C14.5805 2.09056 14.9058 1.71983 14.9687 1.6139C15.0737 1.41264 15.0632 1.41264 14.5281 1.59272C13.6362 1.91049 13.5103 1.86812 13.951 1.39146C14.2762 1.0525 14.6645 0.438131 14.6645 0.258058C14.6645 0.22628 14.5071 0.279243 14.3287 0.374576C14.1398 0.480501 13.7202 0.639389 13.4054 0.734722L12.8388 0.914795L12.3247 0.565241C12.0414 0.374576 11.6427 0.162725 11.4329 0.0991699C10.8978 -0.0491255 10.0794 -0.0279404 9.59673 0.14154C8.2852 0.618204 7.45632 1.84694 7.55075 3.19219Z"/></svg></a>
-                                    <a class="gl" href="#"><svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><path d='M473.16 221.48l-2.26-9.59H262.46v88.22H387c-12.93 61.4-72.93 93.72-121.94 93.72-35.66 0-73.25-15-98.13-39.11a140.08 140.08 0 01-41.8-98.88c0-37.16 16.7-74.33 41-98.78s61-38.13 97.49-38.13c41.79 0 71.74 22.19 82.94 32.31l62.69-62.36C390.86 72.72 340.34 32 261.6 32c-60.75 0-119 23.27-161.58 65.71C58 139.5 36.25 199.93 36.25 256s20.58 113.48 61.3 155.6c43.51 44.92 105.13 68.4 168.58 68.4 57.73 0 112.45-22.62 151.45-63.66 38.34-40.4 58.17-96.3 58.17-154.9 0-24.67-2.48-39.32-2.59-39.96z'/></svg></a> 
-                                </div>
-
-                                <span class="sign__text">Don't have an account? <a href="${pageContext.request.contextPath }/user/login/signup">Sign up!</a></span>
-
-                                <span class="sign__text"><a href="forgot.html">Forgot password?</a></span>
                             </form>
                             <!-- end authorization form -->
                         </div>

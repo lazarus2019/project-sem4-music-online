@@ -73,5 +73,4 @@ public class PlaylistServiceImpl implements PlaylistService {
 		}
 		return playlistModelies;
 	}
-	
 }

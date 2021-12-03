@@ -11,13 +11,7 @@
 	        <!-- /.col -->
 	        <div class="col-md-9 m-0-auto">
 	          <div class="card card-primary card-outline">
-<<<<<<< HEAD
-
 	            <div class="card-header notification">
-
-=======
-	            <div class="card-header">
->>>>>>> origin/NTanh_Branch
 	              <h3 class="card-title">Notifications</h3>
 	            </div>
 	            <!-- /.card-header -->
@@ -120,11 +114,8 @@
 		      }
 		      $(this).data('clicks', !clicks)
 		    })
-<<<<<<< HEAD
 		    console.log("b")
 
-=======
->>>>>>> origin/NTanh_Branch
 		  })
 		</script>
 	</jsp:attribute>

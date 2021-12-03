@@ -24,11 +24,16 @@
 								<a href="artist.html" class="artist">
 									<div class="artist__cover">
 <<<<<<< HEAD
+<<<<<<< HEAD
 										<img src="${pageContext.request.contextPath }/uploads/images/artist/${popularArtist.image }" alt="">
 
 =======
 										<img src="${pageContext.request.contextPath }/uploads/images/artists/${popularArtist.image }" alt="">
 >>>>>>> origin/NTanh_Branch
+=======
+										<img src="${pageContext.request.contextPath }/uploads/images/artist/${popularArtist.image }" alt="">
+
+>>>>>>> origin/Thu_Branch3
 									</div>
 									<h3 class="artist__title">${popularArtist.nickname }</h3>	
 								</a> 

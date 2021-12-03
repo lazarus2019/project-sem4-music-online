@@ -24,6 +24,20 @@ public class FileUploadHelper {
 		}
 	}
 	
+
+	public static String uploadImageAccount(MultipartFile multipartFile, ServletContext servletContext) {
+		try {
+			String fileName = generateFileName(multipartFile.getOriginalFilename());
+			byte[] bytes = multipartFile.getBytes();
+			Path path = Paths.get(servletContext.getRealPath("/uploads/images/artist/" + fileName));
+			Files.write(path, bytes);
+			return fileName;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
 	public static boolean deleteImage(String fileName, ServletContext servletContext) {
 		try {
 			Path path = Paths.get(servletContext.getRealPath("/uploads/images/playlist/" + fileName));

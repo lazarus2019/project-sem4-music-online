@@ -32,7 +32,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 			for (Role role : account.getRoles()) {
 				roles.add(new SimpleGrantedAuthority(role.getName()) );
 			}
-			return new CustomUserDetails(account) ; 
+			if( account.isIsActive()) {				
+				return new CustomUserDetails(account) ; 
+			}
+			else {
+				throw new UsernameNotFoundException("Account Isn't Active");
+				
+			}
 		}
 	}
 
