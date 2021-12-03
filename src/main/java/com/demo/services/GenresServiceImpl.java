@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.Genres;
 import com.demo.models.GenresName;
 import com.demo.repositories.GenresRepository;
+
 @Service("genresService")
 public class GenresServiceImpl implements GenresService{
 	
 	@Autowired
 	private GenresRepository genresRepository;
+	
 
 	@Override
 	public Iterable<Genres> findAll() {
@@ -19,7 +21,7 @@ public class GenresServiceImpl implements GenresService{
 
 	@Override
 	public GenresName getNameById(int id) {
-		return null;
+		return genresRepository.getNameById(id);		
 	}
 	
 }

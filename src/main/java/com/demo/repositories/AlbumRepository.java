@@ -22,4 +22,5 @@ public interface AlbumRepository extends PagingAndSortingRepository<Playlist, In
 //	
 	@Query("SELECT new com.demo.models.AlbumInfo(id,title,description,thumbnail,status.id,publishDate) FROM Playlist WHERE id = :id")
 	public AlbumInfo findAlbumById(@Param("id")int id);
+
 }

@@ -181,6 +181,7 @@ public class Playlist implements java.io.Serializable  {
 		return tracks;
 	}
 
+
 	public Set<Account> findAccountThroughAccountPlaylist() {
 		Set<Account> accounts = new HashSet<Account>(0) ; 
 		for(AccountPlaylist accountPlaylist : accountPlaylists) {
@@ -188,4 +189,6 @@ public class Playlist implements java.io.Serializable  {
 		}
 		return accounts ;
 	}
+
 }
+

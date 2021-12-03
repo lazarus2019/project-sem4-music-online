@@ -52,10 +52,7 @@ public class LoginController {
 	@RequestMapping(value = { "notfound" }, method = RequestMethod.GET)
 	public String notfound() {
 
-
 		return "login/notfound" ; 
-
-
 	}
 
 	@RequestMapping(value = "signup", method = RequestMethod.GET)
@@ -63,11 +60,13 @@ public class LoginController {
 
 		Account account = new Account();
 		modelMap.put("account", account);
+
 		return "login/signup";
 
 	}
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
+
 
 	public String register(@ModelAttribute("account") Account account, ModelMap modelMap) {
 

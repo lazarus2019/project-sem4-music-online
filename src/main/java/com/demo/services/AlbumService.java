@@ -10,4 +10,6 @@ public interface AlbumService {
 	public List<AlbumInfo> searchByKeyword(String keyword);
 
 	public AlbumInfo findAlbumById(int id);
+
 }
+

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
+import com.demo.entities.AccountPlaylistId;
 import com.demo.models.AlbumInfo;
 import com.demo.repositories.AccountPlaylistRepository;
 import com.demo.repositories.AccountRepository;
@@ -58,4 +59,12 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 	public AccountPlaylist getOwnerPlaylist(int playlistId) {
 		return accountPlaylistRepository.checkAlbum(playlistId);
 	}
+
+
+	//A-2/12
+	@Override
+	public List<AccountPlaylistId> getPlaylistOfAccount(int id) {
+		return accountPlaylistRepository.getPlaylistOfAccount(id);
+	}
+
 }

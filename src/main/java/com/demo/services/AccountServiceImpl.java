@@ -8,21 +8,19 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
 import com.demo.entities.Role;
-import com.demo.entities.ServicePackage;
 import com.demo.helpers.SendMailHelper;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 import com.demo.repositories.AccountRepository;
-import com.demo.repositories.PackageRepository;
 
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
@@ -169,12 +167,6 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public List<ArtistsInfor> getSearchArtis(String keyword) {
-		return accountRepository.getSearchArtis(keyword);
-	}
-
-
-	@Override
 	public boolean sendRequestArtist(Account account) {
 		account.setIsRequest(true);
 		return accountRepository.save(account) != null; 
@@ -212,5 +204,9 @@ public class AccountServiceImpl implements AccountService {
 		accountRepository.save(account);
 		
 	}
-	
+
+	public List<ArtistsInfor> getSearchArtis(String keyword) {
+		return accountRepository.getSearchArtis(keyword);
+	}
 }
+

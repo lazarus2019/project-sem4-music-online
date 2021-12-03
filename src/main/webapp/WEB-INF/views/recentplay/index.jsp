@@ -3,7 +3,7 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<mt:userTemplate title="Liked">
+<mt:userTemplate title="Genres">
 	<jsp:attribute name="content">
 	<!-- NTanh -->
    	<!-- main content -->
@@ -15,7 +15,7 @@
 				<!-- title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>Liked Song</h2>
+						<h2>Recently Played</h2>
 					</div>
 				</div>
 				<!-- end title -->
@@ -42,7 +42,7 @@
                     </form>
                 </div>
 				 -->
-				<c:forEach var="bs" items="${lik }">
+				<c:forEach var="bs" items="${recen }">
 				<div class="col-6 col-sm-4 col-lg-2">
 					<div class="album">
 						<div class="album__cover">

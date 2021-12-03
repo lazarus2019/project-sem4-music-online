@@ -16,4 +16,5 @@ public interface ArtistService {
 	public List<Account> getAllArtist() ;
 	
 	public List<Account> getRequestArtist() ;	
+
 }

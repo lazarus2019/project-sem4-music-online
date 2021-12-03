@@ -66,6 +66,7 @@ public class HomeController {
 	@Autowired
 	private ArtistTrackService artistTrackService;
 
+
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap, @RequestParam(value = "local", required = false) String local,
 			Authentication authentication) {

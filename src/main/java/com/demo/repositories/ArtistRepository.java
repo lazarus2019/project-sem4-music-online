@@ -22,8 +22,6 @@ public interface ArtistRepository extends PagingAndSortingRepository<Account, In
 	
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account ORDER BY follower DESC")
 	public List<ArtistInfo> getPopularArtists(Pageable pageable);
-	
-	
 
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id != :id")
 	public List<ArtistInfo> getArtistsWithoutId(@Param("id")int id);
@@ -33,4 +31,5 @@ public interface ArtistRepository extends PagingAndSortingRepository<Account, In
 	
 	@Query("from Account where isArtist = false and isRequest = true")
 	public List<Account> getRequestArtist() ;
+
 }

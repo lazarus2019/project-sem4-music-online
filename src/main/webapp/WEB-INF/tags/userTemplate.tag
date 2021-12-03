@@ -77,9 +77,11 @@
                 <div class="dropdown-menu">
                     <a href="releases.html"><i class="las la-music"></i> New Release</a>
                     <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
-                    <a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
-                    <a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
-                    <a href="${pageContext.request.contextPath }/record-chart"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+
+                    <a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
+                    <a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
+                    <a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+
                 </div>
             </li>
 
@@ -105,7 +107,9 @@
             <t:notification />
             <!-- end notification button -->
 
+
     		<t:nickname/> 
+
         </div>
     
         <button class="header__btn" type="button">
@@ -547,6 +551,36 @@
 		</div>
 	</div>
 	<!-- end modal info -->
+	 <!-- modal ticket -->
+    <form action="#" id="modal-ticket" class="zoom-anim-dialog mfp-hide modal modal--form">
+        <button class="modal__close" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                    d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+            </svg></button>
+
+        <h4 class="sign__title">To buy tickets</h4>
+
+        <div class="sign__group sign__group--row">
+            <label class="sign__label">Your balance:</label>
+            <span class="sign__value">$90.99</span>
+        </div>
+
+        <div class="sign__group sign__group--row">
+            <label class="sign__label" for="value">Choose ticket:</label>
+            <select class="sign__select" name="value" id="value">
+                <option value="50">Regular - $49</option>
+                <option value="100">VIP Light - $99</option>
+                <option value="200">VIP - $169</option>
+            </select>
+
+            <span class="sign__text sign__text--small">You can spend money from your account on the renewal of the
+                connected packages, or on the purchase of goods on our website.</span>
+        </div>
+
+        <button class="sign__btn" type="button">Buy</button>
+    </form>
+    <!-- end modal ticket -->
+    
 
 	<!-- JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>

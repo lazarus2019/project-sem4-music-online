@@ -790,6 +790,17 @@ audio {
 	opacity: 1;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.circle-icon-sm i{
+    color: var(--white);
+    font-size: 15px;
+}
+
+=======
+>>>>>>> origin/Thu_Branch3
+=======
+>>>>>>> origin/NTanh_Branch
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
@@ -937,6 +948,8 @@ a.form-btn:hover {
 
 .item {
 	padding: 6px 20px !important;
+<<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 /* hidden */
@@ -974,12 +987,17 @@ a.form-btn:hover {
 .tabs-2{
     width: 50% !important;
     margin: 0 30px !important;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/NTanh_Branch
 }
 
 /* hidden */
 .hide{
 	display: none
 }
+<<<<<<< HEAD
 
 
 .disabled{
@@ -1095,3 +1113,14 @@ ul.iq-edit-profile li:last-child a {
   border-radius: 5px;
   text-align: center;
 }
+=======
+>>>>>>> origin/Thu_Branch3
+=======
+}
+
+/* hidden */
+.hide{
+	display: none
+}
+>>>>>>> origin/NTanh_Branch
+>>>>>>> origin/NTanh_Branch

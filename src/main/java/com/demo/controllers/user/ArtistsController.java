@@ -25,6 +25,7 @@ import com.demo.services.CookieService;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 @RequestMapping(value = { "artist" })
 public class ArtistsController {
@@ -35,7 +36,6 @@ public class ArtistsController {
 
 	@Autowired
 	CookieService cookieService ;
-
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
@@ -117,11 +117,13 @@ public class ArtistsController {
 		} 
 		return "artist/youralbum" ; 
 	}
+
 	
 	@RequestMapping(value = "albumDetail" , method = RequestMethod.GET) 
 	public String albumDetail() {
 		return "artist/albumDetail" ; 
 	}
+
 
 
 	

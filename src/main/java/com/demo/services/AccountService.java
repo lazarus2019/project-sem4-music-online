@@ -10,6 +10,7 @@ import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
 
 public interface AccountService {
+
 	public List<Account> getAllPopularArtists();
 
 	/* extends UserDetailsService */
@@ -50,3 +51,4 @@ public interface AccountService {
 	public void forgotPassword(Account account);
 
 }
+
