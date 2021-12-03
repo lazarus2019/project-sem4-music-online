@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.services.CookieService;
+
 import com.demo.services.NotificationService;
 
 @Controller
@@ -19,7 +20,7 @@ public class NotificationController {
 
 	@Autowired
 	private NotificationService notificationService;
-	
+
 	@Autowired
 	private CookieService cookieService ; 
 

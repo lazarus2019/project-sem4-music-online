@@ -31,6 +31,13 @@ public class ArtistTrack implements java.io.Serializable {
 		this.track = track;
 		this.isOwn = isOwn;
 	}
+		
+	public ArtistTrack(Account account, Track track, boolean isOwn) {
+		super();
+		this.account = account;
+		this.track = track;
+		this.isOwn = isOwn;
+	}
 
 	@EmbeddedId
 

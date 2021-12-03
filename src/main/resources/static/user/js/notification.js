@@ -86,6 +86,12 @@ const MODAL_CONTENT = {
         html: 'See you later! We will direct you to login page in next <b></b>s.',
         timer: 2,
         url: './login.html'
+    },
+    redirect_track_manage:{
+        icon: 'success',
+        title: "It's Done",
+        html: 'We will return you to the manage page <b></b>s.',
+        timer: 2
     }
 }
 
@@ -143,6 +149,36 @@ export function redirectAlert(modal){
       willClose: () => {
         clearInterval(timerInterval);
         window.location.replace(modal.url);
+      }
+    })
+    // .then((result) => {
+    //   /* Read more about handling dismissals below */
+    //   if (result.dismiss === Swal.DismissReason.timer) {
+    //     console.log('I was closed by the timer')
+    //   }
+    // })
+}
+
+export function redirectAlertURLCustom(modal, url){
+    let timerInterval
+    Swal.fire({
+      title: modal.title,
+      html: modal.html,
+      icon: modal.icon,
+      timer: modal.timer * 1000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b');
+        b.textContent = modal.timer;
+        timerInterval = setInterval(() => {
+            modal.timer--;
+          b.textContent = modal.timer;
+        }, 1000)
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+        window.location.replace(url);
       }
     })
     // .then((result) => {

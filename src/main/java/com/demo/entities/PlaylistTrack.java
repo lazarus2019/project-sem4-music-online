@@ -22,6 +22,12 @@ public class PlaylistTrack implements java.io.Serializable {
 	private Track track;
 
 	public PlaylistTrack() {
+	}	
+	
+	public PlaylistTrack(Playlist playlist, Track track) {
+		super();
+		this.playlist = playlist;
+		this.track = track;
 	}
 
 	public PlaylistTrack(PlaylistTrackId id, Playlist playlist, Track track) {

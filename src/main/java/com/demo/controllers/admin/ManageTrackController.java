@@ -94,7 +94,7 @@ public class ManageTrackController implements ServletContextAware {
 
 	@RequestMapping(value = { "edit" }, method = RequestMethod.GET)
 	public String edit(ModelMap modelMap, @RequestParam(value = "id", required = false) int id) {
-		Track track = trackService.find(id);
+		Track track = trackService.findById(id);
 		modelMap.put("thumbnail", track.getThumbnail());
 		modelMap.put("genres", genresService.findAll());
 		modelMap.put("track", track);
@@ -103,7 +103,7 @@ public class ManageTrackController implements ServletContextAware {
 
 	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	public String edit(@ModelAttribute("track") Track track, @RequestParam("photo") MultipartFile photo) {
-		Track newTrack = trackService.find(track.getId());
+		Track newTrack = trackService.findById(track.getId());
 		if (!photo.isEmpty() && photo.getSize() > 0) {
 			FileUploadHelper fileHelper = new FileUploadHelper();
 			String thumbnail = fileHelper.uploadImage(photo, servletContext, "track");
@@ -119,7 +119,7 @@ public class ManageTrackController implements ServletContextAware {
 
 	@RequestMapping(value = { "checkin" }, method = RequestMethod.GET)
 	public String checkin(ModelMap modelMap, @RequestParam(value = "id", required = false) int id) {
-		Track track = trackService.find(id);
+		Track track = trackService.findById(id);
 		modelMap.put("thumbnail", track.getThumbnail());
 		modelMap.put("genre", track.getGenres().getName());
 		modelMap.put("track", track);
@@ -128,7 +128,7 @@ public class ManageTrackController implements ServletContextAware {
 
 	@RequestMapping(value = "checkin", method = RequestMethod.POST)
 	public String checkin(@ModelAttribute("track") Track track) {
-		Track newTrack = trackService.find(track.getId());
+		Track newTrack = trackService.findById(track.getId());
 		Status status = new Status();
 		newTrack.setIsPremium(track.isIsPremium());
 		status.setId(1);
@@ -139,7 +139,7 @@ public class ManageTrackController implements ServletContextAware {
 
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id", required = false) int id) {
-		Track track = trackService.find(id);
+		Track track = trackService.findById(id);
 		// trackService.save(track);
 		return "redirect:/admin/manage-track/index";
 	}
@@ -148,7 +148,7 @@ public class ManageTrackController implements ServletContextAware {
 			"edit-status" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Integer> editStatus(@RequestParam(value = "id", required = false) int id) {
 		try {
-			Track track = trackService.find(id);
+			Track track = trackService.findById(id);
 			Status status = new Status();
 			if (track.getStatus().getId() == 1) {
 				status.setId(3);
@@ -168,7 +168,7 @@ public class ManageTrackController implements ServletContextAware {
 			"view-lyric" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TrackInfo> viewLyric(@RequestParam(value = "id", required = false) int id) {
 		try {
-			Track track = trackService.find(id);
+			Track track = trackService.findById(id);
 			TrackInfo trackInfo = new TrackInfo();
 			trackInfo.setTitle(track.getTitle());
 			trackInfo.setLyrics(track.getLyrics());
@@ -225,20 +225,26 @@ public class ManageTrackController implements ServletContextAware {
 
 	@RequestMapping(value = {
 			"add-to-playlist" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> addToPlaylist(@RequestParam(value = "id", required = false) int id,
+	public ResponseEntity<Boolean> addToPlaylist(@RequestParam(value = "id", required = false) int id,
 			HttpServletRequest request) {
 		try {
 			int trackId = (Integer) session.getAttribute("trackId");
-			Playlist playlist = playlistService.find(id);
-			Track track = trackService.find(trackId);
-			PlaylistTrack newPlaylistTrack = new PlaylistTrack();
-			newPlaylistTrack.setId(new PlaylistTrackId(id, trackId));
-			newPlaylistTrack.setPlaylist(playlist);
-			newPlaylistTrack.setTrack(track);
-			playlistTrackService.save(newPlaylistTrack);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			PlaylistTrack playlistTrack = playlistTrackService.findById(new PlaylistTrackId(id, trackId));
+			if (playlistTrack != null) {
+				System.out.println(playlistTrack.getPlaylist().getId());
+				return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+			} else {
+				Playlist playlist = playlistService.find(id);
+				Track track = trackService.findById(trackId);
+				PlaylistTrack newPlaylistTrack = new PlaylistTrack();
+				newPlaylistTrack.setId(new PlaylistTrackId(id, trackId));
+				newPlaylistTrack.setPlaylist(playlist);
+				newPlaylistTrack.setTrack(track);
+				playlistTrackService.save(newPlaylistTrack);
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			}
 		} catch (Exception e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

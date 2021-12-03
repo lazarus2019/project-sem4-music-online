@@ -1,22 +1,11 @@
 package com.demo.services;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,10 +18,8 @@ import com.demo.helpers.CalculateDateTimeHelper;
 import com.demo.models.TrackInfo;
 import com.demo.models.TrackInfor;
 import com.demo.models.WeeklyTrackModel;
-import com.demo.repositories.AccountRepository;
-import com.demo.repositories.PackageRepository;
 import com.demo.repositories.TrackRepository;
-import com.fasterxml.jackson.core.format.InputAccessor.Std;
+import com.demo.repositories.AccountRepository;
 
 @Service("trackService")
 public class TrackServiceImpl implements TrackService {
@@ -46,6 +33,7 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public List<Track> getNewRelease(int statusId, int n) {
 		return trackRepository.getNewRelease(statusId, n);
+
 	}
 
 	@Override
@@ -222,13 +210,8 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public Track find(int id) {
+	public Track findById(int id) {
 		return trackRepository.findById(id).get();
-	}
-
-	@Override
-	public void delete(int id) {
-		trackRepository.deleteById(id);
 	}
 
 	@Override
@@ -255,6 +238,16 @@ public class TrackServiceImpl implements TrackService {
 			newTrack = track;
 			newTrack.setBaseListens(track.getListens());
 			trackRepository.save(newTrack);
+		}
+	}
+
+	@Override
+	public void delete(int id) {
+		try {
+			Track track = findById(id);
+			trackRepository.delete(track);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 }

@@ -147,8 +147,12 @@
 			        success: function (status) {	
 			                if (status == 1) {
 			                	self.text('Public');
+			                	self.addClass('iq-bg-info')
+			                	self.removeClass('iq-bg-danger')
 			                } else if (status == 3) {
 			                	self.text('Hidden'); 
+			                	self.addClass('iq-bg-danger')
+			                	self.removeClass('iq-bg-info')
 			                }
 			            
 			        }
@@ -225,24 +229,27 @@
 	            id: id
 	        },
 	        url: '${pageContext.request.contextPath}/admin/manage-track/add-to-playlist',
-	        success: function () {
-	        	Swal.fire({
-	        		  position: 'center',
-	        		  icon: 'success',
-	        		  title: 'Your work has been saved!',
-	        		  showConfirmButton: false,
-	        		  timer: 1500
-	        	});
-		    },
-	        error: function () {
-	        	Swal.fire({
-	        		  position: 'center',
-	        		  icon: 'error',
-	        		  title: 'The song is already in this playlist or somthing wrong!',
-	        		  showConfirmButton: false,
-	        		  timer: 2000
-	        	});
-	        }
+	        success: function (flag) {
+		        if(flag){
+		        	Swal.fire({
+		        		  position: 'center',
+		        		  icon: 'success',
+		        		  title: 'Your work has been saved!',
+		        		  showConfirmButton: false,
+		        		  timer: 1500
+		        	});
+			    } else {
+			    	Swal.fire({
+		        		  position: 'center',
+		        		  icon: 'error',
+		        		  title: 'The song is already in this playlist or somthing wrong!',
+		        		  showConfirmButton: false,
+		        		  timer: 2000
+		        	});
+			    }
+		    }, error: function () {
+				console.log("error")
+			    }
 		});
 	} 
 	

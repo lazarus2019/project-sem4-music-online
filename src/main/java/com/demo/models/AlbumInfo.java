@@ -1,8 +1,8 @@
 package com.demo.models;
 
+import java.util.ArrayList;
 import java.util.Date;
-
-import com.demo.entities.PlaylistCategory;
+import java.util.List;
 
 public class AlbumInfo {
 	private Integer id;
@@ -13,6 +13,7 @@ public class AlbumInfo {
 	private Date publishDate;
 	private int artistId;
 	private String artistNickName;
+	private List<TrackInfo> trackInfos = new ArrayList<TrackInfo>();
 	
 	public AlbumInfo(Integer id, String title, String description, String thumbnail, int statusId, Date publishDate) {
 		super();
@@ -146,6 +147,16 @@ public class AlbumInfo {
 			this.artistNickName = artistNickName;
 		}
 
+
+		public List<TrackInfo> getTrackInfos() {
+			return trackInfos;
+		}
+
+
+
+		public void setTrackInfos(List<TrackInfo> trackInfos) {
+			this.trackInfos = trackInfos;
+		}
 
 }
 

@@ -113,8 +113,7 @@
                         					<div class="iq-header-title">
                            						<h4 class="card-title">Album of Artists</h4>
                         					</div>
-                        					<div class="iq-card-header-toolbar d-flex align-items-center">
-					                           
+                        					<div class="iq-card-header-toolbar d-flex align-items-center">					                           
 					                        </div>
                      					</div>
 				                     <div class="iq-card-body">
@@ -232,8 +231,12 @@
 			        success: function (status) {
 			                if (status == 1) {
 			                	self.text('Public');
+			                	self.addClass('iq-bg-info')
+			                	self.removeClass('iq-bg-danger')
 			                } else if (status == 3) {
 			                	self.text('Hidden') 
+			                	self.addClass('iq-bg-danger')
+			                	self.removeClass('iq-bg-info')
 			                }
 			            
 			        }
@@ -254,8 +257,12 @@
 			        success: function (status) {
 			                if (status == 1) {
 			                	self.text('Public');
+			                	self.addClass('iq-bg-info')
+			                	self.removeClass('iq-bg-danger')
 			                } else if (status == 3) {
 			                	self.text('Hidden') 
+			                	self.addClass('iq-bg-danger')
+			                	self.removeClass('iq-bg-info')
 			                } 
 			            
 			        }

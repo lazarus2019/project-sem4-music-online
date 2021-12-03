@@ -50,5 +50,4 @@ public class RecordChartController {
 		modelMap.put("topTracks", trackList);
 		return "recordChart/index";
 	}
-
 }

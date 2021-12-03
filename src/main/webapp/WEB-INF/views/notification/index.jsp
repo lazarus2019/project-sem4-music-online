@@ -98,6 +98,7 @@
 		      $(this).data('clicks', !clicks)
 		    })
 		    console.log("b")
+
 		  })
 		</script>
 	</jsp:attribute>

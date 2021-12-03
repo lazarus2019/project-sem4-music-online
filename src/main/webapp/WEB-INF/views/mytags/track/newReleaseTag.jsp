@@ -21,7 +21,7 @@
 				<div class="col-6 col-sm-4 col-lg-2">
 					<div class="album">
 						<div class="album__cover">
-							<img src="${pageContext.request.contextPath }/resources/user/img/covers/${newRelease.thumbnail }" alt=""> <a
+							<img src="${pageContext.request.contextPath }/uploads/images/track/${newRelease.thumbnail }" alt=""> <a
 								href="release.html"><svg xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24">
 									<path

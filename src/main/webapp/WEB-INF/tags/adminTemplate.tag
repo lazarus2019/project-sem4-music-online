@@ -1,8 +1,7 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
-<%@ taglib prefix="mt" uri="http://mytags.com" %>
-
+<%@ taglib prefix="t" uri="http://mytags.com" %>
 
 <!doctype html>
 <html lang="en">
@@ -26,8 +25,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/responsive.css">
+    <!-- Remix Icon -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/remixicon.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
     
    	<!-- jQuery -->
    	<script src="${pageContext.request.contextPath }/resources/admin/js/jquery.min.js"></script>
@@ -95,25 +98,16 @@
                             </a>
                         </li>
                         
-                        <li class="artists nav-parent " data-toggle="collapse">
-                            <a href="#artist" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-folder-user-line iq-arrow-left"></i><span>Artist</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="artist" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li>
-                                    <a class="nav-link" href="admin-singer.html"><span>Artists</span></a>
-                                </li>
 
-
-                                <li><a class="nav-link" href="/zestreact/appnew/music/edit-artist"><span>Edit Artist</span></a>
-                                </li>
-
-                                <li><a class="nav-link" href="/zestreact/appnew/music/artist-profile"><span>Artist
-                           Profile</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/add-artist"><span>Add Artist</span></a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/artist" class="iq-waves-effect">
+                            	<i class="ri-album-line iq-arrow-left"></i><span>Artist</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/artist" class="iq-waves-effect">
+                            	<i class="ri-album-line iq-arrow-left"></i><span>User</span>
+                            </a>
                         </li>
 
                         <li>
@@ -174,7 +168,8 @@
 
 						<li>
                             <a href="#setting" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i class="fas fa-cog"></i><span>Settings</span><i
+
+                           class="ripple rippleEffect"></span><i class="ri-settings-2-line" ></i><span>Settings</span><i
                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="setting" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li><a href="${pageContext.request.contextPath }/admin/setting/index">General</a></li>
@@ -593,4 +588,3 @@
 <!-- Mirrored from templates.iqonic.design/muzik/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Nov 2021 05:03:36 GMT -->
 
 </html>
-
