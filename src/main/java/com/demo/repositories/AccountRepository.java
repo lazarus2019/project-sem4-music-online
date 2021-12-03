@@ -22,29 +22,28 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 
 	@Query("from Account where username = :username")
 	public Account findByUsername(@Param("username") String username);
-	
+
 	@Query("from Account where email = :email")
 	public Account findByEmail(@Param("email") String email);
-	
+
 	@Query("select new com.demo.models.ArtistsInfor(id, nickname, image, follower) from Account where isArtist = true ")
 	public List<ArtistsInfor> getallArtists();
-	
+
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE isArtist = true AND (nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%)")
-	public List<ArtistInfo> searchByKeyword(@Param("keyword")String keyword, Pageable pageable);
+	public List<ArtistInfo> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account ORDER BY follower DESC")
 	public List<ArtistInfo> getPopularArtists(Pageable pageable);
 
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id != :id")
-	public List<ArtistInfo> getArtistsWithoutId(@Param("id")int id);
+	public List<ArtistInfo> getArtistsWithoutId(@Param("id") int id);
 
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id = :id")
-	public ArtistInfo getArtistById(@Param("id")int id);
-
+	public ArtistInfo getArtistById(@Param("id") int id);
 
 	@Query("select new com.demo.models.ArtistsInfor(id, nickname, image, follower) from Account where nickname like %:keyword% and isArtist = true ")
 	public List<ArtistsInfor> getSearchArtis(@Param("keyword") String keyword);
-	
+
 	@Query("from Account where username = :username")
 	public Account find(@Param("username") String username);
 }

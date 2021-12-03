@@ -11,11 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadHelper {
 
-	public static String uploadImage(MultipartFile multipartFile, ServletContext servletContext) {
+	public static String uploadImage(MultipartFile multipartFile, ServletContext servletContext, String pathType) {
 		try {
 			String fileName = generateFileName(multipartFile.getOriginalFilename());
 			byte[] bytes = multipartFile.getBytes();
-			Path path = Paths.get(servletContext.getRealPath("/uploads/images/playlist/" + fileName));
+			Path path = Paths.get(servletContext.getRealPath("/uploads/images/" + pathType + "/" + fileName));
 			Files.write(path, bytes);
 			return fileName;
 		}catch(Exception e){
@@ -24,23 +24,9 @@ public class FileUploadHelper {
 		}
 	}
 	
-
-	public static String uploadImageAccount(MultipartFile multipartFile, ServletContext servletContext) {
+	public static boolean deleteImage(String fileName, ServletContext servletContext, String pathType) {
 		try {
-			String fileName = generateFileName(multipartFile.getOriginalFilename());
-			byte[] bytes = multipartFile.getBytes();
-			Path path = Paths.get(servletContext.getRealPath("/uploads/images/artist/" + fileName));
-			Files.write(path, bytes);
-			return fileName;
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-			return null;
-		}
-	}
-	
-	public static boolean deleteImage(String fileName, ServletContext servletContext) {
-		try {
-			Path path = Paths.get(servletContext.getRealPath("/uploads/images/playlist/" + fileName));
+			Path path = Paths.get(servletContext.getRealPath("/uploads/images/" + pathType +"/" + fileName));
 			Files.delete(path);
 			return true;
 		}catch(Exception e){

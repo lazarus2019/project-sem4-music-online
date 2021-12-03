@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.demo.entities.Account;
 import com.demo.entities.Playlist;
+import com.demo.entities.Track;
 
 public class PlaylistModel {
 
@@ -17,13 +18,14 @@ public class PlaylistModel {
 	private int status;
 	private String description;
 	private List<Account> accounts;
+	private List<Track> tracks;
 
 	public PlaylistModel() {
 		super();
 	}
 
 	public PlaylistModel(int id, String thumbnail, String title, Date publishDate, int likes, String playlistCategory,
-			int status, String description, List<Account> accounts) {
+			int status, String description, List<Account> accounts, List<Track> tracks) {
 		super();
 		this.id = id;
 		this.thumbnail = thumbnail;
@@ -34,6 +36,7 @@ public class PlaylistModel {
 		this.status = status;
 		this.description = description;
 		this.accounts = accounts;
+		this.tracks = tracks;
 	}
 
 	public int getId() {
@@ -106,6 +109,14 @@ public class PlaylistModel {
 
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
+	}
+
+	public List<Track> getTracks() {
+		return tracks;
+	}
+
+	public void setTracks(List<Track> tracks) {
+		this.tracks = tracks;
 	}
 
 }

@@ -15,21 +15,19 @@ public interface TrackService {
 	
 	public Track findById(int id);
 
+	public void delete(int id);
+
+	public List<Track> findAll();
+
 	public List<Track> getNewRelease(int statusId, int n);
 
 	public List<Track> getAllByStatus(int statusId);
 
-	public void updateTopWeekly();
+	public List<TrackInfo> getTopAllWeekly(int statusId, int n);
 
-	public void updateBaseListens();
+	public List<TrackInfo> getTopUsUkWeekly(int statusId, int n);
 
-	public List<Track> getTopAllWeekly(int statusId, int n);
-
-	public List<Track> getTopUsUkWeekly(int statusId, int n, int genresId);
-
-	public List<Track> getTopVnWeekly(int statusId, int n, int genresId);
-
-	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId);
+	public List<TrackInfo> getTopVnWeekly(int statusId, int n);
 
 	public List<Track> getTopAll(int n);
 
@@ -40,4 +38,8 @@ public interface TrackService {
 	public TrackInfo findByTrackId(int trackId);
 
 	public List<TrackInfo> getWaitingTrackByGenres(int id, int genresId, Pageable pageable);
+	
+	public boolean updateWeeklyListens();
+
+	public void updateBaseListens();
 }

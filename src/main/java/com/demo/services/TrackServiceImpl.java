@@ -1,6 +1,5 @@
 package com.demo.services;
 
-
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -11,18 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.demo.entities.Account;
+import com.demo.entities.ArtistTrack;
+import com.demo.entities.ServicePackage;
 import com.demo.entities.Track;
 import com.demo.helpers.CalculateDateTimeHelper;
 import com.demo.models.TrackInfo;
 import com.demo.models.TrackInfor;
 import com.demo.models.WeeklyTrackModel;
 import com.demo.repositories.TrackRepository;
+import com.demo.repositories.AccountRepository;
 
 @Service("trackService")
 public class TrackServiceImpl implements TrackService {
 
 	@Autowired
 	private TrackRepository trackRepository;
+
+	@Autowired
+	private AccountRepository accountRepository;
 
 	@Override
 	public List<Track> getNewRelease(int statusId, int n) {
@@ -94,43 +100,83 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-	public void updateTopWeekly() {
-		// statusId = 1 -> public track
-		for (Track track : trackRepository.getAllByStatus(1)) {
-			Track newTrack = new Track();
-			newTrack = track;
-			int countTop = track.getListens() - track.getBaseListens();
-			newTrack.setWeeklyListens(countTop);
-			trackRepository.save(newTrack);
+	public List<TrackInfo> getTopAllWeekly(int statusId, int n) {
+		List<TrackInfo> trackInfos = new ArrayList<TrackInfo>();
+		for (Track track : trackRepository.getTopAllWeekly(statusId, n)) {
+			TrackInfo trackInfo = new TrackInfo();
+			trackInfo.setId(track.getId());
+			trackInfo.setTitle(track.getTitle());
+			trackInfo.setThumbnail(track.getThumbnail());
+			trackInfo.setDuration(track.getDuration());
+			trackInfo.setPremium(track.isIsPremium());
+			List<Account> accounts = new ArrayList<Account>();
+			for (Account account : track.findAccountThroughAtristTrack()) {
+				accounts.add(account);
+			}
+			trackInfo.setAccounts(accounts);
+			trackInfos.add(trackInfo);
 		}
+		return trackInfos;
 	}
 
 	@Override
-	public void updateBaseListens() {
-		// statusId = 1 -> public track
-		for (Track track : trackRepository.getAllByStatus(1)) {
-			Track newTrack = new Track();
-			newTrack = track;
-			newTrack.setBaseListens(track.getListens());
-			trackRepository.save(newTrack);
+	public List<TrackInfo> getTopUsUkWeekly(int statusId, int n) {
+		List<Track> findAll = (List<Track>) trackRepository.findAll();
+		int totalTrack = findAll.size();
+		List<TrackInfo> topAllWeekly = getTopAllWeekly(1, totalTrack);
+		List<TrackInfo> trackInfos = new ArrayList<TrackInfo>();
+		for (TrackInfo trackInfo : topAllWeekly) {
+			Account ownerTrack = null;
+			for (Account account : trackInfo.getAccounts()) {
+				for (ArtistTrack artistTrack : account.getArtistTracks()) {
+					if (artistTrack.isIsOwn() == true) {
+						ownerTrack = accountRepository.findById(artistTrack.getAccount().getId()).get();
+					}
+				}
+			}
+			if (ownerTrack.getCountry().getCountryCode().equalsIgnoreCase("US")) {
+				trackInfos.add(trackInfo);
+			}
 		}
-	}
-
-
-	public List<Track> getTopAllWeekly(int statusId, int n) {
-		return trackRepository.getTopAllWeekly(statusId, n);
-	}
-	
-	@Override
-	public List<Track> getTopUsUkWeekly(int statusId, int n, int genresId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TrackInfo> topUsUktracks = new ArrayList<>();
+		for (TrackInfo trackInfo : trackInfos) {
+			if (topUsUktracks.size() < n) {
+				topUsUktracks.add(trackInfo);
+			} else {
+				break;
+			}
+		}
+		return topUsUktracks;
 	}
 
 	@Override
-	public List<Track> getTopVnWeekly(int statusId, int n, int genresId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TrackInfo> getTopVnWeekly(int statusId, int n) {
+		List<Track> findAll = (List<Track>) trackRepository.findAll();
+		int totalTrack = findAll.size();
+		List<TrackInfo> topAllWeekly = getTopAllWeekly(1, totalTrack);
+		List<TrackInfo> trackInfos = new ArrayList<TrackInfo>();
+		for (TrackInfo trackInfo : topAllWeekly) {
+			Account ownerTrack = null;
+			for (Account account : trackInfo.getAccounts()) {
+				for (ArtistTrack artistTrack : account.getArtistTracks()) {
+					if (artistTrack.isIsOwn() == true) {
+						ownerTrack = accountRepository.findById(artistTrack.getAccount().getId()).get();
+					}
+				}
+			}
+			if (ownerTrack.getCountry().getCountryCode().equalsIgnoreCase("VN")) {
+				trackInfos.add(trackInfo);
+			}
+		}
+		List<TrackInfo> topUsUktracks = new ArrayList<>();
+		for (TrackInfo trackInfo : trackInfos) {
+			if (topUsUktracks.size() < n) {
+				topUsUktracks.add(trackInfo);
+			} else {
+				break;
+			}
+		}
+		return topUsUktracks;
 	}
 
 	@Override
@@ -159,14 +205,44 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
+
+	public List<Track> findAll() {
+		return (List<Track>) trackRepository.findAll();
+	}
+
+	@Override
 	public Track findById(int id) {
 		return trackRepository.findById(id).get();
 	}
 
-	@Override
-	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId) {
-		return trackRepository.getTopWeeklyByGenre(statusId, n, genresId);
+	public void delete(int id) {
+		trackRepository.deleteById(id);
 	}
 
+	@Override
+	public boolean updateWeeklyListens() {
+		try {
+			for (Track track : trackRepository.findAll()) {
+				Track newTrack = new Track();
+				newTrack = track;
+				int countListen = track.getListens() - track.getBaseListens();
+				newTrack.setWeeklyListens(countListen);
+				trackRepository.save(newTrack);
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 
+	}
+
+	@Override
+	public void updateBaseListens() {
+		for (Track track : trackRepository.findAll()) {
+			Track newTrack = new Track();
+			newTrack = track;
+			newTrack.setBaseListens(track.getListens());
+			trackRepository.save(newTrack);
+		}
+	}
 }

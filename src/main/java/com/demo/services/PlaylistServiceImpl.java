@@ -27,8 +27,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@Override
 	public Playlist save(Playlist playlist) {
 		playlist.setPlaylistTracks(null);
-		playlistRepository.save(playlist);
-		return null;
+		return playlistRepository.save(playlist);
 	}
 
 	@Override
@@ -72,5 +71,10 @@ public class PlaylistServiceImpl implements PlaylistService {
 			playlistModelies.add(playlistModel);
 		}
 		return playlistModelies;
+	}
+
+	@Override
+	public List<Playlist> searchByTitle(String keyword) {
+		return playlistRepository.searchByTitle(keyword);
 	}
 }

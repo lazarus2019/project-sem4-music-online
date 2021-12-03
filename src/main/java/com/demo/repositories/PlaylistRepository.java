@@ -20,6 +20,9 @@ public interface PlaylistRepository extends CrudRepository<Playlist, Integer> {
 	@Query(value = "select * from Playlist where category_id != 1 and category_id != 2 and category_id != 3 order by publish_date desc", nativeQuery = true)
 	public List<Playlist> getAllPlaylist();
 	
+	@Query("from Playlist where title like %:keyword% and category_id != 1 and category_id != 2 and category_id != 3 order by publish_date desc")
+	public List<Playlist> searchByTitle(@Param("keyword") String keyword);
+	
 	@Query(value = "select * from Playlist where category_id = 3 order by publish_date desc", nativeQuery = true)
 	public List<Playlist> getAllAlbum();
 

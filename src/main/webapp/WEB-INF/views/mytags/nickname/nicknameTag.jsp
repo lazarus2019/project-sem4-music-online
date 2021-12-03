@@ -41,7 +41,7 @@
                                 <a href="${pageContext.request.contextPath }/artist/youralbum">
                                     <i class="las la-record-vinyl"></i> Your Albums
                                 </a>
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath }/package">
                                     <i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
                                         class="las la-crown yellow__icon"></i>
                                 </a>

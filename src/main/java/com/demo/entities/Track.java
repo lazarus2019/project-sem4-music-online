@@ -45,7 +45,7 @@ public class Track implements java.io.Serializable {
 	}
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
-			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium,
+			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, 
 			Date publishDate) {
 		this.genres = genres;
 		this.status = status;
@@ -63,7 +63,7 @@ public class Track implements java.io.Serializable {
 	}
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
-			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium,
+			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, 
 			Date publishDate, Set<Comment> comments, Set<PlaylistTrack> playlistTracks, Set<ArtistTrack> artistTracks) {
 		this.genres = genres;
 		this.status = status;

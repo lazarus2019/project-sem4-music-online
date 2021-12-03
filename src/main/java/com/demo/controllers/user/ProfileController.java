@@ -239,7 +239,7 @@ public class ProfileController implements ServletContextAware  {
 	  @PostMapping("updateImageAccount11") 
 	  public ResponseEntity<Boolean>  handleFileUpload( @RequestParam("file") MultipartFile file ) {
 	    try {
-	    	String fileName = FileUploadHelper.uploadImageAccount(file, servletContext); 
+	    	String fileName = FileUploadHelper.uploadImage(file, servletContext, "artist"); 
 	    	//System.out.println(fileName);
 			Account account = new Account() ; 
 			String id = cookieService.getValue("acc_id", "") ; 
@@ -251,24 +251,6 @@ public class ProfileController implements ServletContextAware  {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
 	  }
-	
-	@RequestMapping(value = { "updateImageAccount" }, method = RequestMethod.POST)
-	public ResponseEntity<Boolean> updateImageAccount(@ModelAttribute UploadForm form) {
-		//List<ArtistInfo> artistInfos = accountService.searchByKeyword(keyword, PageRequest.of(0, 6));
-
-		Account account = new Account() ; 
-		String id = cookieService.getValue("acc_id", "") ; 
-		account = accountService.findById(Integer.parseInt(id)) ;	
-		//FileUploadHelper fileUploadHelper = new FileUploadHelper() ;
-		MultipartFile photo = form.getFiles()[0] ; 
-		String fileName = FileUploadHelper.uploadImageAccount(photo, servletContext); 
-		account.setImage(fileName);
-		try {
-			return new ResponseEntity<Boolean>(accountService.updateImageAccount(account), HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
-		}
-	}
 	
 	@RequestMapping(value = { "sendRequest" }, method = RequestMethod.GET)
 	public ResponseEntity<Boolean> sendRequest( ModelMap modelMap) {

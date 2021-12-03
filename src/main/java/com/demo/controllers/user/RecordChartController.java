@@ -35,6 +35,8 @@ public class RecordChartController {
 			trackChartModel.setTrackId(track.getId());
 			trackChartModel.setTitle(track.getTitle());
 			trackChartModel.setDuration(track.getDuration());
+			trackChartModel.setLikes(track.getLikes());
+			trackChartModel.setPremium(track.isIsPremium());
 			List<String> nicknames = new ArrayList<String>();
 			for (Account account : track.findAccountThroughAtristTrack()) {
 				if (account.getNickname() != null) {

@@ -790,13 +790,6 @@ audio {
 	opacity: 1;
 }
 
-
-.circle-icon-sm i{
-    color: var(--white);
-    font-size: 15px;
-}
-
-
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
@@ -1102,4 +1095,3 @@ ul.iq-edit-profile li:last-child a {
   border-radius: 5px;
   text-align: center;
 }
-

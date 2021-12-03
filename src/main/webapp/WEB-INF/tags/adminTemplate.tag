@@ -17,6 +17,8 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/admin/images/favicon.ico" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
+    <!-- Datatable CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/dataTables.bootstrap4.min.css">
     <!-- Typography CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/typography.css">
     <!-- Style CSS -->
@@ -32,6 +34,9 @@
     
    	<!-- jQuery -->
    	<script src="${pageContext.request.contextPath }/resources/admin/js/jquery.min.js"></script>
+   	
+   	<!-- Sweetalert CSS -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -83,7 +88,13 @@
 
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/playlist" class="iq-waves-effect">
-                            	<i class="ri-album-line iq-arrow-left"></i><span>Playlist</span>
+                            	<i class="ri-function-line"></i><span>Manage Playlist</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/manage-track" class="iq-waves-effect">
+                            	<i class="ri-album-line iq-arrow-left"></i><span>Manage Track</span>
                             </a>
                         </li>
                         
@@ -513,6 +524,10 @@
     <script src="${pageContext.request.contextPath }/resources/admin/js/bootstrap.min.js"></script>
     <!-- Appear JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.appear.js"></script>
+    <!-- Datatable JavaScript -->
+    <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/js/dataTables.bootstrap4.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/js/popper.min.js"></script>
     <!-- Countdown JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/countdown.min.js"></script>
     <!-- Counterup JavaScript -->
@@ -564,9 +579,10 @@
     <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/music-player-dashboard.js"></script> --%>
     <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/custom.js"></script>
-
+    <script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
+    <!-- Sweetalert -->
     <script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
-
+    
 </body>
 
 <!-- Mirrored from templates.iqonic.design/muzik/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Nov 2021 05:03:36 GMT -->
