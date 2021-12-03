@@ -18,6 +18,8 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/admin/images/favicon.ico" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
+    <!-- Datatable CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/dataTables.bootstrap4.min.css">
     <!-- Typography CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/typography.css">
     <!-- Style CSS -->
@@ -29,6 +31,9 @@
     
    	<!-- jQuery -->
    	<script src="${pageContext.request.contextPath }/resources/admin/js/jquery.min.js"></script>
+   	
+   	<!-- Sweetalert CSS -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -524,6 +529,10 @@
     <script src="${pageContext.request.contextPath }/resources/admin/js/bootstrap.min.js"></script>
     <!-- Appear JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.appear.js"></script>
+    <!-- Datatable JavaScript -->
+    <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/js/dataTables.bootstrap4.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/js/popper.min.js"></script>
     <!-- Countdown JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/countdown.min.js"></script>
     <!-- Counterup JavaScript -->
@@ -575,6 +584,9 @@
     <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/music-player-dashboard.js"></script> --%>
     <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/custom.js"></script>
+    <script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
+    <!-- Sweetalert -->
+    <script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
     
 </body>
 

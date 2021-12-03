@@ -39,8 +39,8 @@
 								<a href="release.html">${newRelease.title }</a>
 							</h3>
 							<span>
-								<a href="artist.html">${newRelease.likes }</a> & 
-								<a href="artist.html">${newRelease.likes }</a> & 
+								<a href="artist.html">${newRelease.likes }</a>  
+								<a href="artist.html">${newRelease.likes }</a>  
 								<a href="artist.html">${newRelease.likes }</a>
 							</span>
 						</div>

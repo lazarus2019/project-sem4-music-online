@@ -23,11 +23,9 @@
                            </div>
                            <div class="form-group">
                               <label id="genre">Genre:</label>
-                                 <select class="form-control" id="genre" name="genres">
-                              	    <c:forEach var="genre" items="${genres }">
-	                                    <option value="${genre.id }">${genre.name }</option>
-                              	    </c:forEach>
-                                 </select>
+                                 <s:select path="genres" class="form-control" id="genre" >
+	                                 <s:options items="${genres }" itemValue="id" itemLabel="name"/>
+                                 </s:select>
                            </div>
                            <div class="custom-control custom-checkbox checkbox-icon custom-control-inline">
                               <s:checkbox path="isPremium" class="custom-control-input" id="customCheck-30"></s:checkbox>

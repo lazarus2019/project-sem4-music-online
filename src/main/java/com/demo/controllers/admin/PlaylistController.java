@@ -27,8 +27,10 @@ import com.demo.entities.AccountPlaylist;
 import com.demo.entities.Playlist;
 import com.demo.entities.PlaylistCategory;
 import com.demo.entities.Status;
+import com.demo.entities.Track;
 import com.demo.helpers.FileUploadHelper;
 import com.demo.models.PlaylistModel;
+import com.demo.models.TrackInfo;
 import com.demo.repositories.AccountRepository;
 import com.demo.services.AccountPlaylistService;
 import com.demo.services.PlaylistCategoryService;
@@ -42,7 +44,7 @@ public class PlaylistController implements ServletContextAware {
 
 	@Autowired
 	private PlaylistService playlistService;
-	
+
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
 
@@ -65,7 +67,7 @@ public class PlaylistController implements ServletContextAware {
 			List<Account> accounts = new ArrayList<Account>();
 			for (Account account : playlist.findAccountThroughAccountPlaylist()) {
 				AccountPlaylist accountPlaylist = accountPlaylistService.getOwnerPlaylist(playlist.getId());
-				if(accountPlaylist.isIsOwn() == true && accountPlaylist.getAccount().getId() == account.getId()) {
+				if (accountPlaylist.isIsOwn() == true && accountPlaylist.getAccount().getId() == account.getId()) {
 					accounts.add(account);
 				}
 			}
@@ -92,8 +94,8 @@ public class PlaylistController implements ServletContextAware {
 		FileUploadHelper fileHelper = new FileUploadHelper();
 		PlaylistCategory playlistCategory = new PlaylistCategory();
 		Status status = new Status();
-		String fileName = fileHelper.uploadImage(photo, servletContext, "playlist");
-		playlist.setThumbnail(fileName);
+		String thumbnail = fileHelper.uploadImage(photo, servletContext, "playlist");
+		playlist.setThumbnail(thumbnail);
 		playlist.setPublishDate(new Date());
 		playlist.setLastUpdated(new Date());
 		playlist.setLikes(0);
@@ -120,8 +122,9 @@ public class PlaylistController implements ServletContextAware {
 		Playlist newPlaylist = playlistService.find(playlist.getId());
 		if (!photo.isEmpty() && photo.getSize() > 0) {
 			FileUploadHelper fileHelper = new FileUploadHelper();
-			String fileName = fileHelper.uploadImage(photo, servletContext, "playlist");
-			newPlaylist.setThumbnail(fileName);
+			fileHelper.deleteImage(newPlaylist.getThumbnail(), servletContext, "playlist");
+			String thumbnail = fileHelper.uploadImage(photo, servletContext, "playlist");
+			newPlaylist.setThumbnail(thumbnail);
 		}
 		if (playlist.getPlaylistCategory() == null) {
 			newPlaylist.getPlaylistCategory().setId(3);
@@ -142,6 +145,23 @@ public class PlaylistController implements ServletContextAware {
 		FileUploadHelper fileHelper = new FileUploadHelper();
 		fileHelper.deleteImage(playlist.getThumbnail(), servletContext, "playlist");
 		return "redirect:/admin/playlist/index";
+	}
+
+	@RequestMapping(value = "view-tracks", method = RequestMethod.GET)
+	public ResponseEntity<List<TrackInfo>> viewTracks(@RequestParam(value = "id", required = false) int id) {
+		try {
+			Playlist playlist = playlistService.find(id);
+			List<TrackInfo> tracks = new ArrayList<TrackInfo>();
+			for (Track track : playlist.findTracks()) {
+				TrackInfo trackInfo = new TrackInfo();
+				trackInfo.setTitle(track.getTitle());
+				trackInfo.setStatusId(track.getStatus().getId());
+				tracks.add(trackInfo);
+			}
+			return new ResponseEntity<List<TrackInfo>>(tracks, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<List<TrackInfo>>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@RequestMapping(value = {

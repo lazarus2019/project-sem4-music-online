@@ -41,30 +41,18 @@ public class HomeController {
 
 	@Autowired
 	private TrackService trackService;
-	
+
 	@Autowired
 	private AccountService accountService;
 
 	@Autowired
 	private CookieService cookieService;
-	
+
 	@Autowired
 	private AlbumService albumService;
-	
+
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
-
-	/*
-	 * @RequestMapping(value = { "", "index" }, method = RequestMethod.GET) public
-	 * String index() {
-	 * 
-	 * Calendar c = Calendar.getInstance(); c.set(Calendar.DAY_OF_WEEK,
-	 * Calendar.MONDAY); System.out.println("today: " + new Date());
-	 * System.out.println("Date " + c.getTime());
-	 * 
-	 * 
-	 * return "home/index"; }
-	 */
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap, @RequestParam(value = "local", required = false) String local,
@@ -98,9 +86,11 @@ public class HomeController {
 
 		return "home/index";
 	}
-	
-	@RequestMapping(value = { "searchTopArtist" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ArtistInfo>> searchTopArtist(@RequestParam("keyword") String keyword, ModelMap modelMap) {
+
+	@RequestMapping(value = {
+			"searchTopArtist" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ArtistInfo>> searchTopArtist(@RequestParam("keyword") String keyword,
+			ModelMap modelMap) {
 		List<ArtistInfo> artistInfos = accountService.searchByKeyword(keyword, PageRequest.of(0, 6));
 		try {
 			return new ResponseEntity<List<ArtistInfo>>(artistInfos, HttpStatus.OK);
@@ -109,7 +99,8 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value = { "searchTopTrack" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = {
+			"searchTopTrack" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TrackInfo>> searchTopTrack(@RequestParam("keyword") String keyword, ModelMap modelMap) {
 		List<TrackInfo> trackInfos = trackService.searchByTitle(keyword, PageRequest.of(0, 6));
 		try {
@@ -119,10 +110,11 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping(value = { "searchTopAlbum" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = {
+			"searchTopAlbum" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AlbumInfo>> searchTopAlbum(@RequestParam("keyword") String keyword, ModelMap modelMap) {
 		List<AlbumInfo> albumInfos = albumService.searchByKeyword(keyword);
-		if(albumInfos.size() > 0) {
+		if (albumInfos.size() > 0) {
 			albumInfos = accountPlaylistService.checkAndGetAlbum(albumInfos);
 		}
 		try {
@@ -131,9 +123,10 @@ public class HomeController {
 			return new ResponseEntity<List<AlbumInfo>>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	// Get track by id
-	@RequestMapping(value = { "getTrackById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = {
+			"getTrackById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TrackInfo> getTrackById(@RequestParam("trackId") int trackId, ModelMap modelMap) {
 		TrackInfo track = trackService.findByTrackId(trackId);
 
@@ -143,10 +136,12 @@ public class HomeController {
 			return new ResponseEntity<TrackInfo>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	// Get waiting track by genres id
-	@RequestMapping(value = { "getWaitingTrack" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TrackInfo> getWaitingTrack(@RequestParam("trackId") int trackId, @RequestParam("genresId") int genresId, ModelMap modelMap) {
+	@RequestMapping(value = {
+			"getWaitingTrack" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TrackInfo> getWaitingTrack(@RequestParam("trackId") int trackId,
+			@RequestParam("genresId") int genresId, ModelMap modelMap) {
 		List<TrackInfo> trackInfos = trackService.getWaitingTrackByGenres(trackId, genresId, PageRequest.of(0, 1));
 		try {
 			return new ResponseEntity<TrackInfo>(trackInfos.get(0), HttpStatus.OK);

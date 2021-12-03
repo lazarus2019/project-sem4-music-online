@@ -1,6 +1,8 @@
 package com.demo.services;
 
 import java.util.*;
+
+
 import com.demo.entities.*;
 import com.demo.models.PlaylistModel;
 
@@ -19,4 +21,6 @@ public interface PlaylistService {
 	public List<Playlist> getAllAlbum();
 	
 	public List<PlaylistModel> getPlaylistModel(List<Playlist> playlists);
+	
+	public List<Playlist> searchByTitle(String keyword);
 }

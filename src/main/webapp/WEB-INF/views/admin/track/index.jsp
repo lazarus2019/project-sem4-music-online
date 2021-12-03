@@ -4,6 +4,7 @@
 <%@ taglib prefix="t" uri="http://mytags.com" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
 
 <mt:adminTemplate title="Playlist">
 	<jsp:attribute name="content">
@@ -22,7 +23,7 @@
                      				 	</div>
 				                     <div class="iq-card-body">
 				                        <div class="table-responsive">
-				                           <table class="data-tables table table-striped table-bordered" style="width:100%">
+				                           <table id="table-track" class="data-tables table table-striped table-bordered" style="width:100%">
 				                              <thead>
 				                                 <tr>
 				                                    <th style="width: 4%; height: 50px;">No</th>
@@ -50,7 +51,7 @@
 					                                    	${track.title }
 					                                    </td>
 					                                    <td class="text-center">
-					                                    	<c:forEach var="account" items="${track.account }">
+					                                    	<c:forEach var="account" items="${track.accounts }">
 					                                    		<span>${account.nickname }</span>
 					                                    		<br>   
 					                                    	</c:forEach>
@@ -66,32 +67,36 @@
 					                                    	<c:if test="${track.statusId == 3 }"><a id="status-btn" class="badge iq-bg-danger toggle-track-status" data-id="${track.id}">Hidden</a></c:if>
 					                                    </td>
 					                                    <td>
-					                                       <div class="flex align-items-center text-center list-user-action">
-					                                          <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" 
-					                                          	href="${pageContext.request.contextPath }/admin/manage-track/edit?id=${track.id }">
-					                                          	<i class="ri-pencil-line"></i>
-					                                          </a>
-					                                          <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" 
-					                                          	href="${pageContext.request.contextPath }/admin/manage-track/delete?id=${track.id }">
-					                                          	<i class="ri-delete-bin-line"></i>
-					                                          </a>
-					                                          <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="View lyrics" 
-					                                          	href="${pageContext.request.contextPath }/admin/playlist/delete?id=${playlist.id }">
-					                                          	<i class="ri-bill-line"></i>
-					                                          </a>
-					                                          <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Playlist" 
-					                                          	href="${pageContext.request.contextPath }/admin/playlist/add-to-playlist?id=${playlist.id }">
-					                                          	<i class="ri-add-fill"></i>
-					                                          </a>
-					                                       </div>
-					                                       <c:if test="${track.statusId == 2 }">
-						                                       <div class="flex align-items-center text-center check-action">
-						                                       	  <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Check for public track" 
-						                                          	 href="${pageContext.request.contextPath }/admin/playlist/delete?id=${playlist.id }">
-						                                          	 <i class="ri-share-forward-2-fill"></i>
-						                                          </a>
-						                                       </div>
-					                                       </c:if>
+					                                        <div class="dropleft check-action text-center">
+															  <a class="bg-primary dropdown-toggle toggle-show-playlist" type="button" id="dropdownMenu1-1" title="Add to playlist"
+															    data-toggle="dropdown" data-id="${track.id }">
+															    <i class="ri-add-fill"></i>
+															  </a>
+															  <!--Menu-->
+															  <div class="dropdown-menu dropdown-primary show-playlist-body scrollable-menu" style="width: auto; " id="your-custom-id">
+															     <!-- Show menu by call ajax -->
+															  </div>
+															</div>
+					                                        <div class="flex align-items-center text-center list-user-action">
+					                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="Edit"
+					                                          	   href="${pageContext.request.contextPath }/admin/manage-track/edit?id=${track.id }">
+					                                          	   <i class="ri-pencil-line"></i>
+					                                            </a>
+					                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="Delete" 
+					                                          	   href="${pageContext.request.contextPath }/admin/manage-track/delete?id=${track.id }">
+					                                          	   <i class="ri-delete-bin-line"></i>
+					                                            </a>
+					                                            <a class="bg-primary toggle-view-lyric" type="button" data-placement="top" title="View lyrics"
+					                                          	   data-toggle="modal" data-target="#viewLyricsModalLong" data-id="${track.id }">
+					                                          	   <i class="ri-bill-line"></i>
+					                                            </a>
+						                                        <c:if test="${track.statusId == 2 }">
+							                                       <a class="bg-danger toggle-view-lyric" type="button" data-placement="top" title="Check for public track"
+						                                          	   href="${pageContext.request.contextPath }/admin/manage-track/checkin?id=${track.id }">
+						                                          	   <i class="ri-check-double-fill"></i>
+					                                            	</a>
+						                                        </c:if>
+														   </div>
 					                                    </td>
 					                                 </tr>
 				                                 </c:forEach>
@@ -107,6 +112,25 @@
 				</div>
 			</div>	
 			
+<!-- Lyrics Modal  -->
+<div class="modal fade" id="viewLyricsModalLong" tabindex="-1" role="dialog" aria-labelledby="viewLyricsModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title view-lyrics-title" id="viewLyricsModalLongTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body view-lyrics-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 
 	$(document).ready(function(){
@@ -131,7 +155,96 @@
         		});
     		});
 		});
+		
+		$('.toggle-view-lyric').on("click", function(){
+	        var id = $(this).data("id");
+		    $.ajax({
+		    	type: 'GET',
+		        data: {
+		            id: id
+		        },
+		        url: '${pageContext.request.contextPath}/admin/manage-track/view-lyric',
+		        success: function (track) {	
+		            $('.view-lyrics-title').html(track.title + ' lyric');
+		            $('.view-lyrics-body').html(track.lyrics);
+		        }
+    		});
+		}); 
+
+		$('.toggle-show-playlist').on("click", function(){
+	        var id = $(this).data("id");
+		    $.ajax({
+		    	type: 'GET',
+		        data: {
+		            id: id
+		        },
+		        url: '${pageContext.request.contextPath}/admin/manage-track/show-playlist',
+		        success: function (playlists) {	
+			        var result = "<h5 class='text-center'>Add to playlist</h5>";
+			        result += "<input class='form-control' type='text' onkeyup='search_playlist(this)' placeholder='Search playlist' aria-label='Search'>";
+				    result += "<div class='show-btn'>";
+			        for (var i = 0; i < playlists.length; i++){
+						result += "<button class='dropdown-item' onclick='add_to_playlist(this)' data-id='" + playlists[i].id + "'>" + playlists[i].title + "</button>";
+				    }
+					result += "</div>";
+				    $('.show-playlist-body').html(result); 
+		        }
+    		});
+		}); 
+
 	})
+	
+	function search_playlist(e){
+		var keyword = $(e).val();
+		$.ajax({
+	    	type: 'GET',
+	        data: {
+	        	keyword: keyword
+	        },
+	        url: '${pageContext.request.contextPath}/admin/manage-track/search-playlist',
+	        success: function (playlists) {	
+		        var result = "";
+		        if(playlists.length == 0){
+			        var text = "Have no result";
+			        result += "<button class='dropdown-item'>" + text + "</button>";
+		        	$('.show-btn').html(result);
+				}
+		        for (var i = 0; i < playlists.length; i++){
+					result += "<button class='dropdown-item' onclick='add_to_playlist(this)' data-id='" + playlists[i].id + "'>" + playlists[i].title + "</button>";
+		        }
+				$('.show-btn').html(result);
+	        } 
+		});
+	}
+	
+	function add_to_playlist(e){
+		var id = $(e).data("id");
+	    $.ajax({
+	    	type: 'GET',
+	        data: {
+	            id: id
+	        },
+	        url: '${pageContext.request.contextPath}/admin/manage-track/add-to-playlist',
+	        success: function () {
+	        	Swal.fire({
+	        		  position: 'center',
+	        		  icon: 'success',
+	        		  title: 'Your work has been saved!',
+	        		  showConfirmButton: false,
+	        		  timer: 1500
+	        	});
+		    },
+	        error: function () {
+	        	Swal.fire({
+	        		  position: 'center',
+	        		  icon: 'error',
+	        		  title: 'The song is already in this playlist or somthing wrong!',
+	        		  showConfirmButton: false,
+	        		  timer: 2000
+	        	});
+	        }
+		});
+	} 
 	
 </script>
 	</jsp:attribute>

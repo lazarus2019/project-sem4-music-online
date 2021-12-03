@@ -86,6 +86,10 @@
 					                                          	href="${pageContext.request.contextPath }/admin/playlist/delete?id=${playlist.id }">
 					                                          	<i class="ri-delete-bin-line"></i>
 					                                          </a>
+					                                          <a class="bg-primary toggle-view-tracks" data-toggle="modal" type="button" data-target=".bd-example-modal-lg" title="View tracks"
+					                                          	 data-id="${playlist.id}">
+					                                          	<i class="ri-list-unordered"></i>
+					                                          </a>
 					                                       </div>
 					                                    </td>
 					                                 </tr>
@@ -115,7 +119,7 @@
                      					</div>
 				                     <div class="iq-card-body">
 				                        <div class="table-responsive">
-				                           <table class=" table table-striped table-bordered" style="width:100%">
+				                           <table class="data-tables table table-striped table-bordered" style="width:100%">
 				                              <thead>
 				                                 <tr>
 				                                    <th style="width: 3%;">No</th>
@@ -162,6 +166,10 @@
 					                                          	href="${pageContext.request.contextPath }/admin/playlist/delete?id=${album.id }">
 					                                          	<i class="ri-delete-bin-line"></i>
 					                                          </a>
+					                                          <a class="bg-primary toggle-view-tracks" data-toggle="modal" type="button" data-target=".bd-example-modal-lg" title="View tracks"
+					                                          	 data-id="${album.id}">
+					                                          	<i class="ri-list-unordered"></i>
+					                                          </a>
 					                                       </div>
 					                                    </td>
 					                                 </tr>
@@ -179,6 +187,34 @@
 					<!-- end content tabs -->
 				</div>
 			</div>	
+
+<!-- View Tracks Modal -->	
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg view-tracks-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Playlist title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class="container">
+		    <div class="row cant d-flex align-items-center" style="height: initial;">
+		        <div class="col-md-12">
+		            <div class="p-3 track-card">
+		                
+		            </div>
+		        </div>
+		    </div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 			
 <script>
 
@@ -226,6 +262,41 @@
         		}); 
     		});
 		});
+
+		$('.toggle-view-tracks').click(function(){
+			var id = $(this).data("id");
+		    $.ajax({
+		    	type: 'GET',
+		        data: {
+		            id: id
+		        },
+		        url: '${pageContext.request.contextPath}/admin/playlist/view-tracks',
+		        success: function (tracks) {
+			        var result = "";
+			       	if(tracks.length <= 0){
+						result += "<h4>There are no songs in this playlist yet</h4>";
+					}
+			        for(var i = 0; i < tracks.length; i++){
+				        result += "<div class='d-flex justify-content-between align-items-center p-3'>";
+						result += "<div class='d-flex flex-row align-items-center'> <i class='fa fa-music color'></i> <small class='ml-2' style='font-size: larger;'>" + tracks[i].title + "</small> </div>";
+						result += "<div class='d-flex flex-row'>";
+						if(tracks[i].statusId == 1){
+		        	 		result += "<i class='fa fa-check color mr-15'></i>";
+						} else if(tracks[i].statusId == 2){
+							result += "<i class='ri-upload-2-fill mr-15'></i>";
+						} else if(tracks[i].statusId == 3){
+							result += "<i class='fas fa-times mr-15'></i>";
+						} 
+                    	result += "<button class='delete-action center-item'><i class='ri-delete-bin-line'></i></button>"
+                    	result += "</div>";
+                        result += "</div>";
+				    } 
+				    $('.track-card').html(result);
+				    $('.modal-title').text(playlist.title); o
+		        }
+    		}); 
+		});
+		
 	})
 	
 </script>

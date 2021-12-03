@@ -27,11 +27,9 @@
                                  <input type="text" class="form-control" readonly="readonly" value="Album">
                               </c:if>
                               <c:if test="${categoryId != 3 }">
-                                 <select class="form-control" id="category" name="playlistCategory.id">
-                              	    <c:forEach var="playlistCategory" items="${playlistCategories }">
-	                                    <option value="${playlistCategory.id }">${playlistCategory.name }</option>
-                              	    </c:forEach>
-                                 </select>
+                              	    <s:select path="playlistCategory" class="form-control" id="category" >
+	                                   <s:options items="${playlistCategories }" itemValue="id" itemLabel="name"/>
+                                 	</s:select>
                               </c:if>
                            </div>
                            <div class="form-group">

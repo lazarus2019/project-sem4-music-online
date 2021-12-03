@@ -29,7 +29,7 @@ public class TrackInfo {
 	private boolean isPremium;
 	private Date publishDate;
 	private Genres genres;
-	private List<Account> account = new ArrayList<Account>();
+	private List<Account> accounts = new ArrayList<Account>();
 	private List<ArtistInfo> artists = new ArrayList<ArtistInfo>();
 
 	public TrackInfo(Integer id, int genresId, String title, String thumbnail) {
@@ -178,12 +178,12 @@ public class TrackInfo {
 		this.publishDate = publishDate;
 	}
 
-	public List<Account> getAccount() {
-		return account;
+	public List<Account> getAccounts() {
+		return accounts;
 	}
 
-	public void setAccount(List<Account> account) {
-		this.account = account;
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 
 	public List<ArtistInfo> getArtists() {

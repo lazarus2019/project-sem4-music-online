@@ -34,6 +34,9 @@
 	<!-- My custom CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/my_custom.css">
 
+	<!-- Sweetalert CSS -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
+
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
@@ -72,7 +75,7 @@
 						<a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
 						<a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
 						<a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
-						<a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+						<a href="${pageContext.request.contextPath }/record-chart"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 					</div>
 				</li>
 
@@ -1194,6 +1197,7 @@
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.inputmask.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/plyr.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 	<!-- My custom JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/js/my_custom.js"></script>
