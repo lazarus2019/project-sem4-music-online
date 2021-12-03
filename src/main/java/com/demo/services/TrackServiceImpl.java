@@ -41,6 +41,7 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public List<Track> getNewRelease(int statusId, int n) {
 		return trackRepository.getNewRelease(statusId, n);
+
 	}
 
 	@Override
@@ -129,19 +130,26 @@ public class TrackServiceImpl implements TrackService {
 		}
 	}
 
+
+	public List<Track> getTopAllWeekly(int statusId, int n) {
+		return trackRepository.getTopAllWeekly(statusId, n);
+	}
+	
 	@Override
-	public List<Track> getTopWeekly(int statusId, int n) {
-		return trackRepository.getTopWeekly(statusId, n);
+	public List<Track> getTopUsUkWeekly(int statusId, int n, int genresId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Track> getTopVnWeekly(int statusId, int n, int genresId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Track save(Track track) {
 		return trackRepository.save(track);
-	}
-
-	@Override
-	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId) {
-		return trackRepository.getTopWeeklyByGenre(statusId, n, genresId);
 	}
 
 	@Override
@@ -163,5 +171,17 @@ public class TrackServiceImpl implements TrackService {
 	public List<TrackInfo> getWaitingTrackByGenres(int id, int genresId, Pageable pageable) {
 		return trackRepository.getWaitingTrackByGenres(id, genresId, pageable);
 	}
+
+	@Override
+	public Track findById(int id) {
+		return trackRepository.findById(id).get();
+	}
+
+	@Override
+	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId) {
+		return null;
+	}
+
+
 
 }

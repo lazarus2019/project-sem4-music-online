@@ -790,6 +790,11 @@ audio {
 	opacity: 1;
 }
 
+.circle-icon-sm i{
+    color: var(--white);
+    font-size: 15px;
+}
+
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
@@ -943,3 +948,152 @@ a.form-btn:hover {
 .hide{
 	display: none
 }
+
+.clr-dark{
+    color: var(--dark) !important;
+}
+
+.clr-blue{
+    color: var(--blue) !important;
+}
+
+.bg-clr-red{
+    background: var(--red);
+}
+
+.bg-clr-yellow{
+    background: var(--yellow);
+}
+
+/* Hover */
+.none-hover:hover{
+    background: transparent !important;
+}
+
+/* Text size */
+.text-large{
+    font-size: 30px;
+}
+
+/* Layout */
+.tabs-2{
+    width: 50% !important;
+    margin: 0 30px !important;
+}
+
+.disabled{
+    pointer-events:none;
+    opacity:0.4;
+}
+
+/* Toggle Request Artist Block*/
+.display-block{
+	display: block;	
+}
+
+.display-none { 
+	display: none ; 
+}
+
+/*---------------------------------------------------------------------
+Profile Edit 
+-----------------------------------------------------------------------*/
+
+.profile-pic {
+    max-width: 100%;
+    display: block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+.profile-img-edit {
+    position: relative;
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+}
+
+.file-upload {
+    display: none;
+}
+
+.p-image {
+    position: absolute;
+    top: auto;
+    right: 8px;
+    bottom: 10px;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    background: var(--iq-primary);
+    color: var(--iq-white);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.upload-button {
+    font-size: 1.5em;
+}
+
+.iq-edit-profile .nav-link {
+    padding: 20px 15px;
+    border-radius: 0;
+    color: var(--iq-body-text);
+    text-align: center;
+    font-size: 16px;
+    border-left: 1px solid var(--iq-light-primary);
+}
+
+.iq-edit-profile.nav-pills .nav-link.active,
+.iq-edit-profile.nav-pills .show>.nav-link {
+    color: var(--iq-white);
+    background: var(--iq-primary);
+}
+
+ul.iq-edit-profile li:first-child a {
+    border-radius: 15px 0 0 15px;
+    border-left: none;
+}
+
+ul.iq-edit-profile li:last-child a {
+    border-radius: 0 15px 15px 0;
+}
+
+
+.image-button {
+	position: relative;
+  	width: 100%;
+  	max-width: 400px;
+}
+
+.image-button img {
+	width: 30%;
+  	height: 30%;
+}
+
+#photoAccount {
+	width: 130px ; 
+	height: 130px ;
+}
+
+.image-button i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+

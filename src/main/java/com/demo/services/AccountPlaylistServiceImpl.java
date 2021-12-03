@@ -7,12 +7,16 @@ import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
 import com.demo.models.AlbumInfo;
 import com.demo.repositories.AccountPlaylistRepository;
+import com.demo.repositories.AccountRepository;
 
 @Service("accountPlaylistService")
-public class AccountPlaylistServiceImpl implements AccountPlaylistService{
+public class AccountPlaylistServiceImpl implements AccountPlaylistService {
+
 
 	@Autowired
 	private AccountPlaylistRepository accountPlaylistRepository;
@@ -33,6 +37,26 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<AlbumInfo> getAlbumsByArtistId(int id) {
+		List<AlbumInfo> result = new ArrayList<AlbumInfo>();
+		List<AccountPlaylist> accountPlaylists = accountPlaylistRepository.getAlbumsOfArtistId(id);
+		if(accountPlaylists != null) {
+			for(AccountPlaylist accountPlaylist : accountPlaylists) {
+				AlbumInfo albumInfo = new AlbumInfo();
+				albumInfo.setTitle(accountPlaylist.getPlaylist().getTitle());
+				albumInfo.setStatusId(accountPlaylist.getPlaylist().getStatus().getId());
+				// Check track is on this album or not
+				result.add(albumInfo);	
+			}			
+		}
+		return result;
+	}
 	
-	
+	@Override
+	public AccountPlaylist getOwnerPlaylist(int playlistId) {
+		return accountPlaylistRepository.checkAlbum(playlistId);
+	}
+
 }

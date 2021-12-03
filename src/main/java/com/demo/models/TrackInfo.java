@@ -1,7 +1,9 @@
 package com.demo.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.demo.entities.Account;
@@ -26,12 +28,9 @@ public class TrackInfo {
 	private int weeklyListens;
 	private boolean isPremium;
 	private Date publishDate;
-	private Set<Account> artist = new HashSet<Account>(0);
-	
-	
-	
-	
-	
+	private List<Account> account = new ArrayList<Account>();
+	private List<ArtistInfo> artists = new ArrayList<ArtistInfo>();
+
 	public TrackInfo(Integer id, int genresId, String title, String thumbnail) {
 		super();
 		this.id = id;
@@ -54,26 +53,6 @@ public class TrackInfo {
 	}
 	public TrackInfo() {
 		super();
-	}
-	public TrackInfo(Integer id, int genresId, int statusId, String fileName, String title, String lyrics,
-			String thumbnail, int likes, int duration, int listens, int baseListens, int weeklyListens,
-			boolean isPremium, Date publishDate, Set<Account> artist) {
-		super();
-		this.id = id;
-		this.genresId = genresId;
-		this.statusId = statusId;
-		this.fileName = fileName;
-		this.title = title;
-		this.lyrics = lyrics;
-		this.thumbnail = thumbnail;
-		this.likes = likes;
-		this.duration = duration;
-		this.listens = listens;
-		this.baseListens = baseListens;
-		this.weeklyListens = weeklyListens;
-		this.isPremium = isPremium;
-		this.publishDate = publishDate;
-		this.artist = artist;
 	}
 	public Integer getId() {
 		return id;
@@ -159,11 +138,18 @@ public class TrackInfo {
 	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
 	}
-	public Set<Account> getArtist() {
-		return artist;
+	public List<Account> getAccount() {
+		return account;
 	}
-	public void setArtist(Set<Account> artist) {
-		this.artist = artist;
+	public void setAccount(List<Account> account) {
+		this.account = account;
 	}
+	public List<ArtistInfo> getArtists() {
+		return artists;
+	}
+	public void setArtists(List<ArtistInfo> artists) {
+		this.artists = artists;
+	}
+
 
 }

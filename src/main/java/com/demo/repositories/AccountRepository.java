@@ -31,7 +31,16 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 	
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE isArtist = true AND (nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%)")
 	public List<ArtistInfo> searchByKeyword(@Param("keyword")String keyword, Pageable pageable);
-	
-	
-	
+
+	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account ORDER BY follower DESC")
+	public List<ArtistInfo> getPopularArtists(Pageable pageable);
+
+	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id != :id")
+	public List<ArtistInfo> getArtistsWithoutId(@Param("id")int id);
+
+	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id = :id")
+	public ArtistInfo getArtistById(@Param("id")int id);
+
+	@Query("from Account where username = :username")
+	public Account find(@Param("username") String username);
 }

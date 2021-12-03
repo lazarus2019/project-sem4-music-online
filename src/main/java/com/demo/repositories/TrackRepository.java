@@ -24,7 +24,8 @@ public interface TrackRepository extends PagingAndSortingRepository<Track, Integ
 	public List<Track> getAllByStatus(@Param("statusId") int statusId);
 	
 	@Query(value = "select * from Track where status_id = :statusId order by weekly_listens desc limit :n", nativeQuery = true) 
-	public List<Track> getTopWeekly(@Param("statusId") int statusId, @Param("n") int n);
+
+	public List<Track> getTopAllWeekly(@Param("statusId") int statusId, @Param("n") int n);
 	
 	@Query(value = "select * from Track where status_id = :statusId and genres_id = :genresId order by weekly_listens desc limit :n", nativeQuery = true) 
 	public List<Track> getTopWeeklyByGenre(@Param("statusId") int statusId, @Param("n") int n, @Param("genresId") int genresId);

@@ -1,4 +1,4 @@
-<%@ tag language="java" pageEncoding="ISO-8859-1"%>
+<%@ tag language="java" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
 <%@ taglib prefix="t" uri="http://mytags.com" %>
@@ -26,7 +26,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/adminlte.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/icheck-bootstrap.min.css">
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
+	
+	    <!-- Remix Icon -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/remixicon.css">
 
 	<!-- CSS Listen -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/1.3.0/css/line-awesome.min.css">
@@ -49,294 +53,68 @@
 </head>
 
 <body>
-	<!-- header -->
-	<header class="header">
-		<div class="header__content"> 
-			<div class="header__logo">
-				<a href="index.html">
-					<img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
-				</a>
-			</div>
+<!-- header -->
+<header class="header">
+    <div class="header__content">
+        <div class="header__logo">
+            <a href="index.html">
+                <img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
+            </a>
+        </div>
 
-			<ul class="header__nav">
-				<li>
-					<a href="${pageContext.request.contextPath }/">Home</a>
-				</li>
-				<!-- <a href="profile.html">Profile</a>
+        <ul class="header__nav">
+            <li>
+                <a href="${pageContext.request.contextPath }/">Home</a>
+            </li>
+            <!-- <a href="profile.html">Profile</a>
 				<a href="about.html">About</a>
 				<a href="contacts.html">Contacts</a> -->
-				<li>
-					<a href="${pageContext.request.contextPath }/genres">Genres</a>
-				</li>
-				<li class="dropdown-btn">
-					<a href="#" class="link">Library</a>
-					<div class="dropdown-menu">
-						<a href="releases.html"><i class="las la-music"></i> New Release</a>
-						<a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
-						<a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
-						<a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
-						<a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
-					</div>
-				</li>
+            <li>
+                <a href="${pageContext.request.contextPath }/genres">Genres</a>
+            </li>
+            <li class="dropdown-btn">
+                <a href="#" class="link">Library</a>
+                <div class="dropdown-menu">
+                    <a href="releases.html"><i class="las la-music"></i> New Release</a>
+                    <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
+                    <a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
+                    <a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
+                    <a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+                </div>
+            </li>
 
 
-				<a href="${pageContext.request.contextPath }/artist">Artist</a>
-			</ul>
-			
-			<!-- search box -->
-			<form action="#" class="header__search">
-				<input type="text" placeholder="Artist, track or podcast" class="input-search">
-				<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-						<path
-							d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
-					</svg></button>
-				<button type="button" class="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-						<path
-							d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
-					</svg></button>
-					<div class="result-layout-fixed-bg" onclick="hideResultContainer()"></div>						
-					</div>
-				<div class="result-layout">
-					<div class="artists-result result-box">
-						<div class="result-title">
-							<h3>Artists</h3>
-							<a href="#">View All</a>
-						</div>
-						<div class="result-content grid-tl-6 mt-3 mb-3" id="artist-container">
-							<div class="artist-box">
-								<div class="artist-image-box">
-									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
-								</div>
-								<p class="artist-name">Juice WRLD</p>
-							</div>
-							<div class="artist-box">
-								<div class="artist-image-box">
-									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
-								</div>
-								<p class="artist-name">Juice WRLD</p>
-							</div>
-							<div class="artist-box">
-								<div class="artist-image-box">
-									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
-								</div>
-								<p class="artist-name">Juice WRLD</p>
-							</div>
-							<div class="artist-box">
-								<div class="artist-image-box">
-									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
-								</div>
-								<p class="artist-name">Juice WRLD</p>
-							</div>
-							<div class="artist-box">
-								<div class="artist-image-box">
-									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
-								</div>
-								<p class="artist-name">Juice WRLD</p>
-							</div>
-							<div class="artist-box">
-								<div class="artist-image-box">
-									<img src="https://media.pitchfork.com/photos/5f071ee5197c383b13eebc88/1:1/w_1500,h_1500,c_limit/Juice-WRLD.jpg" alt="">
-								</div>
-								<p class="artist-name">Juice WRLD</p>
-							</div>
-						</div>
-					</div>
-					<div class="track-result result-box">
-						<div class="result-title">
-							<h3>Track</h3>
-							<a href="#">View All</a>
-						</div>
-						<div class="result-content grid-tl-3 mt-3 mb-3" id="track-container">
-							<div class="track-box">
-								<div class="track-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="track-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="track-box">
-								<div class="track-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="track-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="track-box">
-								<div class="track-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="track-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="track-box">
-								<div class="track-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="track-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="track-box">
-								<div class="track-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="track-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="track-box">
-								<div class="track-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="track-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="albums-result result-box">
-						<div class="result-title">
-							<h3>Albums</h3>
-							<a href="#">View All</a>
-						</div>
-						<div class="result-content grid-tl-3 mt-3 mb-3" id="album-container">
-							<div class="album-box">
-								<div class="album-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="album-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="album-box">
-								<div class="album-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="album-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="album-box">
-								<div class="album-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="album-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="album-box">
-								<div class="album-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="album-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="album-box">
-								<div class="album-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="album-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-							<div class="album-box">
-								<div class="album-box-image">
-									<img src="https://www.kri8thm.in/html/listen/theme/assets/images/cover/small/2.jpg" alt="">
-								</div>
-								<div class="album-box-content">
-									<p>Real Shit</p>
-									<span>Juice WRLD</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-			
-			<div class="header__actions">
-				<div class="header__action header__action--search">
-					<button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24">
-							<path
-								d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
-						</svg></button>
-			</div>
-			<!-- end search box -->
+            <a href="${pageContext.request.contextPath }/artist">Artist</a>
+        </ul>
 
-				<!-- notification button -->
-				<t:notification/>
-				<!-- end notification button -->
+		<!-- base search -->
+		<t:baseSearch />
+		<!-- base search end -->
 
-				<div class="header__action header__action--signin">
-					<c:if test="${pageContext.request.userPrincipal.name == null}">
-					<a class="header__action-btn" href="${pageContext.request.contextPath }/user/login/login">
-						<span>Sign in</span>
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path
-								d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
-						</svg>
-					</a>
-					</c:if>
-					<div class="header__action-btn">
-						<c:if test="${pageContext.request.userPrincipal.name  != null }">
-						<span>${ accountSignined.nickname }</span>					
-					
-						<div class="user__box">
-							<i class="las la-crown"></i>
-							<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-								alt="" class="user__avatar">
-							<div class="dropdown__user-menu">
-								<a href="${pageContext.request.contextPath }/user/profile/index">
-									<i class="lar la-user-circle"></i> Profile
-								</a>
-								<a href="${pageContext.request.contextPath }/artist/yourtrack">
-									<i class="las la-music"></i> Your Tracks
-								</a>
-								<a href="${pageContext.request.contextPath }/artist/youralbum">
-									<i class="las la-record-vinyl"></i> Your Albums
-								</a>
-								<a href="#">
-									<i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
-										class="las la-crown yellow__icon"></i>
-								</a>
-								<a href="#">
-									<i class="las la-user-cog"></i> Settings
-								</a>
-								<a href="${pageContext.request.contextPath }/user/login/logout">
-									<i class="las la-sign-out-alt"></i> Log out
-								</a>
-							</div>
-						</div>
-					</c:if> 
-					</div>
-				</div>
-			</div>
-
-			<button class="header__btn" type="button">
-				<span></span>
-				<span></span>
-				<span></span>
-			</button>
-		</div>
-	</header>
-	<!-- end header -->
-
-
+        <div class="header__actions">
+            <div class="header__action header__action--search">
+                <button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
+                    </svg></button>
+            </div>
+            <!-- end search box -->
+    
+            <!-- notification button -->
+            <t:notification />
+            <!-- end notification button -->
+    		<t:nickname/> 
+        </div>
+    
+        <button class="header__btn" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+<!-- end header -->
 	<!-- player -->
 	<div class="player" id="audioPlayer">
 		<div class="progressbar">
@@ -436,55 +214,7 @@
 				</div>
 			</div>
 			<div class="col-6">
-				<div class="lyric-content">
-					<p>Song: For You - Why don't we</p>
-					<p>Hey</p>
-					<p>She said, 'I really miss the old you'</p>
-					<p>Then found someone better (whoa)</p>
-					<p>I really miss the old me (yeah, yeah)</p>
-					<p>Maybe he was better, oh, oh, oh</p>
-					<p>But I realize I'm doin' fine</p>
-					<p>I just start thinkin' crazy when you're on my mind (crazy when you're on my mind, yeah)</p>
-					<p>You'll be okay and I'll be alright</p>
-					<p>But I've gotta say</p>
-					<p>If we're said and done I know, I shouldn't say that</p>
-					<p>I still care, but I still care</p>
-					<p>And even when you're movin' on I hope you know that</p>
-					<p>I'll be there, I'll be there</p>
-					<p>I'll be there for you</p>
-					<p>I'll be there for you</p>
-					<p>Even if you don't want me to</p>
-					<p>I'll be there for you</p>
-					<p>Be there for you</p>
-					<p>I'll be there for you</p>
-					<p>Even if you don't want me to</p>
-					<p>I'll be there for you</p>
-					<p>(Yeah)</p>
-					<p>I really gotta ask myself (oh)</p>
-					<p>If I knew you weren't good for me then</p>
-					<p>Why do I want you back right now? Oh</p>
-					<p>Like you think I would've asked by now (oh)</p>
-					<p>I'm in the palm of your hand, and then you don't give a damn</p>
-					<p>Was it easy to let me go? (Say it)</p>
-					<p>Say it quick, love my name when you sayin' it</p>
-					<p>I don't even know why I'm sayin' this</p>
-					<p>'Cause nothin' I'm sayin' is gonna change this</p>
-					<p>But I realize I'm doin' fine</p>
-					<p>I just start thinkin' crazy when you're on my mind</p>
-					<p>You'll be okay and I'll be alright</p>
-					<p>But I've gotta say</p>
-					<p>If we're said and done I know, I shouldn't say that</p>
-					<p>I still care, but I still care</p>
-					<p>And even when you're movin' on I hope you know that (I hope you know)</p>
-					<p>I'll be there, I'll be there</p>
-					<p>Be there for you</p>
-					<p>Ooh, ooh</p>
-					<p>I'll be there for you</p>
-					<p>Ooh, ooh</p>
-					<p>Be there for you</p>
-					<p>I'll be there for you</p>
-					<p>Even if you don't want me to</p>
-					<p>I'll be there for you</p>
+				<div class="lyric-content">					
 				</div>
 			</div>
 		</div>
@@ -502,303 +232,7 @@
 			</button>
 		</div>
 		<ul class="playlist__list">
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
-			<li class="playlist__list-item">
-				<div class="playlist__item-desc">
-					<div class="playlist__list-item-image">
-						<img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-							alt="">
-					</div>
-					<div class="playlist__song-content">
-						<h3>I Love You Mummy</h3>
-						<span>Arebica Luna</span>
-					</div>
-				</div>
-				<button class="btn-dropdown-playlist-menu default-btn">
-					<i class="las la-braille audio__icon"></i>
-					<div class="dropdown__playlist-item-menu">
-						<a class="dropdown-song-link favorite-link" data-favorite="true">
-							<i class="las la-heart"></i>
-							<span>Favorite</span>
-						</a>
-						<a class="dropdown-song-link">
-							<i class="las la-plus small__icon"></i>
-							<span>Add to Playlist</span>
-						</a>
-						<a class="dropdown-song-link share-link" href="abc.com">
-							<i class="las la-share small__icon"></i>
-							<span>Share</span>
-						</a>
-						<a class="dropdown-song-link" href="#">
-							<i class="las la-info-circle small__icon"></i>
-							<span>Song Info</span>
-						</a>
-					</div>
-				</button>
-			</li>
+
 		</ul>
 	</div>
 	<!-- end Playlist box -->
@@ -948,7 +382,7 @@
 									<path d="M13.5 18V13L17.5 15.5001L13.5 18Z" fill="#FF0000" />
 								</svg></a>
 						</div>
-						<small class="footer__copyright">� Volna, 2021. Created by <a
+						<small class="footer__copyright">@ Volna, 2021. Created by <a
 								href="../../../themeforest.net/user/dmitryvolkov/portfolio.html" target="_blank">Dmitry
 								Volkov</a>.</small>
 					</div>
@@ -1115,6 +549,8 @@
 
 	<!-- JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.magnific-popup.min.js"></script>
@@ -1127,13 +563,1091 @@
 
 	<!-- My custom JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
-	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/player/player.js"></script>
 	<script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/my_custom.js"></script>
 	
+
+	<!-- Player -->
+	<script defer>
+
+	class Song{
+	    constructor(id, title, singer, path, image, duration){
+	        this.elements = {}
+	        this.elements.root = Song.createRoot()
+	        this.elements.image = this.elements.root.querySelector('.playlist__list-item-image img')
+	        this.elements.title = this.elements.root.querySelector('.playlist__song-content h3')
+	        this.elements.singer = this.elements.root.querySelector('.playlist__song-content span')
+
+	        this.elements.root.dataset.id = id
+	        // this.elements.image.src = `resources/image/document.querySelector{image}`
+	        this.elements.image.src = image
+	        this.elements.title.textContent = title
+	        this.elements.singer.textContent = singer
+
+	    }
+
+	    static createRoot() {
+	        const range = document.createRange();
+
+	        range.selectNode(document.body);
+
+	        return range.createContextualFragment(`
+	        <li class="playlist__list-item">
+	        <div class="playlist__item-desc">
+	            <div class="playlist__list-item-image">
+	                <img src=""
+	                alt="">
+	                </div>
+	                <div class="playlist__song-content">
+	                    <h3></h3>
+	                    <span></span>
+	                    </div>
+	                    </div>
+	                    <button class="btn-dropdown-playlist-menu default-btn">
+	                        <i class="las la-braille audio__icon"></i>
+	                        <div class="dropdown__playlist-item-menu">
+	                <a class="dropdown-song-link favorite-link" data-favorite="true">
+	                    <i class="las la-heart"></i>
+	                    <span>Favorite</span>
+	                    </a>
+	                    <a class="dropdown-song-link">
+	                    <i class="las la-plus small__icon"></i>
+	                    <span>Add to Playlist</span>
+	                    </a>
+	                    <a class="dropdown-song-link share-link" href="abc.com">
+	                    <i class="las la-share small__icon"></i>
+	                    <span>Share</span>
+	                </a>
+	                <a class="dropdown-song-link" href="#">
+	                    <i class="las la-info-circle small__icon"></i>
+	                    <span>Song Info</span>
+	                    </a>
+	                    </div>
+	                    </button>
+	                    </li>
+	                    `).children[0];
+	    }
+	}
+
+	const PlAYER_STORAGE_KEY = "MUSIC_APP"
+	const PLAYLIST_STORAGE_KEY = "MUSIC_APP_PLAYLIST"
+	const WAITING_PLAYLIST_STORAGE_KEY = "MUSIC_APP_WAITING_PLAYLIST"
+	let adsStep = 5
+
+	const player = document.querySelector('.player');
+	const songName = document.querySelector('.song-content h3')
+	const songArtist = document.querySelector('.song-content span')
+	const cdThumb = document.querySelector('.song-image img')
+	const audio = document.querySelector('#audio')
+	const playBtn = document.querySelector('.btn-play-pause-audio')
+	const progress = document.querySelector('.audio-progress')
+	const progressBar = document.querySelector('.progressbar .bar')
+	const nextBtn = document.querySelector('.btn-next-audio')
+	const prevBtn = document.querySelector('.btn-prev-audio')
+	const randomBtn = document.querySelector('.btn-random-song')
+	const repeatBtn = document.querySelector('.btn-loop-song')
+	const playlist = document.querySelector('.playlist__list')
+	playlist.innerHTML = ""
+	const baseDuration = document.querySelector('.base-duration')
+	const trackTime = document.querySelector('.current-time')
+	const lyricContent = document.querySelector('.lyric-content')
+	const lyricThumbnail = document.querySelector('.lyric-thumbnail img')
+	const audioVolume = document.querySelector('.audio-volume')
+	const timerSelect = document.querySelector('#timer-countdown')
+	const setTimerBtn = document.querySelector('.btn-set-timer')
+	const cancelTimerLayout = document.querySelector('.btn-timer-cancel')
+	const removeTimer = document.querySelector('.remove-timer')
+	const timerLeft = document.querySelector('.timer-left')
+	const timerCountDown = document.querySelector('.timer')
+	const advertisement = document.querySelector('#advertisement');
+	
+	let songPlaylist = JSON.parse(localStorage.getItem(PLAYLIST_STORAGE_KEY)) || []
+
+	let newSongs = [
+	{
+	    id: 7,
+	    title: "Tu Phir Se Aana",
+	    singer: "Raftaar x Salim Merchant x Karma",
+	    path: "https://docs.google.com/uc?export=download&id=1BXF9GlkjfHAfM3rfP0nvKvop7K43zFh8",
+	    image:
+	        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg",
+	    duration: 246
+	},
+	{
+	    id: 40,
+	    title: "Ibiza",
+	    singer: "MBB",
+	    path: "https://docs.google.com/uc?export=download&id=10wjlQf92ph-EAma7TFqmcIlIegCDNI9G",
+	    image:
+	        "https://www.stockbiz.vn/Handlers/GetThumbnail.axd?i=202003270834059375000&w=220",
+	    duration: 246
+	},
+	{
+	    id: 25,
+	    title: "For You",
+	    singer: "Why Don't We",
+	    path: "https://docs.google.com/uc?export=download&id=19Lh7YjzCBrGlNVAADVkiEXwHLzpY2K8b",
+	    image:
+	        "https://avatar-ex-swe.nixcdn.com/song/2020/08/06/6/0/8/0/1596669230164_640.jpg",
+	    duration: 246
+	}
+	]
+
+	let waitingPlaylist = [
+	{
+	    id: 40,
+	    title: "Ibiza",
+	    singer: "MBB",
+	    path: "https://docs.google.com/uc?export=download&id=10wjlQf92ph-EAma7TFqmcIlIegCDNI9G",
+	    image:
+	        "https://www.stockbiz.vn/Handlers/GetThumbnail.axd?i=202003270834059375000&w=220",
+	    duration: 246
+	},
+	{
+	    id: 25,
+	    title: "For You",
+	    singer: "Why Don't We",
+	    path: "https://docs.google.com/uc?export=download&id=19Lh7YjzCBrGlNVAADVkiEXwHLzpY2K8b",
+	    image:
+	        "https://avatar-ex-swe.nixcdn.com/song/2020/08/06/6/0/8/0/1596669230164_640.jpg",
+	    duration: 246
+	},
+	{
+	    id: 8,
+	    title: "Tu Phir Se Aana",
+	    singer: "Raftaar x Salim Merchant x Karma",
+	    path: "https://docs.google.com/uc?export=download&id=1BXF9GlkjfHAfM3rfP0nvKvop7K43zFh8",
+	    image:
+	        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg",
+	    duration: 246
+	},
+	{
+	    id: 9,
+	    title: "Tu Phir Se Aana",
+	    singer: "Raftaar x Salim Merchant x Karma",
+	    path: "https://docs.google.com/uc?export=download&id=1BXF9GlkjfHAfM3rfP0nvKvop7K43zFh8",
+	    image:
+	        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg",
+	    duration: 246
+	},
+	{
+	    id: 3,
+	    duration: 130,
+	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
+	    title: "Feeling You",
+	    path: "https://docs.google.com/uc?export=download&id=1kC4OK-CMPKfHUbRgB1uRkqX6YBYpaCyd",
+	    singer: "Raftaar x Harjas"
+	},
+	{
+	    id: 4,
+	    duration: 130,
+	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
+	    title: "Sax",
+	    path: "https://docs.google.com/uc?export=download&id=16ELzmbgvkTcU0L8GUngXL8MYcpjYq7oD",
+	    singer: "Raftaar x Harjas"
+	},
+	{
+	    id: 2,
+	    duration: 130,
+	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
+	    title: "Smell Like Summer",
+	    path: "https://docs.google.com/uc?export=download&id=1CEQDcny85bzP8Xvonukm9BMQF0hPsw35",
+	    singer: "Raftaar x Harjas"
+	},
+	{
+	    id: 1,
+	    duration: 130,
+	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
+	    title: "Steam Like Gone",
+	    path: "https://docs.google.com/uc?export=download&id=1CXF1XCQeiLuGvC515vFkKHtYT2JrreQm",
+	    singer: "Raftaar x Harjas"
+	}
+	]
+
+	let isPremium = false;
+
+	const app = {
+	oldIndex: 0,
+	currentIndex: 0,
+	currentSong: {},
+	volume: .5, // [0;1]
+	isPlaying: false,
+	isRepeat: false,
+	isRandom: false,
+	isAdvertisement: false,
+	startTime: 0,
+	amount: 0,
+	isCountdown: false,
+	secondsTimerLeft: 0,
+	timer: setInterval(() => { }, 1000),
+	config: JSON.parse(localStorage.getItem(PlAYER_STORAGE_KEY)) || {},
+	songs: JSON.parse(localStorage.getItem(PLAYLIST_STORAGE_KEY)) || [],
+	setConfig: function (key, value) {
+	    this.config[key] = value
+	    localStorage.setItem(PlAYER_STORAGE_KEY, JSON.stringify(this.config))
+	},
+	renderFirstTime: function () {
+	    songPlaylist.forEach(song => {
+	        const songEl = new Song(song.id, song.title, song.singer, song.path, song.image, song.duration)
+	        playlist.appendChild(songEl.elements.root)
+	    })
+	},
+	defineProperties: function () {
+	    Object.defineProperty(this, "currentSong", {
+	        get: function () {
+	            this.setConfig('currentIndex', this.currentIndex)
+	            this.setConfig('currentSong', songPlaylist[this.currentIndex])
+	            return songPlaylist[this.currentIndex]
+	        }
+	    });
+	},
+	handleEvents: function () {
+	    const _this = this;
+
+	    playBtn.onclick = () => {
+	        _this.setConfig('isPlaying', !_this.isPlaying)
+	        if (!_this.isAdvertisement) {
+	            if (_this.isPlaying) {
+	                audio.pause()
+	            } else {
+	                audio.play()
+	            }
+	        } else {
+	            _this.runAdvertisement()
+	        }
+	    }
+
+	    audio.onplay = () => {
+	        _this.isPlaying = true
+	        player.classList.add('playing')
+	    }
+
+	    audio.onpause = () => {
+	        _this.isPlaying = false
+	        player.classList.remove('playing')
+	    }
+
+	    audio.ontimeupdate = () => {
+	        if (audio.duration) {
+	            _this.startTime = audio.currentTime
+	            _this.setConfig('startTime', _this.startTime)
+	            const progressPercent = Math.floor(audio.currentTime / audio.duration * 100 * 100) / 100
+	            progress.value = progressPercent
+	            progressBar.style.width = progressPercent + '%';
+	            trackTime.innerHTML = _this.audioCalTime(audio.currentTime)
+	        }
+	    }
+
+	    progress.oninput = (e) => {
+	        const seekTime = Math.floor(audio.duration / 100 * e.target.value * 100) / 100
+	        audio.currentTime = seekTime
+	        progressBar.style.width = e.target.value + '%';
+	    }
+
+	    nextBtn.onclick = () => {
+	        if (_this.isRandom) {
+	            _this.playRandomSong()
+	        } else {
+	            _this.nextSong()
+	        }
+	        if (!_this.isAdvertisement) {
+	            audio.currentTime = 0
+	            audio.play()
+	        }
+	        // _this.renderFirstTime()
+	    }
+
+	    prevBtn.onclick = () => {
+	        if (_this.isRandom) {
+	            _this.playRandomSong()
+	        } else {
+	            _this.prevSong()
+	        }
+	        if (!_this.isAdvertisement) {
+	            audio.currentTime = 0
+	            audio.play()
+	        }
+	        // _this.renderFirstTime()
+	    }
+
+	    randomBtn.onclick = () => {
+	        _this.isRandom = !_this.isRandom
+	        _this.setConfig('isRandom', _this.isRandom)
+	        randomBtn.classList.toggle('active', _this.isRandom)
+	    }
+
+	    repeatBtn.onclick = () => {
+	        _this.isRepeat = !_this.isRepeat
+	        _this.setConfig('isRepeat', _this.isRepeat)
+	        repeatBtn.classList.toggle('active', _this.isRepeat)
+	    }
+
+	    audio.onended = () => {
+	        if (_this.isRepeat) {
+	            audio.play()
+	        } else {
+	            if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
+	                addSongs(waitingPlaylist[0])
+	                playSong(waitingPlaylist[0].id)
+	            } else {
+	                nextBtn.click()
+	            }
+	        }
+	    }
+
+	    advertisement.onended = () => {
+	        _this.isAdvertisement = false
+	        _this.setConfig('isAdvertisement', _this.isAdvertisement)
+	        _this.loadSongWithoutAds()
+	    }
+
+	    playlist.onclick = (e) => {
+	        const songNode = e.target.closest('.playlist__list-item');
+	        if (songNode && !e.target.closest('.btn-dropdown-playlist-menu')) {
+	            // if (songNode) {
+	            // console.log('songnode')
+	            // audio.src = songNode.dataset.filename
+	            const id = Number(songNode.dataset.id)
+	            const currentSong = songPlaylist.find(song => song.id === id)
+	            _this.currentIndex = songPlaylist.indexOf(currentSong)
+	            // _this.currentIndex = Number(songNode.dataset.id)
+	            _this.loadCurrentSong()
+	            // _this.renderFirstTime()
+	            // }
+
+	            if (e.target.closest('.btn-dropdown-playlist-menu')) {
+
+	            }
+	        }
+	    }
+
+	    audioVolume.oninput = (e) => {
+	        const volume = e.target.value / 100
+	        audio.volume = volume
+	        _this.setConfig('volume', volume)
+	    }
+
+	    setTimerBtn.onclick = () => {
+	        clearInterval(_this.timer)
+	        _this.secondsTimerLeft = timerSelect.value * 60;
+	        _this.countDownTimer()
+	        _this.closeTimer()
+	    }
+
+	    cancelTimerLayout.onclick = () => {
+	        _this.closeTimer()
+	    }
+
+	    removeTimer.onclick = () => {
+	        _this.removeCountDown()
+	    }
+	},
+	audioCalTime: function (time) {
+	    const duration = Number.parseInt(time)
+	    if (duration < 3600) {
+	        return new Date(duration * 1000).toISOString().substr(14, 5)
+	    } else {
+	        return new Date(duration * 1000).toISOString().substr(11, 8)
+	    }
+	},
+	countDownTimer: function () {
+	    timerLeft.innerHTML = this.audioCalTime(this.secondsTimerLeft)
+	    this.setCountdownToStorage(true)
+	    timerCountDown.classList.add('show')
+	    this.timer = setInterval(() => {
+	        this.secondsTimerLeft--
+	        this.setConfig('secondsTimerLeft', this.secondsTimerLeft)
+	        timerLeft.innerHTML = this.audioCalTime(this.secondsTimerLeft)
+	        if (this.secondsTimerLeft == 0) {
+	            this.removeCountDown()
+	            this.setCountdownToStorage(false)
+	            audio.pause()
+	            this.setConfig('isPlaying', false)
+	            this.playAlarmTimer()
+	        }
+	    }, 1000)
+	},
+	setCountdownToStorage: function (status) {
+	    this.isCountdown = status;
+	    this.setConfig('isCountdown', this.isCountdown)
+	},
+	playAlarmTimer: function () {
+
+	},
+	closeTimer: function () {
+	    document.querySelector('.set-timer').classList.remove('show')
+	},
+	removeCountDown: function () {
+	    this.secondsTimerLeft = 0
+	    this.setConfig('secondsTimerLeft', this.secondsTimerLeft)
+	    clearInterval(this.timer)
+	    timerCountDown.classList.remove('show')
+	},
+	loadCurrentSong: function () {
+	    this.activeSong()
+
+	    if (this.amount % adsStep === 0 && this.amount !== 0) {
+	        this.isAdvertisement = true
+	        this.setConfig('isAdvertisement', this.isAdvertisement)
+	    }
+	    if (this.isAdvertisement) {
+	        this.runAdvertisement()
+	    } else {
+	        this.amount++
+	        this.setConfig('amount', this.amount)
+	        audio.src = this.currentSong.path
+	        cdThumb.src = this.currentSong.image
+	        songName.textContent = this.currentSong.title;
+	        songArtist.textContent = this.currentSong.singer
+	        baseDuration.innerHTML = this.audioCalTime(this.currentSong.duration)
+	        if (this.isPlaying) {
+	            audio.load()
+	            audio.autoplay = true
+	        }
+	        this.renderLyrics()
+	        lyricThumbnail.src = this.currentSong.image
+	    }
+	},
+	loadSongWithoutAds: function () {
+	    this.activeSong()
+
+	    this.amount++
+	    this.setConfig('amount', this.amount)
+	    audio.src = this.currentSong.path
+	    cdThumb.src = this.currentSong.image
+	    songName.textContent = this.currentSong.title;
+	    songArtist.textContent = this.currentSong.singer
+	    baseDuration.innerHTML = this.audioCalTime(this.currentSong.duration)
+	    audio.play()
+	    this.renderLyrics()
+	    lyricThumbnail.src = this.currentSong.image
+	},
+	activeSong: function () {
+	    const oldSong = document.querySelector('.playlist__list-item.active')
+	    if (oldSong) {
+	        oldSong.classList.remove('active')
+	    }
+	    const songActive = document.querySelector(".playlist__list-item[data-id='"+this.currentSong.id+"']")
+	    if (songActive) {
+	        songActive.classList.add('active')
+	    }
+	},
+	runAdvertisement: function () {
+	    audio.autoplay = false
+	    audio.pause()
+	    advertisement.load()
+	    advertisement.autoplay = true
+	},
+	renderLyrics: function () {
+	    let htmls = this.currentSong.lyrics.map(line => "<p>"+line+"</p>")
+
+	    lyricContent.innerHTML = htmls.join('')
+	},
+	loadConfig: function () {
+	    this.currentIndex = this.config.currentIndex || 0
+	    this.currentSong = this.config.currentSong || songPlaylist[this.currentIndex] || {}
+
+	    this.volume = this.config.volume || .5
+	    audioVolume.value = this.volume * 100
+	    audio.volume = this.volume
+
+	    this.startTime = this.config.startTime || 0
+	    if (this.startTime != 0) {
+	        audio.currentTime = this.startTime
+	    }
+	    if (songPlaylist.length > 0) {
+	        this.loadCurrentSong()
+	    }
+
+	    this.isPlaying = this.config.isPlaying || false
+	    if (this.isPlaying) {
+	        audio.autoplay = true
+	    }
+
+	    this.amount = this.config.amount || 0
+	    this.isAdvertisement = this.config.isAdvertisement || false
+	    this.isRandom = this.config.isRandom || false
+	    this.isRepeat = this.config.isRepeat || false
+	    this.isCountdown = this.config.isCountdown || false
+	    this.secondsTimerLeft = this.config.secondsTimerLeft || 0
+	    if (this.secondsTimerLeft != 0 && this.isCountdown) {
+	        this.countDownTimer()
+	    }
+	    this.amount = this.config.amount || 0
+
+	},
+	nextSong: function () {
+	    this.currentIndex++
+	    if (this.currentIndex >= songPlaylist.length) {
+	        this.currentIndex = 0
+	    }
+	    this.loadCurrentSong()
+	},
+	prevSong: function () {
+	    this.currentIndex--
+	    if (this.currentIndex < 0) {
+	        this.currentIndex = songPlaylist.length - 1
+	    }
+	    this.loadCurrentSong()
+	},
+	playRandomSong: function () {
+	    let newIndex
+	    do {
+	        newIndex = Math.floor(Math.random() * songPlaylist.length)
+	    } while (newIndex === this.currentIndex);
+
+	    this.currentIndex = newIndex
+	    this.loadCurrentSong()
+	},
+	addNewSong: function (songs) {
+	    if (songs.isArray()) {
+
+	    } else {
+	        if (songPlaylist.indexOf(newSong) === -1) {
+	            songPlaylist.push(newSong)
+	            this.updatePlaylist(songPlaylist)
+	        }
+	    }
+
+	},
+	findSong: function (id) {
+	    return songPlaylist.find(song => song.id === id) || null
+	},
+	deleteSong: function (songId) {
+	    const song = this.findSong(songId)
+	    if (song) {
+	        songPlaylist.splice(songs.indexOf(song), 1)
+	    }
+	},
+	getPlaylist: function () {
+
+	},
+	updatePlaylist: function (playlist) {
+	    localStorage.setItem(PLAYLIST_STORAGE_KEY, JSON.stringify(playlist))
+	},
+	start: function () {
+	    //RenderFirstTime playlist
+	    this.renderFirstTime()
+
+	    this.loadConfig()
+
+	    this.defineProperties()
+
+	    this.handleEvents()
+
+	    // this.loadCurrentSong()
+
+	    // this.updatePlaylist(songPlaylist)
+
+	    randomBtn.classList.toggle('active', this.isRandom)
+	    repeatBtn.classList.toggle('active', this.isRepeat)
+	}
+	}
+
+	const appPremium = {
+	oldIndex: 0,
+	currentIndex: 0,
+	currentSong: {},
+	volume: .5, // [0;1]
+	isPlaying: false,
+	isRepeat: false,
+	isRandom: false,
+	startTime: 0,
+	isCountdown: false,
+	secondsTimerLeft: 0,
+	timer: setInterval(() => { }, 1000),
+	config: JSON.parse(localStorage.getItem(PlAYER_STORAGE_KEY)) || {},
+	songs: JSON.parse(localStorage.getItem(PLAYLIST_STORAGE_KEY)) || [],
+	setConfig: function (key, value) {
+	    this.config[key] = value
+	    localStorage.setItem(PlAYER_STORAGE_KEY, JSON.stringify(this.config))
+	},
+	renderFirstTime: function () {
+	    songPlaylist.forEach(song => {
+	        const songEl = new Song(song.id, song.title, song.singer, song.path, song.image, song.duration)
+	        playlist.appendChild(songEl.elements.root)
+	    })
+	    console.log('renderFirstTimeed')
+	},
+	defineProperties: function () {
+	    Object.defineProperty(this, "currentSong", {
+	        get: function () {
+	            this.setConfig('currentIndex', this.currentIndex)
+	            this.setConfig('currentSong', songPlaylist[this.currentIndex])
+	            return songPlaylist[this.currentIndex]
+	        }
+	    });
+	},
+	handleEvents: function () {
+	    const _this = this;
+
+	    playBtn.onclick = () => {
+	        _this.setConfig('isPlaying', !_this.isPlaying)
+	        if (_this.isPlaying) {
+	            audio.pause()
+	        } else {
+	            audio.play()
+	        }
+	    }
+
+	    audio.onplay = () => {
+	        _this.isPlaying = true
+	        player.classList.add('playing')
+	    }
+
+	    audio.onpause = () => {
+	        _this.isPlaying = false
+	        player.classList.remove('playing')
+	    }
+
+	    audio.ontimeupdate = () => {
+	        if (audio.duration) {
+	            _this.startTime = audio.currentTime
+	            _this.setConfig('startTime', _this.startTime)
+	            const progressPercent = Math.floor(audio.currentTime / audio.duration * 100 * 100) / 100
+	            progress.value = progressPercent
+	            progressBar.style.width = progressPercent + '%';
+	            trackTime.innerHTML = _this.audioCalTime(audio.currentTime)
+	        }
+	    }
+
+	    progress.oninput = (e) => {
+	        const seekTime = Math.floor(audio.duration / 100 * e.target.value * 100) / 100
+	        audio.currentTime = seekTime
+	        progressBar.style.width = e.target.value + '%';
+	    }
+
+	    nextBtn.onclick = () => {
+	        if (_this.isRandom) {
+	            _this.playRandomSong()
+	        } else {
+	            _this.nextSong()
+	        }
+	        audio.play()
+	    }
+
+	    prevBtn.onclick = () => {
+	        if (_this.isRandom) {
+	            _this.playRandomSong()
+	        } else {
+	            _this.prevSong()
+	        }
+	        audio.play()
+	    }
+
+	    randomBtn.onclick = () => {
+	        _this.isRandom = !_this.isRandom
+	        _this.setConfig('isRandom', _this.isRandom)
+	        randomBtn.classList.toggle('active', _this.isRandom)
+	    }
+
+	    repeatBtn.onclick = () => {
+	        _this.isRepeat = !_this.isRepeat
+	        _this.setConfig('isRepeat', _this.isRepeat)
+	        repeatBtn.classList.toggle('active', _this.isRepeat)
+	    }
+
+	    audio.onended = () => {
+	        if (_this.isRepeat) {
+	            audio.play()
+	        } else {
+	            if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
+	                addSongs(waitingPlaylist[0])
+	                playSong(waitingPlaylist[0].id)
+	            } else {
+	                nextBtn.click()
+	            }
+	        }
+	    }
+
+	    playlist.onclick = (e) => {
+	        const songNode = e.target.closest('.playlist__list-item');
+	        if (songNode && !e.target.closest('.btn-dropdown-playlist-menu')) {
+	            // if (songNode) {
+	            // console.log('songnode')
+	            // audio.src = songNode.dataset.filename
+	            const id = Number(songNode.dataset.id)
+	            const currentSong = songPlaylist.find(song => song.id === id)
+	            _this.currentIndex = songPlaylist.indexOf(currentSong)
+	            // _this.currentIndex = Number(songNode.dataset.id)
+	            _this.loadCurrentSong()
+	            // }
+
+	            if (e.target.closest('.btn-dropdown-playlist-menu')) {
+
+	            }
+	        }
+	    }
+
+	    audioVolume.oninput = (e) => {
+	        const volume = e.target.value / 100
+	        audio.volume = volume
+	        _this.setConfig('volume', volume)
+	    }
+
+	    setTimerBtn.onclick = () => {
+	        clearInterval(_this.timer)
+	        _this.secondsTimerLeft = timerSelect.value * 60;
+	        _this.countDownTimer()
+	        _this.closeTimer()
+	    }
+
+	    cancelTimerLayout.onclick = () => {
+	        _this.closeTimer()
+	    }
+
+	    removeTimer.onclick = () => {
+	        _this.removeCountDown()
+	    }
+	},
+	audioCalTime: function (time) {
+	    const duration = Number.parseInt(time)
+	    if (duration < 3600) {
+	        return new Date(duration * 1000).toISOString().substr(14, 5)
+	    } else {
+	        return new Date(duration * 1000).toISOString().substr(11, 8)
+	    }
+	},
+	countDownTimer: function () {
+	    timerLeft.innerHTML = this.audioCalTime(this.secondsTimerLeft)
+	    this.setCountdownToStorage(true)
+	    timerCountDown.classList.add('show')
+	    this.timer = setInterval(() => {
+	        this.secondsTimerLeft--
+	        this.setConfig('secondsTimerLeft', this.secondsTimerLeft)
+	        timerLeft.innerHTML = this.audioCalTime(this.secondsTimerLeft)
+	        if (this.secondsTimerLeft == 0) {
+	            this.removeCountDown()
+	            this.setCountdownToStorage(false)
+	            audio.pause()
+	            this.setConfig('isPlaying', false)
+	            this.playAlarmTimer()
+	        }
+	    }, 1000)
+	},
+	setCountdownToStorage: function (status) {
+	    this.isCountdown = status;
+	    this.setConfig('isCountdown', this.isCountdown)
+	},
+	playAlarmTimer: function () {
+
+	},
+	closeTimer: function () {
+	    document.querySelector('.set-timer').classList.remove('show')
+	},
+	removeCountDown: function () {
+	    this.secondsTimerLeft = 0
+	    this.setConfig('secondsTimerLeft', this.secondsTimerLeft)
+	    clearInterval(this.timer)
+	    timerCountDown.classList.remove('show')
+	},
+	loadCurrentSong: function () {
+	    this.activeSong()
+
+	    audio.src = this.currentSong.path
+	    cdThumb.src = this.currentSong.image
+	    songName.textContent = this.currentSong.title;
+	    songArtist.textContent = this.currentSong.singer
+	    baseDuration.innerHTML = this.audioCalTime(this.currentSong.duration)
+	    if (this.isPlaying) {
+	        audio.load()
+	        audio.autoplay = true
+	    }
+	    this.renderLyrics()
+	    lyricThumbnail.src = this.currentSong.image
+	},
+	activeSong: function () {
+	    const oldSong = document.querySelector('.playlist__list-item.active')
+	    if (oldSong) {
+	        oldSong.classList.remove('active')
+	    }
+	    const songActive = document.querySelector(".playlist__list-item[data-id='"+this.currentSong.id+"']")
+	    if (songActive) {
+	        songActive.classList.add('active')
+	    }
+	},
+	renderLyrics: function () {
+		if(this.currentSong.lyrics){
+		    let htmls = this.currentSong.lyrics.map(line => "<p>"+line+"</p>")
+
+		    lyricContent.innerHTML = htmls.join('')
+		}
+	},
+	loadConfig: function () {
+	    this.currentIndex = this.config.currentIndex || 0
+	    this.currentSong = this.config.currentSong || songPlaylist[this.currentIndex] || {}
+
+	    this.volume = this.config.volume || .5
+	    audioVolume.value = this.volume * 100
+	    audio.volume = this.volume
+
+	    this.startTime = this.config.startTime || 0
+	    if (this.startTime != 0) {
+	        audio.currentTime = this.startTime
+	    }
+	    if (songPlaylist.length > 0) {
+	        this.loadCurrentSong()
+	    }
+
+	    this.isPlaying = this.config.isPlaying || false
+	    if (this.isPlaying) {
+	        audio.autoplay = true
+	    }
+
+	    this.isRandom = this.config.isRandom || false
+	    this.isRepeat = this.config.isRepeat || false
+	    this.isCountdown = this.config.isCountdown || false
+	    this.secondsTimerLeft = this.config.secondsTimerLeft || 0
+	    if (this.secondsTimerLeft != 0 && this.isCountdown) {
+	        this.countDownTimer()
+	    }
+
+	},
+	nextSong: function () {
+	    this.currentIndex++
+	    if (this.currentIndex >= songPlaylist.length) {
+	        this.currentIndex = 0
+	    }
+	    this.loadCurrentSong()
+	},
+	prevSong: function () {
+	    this.currentIndex--
+	    if (this.currentIndex < 0) {
+	        this.currentIndex = songPlaylist.length - 1
+	    }
+	    this.loadCurrentSong()
+	},
+	playRandomSong: function () {
+	    let newIndex
+	    do {
+	        newIndex = Math.floor(Math.random() * songPlaylist.length)
+	    } while (newIndex === this.currentIndex);
+
+	    this.currentIndex = newIndex
+	    this.loadCurrentSong()
+	},
+	addNewSong: function (songs) {
+	    if (songs.isArray()) {
+
+	    } else {
+	        if (songPlaylist.indexOf(newSong) === -1) {
+	            songPlaylist.push(newSong)
+	            this.updatePlaylist(songPlaylist)
+	        }
+	    }
+
+	},
+	findSong: function (id) {
+	    return songPlaylist.find(song => song.id === id) || null
+	},
+	deleteSong: function (songId) {
+	    const song = this.findSong(songId)
+	    if (song) {
+	        songPlaylist.splice(songs.indexOf(song), 1)
+	    }
+	},
+	getPlaylist: function () {
+
+	},
+	updatePlaylist: function (playlist) {
+	    localStorage.setItem(PLAYLIST_STORAGE_KEY, JSON.stringify(playlist))
+	},
+	start: function () {
+	    this.renderFirstTime()
+
+	    this.loadConfig()
+
+	    this.defineProperties()
+
+	    this.handleEvents()
+
+	    // this.loadCurrentSong()
+
+	    // this.updatePlaylist(songPlaylist)
+
+	    randomBtn.classList.toggle('active', this.isRandom)
+	    repeatBtn.classList.toggle('active', this.isRepeat)
+	}
+	}
+
+	if (isPremium) {
+	appPremium.start()
+	} else {
+	app.start()
+	}
+	function renderSong(data) {
+	const song = new Song(data.id, data.title, data.singer, data.path, data.image, data.duration)
+	playlist.appendChild(song.elements.root)
+	}
+
+	function updatePlaylist(localKey, data) {
+	localStorage.setItem(localKey, JSON.stringify(data))
+	}
+
+	function findSong(songId) {
+	return songPlaylist.find(song => song.id === songId) || null
+	}
+
+	function removePlaylist() {
+	songPlaylist = []
+	updatePlaylist(PLAYLIST_STORAGE_KEY, songPlaylist)
+	}
+
+	function replaceNewPlaylist(playlist) {
+	removePlaylist()
+	document.querySelector('.playlist__list').innerHTML = ""
+	addSongs(playlist)
+	playSong(playlist[0].id)
+	}
+
+	function addSongToWaiting(song) {
+	waitingPlaylist[0] = song
+	updatePlaylist(WAITING_PLAYLIST_STORAGE_KEY, waitingPlaylist)
+	}
+
+	function addSongs(songs) {
+	if (Array.isArray(songs)) {
+	    songs.forEach(song => {
+	        checkSongRender(song)
+	    })
+	} else {
+	    checkSongRender(songs)
+	}
+	}
+
+	function checkSongRender(song) {
+	const newSong = findSong(song.id);
+	if (!newSong) {
+	    songPlaylist.push(song)
+	    renderSong(song)
+	    updatePlaylist(PLAYLIST_STORAGE_KEY, songPlaylist)
+	}
+	}
+
+	function deleteSong(songId) {
+	const song = findSong(songId)
+	if (song) {
+	    const htmlEl = playlist.querySelector(".playlist__list-item[data-id='"+ songId+"']")
+	    if (htmlEl) {
+	        htmlEl.remove()
+	    }
+	    playlist.splice(songs.indexOf(song), 1)
+	    updatePlaylist(songPlaylist)
+	    const songActive = playlist.querySelector('.playlist__list-item.active')
+	    if (songActive) {
+	        const currentSong = findSong(songActive.dataset.id)
+	        if (currentSong) app.currentIndex = songPlaylist.indexOf(currentSong)
+	    }
+	}
+	}
+
+	function playSong(songId) {
+	const currentSong = findSong(songId)
+	if (isPremium) {
+	    appPremium.currentIndex = songPlaylist.indexOf(currentSong)
+
+	    appPremium.loadCurrentSong()
+	} else {
+	    app.currentIndex = songPlaylist.indexOf(currentSong)
+
+	    app.loadCurrentSong()
+	}
+	}
+
+	// Save waiting songs
+	// updatePlaylist(WAITING_PLAYLIST_STORAGE_KEY, waitingPlaylist)
+
+	// addSongs(waitingPlaylist)
+
+	// TESTING
+
+	// const playAudioBtn = document.querySelector('.play-audio-btn')
+	// if(playAudioBtn){
+//		     playAudioBtn.addEventListener('click', ()=>{
+//		         const currentSong = songPlaylist.find(song => song.id === 3)
+//		         app.currentIndex = songPlaylist.indexOf(currentSong)
+//		         app.loadCurrentSong()
+//		     })
+	// }
+
+	// replaceNewPlaylist(waitingPlaylist)
+
+		
+		//==== Click functions: Track - Album ====
+
+ function getTrackById(e){
+		var trackId = $(e).data("id");
+        $.ajax({
+            type: 'GET',
+            data: {
+                trackId: trackId
+            },
+            url: '${pageContext.request.contextPath }/home/getTrackById',
+            success: function (track) {
+                if (track) {
+                    console.log(track)
+                    var singer = ""
+                    if(track.artist){
+                    	singer = track.artist.map(artist => artist.nickname + " - ")
+                        }
+                    var playTrack = {
+							id: track.id,
+							title:track.title,
+							image: '${pageContext.request.contextPath }/resources/user/img/tracks/' + track.thumbnail,
+							path: '${pageContext.request.contextPath }/resources/user/audio/tracks/' + track.fileName,
+							duration: track.duration,
+							singer: singer,
+							lyrics: track.lyrics
+                        }
+                    addSongs(playTrack)
+                    playSong(playTrack.id)
+                    var lyrics = renderLyrics(track.lyrics)
+	                            var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
+	                            $(".lyric-content").html(songTitle + lyrics)
+                }
+            }
+        })
+}
+
+	function getWaitingTrack(track){
+		$.ajax({
+            type: 'GET',
+            data: {
+                trackId: track.id,
+                genresId: track.genresId
+            },
+            url: '${pageContext.request.contextPath }/home/getWaitingTrack',
+            success: function (waitingTrack) {
+                console.log("waiting track:" + waitingTrack.title)
+                addSongToWaiting(waitingTrack)
+            }
+        })
+	}
+
+	function getListTrackByAlbumId(e){
+		var albumId = $(e).data("id");
+		$.ajax({
+            type: 'GET',
+            data: {
+            	albumId: albumId
+            },
+            url: '${pageContext.request.contextPath }/home/getAlbumWithTracksById',
+            success: function (album) {
+                if(album){
+                    addSongs(album.trackInfos)
+                }
+            }
+        })
+		
+	}
+	</script>
+	
 	<!-- Main Search -->
-	<script>
-	$(document).ready(function() {
+	<script defer>
+	
+		/* Set select2 */
+		$('.js-example-basic-multiple').select2();
+
 	    $('.input-search').keyup(function () {
 	        var keyword = $('.input-search').val();
 
@@ -1145,6 +1659,11 @@
 	            },
 	            url: '${pageContext.request.contextPath}/home/searchTopArtist',
 	            success: function (artists) {
+	            	if(artists.length < 6){
+						$("#artist-result-all").addClass("hide")
+			            }else{
+			            	$("#artist-result-all").removeClass("hide")    
+				            }
 	                var htmls = "";
 	                for (var i = 0; i < artists.length; i++) {
 
@@ -1164,9 +1683,16 @@
 	            },
 	            url: '${pageContext.request.contextPath}/home/searchTopTrack',
 	            success: function (tracks) {
+		             console.log(tracks)
+	            	if(tracks.length < 6){
+						$("#track-result-all").addClass("hide")
+			            }else{
+			            	$("#track-result-all").removeClass("hide")    
+				            }
 	                var htmls = "";
                for (var i = 0; i < tracks.length; i++) {
-	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "'><div class='track-box-image'>" +
+	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "' onclick='getTrackById(this)'><div class='track-box-image'>" +
+
 	                        "<img src='${pageContext.request.contextPath}/resources/user/img/tracks/" + tracks[i].thumbnail + "' /></div>" +
 	                        "<div class='track-box-content'><p>" + tracks[i].title + "</p><span>"+ "aritst" + "</span></div></div>"
 	                }
@@ -1182,9 +1708,15 @@
 	            },
 	            url: '${pageContext.request.contextPath }/home/searchTopAlbum',
 	            success: function (albums) {
+		            if(albums.length < 6){
+						$("#album-result-all").addClass("hide")
+			            }else{
+			            	$("#album-result-all").removeClass("hide")    
+				            }
 	                var htmls = "";
 	                for (var i = 0; i < albums.length; i++) {
-	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "'><div class='album-box-image'>" +
+	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "' onclick='getListTrackByAlbumId(this)'><div class='album-box-image'>" +
+
 	                        "<img src='${pageContext.request.contextPath}/resources/user/img/playlist/" + albums[i].thumbnail + "'/></div>" +
 	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
 	                }
@@ -1243,7 +1775,6 @@
 	            }
 	        })
 	    })
-	})
 	</script>
 	
 </body>

@@ -1,15 +1,18 @@
 package com.demo.controllers.user;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
@@ -20,6 +23,7 @@ import com.demo.models.ArtistsInfor;
 import com.demo.services.AccountService;
 import com.demo.services.CookieService;
 
+
 @Controller
 @RequestMapping(value = { "artist" })
 public class ArtistsController {
@@ -27,9 +31,11 @@ public class ArtistsController {
 	@Autowired
 	private AccountService accountService;
 
+
 	@Autowired
 	CookieService cookieService ;
 	
+
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
 		try {
@@ -41,7 +47,7 @@ public class ArtistsController {
 
 		return "artist/index";
 	}
-	
+
 	@RequestMapping( value = {"yourtrack" } , method = RequestMethod.GET )
 	public String yourtrack(  ModelMap modelMap , Authentication authentication ) {
 		if( authentication == null || authentication instanceof AnonymousAuthenticationToken) {
@@ -109,6 +115,11 @@ public class ArtistsController {
 			}
 		} 
 		return "artist/youralbum" ; 
+	}
+	
+	@RequestMapping(value = "albumDetail" , method = RequestMethod.GET) 
+	public String albumDetail() {
+		return "artist/albumDetail" ; 
 	}
 
 

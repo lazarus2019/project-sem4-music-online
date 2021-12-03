@@ -30,13 +30,19 @@ import com.demo.security.oauth2.CustomOAuth2User;
 import com.demo.services.AccountPlaylistService;
 import com.demo.services.AccountService;
 import com.demo.services.AlbumService;
+
+import com.demo.services.ArtistTrackService;
 import com.demo.services.CookieService;
 import com.demo.services.NotificationService;
+import com.demo.services.PlaylistService;
+
 import com.demo.services.SessionService;
 import com.demo.services.TrackService;
 
 @Controller
+
 @RequestMapping(value = { "", "home" })
+
 public class HomeController {
 
 	@Autowired
@@ -54,17 +60,11 @@ public class HomeController {
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
 
-	/*
-	 * @RequestMapping(value = { "", "index" }, method = RequestMethod.GET) public
-	 * String index() {
-	 * 
-	 * Calendar c = Calendar.getInstance(); c.set(Calendar.DAY_OF_WEEK,
-	 * Calendar.MONDAY); System.out.println("today: " + new Date());
-	 * System.out.println("Date " + c.getTime());
-	 * 
-	 * 
-	 * return "home/index"; }
-	 */
+	@Autowired 
+	private PlaylistService playlistService;
+	
+	@Autowired
+	private ArtistTrackService artistTrackService;
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap, @RequestParam(value = "local", required = false) String local,
@@ -93,6 +93,8 @@ public class HomeController {
 
 				modelMap.put("accountSignined", account);
 				cookieService.add("acc_id", String.valueOf(account.getId()), 5);
+				//cookieService.add("acc_nickname", account.getNickname(), 5 ) ; 
+				
 			}
 		}
 
@@ -112,6 +114,11 @@ public class HomeController {
 	@RequestMapping(value = { "searchTopTrack" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TrackInfo>> searchTopTrack(@RequestParam("keyword") String keyword, ModelMap modelMap) {
 		List<TrackInfo> trackInfos = trackService.searchByTitle(keyword, PageRequest.of(0, 6));
+
+		for(TrackInfo trackInfo : trackInfos) {
+			trackInfo.setArtists(artistTrackService.getAccountByTrackId(trackInfo.getId()));
+		}
+
 		try {
 			return new ResponseEntity<List<TrackInfo>>(trackInfos, HttpStatus.OK);
 		} catch (Exception e) {
@@ -132,6 +139,30 @@ public class HomeController {
 		}
 	}
 	
+
+	// Get album contains tracks by id
+	@RequestMapping(value = { "getAlbumWithTracksById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AlbumInfo> getAlbumWithTracksById(@RequestParam("albumId") int albumId, ModelMap modelMap) {
+		System.out.println("albumId: " + albumId);
+		AlbumInfo albumInfo = albumService.findAlbumById(albumId);
+		for(Track track : playlistService.find(albumId).findTracks()) {
+			TrackInfo trackInfo = new TrackInfo();
+			trackInfo.setDuration(track.getDuration());
+			trackInfo.setId(track.getId());
+			trackInfo.setThumbnail(track.getThumbnail());
+			trackInfo.setFileName(track.getFileName());
+			trackInfo.setLyrics(track.getLyrics());
+			trackInfo.setArtists(artistTrackService.getAccountByTrackId(track.getId()));
+			
+			albumInfo.getTrackInfos().add(trackInfo);
+		}
+		try {
+			return new ResponseEntity<AlbumInfo>(albumInfo, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<AlbumInfo>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	// Get track by id
 	@RequestMapping(value = { "getTrackById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TrackInfo> getTrackById(@RequestParam("trackId") int trackId, ModelMap modelMap) {

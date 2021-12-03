@@ -4,11 +4,13 @@ import java.util.*;
 
 import org.springframework.data.domain.Pageable;
 
-import com.demo.entities.*;
+
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
+import com.demo.entities.Account;
+import com.demo.entities.AuthenticationProvider;
 
-public interface AccountService {
+public interface AccountService{
 
 	public List<Account> getAllPopularArtists();
 	
@@ -32,5 +34,17 @@ public interface AccountService {
 	public List<ArtistsInfor> getallArtists();
 	
 	public List<ArtistInfo> searchByKeyword(String keyword, Pageable pageable);
+
+	public List<ArtistInfo> getPopularArtists(Pageable pageable);
 	
+	public List<ArtistInfo> getArtistWithoutId(int id);
+	
+	public boolean sendRequestArtist(Account account) ; 
+	
+	public boolean updateImageAccount(Account account) ; 
+	
+	public boolean acceptOrRejectArtist(Account account) ; 
+	
+	public void forgotPassword(Account account); 
+
 }

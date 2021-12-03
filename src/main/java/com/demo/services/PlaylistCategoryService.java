@@ -5,6 +5,8 @@ import com.demo.entities.*;
 
 public interface PlaylistCategoryService {
 
-	public List<PlaylistCategory> getAllPlaylist();
+
+	public List<PlaylistCategory> getAllPlaylistCategories();
+
 	
 }

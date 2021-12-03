@@ -15,12 +15,13 @@ import com.demo.models.AlbumInfo;
 public interface AlbumRepository extends PagingAndSortingRepository<Playlist, Integer> {
 	
 	@Query("SELECT new com.demo.models.AlbumInfo(id,title, thumbnail) FROM Playlist WHERE status.id = 1 AND category_id = 3 AND title LIKE %:keyword%")
-	public List<AlbumInfo> searchByKeyword(@Param("keyword")String keyword);
-	
+	public List<AlbumInfo> searchByKeyword(@Param("keyword")String keyword);	
 
-//	@Query("SELECT new com.demo.entities.AlbumInfo(id,title,description,thumbnail,status,publishDate) FROM Playlist AS pl JOIN AccountPlaylist AS ac_pl ON pl.id = ac_pl.playlist.id WHERE pl.playlistCategory.id = 3 AND ac_pl.account.id = :id")
+	
+//	@Query("SELECT new com.demo.models.AlbumInfo(pl.id,pl.title,pl.description,pl.thumbnail,pl.status.id,pl.publishDate) FROM Playlist AS pl JOIN AccountPlaylist AS ac_pl ON pl.id = ac_pl.playlist.id WHERE pl.playlistCategory.id = 3 AND ac_pl.account.id = :id")
 //	public List<AlbumInfo> findAllAlbumByArtist(@Param("id")int artist_id);
 //	
-//	@Query("SELECT new com.demo.entities.AlbumInfo(id,title,description,thumbnail,status,publishDate) FROM Playlist AS pl WHERE pl.id = :id")
-//	public AlbumInfo findAlbumById(@Param("id")int id);
+	@Query("SELECT new com.demo.models.AlbumInfo(id,title,description,thumbnail,status.id,publishDate) FROM Playlist WHERE id = :id")
+	public AlbumInfo findAlbumById(@Param("id")int id);
+
 }
