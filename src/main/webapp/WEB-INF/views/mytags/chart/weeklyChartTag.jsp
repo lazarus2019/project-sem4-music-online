@@ -39,7 +39,12 @@
 													</svg>
 												</a>
 												<div class="single-item__title">
-													<h4><a class="clr-white" href="#">${allWeeklyTrack.title }</a></h4>
+													<h4>
+														<a class="clr-white" href="#">
+															${allWeeklyTrack.title }
+															<c:if test="${allWeeklyTrack.premium == true}"><i class="las la-crown crown-icon flex-column yellow__icon"></i></c:if>
+														</a>
+													</h4>
 													<c:forEach var="artist" items="${allWeeklyTrack.accounts }">
 														<span><a href="#">${artist.nickname }</a></span>
 													</c:forEach>
@@ -84,7 +89,12 @@
 													</svg>
 												</a>
 												<div class="single-item__title">
-													<h4><a class="clr-white" href="#">${usUkWeeklyTrack.title }</a></h4>
+													<h4>
+														<a class="clr-white" href="#">
+															${usUkWeeklyTrack.title }
+															<c:if test="${usUkWeeklyTrack.premium == true}"><i class="las la-crown crown-icon flex-column yellow__icon"></i></c:if>
+														</a>
+													</h4>
 													<c:forEach var="artist" items="${usUkWeeklyTrack.accounts }">
 														<span><a href="#">${artist.nickname }</a></span>
 													</c:forEach>
@@ -129,9 +139,14 @@
 													</svg>
 												</a>
 												<div class="single-item__title">
-													<h4><a class="clr-white" href="#">${vnWeeklyTrack.title }</a></h4>
+													<h4>
+														<a class="clr-white" href="#">
+															${vnWeeklyTrack.title }
+															<c:if test="${vnWeeklyTrack.premium == true}"><i class="las la-crown crown-icon flex-column yellow__icon"></i></c:if>
+														</a>
+													</h4>
 													<c:forEach var="artist" items="${vnWeeklyTrack.accounts }">
-														<span><a href="#">${artist.nickname }</a></span>
+														<span><a href="#">${artist.nickname }, </a></span>
 													</c:forEach>
 												</div>
 												<span class="single-item__time"><t:trackTime totalSeconds="${vnWeeklyTrack.duration }"/></span>

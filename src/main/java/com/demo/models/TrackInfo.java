@@ -26,7 +26,7 @@ public class TrackInfo {
 	private int listens;
 	private int baseListens;
 	private int weeklyListens;
-	private boolean isPremium;
+	private boolean premium;
 	private Date publishDate;
 	private Genres genres;
 	private List<Account> accounts = new ArrayList<Account>();
@@ -41,7 +41,7 @@ public class TrackInfo {
 	}
 
 	public TrackInfo(Integer id, int genresId, int statusId, String fileName, String title, String lyrics,
-			String thumbnail, int duration, boolean isPremium) {
+			String thumbnail, int duration, boolean premium) {
 		super();
 		this.id = id;
 		this.genresId = genresId;
@@ -51,7 +51,7 @@ public class TrackInfo {
 		this.lyrics = lyrics;
 		this.thumbnail = thumbnail;
 		this.duration = duration;
-		this.isPremium = isPremium;
+		this.premium = premium;
 	}
 
 	public Genres getGenres() {
@@ -163,11 +163,11 @@ public class TrackInfo {
 	}
 
 	public boolean isPremium() {
-		return isPremium;
+		return premium;
 	}
 
-	public void setPremium(boolean isPremium) {
-		this.isPremium = isPremium;
+	public void setPremium(boolean premium) {
+		this.premium = premium;
 	}
 
 	public Date getPublishDate() {

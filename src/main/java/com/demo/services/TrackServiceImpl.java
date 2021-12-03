@@ -120,6 +120,7 @@ public class TrackServiceImpl implements TrackService {
 			trackInfo.setTitle(track.getTitle());
 			trackInfo.setThumbnail(track.getThumbnail());
 			trackInfo.setDuration(track.getDuration());
+			trackInfo.setPremium(track.isIsPremium());
 			List<Account> accounts = new ArrayList<Account>();
 			for (Account account : track.findAccountThroughAtristTrack()) {
 				accounts.add(account);

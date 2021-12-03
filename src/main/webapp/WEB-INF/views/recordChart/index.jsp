@@ -36,7 +36,7 @@
                                 <h4>
                                 	<a href="#">
                                 		${i.index + 1 }. ${topTrack.title }
-                                		<c:if test="${topTrack.premium == true }"><i class="las la-crown crown-icon flex-column clr-yellow"></i></c:if>
+                                		<c:if test="${topTrack.premium == true }"><i class="las la-crown crown-icon flex-column yellow__icon"></i></c:if>
                                 	</a>
                                 </h4>
                                 <c:forEach var="nickname" items="${topTrack.artistNicknames }">

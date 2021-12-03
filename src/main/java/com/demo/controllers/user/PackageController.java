@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import org.openqa.selenium.html5.LocalStorage;
 import com.demo.paypal.PayPalConfig;
 import com.demo.paypal.PayPalResult;
 import com.demo.paypal.PayPalSucess;
