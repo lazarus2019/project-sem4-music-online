@@ -34,6 +34,29 @@ public class FileUploadHelper {
 			return false;
 		}
 	}
+	public static String uploadFile(MultipartFile multipartFile, String direction, ServletContext servletContext) {
+		try {
+			String fileName = generateFileName(multipartFile.getOriginalFilename());
+			byte[] bytes = multipartFile.getBytes();
+			Path path = Paths.get(servletContext.getRealPath("/uploads/" + direction + fileName));
+			Files.write(path, bytes);
+			return fileName;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public static boolean deleteFile(String fileName, String direction, ServletContext servletContext) {
+		try {
+			Path path = Paths.get(servletContext.getRealPath("/uploads/" + direction + fileName));
+			Files.deleteIfExists(path);
+			return true;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 	
 	private static String generateFileName(String fileName) {
 		String name = UUID.randomUUID().toString().replace("-", "");

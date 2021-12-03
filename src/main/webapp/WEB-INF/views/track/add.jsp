@@ -3,27 +3,12 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-	rel="stylesheet" />
-<script
-	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <mt:userTemplate title="Add New Track">
 	<jsp:attribute name="content">
 	
 	<!-- FORM -->
-<<<<<<< HEAD
-<<<<<<< HEAD
             <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
-
-=======
-            <form action="">
->>>>>>> origin/NTanh_Branch
-=======
-            <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
-
->>>>>>> origin/Thu_Branch3
                 <div class="row row--grid">
                     <div class="col-6">
                         <div class="step non-hidden">
@@ -32,12 +17,12 @@
                                 <div class="form-heading clr-white">Track Title:</div>
                                 <div class="sign__group">
                                     <input type="text"
-									class="sign__input" placeholder="Title" name="title">
+									class="sign__input" placeholder="Title" name="title" required>
                                 </div>
                                 <div class="form-heading clr-white">Feature Artists:</div>
                                 <div class="sign__group">
                                    <select
-									class="js-example-basic-multiple sign__input select__form" name="artist[]"
+									class="js-example-basic-multiple sign__input select__form" name="artists"
 									multiple="multiple">
 										<c:forEach items="${artists}" var="artist">
                              					<option value="${artist.id }">${artist.nickname }</option>
@@ -46,8 +31,8 @@
                                 </div>
                                 <div class="form-heading clr-white">Genres:</div>
                                 <div class="sign__group">
-                                    <select name="genres" id="genres"
-									class="sign__input select__form" data-dropdown>
+                                    <select name="genres.id" id="genres"
+									class="sign__input select__form" data-dropdown required>
                                         <option value="">Select genres</option>
                              			<c:forEach items="${genres}" var="genre">
                              					<option value="${genre.id }">${genre.name }</option>
@@ -58,37 +43,14 @@
                                 <div
 								class="flex-box justify-content-between align-items-center mb-2">
                                     <div class="form-heading clr-white">Lyrics (separate line with /n)</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/Thu_Branch3
                                     <input type="file" name="lyricsTrack"
 									id="lyricsTrack" style="display: none;" accept="text/plain" onchange="callFile(this)">
                                     <label for="lyricsTrack"
-
-<<<<<<< HEAD
-=======
-                                    <input type="file" name="lyricTrack"
-									id="lyricTrack" style="display: none;" accept="text/plain">
-                                    <label for="lyricTrack"
->>>>>>> origin/NTanh_Branch
-=======
->>>>>>> origin/Thu_Branch3
 									class="form-btn">Import Lyrics</label>
                                 </div>
                                 <div class="sign__group">
                                     <textarea type="text"
-<<<<<<< HEAD
-<<<<<<< HEAD
-									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics"></textarea>
-
-=======
-									class="form__textarea" placeholder="Track Lyrics" name="artist"></textarea>
->>>>>>> origin/NTanh_Branch
-=======
-									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics"></textarea>
-
->>>>>>> origin/Thu_Branch3
+									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics" required></textarea>
                                 </div>
                                 
 
@@ -109,17 +71,10 @@
 											class="form-heading clr-white">Your Track</div>
                                             <input type="file"
 											name="audioTrack" id="audioTrack" style="display: none;"
-											accept=".mp3,audio/*" onchange="uploadTrack(this)">
+											accept=".mp3,audio/*" onchange="uploadTrack(this)" required>
                                             <label for="audioTrack"
 											class="form-btn">Upload Audio</label>
-<<<<<<< HEAD
-<<<<<<< HEAD
 											<input type="hidden" name="duration" id="duration">
-=======
->>>>>>> origin/NTanh_Branch
-=======
-											<input type="hidden" name="duration" id="duration">
->>>>>>> origin/Thu_Branch3
                                         </div>
                                         <div
 										class="audio-upload-progress">
@@ -154,15 +109,14 @@
                                         </div>
                                     </div>
                                     <div class="grid-box-item">
-                                        <div
-										class="flex-box justify-content-between align-items-center mb-2">
+                                        <div class="flex-box justify-content-between align-items-center mb-2">
                                             <div
 											class="form-heading clr-white">Track Thumbnail (square)</div>
                                             <input type="file"
 											name="thumbnailTrack" id="thumbnailTrack"
 											style="display: none;"
 											accept="image/png, image/jpg, image/jpeg"
-											onchange="previewUpload(this)">
+											onchange="previewUpload(this)" required>
                                             <label for="thumbnailTrack"
 											class="form-btn">Upload Thumbnail</label>
                                         </div>
@@ -175,106 +129,102 @@
                                 </div>
                                 <div class="form-heading clr-white">Other options:</div>
                                 <div class="border-dash-box-padding">
-                                    <div
-									class="flex-box align-items-center mb-2">
-                                        <div
-										class="sign__group sign__group--checkbox mb-0">
+                                    <div class="flex-box align-items-center mb-2">
+                                        <div class="sign__group sign__group--checkbox mb-0">
                                             <input id="isPremium"
 											name="isPremium" type="checkbox" checked="checked">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                             <label for="isPremium">Is Premium <i class="las la-crown yellow__icon"></i></label>
-                                        </div>
-
-=======
-                                            <label for="isPremium">Is Premium</label>
                                         </div>
                                         <div class="public-date-box">
                                             <input type="date"
-											class="sign__input" placeholder="Password" name="publishDate"
-											value="">
-                                        </div>
->>>>>>> origin/NTanh_Branch
-=======
-                                            <label for="isPremium">Is Premium <i class="las la-crown yellow__icon"></i></label>
-                                        </div>
-
->>>>>>> origin/Thu_Branch3
-                                        <div
-										class="sign__group sign__group--checkbox mb-0">
-                                            <input id="isHidden"
-											name="isHidden" type="checkbox" checked="checked">
-                                            <label for="isHidden">Is Hidden</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-heading clr-white">Add to Albums:</div>
-                                    <div
-									class="flex-box align-items-start flex-wrap flex-4">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/Thu_Branch3
-									<c:forEach items="${albums }" var="album">
-									    <div class="sign__group sign__group--checkbox mb-1">
-                                            <input id="album-artist-${album.id }"
-											name="albums" type="checkbox">
-                                            <label for="album-artist-${album.id }">${album.title }</label>
-<<<<<<< HEAD
-                                        </div>
-									</c:forEach>                                  
-
-=======
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Goodbye & Good Riddance</label>
-                                        </div>
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Death Race for Love</label>
-                                        </div>
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Legends Never Die</label>
-                                        </div>
-                                        <div
-										class="sign__group sign__group--checkbox mb-1">
-                                            <input id="isPremium"
-											name="isPremium" type="checkbox" checked="checked">
-                                            <label for="isPremium">Fighting Demons</label>
+											class="sign__input" placeholder="Password" name="trackDate"
+											value="" required>
                                         </div>                                        
->>>>>>> origin/NTanh_Branch
-=======
-                                        </div>
-									</c:forEach>                                  
-
->>>>>>> origin/Thu_Branch3
+                                    </div>
+                                    <div class="flex-box align-items-center mb-2 justify-content-between">
+	                                    <div class="form-heading clr-white">Add to Albums:</div>
+	                                    <button type="button" class="circle-icon-lg ml-2" onclick="reloadAlbums()"><i class="las la-sync"></i></button>
+                                    </div>
+                                    <div class="flex-box align-items-start flex-wrap flex-4 album-container">
+										<c:forEach items="${albums }" var="album">
+										    <div class="sign__group sign__group--checkbox mb-1">
+	                                            <input id="album-artist-${album.id }"
+												name="albums" type="checkbox" value="${album.id }">
+	                                            <label for="album-artist-${album.id }">${album.title }</label>
+	                                        </div>
+										</c:forEach>                                  
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </form>
+            <script>
+				function getAccId(name){
+				    var nameEQ = name + "=";
+				    var ca = document.cookie.split(';');
+				    for (var i = 0; i < ca.length; i++) {
+				        var c = ca[i];
+				        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+				        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+				    }
+				    return null;
+				}
 		
+				function reloadAlbums(){
+				    const albumIdsChecked = []; // Array string id
+				    $('input[name="albums"]:checked').each(function(){
+				        albumIdsChecked.push($(this).val())
+				    })
+				    
+				    var id = getAccId('acc_id');
+				     if(id != null){
+				        $.ajax({
+				            type: 'GET',
+				            data: {
+				                /* id: parseInt(id) */
+				                id: 5
+				            },
+				            url: '${pageContext.request.contextPath }/track/reloadAlbums',
+				            success: function (albums) {
+					            console.log(albums)
+				                
+				                var htmls = ""
+				                    
+				                    let flag = false
+				                    for(let i = 0; i < albums.length; i++){
+				                        let checked = ""
+				                        for(let j = 0; j < albumIdsChecked.length; j++){				            		    
+				                            if(parseInt(albumIdsChecked[j]) === albums[i].id){
+				                                flag = true
+				                                break
+				                            } 
+				                        }
+				                       
+				                        if(!flag){
+				                            checked = "" 
+				                        }
+				                        if(flag){
+				                            checked = "checked"
+				                        }
+
+				                        htmls += "<div class='sign__group sign__group--checkbox mb-1'>"
+				                        htmls += "<input id='album-artist-"+ albums[i].id +"' name='albums' type='checkbox' value='"+ albums[i].id +"' "+ checked +">" 
+				                        htmls += "<label for='album-artist-"+ albums[i].id +"'>"+ albums[i].title +"</label>"
+				                        htmls += "</div>" 
+
+				                        flag = false
+				                    }
+			                    console.log(htmls)
+				                    $('.album-container').html(htmls)				        
+				                }
+				           
+				        })
+				    }			
+				}
+		</script>
 	</jsp:attribute>
 
 </mt:userTemplate>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/NTanh_Branch
-=======
-
->>>>>>> origin/Thu_Branch3
-<script>
-	$(document).ready(function() {
-		$('.js-example-basic-multiple').select2();
-	});
-</script>

@@ -183,8 +183,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void forgotPassword(Account account) {
-		
+	public void forgotPassword(Account account) {		
 
 		int i = ThreadLocalRandom.current().nextInt(100000, 1000000) ; 
 		account.setPassword(new BCryptPasswordEncoder().encode(String.valueOf(i)));

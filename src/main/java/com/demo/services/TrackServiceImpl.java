@@ -205,7 +205,6 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
-
 	public List<Track> findAll() {
 		return (List<Track>) trackRepository.findAll();
 	}
@@ -213,10 +212,6 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public Track findById(int id) {
 		return trackRepository.findById(id).get();
-	}
-
-	public void delete(int id) {
-		trackRepository.deleteById(id);
 	}
 
 	@Override
@@ -243,6 +238,16 @@ public class TrackServiceImpl implements TrackService {
 			newTrack = track;
 			newTrack.setBaseListens(track.getListens());
 			trackRepository.save(newTrack);
+		}
+	}
+
+	@Override
+	public void delete(int id) {
+		try {
+			Track track = findById(id);
+			trackRepository.delete(track);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 }

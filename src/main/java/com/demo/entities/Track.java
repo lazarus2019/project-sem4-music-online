@@ -45,8 +45,7 @@ public class Track implements java.io.Serializable {
 	}
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
-			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, 
-			Date publishDate) {
+			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, Date publishDate) {
 		this.genres = genres;
 		this.status = status;
 		this.fileName = fileName;
@@ -249,4 +248,13 @@ public class Track implements java.io.Serializable {
 		}
 		return accounts ;
 	}
+	
+	public Set<Playlist> findPlaylistThroughPlaylistTrack() {
+		Set<Playlist> playlists = new HashSet<Playlist>(0) ; 
+		for(PlaylistTrack playlistTrack: playlistTracks) {
+			playlists.add(playlistTrack.getPlaylist()) ; 
+		}
+		return playlists ;
+	}
 }
+
