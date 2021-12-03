@@ -13,7 +13,7 @@
 									<!-- title -->
 									<div class="col-12">
 										<div class="main__title">
-											<h2><a class="clr-light" href="#">Viet Name</a></h2>
+											<h2><a class="clr-light" href="#">All</a></h2>
 										</div>
 									</div>
 									<!-- end title -->
@@ -317,7 +317,7 @@
 									<!-- title -->
 									<div class="col-12">
 										<div class="main__title">
-											<h2><a class="clr-light" href="#">Top All</a></h2>
+											<h2><a class="clr-light" href="#">Viet Nam</a></h2>
 										</div>
 									</div>
 									<!-- end title -->

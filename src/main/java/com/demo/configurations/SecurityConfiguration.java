@@ -31,9 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable() ; 
 		
 		http.authorizeRequests()
-			.antMatchers("/user/**").permitAll() 
-			.antMatchers("/oauth2/**").permitAll() 
-			
+			.antMatchers("/oauth2/**").permitAll() 			
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and()
 			.formLogin()
@@ -66,9 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
 		builder.userDetailsService(userDetailsService);
 	}
-	
-	
-	
+
 	@Bean
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();

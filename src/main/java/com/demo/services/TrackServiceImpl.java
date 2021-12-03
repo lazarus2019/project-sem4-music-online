@@ -1,36 +1,22 @@
 package com.demo.services;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
+
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.demo.entities.ServicePackage;
 import com.demo.entities.Track;
 import com.demo.helpers.CalculateDateTimeHelper;
 import com.demo.models.TrackInfo;
 import com.demo.models.TrackInfor;
 import com.demo.models.WeeklyTrackModel;
-import com.demo.repositories.AccountRepository;
-import com.demo.repositories.PackageRepository;
 import com.demo.repositories.TrackRepository;
-import com.fasterxml.jackson.core.format.InputAccessor.Std;
 
 @Service("trackService")
 public class TrackServiceImpl implements TrackService {
@@ -129,19 +115,26 @@ public class TrackServiceImpl implements TrackService {
 		}
 	}
 
+
+	public List<Track> getTopAllWeekly(int statusId, int n) {
+		return trackRepository.getTopAllWeekly(statusId, n);
+	}
+	
 	@Override
-	public List<Track> getTopWeekly(int statusId, int n) {
-		return trackRepository.getTopWeekly(statusId, n);
+	public List<Track> getTopUsUkWeekly(int statusId, int n, int genresId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Track> getTopVnWeekly(int statusId, int n, int genresId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Track save(Track track) {
 		return trackRepository.save(track);
-	}
-
-	@Override
-	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId) {
-		return trackRepository.getTopWeeklyByGenre(statusId, n, genresId);
 	}
 
 	@Override
@@ -162,6 +155,16 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public List<TrackInfo> getWaitingTrackByGenres(int id, int genresId, Pageable pageable) {
 		return trackRepository.getWaitingTrackByGenres(id, genresId, pageable);
+	}
+
+	@Override
+	public Track findById(int id) {
+		return trackRepository.findById(id).get();
+	}
+
+	@Override
+	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId) {
+		return trackRepository.getTopWeeklyByGenre(statusId, n, genresId);
 	}
 
 }

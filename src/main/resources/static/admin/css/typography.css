@@ -1169,6 +1169,12 @@ Avatar Size
     line-height: 50px;
 }
 
+.avatar-150 {
+    height: 150px;
+    width: 150px;
+    line-height: 150px;
+}
+
 .avatar-55 {
     height: 55px;
     width: 55px;

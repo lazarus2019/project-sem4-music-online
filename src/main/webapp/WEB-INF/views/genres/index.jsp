@@ -15,7 +15,7 @@
                 <!-- title -->
                 <div class="col-12">
                     <div class="main__title">
-                        <h2>All Genres</h2>
+                        <h2>Genres</h2>
                     </div>
                 </div>
                 <!-- end title -->
@@ -27,7 +27,7 @@
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="post">
                         <a href="${pageContext.request.contextPath }/track/id/${genres.id}" class="post__img">
-                            <img src="${pageContext.request.contextPath }/resources/user/img/posts/${genres.thumbnail }" alt="">
+                            <img src="${pageContext.request.contextPath }/uploads/images/posts/${genres.thumbnail }" alt="">
                         </a>
 
 						<!-- 
@@ -41,7 +41,7 @@
                         -->
 
                         <div class="post__content">
-                            <a href="${pageContext.request.contextPath }/track/index/${genres.id}" class="post__category">${genres.name }</a>         
+                            <a href="${pageContext.request.contextPath }/track/s/${genres.id}" class="post__category">${genres.name }</a>         
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,9 @@ import com.demo.services.AccountService;
 import com.demo.services.CookieService;
 
 @Controller
-@RequestMapping("user/login")
+
+@RequestMapping(value = {"login" ,"user/login" , })
+
 public class LoginController {
 
 	@Autowired
@@ -36,13 +38,17 @@ public class LoginController {
 			cookieService.remove("login_type");
 			cookieService.remove("acc_id");
 		}
-		return "user/login/login";
+
+		return "login/login";
+
 	}
 	
 	
 	@RequestMapping( value = {"notfound" } , method = RequestMethod.GET )
 	public String notfound() {
-		return "user/login/notfound" ; 
+
+		return "login/notfound" ; 
+
 	}
 	
 	@RequestMapping(value = "signup", method = RequestMethod.GET)
@@ -50,33 +56,20 @@ public class LoginController {
 		Account account = new Account() ; 
 		modelMap.put("account", account) ; 
 		
-		return "user/login/signup";
+
+		return "login/signup";
+
 	}
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String register(@ModelAttribute("account") Account account) {
 		
 		accountService.registerNewSignUp(account,AuthenticationProvider.LOCAL);
 		System.out.println("Success: " + account.getId());
-		return "redirect:/user/login/";
+
+		return "redirect:/login/";
+
 	}
 	
-	
-	
-//	@RequestMapping(value = "register", method = RequestMethod.POST)
-//	public String register(@ModelAttribute("account") Account account, @RequestParam("roles") int[] roles) {
-//		account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
-//		if (roles != null) {
-//			account.getRoles().clear();
-//			for (int role : roles) {
-//				Role ro = new Role();
-//				ro.setId(role);
-//				account.getRoles().add(ro);
-//			}
-//		}
-//		accountService.save(account);
-//		return "redirect:/account/login";
-//	}
-	
-	
+
 	
 }

@@ -6,21 +6,24 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.Genres;
 import com.demo.models.GenresName;
 import com.demo.repositories.GenresRepositories;
-
+import com.demo.repositories.GenresRepository;
 @Service("genresService")
-public class GenresServicesImpl implements GenresService {
-
-	@Autowired
-	private GenresRepositories genresRepositories;
+public class GenresServiceImpl implements GenresService{
 	
+	@Autowired
+	private GenresRepository genresRepository;
+	
+	@Autowired
+	private GenresRepositories GenresRepositories;
+
 	@Override
 	public Iterable<Genres> findAll() {
-		return genresRepositories.findAll(); 
+		return genresRepository.findAll();
 	}
-	
+
 	@Override
 	public GenresName getNameById(int id) {
-		return genresRepositories.getNameById(id);		
+		return GenresRepositories.getNameById(id);		
 	}
 	
 }

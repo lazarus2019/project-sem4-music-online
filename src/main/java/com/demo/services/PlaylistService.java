@@ -1,7 +1,12 @@
 package com.demo.services;
 
 import java.util.*;
+
+import org.springframework.data.repository.query.Param;
+
 import com.demo.entities.*;
+import com.demo.models.PlaylistInfor;
+import com.demo.models.PlaylistModel;
 
 public interface PlaylistService {
 
@@ -10,8 +15,16 @@ public interface PlaylistService {
 	public Playlist save(Playlist playlist);
 
 	public Playlist find(int id);
+
+	public void delete(int id);
 	
 	public List<Playlist> getAllPlaylist();
 
 	public List<Playlist> getAllAlbum();
+	
+	public List<PlaylistModel> getPlaylistModel(List<Playlist> playlists);
+	//A
+	public PlaylistInfor getLikedPlaylistByAccountId(int id);
+
+	public PlaylistInfor getRecentPlaylistByAccountId(int id);
 }

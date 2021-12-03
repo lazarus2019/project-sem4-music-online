@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +30,16 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<Account> getAllPopularArtists() {
 		return accountRepository.getAllPopularArtists();
+	}
+
+	@Override
+	public List<ArtistInfo> getPopularArtists(Pageable pageable) {
+		return accountRepository.getPopularArtists(pageable);
+	}
+
+	@Override
+	public List<ArtistInfo> getArtistWithoutId(int id) {
+		return accountRepository.getArtistsWithoutId(id);
 	}
 
 	@Override
@@ -121,21 +135,18 @@ public class AccountServiceImpl implements AccountService {
 
 	}
 	
-	//TA
 	@Override
 	public List<ArtistsInfor> getallArtists() {
 		return accountRepository.getallArtists();
 	}
-	
-	//TA
-	@Override
-	public List<ArtistsInfor> getSearchArtis(String keyword) {
-		return accountRepository.getSearchArtis(keyword);
-	}
-	
+
 	@Override
 	public List<ArtistInfo> searchByKeyword(String keyword, Pageable pageable) {
 		return accountRepository.searchByKeyword(keyword, pageable);
 	}
-
+	
+	@Override
+	public List<ArtistsInfor> getSearchArtis(String keyword) {
+		return accountRepository.getSearchArtis(keyword);
+	}
 }

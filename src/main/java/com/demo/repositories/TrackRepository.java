@@ -24,12 +24,13 @@ public interface TrackRepository extends PagingAndSortingRepository<Track, Integ
 	public List<Track> getAllByStatus(@Param("statusId") int statusId);
 	
 	@Query(value = "select * from Track where status_id = :statusId order by weekly_listens desc limit :n", nativeQuery = true) 
-	public List<Track> getTopWeekly(@Param("statusId") int statusId, @Param("n") int n);
-	
+
+	public List<Track> getTopAllWeekly(@Param("statusId") int statusId, @Param("n") int n);
+
 	@Query(value = "select * from Track where status_id = :statusId and genres_id = :genresId order by weekly_listens desc limit :n", nativeQuery = true) 
 	public List<Track> getTopWeeklyByGenre(@Param("statusId") int statusId, @Param("n") int n, @Param("genresId") int genresId);
 
-	@Query(" select new com.demo.models.TrackInfor(id, title, fileName, lyrics, thumbnail, likes, listens) from Track where genres.id = :id ")
+	@Query(" select new com.demo.models.TrackInfor(id, title, fileName, lyrics, thumbnail, likes, listens) from Track where status.id = 1 AND genres.id = :id ")
 	public List<TrackInfor> findTrackByGenresId(@Param("id") int id);
 	
 	@Query("SELECT new com.demo.models.TrackInfo(id, genres.id, title, thumbnail) FROM Track WHERE status.id = 1 AND title LIKE %:keyword%")

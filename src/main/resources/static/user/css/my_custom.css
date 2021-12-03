@@ -790,6 +790,17 @@ audio {
 	opacity: 1;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.circle-icon-sm i{
+    color: var(--white);
+    font-size: 15px;
+}
+
+=======
+>>>>>>> origin/Thu_Branch3
+=======
+>>>>>>> origin/NTanh_Branch
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
@@ -937,9 +948,58 @@ a.form-btn:hover {
 
 .item {
 	padding: 6px 20px !important;
+<<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 /* hidden */
 .hide{
 	display: none
 }
+
+.clr-dark{
+    color: var(--dark) !important;
+}
+
+.clr-blue{
+    color: var(--blue) !important;
+}
+
+.bg-clr-red{
+    background: var(--red);
+}
+
+.bg-clr-yellow{
+    background: var(--yellow);
+}
+
+/* Hover */
+.none-hover:hover{
+    background: transparent !important;
+}
+
+/* Text size */
+.text-large{
+    font-size: 30px;
+}
+
+/* Layout */
+.tabs-2{
+    width: 50% !important;
+    margin: 0 30px !important;
+=======
+}
+
+/* hidden */
+.hide{
+	display: none
+}
+>>>>>>> origin/Thu_Branch3
+=======
+}
+
+/* hidden */
+.hide{
+	display: none
+}
+>>>>>>> origin/NTanh_Branch

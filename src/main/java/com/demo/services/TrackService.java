@@ -13,6 +13,8 @@ public interface TrackService {
 
 	public Track save(Track track);
 
+	public Track findById(int id);
+
 	public List<Track> getNewRelease(int statusId, int n);
 
 	public List<Track> getAllByStatus(int statusId);
@@ -21,7 +23,11 @@ public interface TrackService {
 
 	public void updateBaseListens();
 
-	public List<Track> getTopWeekly(int statusId, int n);
+	public List<Track> getTopAllWeekly(int statusId, int n);
+
+	public List<Track> getTopUsUkWeekly(int statusId, int n, int genresId);
+
+	public List<Track> getTopVnWeekly(int statusId, int n, int genresId);
 
 	public List<Track> getTopWeeklyByGenre(int statusId, int n, int genresId);
 
