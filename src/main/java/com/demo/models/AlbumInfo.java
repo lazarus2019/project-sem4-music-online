@@ -148,7 +148,6 @@ public class AlbumInfo {
 		}
 
 
-
 		public List<TrackInfo> getTrackInfos() {
 			return trackInfos;
 		}
@@ -158,7 +157,6 @@ public class AlbumInfo {
 		public void setTrackInfos(List<TrackInfo> trackInfos) {
 			this.trackInfos = trackInfos;
 		}
-
 
 }
 

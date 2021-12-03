@@ -36,7 +36,6 @@ public class Track implements java.io.Serializable {
 	private int baseListens;
 	private int weeklyListens;
 	private boolean isPremium;
-	private boolean isDelete;
 	private Date publishDate;
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<PlaylistTrack> playlistTracks = new HashSet<PlaylistTrack>(0);
@@ -46,8 +45,7 @@ public class Track implements java.io.Serializable {
 	}
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
-			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, boolean isDelete,
-			Date publishDate) {
+			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, Date publishDate) {
 		this.genres = genres;
 		this.status = status;
 		this.fileName = fileName;
@@ -60,12 +58,11 @@ public class Track implements java.io.Serializable {
 		this.baseListens = baseListens;
 		this.weeklyListens = weeklyListens;
 		this.isPremium = isPremium;
-		this.isDelete = isDelete;
 		this.publishDate = publishDate;
 	}
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
-			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, boolean isDelete,
+			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, 
 			Date publishDate, Set<Comment> comments, Set<PlaylistTrack> playlistTracks, Set<ArtistTrack> artistTracks) {
 		this.genres = genres;
 		this.status = status;
@@ -79,7 +76,6 @@ public class Track implements java.io.Serializable {
 		this.baseListens = baseListens;
 		this.weeklyListens = weeklyListens;
 		this.isPremium = isPremium;
-		this.isDelete = isDelete;
 		this.publishDate = publishDate;
 		this.comments = comments;
 		this.playlistTracks = playlistTracks;
@@ -207,15 +203,6 @@ public class Track implements java.io.Serializable {
 	public void setIsPremium(boolean isPremium) {
 		this.isPremium = isPremium;
 	}
-	
-	@Column(name = "is_delete", nullable = false)
-	public boolean isIsDelete() {
-		return this.isDelete;
-	}
-	
-	public void setIsDelete(boolean isDelete) {
-		this.isDelete = isDelete;
-	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "publish_date", nullable = false, length = 10)
@@ -253,7 +240,7 @@ public class Track implements java.io.Serializable {
 	public void setArtistTracks(Set<ArtistTrack> artistTracks) {
 		this.artistTracks = artistTracks;
 	}
-	
+
 	public Set<Account> findAccountThroughAtristTrack() {
 		Set<Account> accounts = new HashSet<Account>(0) ; 
 		for(ArtistTrack artistTrack: artistTracks) {
@@ -270,3 +257,4 @@ public class Track implements java.io.Serializable {
 		return playlists ;
 	}
 }
+

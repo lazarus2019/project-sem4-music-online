@@ -12,5 +12,9 @@ public interface ArtistService {
 	
 	public List<ArtistInfo> getPopularArtists(Pageable pageable);
 	
-	public List<ArtistInfo> getArtistWithoutId(int id);
+	public List<ArtistInfo> getArtistWithoutId(int id);	
+	public List<Account> getAllArtist() ;
+	
+	public List<Account> getRequestArtist() ;	
+
 }

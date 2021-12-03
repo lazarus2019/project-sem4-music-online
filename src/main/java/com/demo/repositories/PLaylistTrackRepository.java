@@ -11,7 +11,7 @@ import com.demo.entities.PlaylistTrack;
 import com.demo.entities.PlaylistTrackId;
 
 @Repository("playlistTrackRepository")
-public interface PLaylistTrackRepository extends CrudRepository<PlaylistTrack, PlaylistTrackId>{
+public interface PlaylistTrackRepository extends CrudRepository<PlaylistTrack, PlaylistTrackId>{
 
 	@Query(value = "SELECT playlist_id FROM playlist_track WHERE track_id = :id", nativeQuery = true)
 	public List<Integer> getAlbumOwnIdsByTrackId(@Param("id") int id);

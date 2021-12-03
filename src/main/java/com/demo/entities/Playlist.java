@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "playlist", catalog = "music_app")
-public class Playlist implements java.io.Serializable {
+public class Playlist implements java.io.Serializable  {
 
 	private Integer id;
 	private PlaylistCategory playlistCategory;
@@ -172,7 +172,7 @@ public class Playlist implements java.io.Serializable {
 	public void setAccountPlaylists(Set<AccountPlaylist> accountPlaylists) {
 		this.accountPlaylists = accountPlaylists;
 	}
-	
+
 	public List<Track> findTracks(){
 		List<Track> tracks = new ArrayList<Track>();
 		for(PlaylistTrack playlistTrack : this.playlistTracks) {
@@ -181,6 +181,7 @@ public class Playlist implements java.io.Serializable {
 		return tracks;
 	}
 
+
 	public Set<Account> findAccountThroughAccountPlaylist() {
 		Set<Account> accounts = new HashSet<Account>(0) ; 
 		for(AccountPlaylist accountPlaylist : accountPlaylists) {
@@ -188,4 +189,6 @@ public class Playlist implements java.io.Serializable {
 		}
 		return accounts ;
 	}
+
 }
+

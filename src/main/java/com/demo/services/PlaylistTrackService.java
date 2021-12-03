@@ -1,5 +1,8 @@
 package com.demo.services;
 
+import java.util.*;
+import com.demo.entities.*;
+
 import java.util.List;
 
 import com.demo.entities.Playlist;
@@ -8,11 +11,12 @@ import com.demo.entities.PlaylistTrackId;
 import com.demo.entities.Track;
 
 public interface PlaylistTrackService {
-	public PlaylistTrack findById(PlaylistTrackId playlistTrackId);
-	
-	public void delete(PlaylistTrackId playlistTrackId);
 	
 	public PlaylistTrack save(PlaylistTrack playlistTrack);
+	
+	public PlaylistTrack findById(PlaylistTrackId playlistTrackId);
+	
+	public void delete(PlaylistTrackId playlistTrackId);	
 	
 	public Iterable<PlaylistTrack> findAll();
 	

@@ -206,7 +206,7 @@ public class PlaylistUserController implements ServletContextAware{
 	}
 	
 	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> searchTopArtist(@RequestParam("id") int albumId) {
+	public ResponseEntity<Boolean> delete(@RequestParam("id") int albumId) {
 		boolean result = false;
 		Playlist album = playlistService.find(albumId);
 		

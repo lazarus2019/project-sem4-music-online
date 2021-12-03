@@ -49,7 +49,7 @@
                                 <div class="track-box" data-id="${track.id }" onclick="getTrackById(this)">
                                     <div class="track-box-image">
                                         <img
-                                            src="${pageContext.request.contextPath}/uploads/images/tracks/${track.thumbnail}" />
+                                            src="${pageContext.request.contextPath}/uploads/images/track/${track.thumbnail}" />
                                     </div>
                                     <div class="track-box-content">
                                         <p>${track.title }</p>

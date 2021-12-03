@@ -26,7 +26,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/adminlte.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/icheck-bootstrap.min.css">
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
+	
+	    <!-- Remix Icon -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/remixicon.css">
 
 	<!-- CSS Listen -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/1.3.0/css/line-awesome.min.css">
@@ -49,8 +53,6 @@
 </head>
 
 <body>
-
-	
 <!-- header -->
 <header class="header">
     <div class="header__content">
@@ -75,9 +77,11 @@
                 <div class="dropdown-menu">
                     <a href="releases.html"><i class="las la-music"></i> New Release</a>
                     <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
-                    <a href="liked_song.html"><i class="las la-heart"></i> Liked</a>
-                    <a href="recently_history.html"><i class="las la-headphones"></i> Recently Played</a>
+
+                    <a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
+                    <a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
                     <a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+
                 </div>
             </li>
 
@@ -102,50 +106,10 @@
             <!-- notification button -->
             <t:notification />
             <!-- end notification button -->
-    
-            <div class="header__action header__action--signin">
-                <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <a class="header__action-btn" href="${pageContext.request.contextPath }/user/login/login">
-                        <span>Sign in</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
-                        </svg>
-                    </a>
-                </c:if>
-                <div class="header__action-btn">
-                    <c:if test="${pageContext.request.userPrincipal.name  != null }">
-                        <span>${ accountSignined.nickname }</span>
-    
-                        <div class="user__box">
-                            <i class="las la-crown"></i>
-                            <img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-                                alt="" class="user__avatar">
-                            <div class="dropdown__user-menu">
-                                <a href="${pageContext.request.contextPath }/user/profile/index">
-                                    <i class="lar la-user-circle"></i> Profile
-                                </a>
-                                <a href="artist_tracks.html">
-                                    <i class="las la-music"></i> Your Tracks
-                                </a>
-                                <a href="artist_album.html">
-                                    <i class="las la-record-vinyl"></i> Your Albums
-                                </a>
-                                <a href="#">
-                                    <i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
-                                        class="las la-crown yellow__icon"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="las la-user-cog"></i> Settings
-                                </a>
-                                <a href="${pageContext.request.contextPath }/user/login/logout">
-                                    <i class="las la-sign-out-alt"></i> Log out
-                                </a>
-                            </div>
-                        </div>
-                    </c:if>
-                </div>
-            </div>
+
+
+    		<t:nickname/> 
+
         </div>
     
         <button class="header__btn" type="button">
@@ -156,7 +120,6 @@
     </div>
 </header>
 <!-- end header -->
-
 	<!-- player -->
 	<div class="player" id="audioPlayer">
 		<div class="progressbar">
@@ -424,7 +387,7 @@
 									<path d="M13.5 18V13L17.5 15.5001L13.5 18Z" fill="#FF0000" />
 								</svg></a>
 						</div>
-						<small class="footer__copyright">© Volna, 2021. Created by <a
+						<small class="footer__copyright">@ Volna, 2021. Created by <a
 								href="../../../themeforest.net/user/dmitryvolkov/portfolio.html" target="_blank">Dmitry
 								Volkov</a>.</small>
 					</div>
@@ -588,9 +551,41 @@
 		</div>
 	</div>
 	<!-- end modal info -->
+	 <!-- modal ticket -->
+    <form action="#" id="modal-ticket" class="zoom-anim-dialog mfp-hide modal modal--form">
+        <button class="modal__close" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                    d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+            </svg></button>
+
+        <h4 class="sign__title">To buy tickets</h4>
+
+        <div class="sign__group sign__group--row">
+            <label class="sign__label">Your balance:</label>
+            <span class="sign__value">$90.99</span>
+        </div>
+
+        <div class="sign__group sign__group--row">
+            <label class="sign__label" for="value">Choose ticket:</label>
+            <select class="sign__select" name="value" id="value">
+                <option value="50">Regular - $49</option>
+                <option value="100">VIP Light - $99</option>
+                <option value="200">VIP - $169</option>
+            </select>
+
+            <span class="sign__text sign__text--small">You can spend money from your account on the renewal of the
+                connected packages, or on the purchase of goods on our website.</span>
+        </div>
+
+        <button class="sign__btn" type="button">Buy</button>
+    </form>
+    <!-- end modal ticket -->
+    
 
 	<!-- JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.magnific-popup.min.js"></script>
@@ -600,6 +595,7 @@
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.inputmask.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/plyr.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 	<!-- My custom JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
@@ -1578,8 +1574,8 @@
                          var playTrack = {
          						id: track.id,
          						title:track.title,
-         						image: '${pageContext.request.contextPath }/uploads/images/tracks/' + track.thumbnail,
-         						path: '${pageContext.request.contextPath }/uploads/audio/tracks/' + track.fileName,
+         						image: '${pageContext.request.contextPath }/uploads/images/track/' + track.thumbnail,
+         						path: '${pageContext.request.contextPath }/uploads/audio/track/' + track.fileName,
          						duration: track.duration,
          						singer: singer,
          						lyrics: track.lyrics
@@ -1634,7 +1630,7 @@
 	
 		/* Set select2 */
 		$('.js-example-basic-multiple').select2();
-		
+
 	    $('.input-search').keyup(function () {
 	        var keyword = $('.input-search').val();
 
@@ -1679,7 +1675,7 @@
 	                var htmls = "";
                for (var i = 0; i < tracks.length; i++) {
 	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "' onclick='getTrackById(this)'><div class='track-box-image'>" +
-	                        "<img src='${pageContext.request.contextPath}/uploads/images/tracks/" + tracks[i].thumbnail + "' /></div>" +
+	                        "<img src='${pageContext.request.contextPath}/uploads/images/track/" + tracks[i].thumbnail + "' /></div>" +
 	                        "<div class='track-box-content'><p>" + tracks[i].title + "</p><span>"+ "aritst" + "</span></div></div>"
 	                }
 	                $("#track-container").html(htmls);
@@ -1702,6 +1698,7 @@
 	                var htmls = "";
 	                for (var i = 0; i < albums.length; i++) {
 	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "' onclick='getListTrackByAlbumId(this)'><div class='album-box-image'>" +
+
 	                        "<img src='${pageContext.request.contextPath}/resources/user/img/playlist/" + albums[i].thumbnail + "'/></div>" +
 	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
 	                }

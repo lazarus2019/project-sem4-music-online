@@ -141,7 +141,7 @@
                                             <label for="thumbnailTrack" class="form-btn">Upload Thumbnail</label>
                                         </div>
                                         <div class="border-dash-box form__thumbnail-track">
-                                            <img src="${pageContext.request.contextPath }/uploads/images/tracks/${thumbnail }" alt="" style="display: block;">
+                                            <img src="${pageContext.request.contextPath }/uploads/images/track/${thumbnail }" alt="" style="display: block;">
                                             <p style="display: none">Your thumbnail will be here!</p>
                                         </div>
                                     </div>

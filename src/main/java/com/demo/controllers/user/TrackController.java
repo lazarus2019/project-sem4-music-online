@@ -32,6 +32,7 @@ import com.demo.models.AlbumInfo;
 import com.demo.models.ArtistInfo;
 import com.demo.models.TrackInfo;
 import com.demo.services.AccountPlaylistService;
+
 import com.demo.services.AccountService;
 import com.demo.services.ArtistTrackService;
 import com.demo.services.CommentService;
@@ -55,7 +56,7 @@ public class TrackController implements ServletContextAware{
 	private AccountService accountService;
 	
 	@Autowired
-	private AccountPlaylistService accountPlaylistService;
+	private AccountPlaylistService accountPlaylistService;	
 	
 	@Autowired
 	private ArtistTrackService artistTrackService;
@@ -66,8 +67,10 @@ public class TrackController implements ServletContextAware{
 	@Autowired
 	private CommentService commentService;
 	
-	@RequestMapping( value = {"index/{id}" } , method = RequestMethod.GET )
+	@RequestMapping( value = {"id/{id}" } , method = RequestMethod.GET )
 	public String index( @PathVariable("id") int id , ModelMap modelMap) {
+		
+		modelMap.put("na", genresService.getNameById(id));
 		modelMap.put("listtrack", trackService.findTrackByGenresId(id));
 		return "track/index" ; 
 	}
@@ -97,8 +100,8 @@ public class TrackController implements ServletContextAware{
 		int artistId = 5;
 		FileUploadHelper fileHelper = new FileUploadHelper();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String directionThumbnail = "images/tracks/";
-		String directionAudio = "audio/tracks/";
+		String directionThumbnail = "images/track/";
+		String directionAudio = "audio/track/";
 		
 		Status status = new Status();
 		status.setId(2);
@@ -176,7 +179,7 @@ public class TrackController implements ServletContextAware{
 		int artistId = 5;
 		Track newTrack = trackService.findById(track.getId());
 		FileUploadHelper fileHelper = new FileUploadHelper();
-		String directionThumbnail = "images/tracks/";
+		String directionThumbnail = "images/track/";
 		
 		// Set new thumbnail
 		if (!thumbnailTrack.isEmpty() && thumbnailTrack.getSize() > 0) {
@@ -190,13 +193,17 @@ public class TrackController implements ServletContextAware{
 		}
 		
 		// Check/Set publish/hidden
-		Status status = new Status();			
-		if(isHidden != null) {
-			status.setId(3);
+		if(newTrack.getStatus().getId() != 2) {
+			Status status = new Status();			
+			if(isHidden != null) {
+				status.setId(3);
+			}else {
+				status.setId(1);
+			}
+			newTrack.setStatus(status);				
 		}else {
-			status.setId(1);
+			
 		}
-		newTrack.setStatus(status);	
 		
 		newTrack.setGenres(track.getGenres());
 		newTrack.setTitle(track.getTitle());
@@ -235,7 +242,7 @@ public class TrackController implements ServletContextAware{
 	}	
 
 	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> searchTopArtist(@RequestParam("id") int trackId) {
+	public ResponseEntity<Boolean> delete(@RequestParam("id") int trackId) {
 		boolean result = false;
 		Track track = trackService.findById(trackId);
 		
@@ -265,7 +272,7 @@ public class TrackController implements ServletContextAware{
 			return new ResponseEntity<List<AlbumInfo>>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping( value = { "manage" })
 	public String manage() {
 		return "track/manage" ; 

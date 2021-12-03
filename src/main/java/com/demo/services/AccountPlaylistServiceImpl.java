@@ -7,14 +7,18 @@ import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
 import com.demo.entities.AccountPlaylistId;
 import com.demo.entities.Playlist;
 import com.demo.models.AlbumInfo;
 import com.demo.repositories.AccountPlaylistRepository;
+import com.demo.repositories.AccountRepository;
 
 @Service("accountPlaylistService")
-public class AccountPlaylistServiceImpl implements AccountPlaylistService{
+public class AccountPlaylistServiceImpl implements AccountPlaylistService {
+
 
 	@Autowired
 	private AccountPlaylistRepository accountPlaylistRepository;
@@ -65,6 +69,12 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService{
 	@Override
 	public AccountPlaylist getOwnerPlaylist(int playlistId) {
 		return accountPlaylistRepository.checkAlbum(playlistId);
+	}
+
+	//A-2/12
+	@Override
+	public List<AccountPlaylistId> getPlaylistOfAccount(int id) {
+		return accountPlaylistRepository.getPlaylistOfAccount(id);
 	}
 
 	@Override

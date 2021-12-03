@@ -2,7 +2,6 @@ package com.demo.repositories;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +22,5 @@ public interface AlbumRepository extends PagingAndSortingRepository<Playlist, In
 //	
 	@Query("SELECT new com.demo.models.AlbumInfo(id,title,description,thumbnail,status.id,publishDate) FROM Playlist WHERE id = :id")
 	public AlbumInfo findAlbumById(@Param("id")int id);
+
 }

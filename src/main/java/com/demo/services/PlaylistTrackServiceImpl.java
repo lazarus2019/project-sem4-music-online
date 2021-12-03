@@ -9,13 +9,13 @@ import com.demo.entities.Playlist;
 import com.demo.entities.PlaylistTrack;
 import com.demo.entities.PlaylistTrackId;
 import com.demo.entities.Track;
-import com.demo.repositories.PLaylistTrackRepository;
+import com.demo.repositories.PlaylistTrackRepository;
 
 @Service("playlistTrackService")
 public class PlaylistTrackServiceImpl implements PlaylistTrackService{
 	
 	@Autowired
-	private PLaylistTrackRepository pLaylistTrackRepository;
+	private PlaylistTrackRepository pLaylistTrackRepository;
 	
 	@Autowired
 	private TrackService trackService;
@@ -91,6 +91,5 @@ public class PlaylistTrackServiceImpl implements PlaylistTrackService{
 			System.out.println(e.getMessage());
 		}
 	}
-
 	
 }

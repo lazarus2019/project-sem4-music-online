@@ -31,4 +31,14 @@ public class ArtistServiceImpl implements ArtistService{
 		return artistRepository.getArtistsWithoutId(id);
 	}
 
+	@Override
+	public List<Account> getAllArtist() {
+		return artistRepository.getAllArtist();
+	}
+
+	@Override
+	public List<Account> getRequestArtist() {
+		return artistRepository.getRequestArtist();
+	}
+
 }
