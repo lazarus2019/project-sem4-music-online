@@ -355,7 +355,5 @@ public class Account implements java.io.Serializable {
 				+ accountPlaylists + ", roles=" + roles + ", artistTracks=" + artistTracks + ", accountSettings="
 				+ accountSettings + "]";
 	}
-	
-	
 
 }

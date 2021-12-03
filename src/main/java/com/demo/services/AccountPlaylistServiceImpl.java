@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.AccountPlaylist;
+import com.demo.entities.AccountPlaylistId;
+import com.demo.entities.Playlist;
 import com.demo.models.AlbumInfo;
 import com.demo.repositories.AccountPlaylistRepository;
 
@@ -16,6 +18,12 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService{
 
 	@Autowired
 	private AccountPlaylistRepository accountPlaylistRepository;
+	
+	@Autowired
+	private AccountPlaylistService accountPlaylistService;
+	
+	@Autowired
+	private AccountService accountService;
 
 	@Override
 	public List<AlbumInfo> checkAndGetAlbum(List<AlbumInfo> album) {
@@ -44,6 +52,9 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService{
 				albumInfo.setId(accountPlaylist.getPlaylist().getId());
 				albumInfo.setTitle(accountPlaylist.getPlaylist().getTitle());
 				albumInfo.setStatusId(accountPlaylist.getPlaylist().getStatus().getId());
+				albumInfo.setThumbnail(accountPlaylist.getPlaylist().getThumbnail());
+				albumInfo.setDescription(accountPlaylist.getPlaylist().getDescription());
+				albumInfo.setPublishDate(accountPlaylist.getPlaylist().getPublishDate());
 				// Check track is on this album or not
 				result.add(albumInfo);	
 			}			
@@ -54,5 +65,56 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService{
 	@Override
 	public AccountPlaylist getOwnerPlaylist(int playlistId) {
 		return accountPlaylistRepository.checkAlbum(playlistId);
+	}
+
+	@Override
+	public AccountPlaylist save(AccountPlaylist accountPlaylist) {
+		return accountPlaylistRepository.save(accountPlaylist);
+	}
+
+	@Override
+	public void delete(AccountPlaylistId accountPlaylistId) {
+		try {
+			AccountPlaylist accountPlaylist = findById(accountPlaylistId);
+			accountPlaylistRepository.delete(accountPlaylist);			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public AccountPlaylist findById(AccountPlaylistId accountPlaylistId) {
+		return accountPlaylistRepository.findById(accountPlaylistId).get();
+	}
+
+	@Override
+	public Iterable<AccountPlaylist> findAll() {
+		return accountPlaylistRepository.findAll();
+	}
+
+	@Override
+	public void removeAccountHasAlbum(Playlist album) {
+		try {
+			for(AccountPlaylist accountPlaylist : album.getAccountPlaylists()) {
+				accountPlaylistService.delete(accountPlaylist.getId());
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}		
+	}
+
+	@Override
+	public void setOwnerAlbum(Playlist album, int artistId) {
+		try {
+			AccountPlaylist accountPlaylist = new AccountPlaylist();
+			accountPlaylist.setId(new AccountPlaylistId(album.getId(), artistId));
+			accountPlaylist.setPlaylist(album);
+			accountPlaylist.setAccount(accountService.findById(artistId));
+			accountPlaylist.setIsOwn(true);
+			accountPlaylistService.save(accountPlaylist);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}		
+		
 	}
 }

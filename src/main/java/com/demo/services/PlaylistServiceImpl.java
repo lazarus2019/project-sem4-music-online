@@ -26,9 +26,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 
 	@Override
 	public Playlist save(Playlist playlist) {
-		playlist.setPlaylistTracks(null);
-		playlistRepository.save(playlist);
-		return null;
+		return playlistRepository.save(playlist);
 	}
 
 	@Override

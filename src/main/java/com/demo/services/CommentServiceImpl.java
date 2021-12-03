@@ -5,13 +5,14 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Comment;
 import com.demo.entities.CommentId;
+import com.demo.entities.Track;
 import com.demo.repositories.CommentRepository;
 
 @Service("commentService")
 public class CommentServiceImpl implements CommentService{
 	@Autowired
 	private CommentRepository commentRepository;
-
+	
 	@Override
 	public Comment findById(CommentId commentId) {
 		return commentRepository.findById(commentId).get();
@@ -35,6 +36,17 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public Comment save(Comment comment) {
 		return commentRepository.save(comment);
+	}
+
+	@Override
+	public void removeAllCommentInTrack(Track track) {
+		try {
+			for(Comment comment : track.getComments()) {
+				delete(comment.getId());
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	

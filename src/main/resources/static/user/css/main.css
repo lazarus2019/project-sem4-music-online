@@ -2118,7 +2118,7 @@ body::-webkit-scrollbar-thumb {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 98;
     background-color: #fff;
     border: none;
   }
@@ -7720,7 +7720,7 @@ body::-webkit-scrollbar-thumb {
   color: var(--indigo)
 }
 
-.btn-dropdown-track-menu-artist {
+.btn-dropdown-track-menu-artist, .btn-dropdown-album-menu-artist {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -7728,7 +7728,7 @@ body::-webkit-scrollbar-thumb {
   z-index: 3;
 }
 
-.btn-dropdown-track-menu-artist i {
+.btn-dropdown-track-menu-artist i, .btn-dropdown-album-menu-artist > i {
   color: var(--white);
   font-size: 35px;
 }
@@ -8022,7 +8022,11 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
+  padding: 12px 10px;
+}
+
+.form-track-option{
+	cursor: pointer;
 }
 
 .form-track-box:not(:last-child){
@@ -8037,4 +8041,58 @@ body::-webkit-scrollbar-thumb {
 
 .form-track-option i{
   font-size: 20px;
+}
+
+/* Delete track */
+.delete_form__btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+  color: #fff !important;
+  background-color: #222227;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  margin: 15px auto 0;
+  text-decoration: none !important;
+}
+
+.delete_form__btn:hover{
+	background: var(--red)	
+}
+
+/* checkbox premium */
+/* .sign__group--checkbox input:not(:checked)+label, .sign__group--checkbox input:checked+label {
+  font-size: 14px;
+  color: #c0c0c0;
+  font-weight: normal;
+  position: relative;
+  cursor: pointer;
+  padding-left: 35px;
+  line-height: 22px;
+  margin: 0;
+}
+.sign__group--checkbox input:not(:checked)+label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.sign__group--checkbox input:checked+label:after {
+  opacity: 1;
+  transform: scale(1);
+} */
+#checkbox-isPremium:checked~#label-isPremium:after{
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+#checkbox-isPremium:not(:checked)~#label-isPremium:after{
+  opacity: 0 !important;
+  transform: scale(0) !important;
 }

@@ -51,6 +51,7 @@ function hideLyrics() {
 
 function changeVolumeIcon(e) {
 	let value = e.value;
+	console.log(value)
 	const iconVolume = document.querySelector('.btn-toggle-volume i');
 	if (value == 0) {
 		iconVolume.classList = "las la-volume-mute audio__icon";
@@ -395,7 +396,53 @@ function callFile(e) {
   reader.onload = function () {
     var text = this.result;
     var node = document.getElementById('lyrics-textarea') || null;
+/*    var lines = text.split('\n');
+    for(let i = 0; i < lines.length; i++){
+    	console.log(lines[i].replace('/r', '/n/n'))
+    }*/
     if (node) { node.value = text; }
+    reader = null;
   };
   reader.readAsText(e.files[0]);
 }
+
+function chooseTrack(label, id){
+    const chooseTrackContainer = document.querySelector('.form-choose-track-container')
+    const trackContainer = document.querySelector('.form-track-container')
+
+    const formTrackBox = document.querySelector('.form-track-box[data-id="'+ id +'"]')
+    const trackCheckbox = document.querySelector('#track-' + id );
+    
+    if(!trackCheckbox.checked){
+    	moveToElement(formTrackBox, chooseTrackContainer)
+        label.querySelector('i').classList.remove('la-check')
+        label.querySelector('i').classList.add('la-times')
+        label.querySelector('i').classList.add('clr-red')
+    }
+    
+    if(trackCheckbox.checked){
+    	moveToElement(formTrackBox, trackContainer)
+        label.querySelector('i').classList.add('la-check')
+        label.querySelector('i').classList.remove('la-times')
+        label.querySelector('i').classList.remove('clr-red')
+    }
+
+}
+
+function moveToElement(childEl, parentEl){
+    let fragment = document.createDocumentFragment()
+	fragment.appendChild(childEl);
+	parentEl.appendChild(fragment);
+}
+
+	function getAccIdInCookie(name){
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for (var i = 0; i < ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	    }
+	    return null;
+	}
+	//alert( getAccIdInCookie('acc_id') );
