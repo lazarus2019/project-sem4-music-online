@@ -31,4 +31,5 @@ public interface AccountPlaylistService {
 	
 	public void setOwnerAlbum(Playlist album, int artistId);
 	
+	public boolean checkAlbumOwner(int artistId, int albumId);
 }

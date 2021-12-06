@@ -77,9 +77,10 @@
                 <div class="dropdown-menu">
                     <a href="releases.html"><i class="las la-music"></i> New Release</a>
                     <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
-
-                    <a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
-                    <a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
+					<c:if test="${pageContext.request.userPrincipal.name  != null }">
+                    	<a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
+                    	<a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
+                    </c:if>
                     <a href="${pageContext.request.contextPath }/record-chart"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 
                 </div>
@@ -851,8 +852,7 @@
 	            audio.play()
 	        } else {
 	            if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
-	                addSongs(waitingPlaylist[0])
-	                playSong(waitingPlaylist[0].id)
+	                _this.findAndSongToWaiting()	                
 	            } else {
 	                nextBtn.click()
 	            }
@@ -949,7 +949,7 @@
 	},
 	loadCurrentSong: function () {
 	    this.activeSong()
-
+		
 	    if (this.amount % adsStep === 0 && this.amount !== 0) {
 	        this.isAdvertisement = true
 	        this.setConfig('isAdvertisement', this.isAdvertisement)
@@ -1008,9 +1008,14 @@
 
 	    lyricContent.innerHTML = title + htmls.join('')
 	},
+	findAndSongToWaiting: function(){
+		getWaitingTrack(this.currentSong)
+	},
 	loadConfig: function () {
 	    this.currentIndex = this.config.currentIndex || 0
 	    this.currentSong = this.config.currentSong || songPlaylist[this.currentIndex] || {}
+	    this.amount = this.config.amount || 0
+	    this.isAdvertisement = this.config.isAdvertisement || false
 
 	    this.volume = this.config.volume || .5
 	    audioVolume.value = this.volume * 100
@@ -1028,9 +1033,7 @@
 	    if (this.isPlaying) {
 	        audio.autoplay = true
 	    }
-
-	    this.amount = this.config.amount || 0
-	    this.isAdvertisement = this.config.isAdvertisement || false
+	    
 	    this.isRandom = this.config.isRandom || false
 	    this.isRepeat = this.config.isRepeat || false
 	    this.isCountdown = this.config.isCountdown || false
@@ -1046,6 +1049,7 @@
 	    if (this.currentIndex >= songPlaylist.length) {
 	        this.currentIndex = 0
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	prevSong: function () {
@@ -1053,6 +1057,7 @@
 	    if (this.currentIndex < 0) {
 	        this.currentIndex = songPlaylist.length - 1
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	playRandomSong: function () {
@@ -1062,6 +1067,7 @@
 	    } while (newIndex === this.currentIndex);
 
 	    this.currentIndex = newIndex
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	addNewSong: function (songs) {
@@ -1217,8 +1223,7 @@
 	            audio.play()
 	        } else {
 	            if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
-	                addSongs(waitingPlaylist[0])
-	                playSong(waitingPlaylist[0].id)
+	            	_this.findAndSongToWaiting()	                
 	            } else {
 	                nextBtn.click()
 	            }
@@ -1308,7 +1313,7 @@
 	},
 	loadCurrentSong: function () {
 	    this.activeSong()
-
+		
 	    audio.src = this.currentSong.path
 	    cdThumb.src = this.currentSong.image
 	    songName.textContent = this.currentSong.title;
@@ -1338,6 +1343,9 @@
 
 		    lyricContent.innerHTML = title + htmls.join('')
 		}
+	},
+	findAndSongToWaiting: function(){
+		getWaitingTrack(this.currentSong)
 	},
 	loadConfig: function () {
 	    this.currentIndex = this.config.currentIndex || 0
@@ -1374,6 +1382,7 @@
 	    if (this.currentIndex >= songPlaylist.length) {
 	        this.currentIndex = 0
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	prevSong: function () {
@@ -1381,6 +1390,7 @@
 	    if (this.currentIndex < 0) {
 	        this.currentIndex = songPlaylist.length - 1
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	playRandomSong: function () {
@@ -1390,6 +1400,7 @@
 	    } while (newIndex === this.currentIndex);
 
 	    this.currentIndex = newIndex
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	addNewSong: function (songs) {
@@ -1514,16 +1525,16 @@
 	}
 
 	function playSong(songId) {
-	const currentSong = findSong(songId)
-	if (isPremium) {
-	    appPremium.currentIndex = songPlaylist.indexOf(currentSong)
-
-	    appPremium.loadCurrentSong()
-	} else {
-	    app.currentIndex = songPlaylist.indexOf(currentSong)
-
-	    app.loadCurrentSong()
-	}
+		const currentSong = findSong(songId)
+		if (isPremium) {
+		    appPremium.currentIndex = songPlaylist.indexOf(currentSong)
+	
+		    appPremium.loadCurrentSong()
+		} else {
+		    app.currentIndex = songPlaylist.indexOf(currentSong)
+	
+		    app.loadCurrentSong()
+		}
 	}
 
 	// Save waiting songs
@@ -1578,11 +1589,13 @@
          						path: '${pageContext.request.contextPath }/uploads/audio/track/' + track.fileName,
          						duration: track.duration,
          						singer: singer,
-         						lyrics: track.lyrics
+         						lyrics: track.lyrics,
+         						genresId: track.genresId
                             }
                              
 	                    addSongs(playTrack)
 	                    playSong(playTrack.id)
+	                    plusListenForTrack(playTrack.id)
 	                    var lyrics = renderLyrics(track.lyrics)
 	                    var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
 	                    $(".lyric-content").html(songTitle + lyrics)
@@ -1592,6 +1605,21 @@
         })
 }
 
+	function plusListenForTrack(trackId){
+		$.ajax({
+            type: 'GET',
+            data: {
+                trackId: trackId,
+            },
+            url: '${pageContext.request.contextPath }/player/plusListenTrack',
+            success: function (response) {
+            	/* console.log("OK")     */
+            }
+            ,error: function(){
+            	console.log("ERROR")
+           	}
+        })
+	}
 	function getWaitingTrack(track){
 		$.ajax({
             type: 'GET',
@@ -1602,7 +1630,23 @@
             url: '${pageContext.request.contextPath }/home/getWaitingTrack',
             success: function (waitingTrack) {
                 console.log("waiting track:" + waitingTrack.title)
-                addSongToWaiting(waitingTrack)
+                var singer = ""
+                    if(track.artist){
+                       singer = track.artist.map(artist => artist.nickname + " - ")
+                    }
+                var playTrack = {
+         						id: waitingTrack.id,
+         						title: waitingTrack.title,
+         						image: '${pageContext.request.contextPath }/uploads/images/track/' + waitingTrack.thumbnail,
+         						path: '${pageContext.request.contextPath }/uploads/audio/track/' + waitingTrack.fileName,
+         						duration: waitingTrack.duration,
+         						singer: singer,
+         						lyrics: waitingTrack.lyrics,
+         						genresId: waitingTrack.genresId
+                            }
+                addSongToWaiting(playTrack)   
+                addSongs(playTrack)
+                playSong(waitingPlaylist[0].id)             
             }
         })
 	}

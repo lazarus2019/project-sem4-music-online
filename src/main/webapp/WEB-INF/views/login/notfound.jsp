@@ -1,10 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
    
-<!-- Mirrored from templates.iqonic.design/muzik/html/pages-error.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Nov 2021 05:04:30 GMT -->
+<!-- Mirrored from templates.iqonic.design/muzik/html/pages-error-500.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Nov 2021 05:04:31 GMT -->
 <head>
       <!-- Required meta tags -->
       <meta charset="utf-8">
@@ -12,115 +9,114 @@
       <title>Muzik - Responsive Bootstrap 4 Admin Dashboard Template</title>
       <!-- Favicon -->
       <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/admin/images/favicon.ico" />
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/typography.css">
-      <!-- Style CSS -->
-      <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/style.css">
-      <!-- Responsive CSS -->
-      <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/responsive.css">
-   </head>
-   <body>
-      <!-- loader Start -->
-      <div id="loading">
-         <div id="loading-center">
-         </div>
-      </div>
-      <!-- loader END -->
-      <!-- Wrapper Start -->
-      <div class="wrapper">
-         <div class="container p-0">
-            <div class="row no-gutters height-self-center">
-               <div class="col-sm-12 text-center align-self-center">
-                  <div class="iq-error position-relative">
-                     <img src="${pageContext.request.contextPath }/resources/admin/images/error/404.png" class="img-fluid iq-error-img" alt="">
-                     <h2 class="mb-0 mt-4">Oops! This Page is Not Found.</h2>
-                     <p>The requested page dose not exist.</p>
-                     <a class="btn btn-primary mt-3" href="${pageContext.request.contextPath }/user/home/index"><i class="ri-home-4-line"></i>Back to Home</a>                            
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Wrapper END -->
-      <!-- color-customizer -->
-      <div class="iq-colorbox color-fix">
-         <div class="buy-button"> <a class="color-full" href="#"><i class="fa fa-spinner fa-spin"></i></a> </div>
-         <div class="clearfix color-picker">
-            <h3 class="iq-font-black">Muzik Awesome Color</h3>
-            <p>This color combo available inside whole template. You can change on your wish, Even you can create your own with limitless possibilities! </p>
-            <ul class="iq-colorselect clearfix">
-               <li class="color-1 iq-colormark" data-style="color-1"></li>
-               <li class="color-2" data-style="iq-color-2"></li>
-               <li class="color-3" data-style="iq-color-3"></li>
-               <li class="color-4" data-style="iq-color-4"></li>
-               <li class="color-5" data-style="iq-color-5"></li>
-               <li class="color-6" data-style="iq-color-6"></li>
-               <li class="color-7" data-style="iq-color-7"></li>
-               <li class="color-8" data-style="iq-color-8"></li>
-               <li class="color-9" data-style="iq-color-9"></li>
-               <li class="color-10" data-style="iq-color-10"></li>
-               <li class="color-11" data-style="iq-color-11"></li>
-               <li class="color-12" data-style="iq-color-12"></li>
-               <li class="color-13" data-style="iq-color-13"></li>
-               <li class="color-14" data-style="iq-color-14"></li>
-               <li class="color-15" data-style="iq-color-15"></li>
-               <li class="color-16" data-style="iq-color-16"></li>
-               <li class="color-17" data-style="iq-color-17"></li>
-               <li class="color-18" data-style="iq-color-18"></li>
-               <li class="color-19" data-style="iq-color-19"></li>
-               <li class="color-20" data-style="iq-color-20"></li>
-            </ul>
-            <a target="_blank" class="btn btn-primary d-block mt-3" href="../../../themeforest.net/item/muzik-music-streaming-admin-template/27967164.html">Purchase Now</a>
-         </div>
-      </div>
-      <!-- color-customizer END -->
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.min.js"></script>
-      <script src="${pageContext.request.contextPath }/resources/admin/js/popper.min.js"></script>
-      <script src="${pageContext.request.contextPath }/resources/admin/js/bootstrap.min.js"></script>
-      <!-- Appear JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.appear.js"></script>
-      <!-- Countdown JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/countdown.min.js"></script>
-      <!-- Counterup JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/waypoints.min.js"></script>
-      <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.counterup.min.js"></script>
-      <!-- Wow JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/wow.min.js"></script>
-      <!-- Apexcharts JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/apexcharts.js"></script>
-      <!-- Slick JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/slick.min.js"></script>
-      <!-- Select2 JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/select2.min.js"></script>
-      <!-- Owl Carousel JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/owl.carousel.min.js"></script>
-      <!-- Magnific Popup JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/jquery.magnific-popup.min.js"></script>
-      <!-- Smooth Scrollbar JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/smooth-scrollbar.js"></script>
-     
-      <!-- am core JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/core.js"></script>
-      <!-- am charts JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/charts.js"></script>
-      <!-- am animated JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/animated.js"></script>
-      <!-- am kelly JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/kelly.js"></script>
-      <!-- am maps JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/maps.js"></script>
-      <!-- am worldLow JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/worldLow.js"></script>
-      <!-- Style Customizer -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/style-customizer.js"></script>
-      <script src="${pageContext.request.contextPath }/resources/admin/js/chart-custom.js"></script>
-      <!-- Custom JavaScript -->
-      <script src="${pageContext.request.contextPath }/resources/admin/js/custom.js"></script>
-   </body>
 
-<!-- Mirrored from templates.iqonic.design/muzik/html/pages-error.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Nov 2021 05:04:31 GMT -->
-</html>
+    
+
+<style>
+body {
+  background-color: #2F3242;
+}
+svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -400px;
+}
+.message-box {
+  height: 200px;
+  width: 380px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: 50px;
+  color: #FFF;
+  font-family: Roboto;
+  font-weight: 300;
+}
+.message-box h1 {
+  font-size: 60px;
+  line-height: 46px;
+  margin-bottom: 40px;
+}
+.buttons-con .action-link-wrap {
+  margin-top: 40px;
+}
+.buttons-con .action-link-wrap a {
+  background: #68c950;
+  padding: 8px 25px;
+  border-radius: 4px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px
+}
+.buttons-con .action-link-wrap a:hover {
+  background: #5A5C6C;
+  color: #fff;
+}
+
+#Polygon-1 , #Polygon-2 , #Polygon-3 , #Polygon-4 , #Polygon-4, #Polygon-5 {
+  animation: float 1s infinite ease-in-out alternate;
+}
+#Polygon-2 {
+  animation-delay: .2s; 
+}
+#Polygon-3 {
+  animation-delay: .4s; 
+}
+#Polygon-4 {
+  animation-delay: .6s; 
+}
+#Polygon-5 {
+  animation-delay: .8s; 
+}
+
+@keyframes float {
+	100% {
+    transform: translateY(20px);
+  }
+}
+@media (max-width: 450px) {
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -190px;
+  }
+  .message-box {
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -190px;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+<svg width="380px" height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M353,9 L626.664028,170 L626.664028,487 L353,642 L79.3359724,487 L79.3359724,170 L353,9 Z" id="Polygon-1" stroke="#007FB2" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M78.5,529 L147,569.186414 L147,648.311216 L78.5,687 L10,648.311216 L10,569.186414 L78.5,529 Z" id="Polygon-2" stroke="#EF4A5B" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M773,186 L827,217.538705 L827,279.636651 L773,310 L719,279.636651 L719,217.538705 L773,186 Z" id="Polygon-3" stroke="#795D9C" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M639,529 L773,607.846761 L773,763.091627 L639,839 L505,763.091627 L505,607.846761 L639,529 Z" id="Polygon-4" stroke="#F2773F" stroke-width="6" sketch:type="MSShapeGroup"></path>
+        <path d="M281,801 L383,861.025276 L383,979.21169 L281,1037 L179,979.21169 L179,861.025276 L281,801 Z" id="Polygon-5" stroke="#36B455" stroke-width="6" sketch:type="MSShapeGroup"></path>
+    </g>
+</svg>
+<div class="message-box">
+  <h1>403</h1>
+  <h2 class="mb-0 mt-4">Oops! Access Denied</h2>
+  <p>You do not have permission to access this page.</p>
+  <div class="buttons-con">
+    <div class="action-link-wrap">
+      <a href="${pageContext.request.contextPath }/home/index" class="link-button">Go to Home Page</a>
+    </div>
+  </div>
+</div>
+</body>

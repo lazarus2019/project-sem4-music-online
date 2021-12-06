@@ -52,15 +52,18 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 		List<AccountPlaylist> accountPlaylists = accountPlaylistRepository.getAlbumsOfArtistId(id);
 		if(accountPlaylists != null) {
 			for(AccountPlaylist accountPlaylist : accountPlaylists) {
-				AlbumInfo albumInfo = new AlbumInfo();
-				albumInfo.setId(accountPlaylist.getPlaylist().getId());
-				albumInfo.setTitle(accountPlaylist.getPlaylist().getTitle());
-				albumInfo.setStatusId(accountPlaylist.getPlaylist().getStatus().getId());
-				albumInfo.setThumbnail(accountPlaylist.getPlaylist().getThumbnail());
-				albumInfo.setDescription(accountPlaylist.getPlaylist().getDescription());
-				albumInfo.setPublishDate(accountPlaylist.getPlaylist().getPublishDate());
-				// Check track is on this album or not
-				result.add(albumInfo);	
+				if(accountPlaylist.getPlaylist().getPlaylistCategory().getId() == 3) {
+					AlbumInfo albumInfo = new AlbumInfo();
+					albumInfo.setId(accountPlaylist.getPlaylist().getId());
+					albumInfo.setTitle(accountPlaylist.getPlaylist().getTitle());
+					albumInfo.setStatusId(accountPlaylist.getPlaylist().getStatus().getId());
+					albumInfo.setThumbnail(accountPlaylist.getPlaylist().getThumbnail());
+					albumInfo.setDescription(accountPlaylist.getPlaylist().getDescription());
+					albumInfo.setPublishDate(accountPlaylist.getPlaylist().getPublishDate());
+					// Check track is on this album or not
+					result.add(albumInfo);
+				}
+
 			}			
 		}
 		return result;
@@ -126,5 +129,19 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 			System.out.println(e.getMessage());
 		}		
 		
+	}
+
+	@Override
+	public boolean checkAlbumOwner(int artistId, int albumId) {
+		boolean result = false;
+		List<AlbumInfo> albumInfos = getAlbumsByArtistId(artistId);
+		for(AlbumInfo albumInfo : albumInfos) {
+			if(albumInfo.getId() == albumId) {
+				result = true;
+				break;
+			}
+		}	
+		
+		return result;
 	}
 }

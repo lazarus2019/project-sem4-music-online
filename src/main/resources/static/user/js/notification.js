@@ -104,6 +104,17 @@ const MODAL_CONTENT = {
         title: "You not allow to be here!",
         html: 'We will return you to the manage page <b></b>s.',
         timer: 2
+    },
+    send_mail_success: {
+        icon: 'success',
+        title: 'Sent!',
+        text: 'Your mail was sent!'
+    },
+    send_mail_error: {
+        icon: 'error',
+        title: 'Failed!',
+        text: 'Please check your request and try again'
+
     }
 }
 
@@ -113,14 +124,6 @@ export function swalAlert(modal) {
         title: modal.title,
         text: modal.text,
         confirmButtonText: 'OK'
-    })
-}
-
-export function swalAlertWithoutButton(modal) {
-    Swal.fire({
-        icon: modal.icon,
-        title: modal.title,
-        text: modal.text,
     })
 }
 
@@ -209,5 +212,5 @@ export function redirectAlertURLCustom(modal, url){
     // })
 }
 
-export default {MODAL_CONTENT}
 
+export default {MODAL_CONTENT}

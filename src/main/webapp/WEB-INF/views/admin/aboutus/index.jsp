@@ -40,7 +40,7 @@
             </div>	
          
          <script type="module" defer>	
-			import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom, swalAlertWithoutButton } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
+			import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
 			$('.delete-btn').each(function (index) {
 		    	$(this).click(function () {
 		        	var id = $(this).data("id");

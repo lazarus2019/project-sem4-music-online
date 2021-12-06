@@ -267,7 +267,7 @@
           	           data: {
              	           id: id
                     	},
-                    	url: '${pageContext.request.contextPath }/track/delete',
+                    	url: '${pageContext.request.contextPath }/admin/manage-track/delete',
                     	success: function (response) {
                         	if (response) {
                             	swalAlert(modal.MODAL_CONTENT.delete_success);

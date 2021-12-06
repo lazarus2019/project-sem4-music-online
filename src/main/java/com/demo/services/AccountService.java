@@ -3,8 +3,8 @@ package com.demo.services;
 import java.util.*;
 
 import org.springframework.data.domain.Pageable;
-
 import com.demo.models.ArtistChartModel;
+import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 import com.demo.entities.Account;
@@ -56,6 +56,10 @@ public interface AccountService {
 	public long countUser();
 	
 	public List<ArtistChartModel> getAccountChart();
+	
+	public ArtistDetail getArtistByIdAccount(int id);
+	
+	public Account addNewAdmin(Account account , String image) ;
 
 }
 

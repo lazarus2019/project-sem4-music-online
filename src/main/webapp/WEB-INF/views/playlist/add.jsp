@@ -31,10 +31,10 @@
                                                 placeholder="Enter keyword" oninput="createSearchFunc(this, 'form-track-container', 'form-track-box', 'p')">
                                                 <button type="button" class="circle-icon-lg ml-2" onclick="reloadTracks()"><i class="las la-sync"></i></button>
                                          </div>
-                                            <div class="form-track-container mt-2 pr-2" style="height: 100%;">                                                                  
+                                            <div class="form-track-container mt-2 pr-2" style="height: 100%; overflow-x: hidden;">                                                                  
                          
                                                 <c:forEach items="${tracks}" var="track">
-	                                                <div class="form-track-box" data-id="${track.id }"><p class="clr-white mb-0" style="width: 45%;">${track.title }</p>
+	                                                <div class="form-track-box" data-id="${track.id }"><p class="clr-white mb-0" >${track.title }</p>
 		                                                <input type="checkbox" name="tracks" value="${track.id }" id="track-${track.id }" style="display: none">
 	                                                    <div class="form-track-box-option">
 		                                                    <c:if test="${track.status.id == 2 }">
@@ -62,7 +62,7 @@
                                         <div
                                             class="border-dash-box mb-3 p-3 flex-box flex-column all-choose-track-container">
                                             <div class="form-choose-track-container mt-2 pr-2"
-                                                style="height: 361.406px">                                                
+                                                style="height: 361.406px; overflow-x: hidden;">                                                
                                             </div>
                                         </div>
                                     </div>
@@ -138,8 +138,7 @@
 					$.ajax({
 		            	type: 'GET',
 		            	data: {
-		                	/* id: parseInt(id) */
-		                	id: 5
+		                	id: parseInt(id)		                	
 		            	},
 		            	url: '${pageContext.request.contextPath }/playlist/reloadTracks',
 		            	success: function (tracks) {
@@ -169,7 +168,7 @@
 				            		        }
 				            		    
 				            		        htmls += "<div class='form-track-box' data-id='"+ tracks[i].id +"'>"
-				            		        htmls += "<p class='clr-white mb-0' style='width: 45%;'>"+ tracks[i].title +"</p>"
+				            		        htmls += "<p class='clr-white mb-0'>"+ tracks[i].title +"</p>"
 				            		        htmls += "<input type='checkbox' name='tracks' value='"+ tracks[i].id +"' id='track-"+ tracks[i].id +"' style='display: none'>"
 				            		        htmls += "<div class='form-track-box-option'>" + status + premium    
 				            		        htmls += "<label for='track-"+ tracks[i].id +"' class='form-track-option clr-green' onclick='chooseTrack(this, "+ tracks[i].id +")'><i class='las la-check'></i></label>"

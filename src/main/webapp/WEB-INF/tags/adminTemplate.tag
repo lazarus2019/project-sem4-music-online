@@ -2,6 +2,7 @@
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
 <%@ taglib prefix="t" uri="http://mytags.com" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>  
 
 <!doctype html>
 <html lang="en">
@@ -29,11 +30,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/remixicon.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/custom.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
     
    	<!-- jQuery -->
    	<script src="${pageContext.request.contextPath }/resources/admin/js/jquery.min.js"></script>
+   	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
    	
    	<!-- Sweetalert CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
@@ -47,6 +51,7 @@
     </div> -->
     <!-- loader END -->
     <!-- Wrapper Start -->
+    
     <div class="wrapper">
         <!-- Sidebar  -->
         <div class="iq-sidebar">
@@ -71,26 +76,14 @@
                   		<li>
                   			<a href="${pageContext.request.contextPath }/admin/dashboard"><i class="las la-house-damage"></i>Dashboard</a>
                   		</li>
-                  		
-                        <li>
-                            <a href="#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-admin-line iq-arrow-left"></i><span>Admin</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="admin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a href="admin-dashboard.html"><i class="las la-house-damage"></i>Dashboard</a></li>
-                                <li><a href="admin-category.html"><i class="ri-function-line"></i>Category</a></li>
-                                <li><a href="admin-writer.html"><i class="las la-user"></i>Writer</a></li>
-                                <li><a href="admin-singer.html"><i class="las la-microphone-alt"></i>Singer</a></li>
-                                <li><a href="admin-song.html"><i class="las la-play-circle"></i>Music</a></li>
-                            </ul>
-                        </li>
+
 
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/playlist" class="iq-waves-effect">
                             	<i class="ri-function-line"></i><span>Manage Playlist</span>
                             </a>
                         </li>
+
 
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/manage-track" class="iq-waves-effect">
@@ -101,43 +94,21 @@
 
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/artist" class="iq-waves-effect">
-                            	<i class="ri-album-line iq-arrow-left"></i><span>Artist</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/admin/artist" class="iq-waves-effect">
-                            	<i class="ri-album-line iq-arrow-left"></i><span>User</span>
+                            	<i class="ri-folder-user-line iq-arrow-left"></i><span>Manage Artist</span> <span class="messageCustomAccount badge badge-primary">5</span>
                             </a>
                         </li>
 
-                        <li>
-                            <a href="admin-add-song.html"><i class="ri-upload-cloud-line "></i><span>Song Uploader</span>    </a>
-                        </li>
-                        <li class="mailbox nav-parent " data-toggle="collapse">
-                            <a href="#mailbox" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="mailbox" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-inbox"><span>Inbox</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-compose"><span>Compose</span></a>
-                                </li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-view"><span>View</span></a></li>
-                            </ul>
-                        </li>
 
-                        <li class="reports nav-parent " data-toggle="collapse">
-                            <a href="#report" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-pie-chart-line iq-arrow-left"></i><span>Report</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="report" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a class="nav-link active" href="/zestreact/appnew/music/reports-songs" aria-current="page"><span>Songs</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/reports-statistics"><span>Statistics</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/reports-trending"><span>Trending</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/reports-visitors"><span>Visitors</span></a></li>
-                            </ul>
-                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/package" class="iq-waves-effect">
+                            	<i class="ri-pages-fill iq-arrow-left"></i><span>Service Package</span></a> 
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/contact" class="iq-waves-effect">
+                            	<i class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span></a> 
+                            </a>
+                        </li>                        
 
                         <li class="genres nav-parent " data-toggle="collapse">
                             <a href="#genres" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
@@ -152,30 +123,23 @@
                             </ul>
                         </li>
 
-                        <li class="songs nav-parent " data-toggle="collapse">
-                            <a href="#song" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-disc-line iq-arrow-left"></i><span>Song</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="song" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-
-                                <li><a class="nav-link" href="admin-song.html"><span>Song</span></a></li>
-                                <li><a class="nav-link" href="admin-add-song.html"><span>Add Song</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/edit-song"><span>Edit Song</span></a></li>
-                                
-	                        </ul>
-                        </li>
-
 						<li>
                             <a href="#setting" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-
                            class="ripple rippleEffect"></span><i class="ri-settings-2-line" ></i><span>General</span><i
+
                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="setting" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li><a href="${pageContext.request.contextPath }/admin/banner/index">Banner</a></li>
                                 <li><a href="${pageContext.request.contextPath }/admin/aboutus/index">About</a></li>
                             </ul>
                         </li>
+                        <sec:authorize access="hasRole('ROLE_MANAGER')">
+							<li>
+	                            <a href="${pageContext.request.contextPath }/admin/manageAdmin" class="iq-waves-effect">
+	                            	<i class="ri-folder-user-line iq-arrow-left"></i><span>Manager Admin</span>
+	                            </a>
+	                        </li>
+						</sec:authorize>
                       	
 
 
@@ -369,69 +333,8 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="line-height pt-3">
-                                <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                                    <img src="${pageContext.request.contextPath }/resources/admin/images/user/11.png" class="img-fluid rounded-circle" alt="user">
-                                </a>
-                                <div class="iq-sub-dropdown iq-user-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                        <div class="iq-card-body p-0 ">
-                                            <div class="bg-primary p-3">
-                                                <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
-                                                <span class="text-white font-size-12">Available</span>
-                                            </div>
-                                            <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
-                                                <div class="media align-items-center">
-                                                    <div class="rounded iq-card-icon iq-bg-primary">
-                                                        <i class="ri-file-user-line"></i>
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">My Profile</h6>
-                                                        <p class="mb-0 font-size-12">View personal profile details.</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
-                                                <div class="media align-items-center">
-                                                    <div class="rounded iq-card-icon iq-bg-primary">
-                                                        <i class="ri-profile-line"></i>
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Edit Profile</h6>
-                                                        <p class="mb-0 font-size-12">Modify your personal details.</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="account-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                                <div class="media align-items-center">
-                                                    <div class="rounded iq-card-icon iq-bg-primary">
-                                                        <i class="ri-account-box-line"></i>
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Account settings</h6>
-                                                        <p class="mb-0 font-size-12">Manage your account parameters.</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="privacy-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                                <div class="media align-items-center">
-                                                    <div class="rounded iq-card-icon iq-bg-primary">
-                                                        <i class="ri-lock-line"></i>
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Privacy Settings</h6>
-                                                        <p class="mb-0 font-size-12">Control your privacy parameters.</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="d-inline-block w-100 text-center p-3">
-                                                <a class="bg-primary iq-sign-btn" href="sign-in.html" role="button">Sign out<i
-                                          class="ri-login-box-line ml-2"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            <t:profile/>
+                        
                         </ul>
                     </div>
                 </nav>
@@ -445,43 +348,7 @@
             </div>
         </div>
     </div>
-    <!-- Wrapper END -->
-    <!-- Footer 
-   <footer class="iq-footer">
-      <div class="container-fluid">
-         <div class="row">
-            <div class="col-sm-12">
-               <div class="player row">
-                  <div class="details col-6 col-sm-4 col-md-4 col-lg-4">
-                     <div class="now-playing"></div>
-                     <div class="track-art"></div>
-                     <div>
-                        <div class="track-name">Pop Smoke </div>
-                        <div class="track-artist">Cascada</div>
-                     </div>
-                  </div>
-                  <div class="slider_container slider_music col-sm-5 col-md-4 col-lg-4">
-                     <div class="current-time">00:00</div>
-                     <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
-                     <div class="total-duration">00:00</div>
-                  </div>
-                  <div class="buttons col-6  col-sm-3 col-md-2  col-lg-2">
-                     <div class="prev-track" onclick="prevTrack()"><i class="fa fa-step-backward fa-2x"></i></div>
-                     <div class="playpause-track" onclick="playpauseTrack()"><i class="fa fa-play-circle fa-3x"></i>
-                     </div>
-                     <div class="next-track" onclick="nextTrack()"><i class="fa fa-step-forward fa-2x"></i></div>
-                  </div>
-                  <div class="slider_container sound col-sm-6 col-md-2  col-lg-2">
-                     <i class="fa fa-volume-down"></i>
-                     <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
-                     <i class="fa fa-volume-up"></i>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </footer>
-   -->
+   
     <!-- Footer END -->
     <!-- color-customizer -->
     <div class="iq-colorbox color-fix">
@@ -519,6 +386,8 @@
     <!-- color-customizer END -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     
     <script src="${pageContext.request.contextPath }/resources/admin/js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/js/bootstrap.min.js"></script>
@@ -573,18 +442,13 @@
     <script src="${pageContext.request.contextPath }/resources/admin/js/style-customizer.js"></script>
     <!-- Chart Custom JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/chart-custom.js"></script>
-    <!-- Music js -->
-    <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/music-player.js"></script> --%>
-    <!-- Music-player js -->
-    <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/music-player-dashboard.js"></script> --%>
-    <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/custom.js"></script>
     <script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
     <!-- Sweetalert -->
     <script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    
 </body>
 
 <!-- Mirrored from templates.iqonic.design/muzik/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Nov 2021 05:03:36 GMT -->
+
 
 </html>

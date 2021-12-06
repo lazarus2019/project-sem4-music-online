@@ -1,15 +1,19 @@
 package com.demo.services;
 
-import java.util.*;
+import java.util.List;
 
-import org.springframework.data.repository.query.Param;
-
-import com.demo.entities.*;
+import com.demo.entities.Account;
+import com.demo.entities.PackageInfo;
 import com.demo.models.PackageChartModel;
 
 public interface PackageInfoService {
-
-	public List<PackageInfo> findAll();
+	public List<Account> getAccountsSignPackageById(int packageId);
+	
+	public int getAmountAccountSignPackageById(int packageId);		
+	
+	public List<PackageInfo> getPackageInfosById(int packageId);
+	
+	public Iterable<PackageInfo> findAll();
 	
 	public List<PackageChartModel> getPackageChart(); 
 

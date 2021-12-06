@@ -54,16 +54,16 @@ public class NotificationController {
 			Notification notification = notificationService.findById(id);
 			if (notification.isIsRead() == false) {
 				notification.setIsRead(true);
-			} 
+			}
 			notificationService.save(notification);
 			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(value = {
-	"mark-all-as-read" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+			"mark-all-as-read" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> MarkAllAsRead() {
 		try {
 			int accountId = Integer.parseInt(cookieService.getValue("acc_id", null));

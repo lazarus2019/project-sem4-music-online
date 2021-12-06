@@ -74,7 +74,7 @@
 					                                    	</c:if>
 					                                    </td>
 					                                    <td>
-					                                    	<p class="mb-0">${playlist.description }</p>
+					                                    	<p class="mb-0" style="height: 156px; overflow-y: auto">${playlist.description }</p>
 					                                    </td>
 					                                    <td>
 					                                       <div class="flex align-items-center text-center list-user-action">
@@ -356,7 +356,7 @@
 	}
 </script>
 <script type="module" defer>	
-	import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom, swalAlertWithoutButton } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
+	import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
 	$('.delete-btn').each(function (index) {
     	$(this).click(function () {
         	var id = $(this).data("id");
@@ -368,7 +368,7 @@
           	           data: {
              	           id: id
                     	},
-                    	url: '${pageContext.request.contextPath }/playlist/delete',
+                    	url: '${pageContext.request.contextPath }/admin/playlist/delete',
                     	success: function (response) {
                         	if (response) {
                             	swalAlert(modal.MODAL_CONTENT.delete_success);

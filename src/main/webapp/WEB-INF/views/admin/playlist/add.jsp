@@ -21,6 +21,14 @@
                               <input type="text" class="form-control" name="title">
                            </div>
                            <div class="form-group">
+                              <label>Thumbnail:</label>
+                              <input type="file" name="photo">
+                              <!-- <div class="custom-file">
+                                 <input type="file" class="custom-file-input" id="customFile"  name="photo">
+                                 <label class="custom-file-label" for="customFile"></label>
+                              </div> -->
+                           </div>
+                           <div class="form-group">
                               <label>Playlist Category:</label>
                               <select class="form-control" id="exampleFormControlSelect1" name="playlistCategory.id">
                               	 <c:forEach var="playlistCategory" items="${playlistCategories }">
@@ -31,14 +39,6 @@
                            <div class="form-group">
                               <label>Description:</label>
                               <textarea class="form-control" rows="4" name="description"></textarea>
-                           </div>
-                           <div class="form-group">
-                              <label>Thumbnail:</label>
-                              <input type="file" name="photo">
-                              <!-- <div class="custom-file">
-                                 <input type="file" class="custom-file-input" id="customFile"  name="photo">
-                                 <label class="custom-file-label" for="customFile"></label>
-                              </div> -->
                            </div>
                            <button type="submit" class="btn btn-primary">Submit</button>
                            <button type="reset" class="btn btn-danger">Reset</button>
