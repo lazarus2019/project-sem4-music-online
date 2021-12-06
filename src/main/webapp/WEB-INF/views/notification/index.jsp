@@ -38,7 +38,9 @@
 			                  </button>
 			                </div>
 			                <!-- /.btn-group -->
-			                <div class="float-right"></div>
+			                <div class="float-right">
+			                	<a type="button" class="mark-all-as-read">Mark all as read</a>
+			                </div>
 			                <!-- /.float-right -->
 			              </div>
 			              <div class="table-responsive mailbox-messages">
@@ -52,11 +54,15 @@
 						                        <label for="check${i.index + 1}"></label>
 						                      </div>
 						                    </td>
-						                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
 						                    <td class="mailbox-subject">${notification.message }</td>
-						                    <td class="mailbox-feedback"><a href="contactPage">Feedback</a></td>
+						                    <td class="mailbox-feedback"><a href="${pageContext.request.contextPath }/contact">Feedback</a></td>
 						                    <td class="mailbox-date"><t:timeAgo pastDate="${notification.date }"/></td>
-						                    <td class="mailbox-attachment"></td>
+						                    <c:if test="${notification.isRead == true }">
+						                    	<td><a type="button"><i class="far fa-check-circle clr-green"></i></a></td>
+						                    </c:if>
+						                    <c:if test="${notification.isRead == false }">
+						                    	<td><a type="button" class="toggle-edit-status" data-id="${notification.id }"><i class="far fa-circle clr-blue"></i></a></td>
+						                    </c:if>
 					                	</tr>
 				                  	</c:forEach>
 			                  </tbody>
@@ -80,26 +86,61 @@
 		<script src="${pageContext.request.contextPath }/resources/user/js/jquery.min.js"></script>
 		
 		<!-- jquery  -->
-		<script>
-		
-		  $(function () {
-		    //Enable check and uncheck all functionality
-		    $('.checkbox-toggle').click(function () {
-		      var clicks = $(this).data('clicks')
-		      if (clicks) {
-		        //Uncheck all checkboxes
-		        $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
-		        $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
-		      } else {
-		        //Check all checkboxes
-		        $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
-		        $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
-		      }
-		      $(this).data('clicks', !clicks)
-		    })
-		    console.log("b")
+	<script>
+		$(document).ready(function(){
+			$('.toggle-edit-status').each(function (index) {
+			    $(this).on("click", function () {
+			        var id = $(this).data("id")
+			        var self = $(this);
+			        $.ajax({
+			            type: 'GET',
+			            data: {
+			                id: id
+			            },
+			            url: '${pageContext.request.contextPath}/notification/edit-status',
+			            success: function (status) {
+			                if (status == true) {
+			                    result = "<i class='far fa-check-circle clr-green'></i>";
+			                    self.html(result);
+			                } 
+	
+			            }
+			        }); 
+			    });
+			});
 
-		  })
-		</script>
+			$('.mark-all-as-read').on("click", function () {
+		        $.ajax({
+		            type: 'GET',
+		            url: '${pageContext.request.contextPath}/notification/mark-all-as-read',
+		            success: function (status) {
+		                if (status == true) {
+		                    result = "<i class='far fa-check-circle clr-green'></i>";
+		                    $('.toggle-edit-status').html(result);
+		                } 
+
+		            }
+		        }); 
+		    });	
+		
+		})
+		
+		$(function () {
+		        //Enable check and uncheck all functionality
+		        $('.checkbox-toggle').click(function () {
+		            var clicks = $(this).data('clicks')
+		            if (clicks) {
+				        //Uncheck all checkboxes
+				        $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
+				        $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
+			        } else {
+				        //Check all checkboxes
+				        $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
+				        $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
+			        }
+			        $(this).data('clicks', !clicks)
+			    })
+		})
+	</script>
 	</jsp:attribute>
 </mt:userTemplate>

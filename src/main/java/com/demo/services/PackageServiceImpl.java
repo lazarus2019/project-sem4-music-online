@@ -108,6 +108,11 @@ public class PackageServiceImpl implements PackageService {
 		return packageInfoFirst;
 	}
 
+	@Override
+	public long countPackage() {
+		return packageRepository.countPackage();
+	}
+
 	
 	
 }

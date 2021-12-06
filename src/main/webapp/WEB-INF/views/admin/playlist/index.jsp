@@ -64,13 +64,13 @@
 					                                       <img src="${pageContext.request.contextPath }/uploads/images/playlist/${playlist.thumbnail }" class="img-responsive avatar-150 rounded" alt="" width="200" height="200">
 					                                    </td>
 					                                    <td>${playlist.title }</td>
-					                                    <td class="text-center"><fmt:formatDate value="${playlist.publishDate }" type="date" pattern="MM/dd/yyyy"/></td>
+					                                    <td class="text-center"><fmt:formatDate value="${playlist.publishDate }" type="date" pattern="dd/MM/yyyy"/></td>
 					                                    <td>${playlist.likes } <i class="fas fa-heart clr-red"></i></td>
 					                                    <td class="text-center">${playlist.playlistCategory.name }</td>
 					                                    <td class="text-center">
-					                                    	<c:if test="${playlist.status.id == 1 }"><a id="status-btn" class="badge iq-bg-info toggle-playlist-status" data-id="${playlist.id}">Public</a>
+					                                    	<c:if test="${playlist.status.id == 1 }"><button id="status-btn" type="button" class="badge iq-bg-info toggle-playlist-status" data-id="${playlist.id}">Public</button>
 					                                    	</c:if>
-					                                    	<c:if test="${playlist.status.id == 3 }"><a id="status-btn" class="badge iq-bg-danger toggle-playlist-status" data-id="${playlist.id}">Hidden</a>
+					                                    	<c:if test="${playlist.status.id == 3 }"><button id="status-btn" type="button" class="badge iq-bg-danger toggle-playlist-status" data-id="${playlist.id}">Hidden</button>
 					                                    	</c:if>
 					                                    </td>
 					                                    <td>
@@ -79,16 +79,16 @@
 					                                    <td>
 					                                       <div class="flex align-items-center text-center list-user-action">
 					                                          <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" 
-					                                          	href="${pageContext.request.contextPath }/admin/playlist/edit?id=${playlist.id }">
-					                                          	<i class="ri-pencil-line"></i>
+					                                          	 href="${pageContext.request.contextPath }/admin/playlist/edit?id=${playlist.id }">
+					                                          	 <i class="ri-pencil-line"></i>
 					                                          </a>
-					                                          <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" 
-					                                          	href="${pageContext.request.contextPath }/admin/playlist/delete?id=${playlist.id }">
-					                                          	<i class="ri-delete-bin-line"></i>
+					                                          <a class="bg-primary delete-btn" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" 
+					                                          	 data-id="${playlist.id}">
+					                                          	 <i class="ri-delete-bin-line"></i>
 					                                          </a>
 					                                          <a class="bg-primary toggle-view-tracks" data-toggle="modal" type="button" data-target=".bd-example-modal-lg" title="View tracks"
 					                                          	 data-id="${playlist.id}">
-					                                          	<i class="ri-list-unordered"></i>
+					                                          	 <i class="ri-list-unordered"></i>
 					                                          </a>
 					                                       </div>
 					                                    </td>
@@ -146,11 +146,11 @@
 					                                    		<span>${account.nickname }</span>
 					                                    	</c:forEach>
 					                                    </td>
-					                                    <td class="text-center"><fmt:formatDate value="${album.publishDate }" type="date" pattern="MM/dd/yyyy"/></td>
+					                                    <td class="text-center"><fmt:formatDate value="${album.publishDate }" type="date" pattern="dd/MM/yyyy"/></td>
 					                                    <td>${album.likes } <i class="fas fa-heart clr-red"></i></td>
 					                                    <td class="text-center ">
-					                                    	<c:if test="${album.status == 1 }"><a class="badge iq-bg-info toggle-album-status" data-id="${album.id}">Public</a></c:if>
-					                                    	<c:if test="${album.status == 3 }"><a class="badge iq-bg-danger toggle-album-status" data-id="${album.id}">Hidden</a></c:if>
+					                                    	<c:if test="${album.status == 1 }"><button type="button" class="badge iq-bg-info toggle-album-status" data-id="${album.id}">Public</button></c:if>
+					                                    	<c:if test="${album.status == 3 }"><button type="button" class="badge iq-bg-danger toggle-album-status" data-id="${album.id}">Hidden</button></c:if>
 					                                    </td>
 					                                    <td>
 					                                       <p class="mb-0">${album.description }</p>
@@ -161,8 +161,8 @@
 					                                          	href="${pageContext.request.contextPath }/admin/playlist/edit?id=${album.id }">
 					                                          	<i class="ri-pencil-line"></i>
 					                                          </a>
-					                                          <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" 
-					                                          	href="${pageContext.request.contextPath }/admin/playlist/delete?id=${album.id }">
+					                                          <a class="bg-primary delete-btn" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" 
+					                                          	data-id="${album.id}">
 					                                          	<i class="ri-delete-bin-line"></i>
 					                                          </a>
 					                                          <a class="bg-primary toggle-view-tracks" data-toggle="modal" type="button" data-target=".bd-example-modal-lg" title="View tracks"
@@ -216,96 +216,174 @@
 </div>
 			
 <script>
-
 	$(document).ready(function(){
-		$('.toggle-playlist-status').each(function(index){
-		    $(this).on("click", function(){
+		$('.toggle-playlist-status').each(function (index) {
+		    $(this).on("click", function () {
 		        var id = $(this).data("id")
 		        var self = $(this);
-			    $.ajax({
-			    	type: 'GET',
-			        data: {
-			            id: id
-			        },
-			        url: '${pageContext.request.contextPath}/admin/playlist/edit-status',
-			        success: function (status) {
-			                if (status == 1) {
-			                	self.text('Public');
-			                	self.addClass('iq-bg-info')
-			                	self.removeClass('iq-bg-danger')
-			                } else if (status == 3) {
-			                	self.text('Hidden') 
-			                	self.addClass('iq-bg-danger')
-			                	self.removeClass('iq-bg-info')
-			                }
-			            
-			        }
-        		});
-    		});
+		        $.ajax({
+		            type: 'GET',
+		            data: {
+		                id: id
+		            },
+		            url: '${pageContext.request.contextPath}/admin/playlist/edit-status',
+		            success: function (status) {
+		                if (status == 1) {
+		                    self.text('Public');
+		                    self.addClass('iq-bg-info')
+		                    self.removeClass('iq-bg-danger')
+		                } else if (status == 3) {
+		                    self.text('Hidden')
+		                    self.addClass('iq-bg-danger')
+		                    self.removeClass('iq-bg-info')
+		                }
+
+		            }
+		        });
+		    });
 		});
 
-		$('.toggle-album-status').each(function(index){
-		    $(this).on("click", function(){
+		$('.toggle-album-status').each(function (index) {
+		    $(this).on("click", function () {
 		        var id = $(this).data("id")
 		        var self = $(this);
-			    $.ajax({
-			    	type: 'GET',
-			        data: {
-			            id: id
-			        },
-			        url: '${pageContext.request.contextPath}/admin/playlist/edit-status',
-			        success: function (status) {
-			                if (status == 1) {
-			                	self.text('Public');
-			                	self.addClass('iq-bg-info')
-			                	self.removeClass('iq-bg-danger')
-			                } else if (status == 3) {
-			                	self.text('Hidden') 
-			                	self.addClass('iq-bg-danger')
-			                	self.removeClass('iq-bg-info')
-			                } 
-			            
-			        }
-        		}); 
-    		});
+		        $.ajax({
+		            type: 'GET',
+		            data: {
+		                id: id
+		            },
+		            url: '${pageContext.request.contextPath}/admin/playlist/edit-status',
+		            success: function (status) {
+		                if (status == 1) {
+		                    self.text('Public');
+		                    self.addClass('iq-bg-info')
+		                    self.removeClass('iq-bg-danger')
+		                } else if (status == 3) {
+		                    self.text('Hidden')
+		                    self.addClass('iq-bg-danger')
+		                    self.removeClass('iq-bg-info')
+		                }
+
+		            }
+		        });
+		    });
 		});
 
-		$('.toggle-view-tracks').click(function(){
-			var id = $(this).data("id");
+		$('.toggle-view-tracks').click(function () {
+		    var id = $(this).data("id");
 		    $.ajax({
-		    	type: 'GET',
+		        type: 'GET',
 		        data: {
 		            id: id
 		        },
 		        url: '${pageContext.request.contextPath}/admin/playlist/view-tracks',
 		        success: function (tracks) {
-			        var result = "";
-			       	if(tracks.length <= 0){
-						result += "<h4>There are no songs in this playlist yet</h4>";
-					}
-			        for(var i = 0; i < tracks.length; i++){
-				        result += "<div class='d-flex justify-content-between align-items-center p-3'>";
-						result += "<div class='d-flex flex-row align-items-center'> <i class='fa fa-music color'></i> <small class='ml-2' style='font-size: larger;'>" + tracks[i].title + "</small> </div>";
-						result += "<div class='d-flex flex-row'>";
-						if(tracks[i].statusId == 1){
-		        	 		result += "<i class='fa fa-check color mr-15'></i>";
-						} else if(tracks[i].statusId == 2){
-							result += "<i class='ri-upload-2-fill mr-15'></i>";
-						} else if(tracks[i].statusId == 3){
-							result += "<i class='fas fa-times mr-15'></i>";
-						} 
-                    	result += "<button class='delete-action center-item'><i class='ri-delete-bin-line'></i></button>"
-                    	result += "</div>";
-                        result += "</div>";
-				    } 
-				    $('.track-card').html(result);
-				    $('.modal-title').text(playlist.title); o
+		            var result = "";
+		            if (tracks.length <= 0) {
+		                result += "<h4>There are no songs in this playlist yet</h4>";
+		            }
+		            for (var i = 0; i < tracks.length; i++) {
+		                result += "<div class='d-flex justify-content-between align-items-center p-3'>";
+		                result += "<div class='d-flex flex-row align-items-center'> <i class='fa fa-music color'></i> <small class='ml-2' style='font-size: larger;'>" + tracks[i].title + "</small> </div>";
+		                result += "<div class='d-flex flex-row'>";
+		                if (tracks[i].statusId == 1) {
+		                    result += "<i class='fa fa-check color mr-15'></i>";
+		                } else if (tracks[i].statusId == 2) {
+		                    result += "<i class='ri-upload-2-fill mr-15'></i>";
+		                } else if (tracks[i].statusId == 3) {
+		                    result += "<i class='fas fa-times mr-15'></i>";
+		                }
+		                result += "<button class='delete-action center-item'><i class='ri-delete-bin-line' onclick='delete_track(this)' data-id='" + tracks[i].id + "'></i></button>"
+		                result += "</div>";
+		                result += "</div>";
+		            }
+		            $('.track-card').html(result);
 		        }
-    		}); 
+		    });
 		});
-		
 	})
 	
+	function delete_track(e) {
+	    var id = $(e).data("id");
+	    Swal.fire({
+	        icon: 'warning',
+	        title: 'Are you sure?',
+	        text: "You won't be able to revert this!",
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: 'Yes, delete it!'
+	    }).then((result) => {
+	        if (result.isConfirmed) {
+	            $.ajax({
+	                type: 'GET',
+	                data: {
+	                    id: id
+	                },
+	                url: '${pageContext.request.contextPath}/admin/playlist/delete-track',
+	                success: function (tracks) {
+	                    if (tracks.length <= 0) {
+	                        result += "<h4>There are no songs in this playlist yet</h4>";
+	                    }
+	                    Swal.fire({
+	                        icon: 'success',
+	                        title: 'Deleted!',
+	                        text: 'Your data/change have been saved',
+	                        showConfirmButton: false,
+	                        timer: 1500
+	                    });
+	                    var result = "";
+	                    for (var i = 0; i < tracks.length; i++) {
+	                        result += "<div class='d-flex justify-content-between align-items-center p-3'>";
+	                        result += "<div class='d-flex flex-row align-items-center'> <i class='fa fa-music color'></i> <small class='ml-2' style='font-size: larger;'>" + tracks[i].title + "</small> </div>";
+	                        result += "<div class='d-flex flex-row'>";
+	                        if (tracks[i].statusId == 1) {
+	                            result += "<i class='fa fa-check color mr-15'></i>";
+	                        } else if (tracks[i].statusId == 2) {
+	                            result += "<i class='ri-upload-2-fill mr-15'></i>";
+	                        } else if (tracks[i].statusId == 3) {
+	                            result += "<i class='fas fa-times mr-15'></i>";
+	                        }
+	                        result += "<button class='delete-action center-item'><i class='ri-delete-bin-line' onclick='delete_track(this)' data-id='" + tracks[i].id + "'></i></button>"
+	                        result += "</div>";
+	                        result += "</div>";
+	                    }
+	                    $('.track-card').html(result);
+	                }
+	            });
+	        }
+	    })
+	}
+</script>
+<script type="module" defer>	
+	import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom, swalAlertWithoutButton } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
+	$('.delete-btn').each(function (index) {
+    	$(this).click(function () {
+        	var id = $(this).data("id");
+        	confirmAlert(
+        	    function () {
+        	        console.log("id: " + id);
+         	       $.ajax({
+         	           type: 'GET',
+          	           data: {
+             	           id: id
+                    	},
+                    	url: '${pageContext.request.contextPath }/playlist/delete',
+                    	success: function (response) {
+                        	if (response) {
+                            	swalAlert(modal.MODAL_CONTENT.delete_success);
+                            	var url = '${pageContext.request.contextPath }/admin/playlist';
+                            	window.location.replace(url);
+                        	}
+                        	if (!response) { 
+								swalAlert(modal.MODAL_CONTENT.delete_error) 
+							}
+                    	}
+                	})
+
+            	}, modal.MODAL_CONTENT.confirm_delete_dialog)
+    	})
+	})
 </script>
 	</jsp:attribute>
 </mt:adminTemplate>

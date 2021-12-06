@@ -17,8 +17,8 @@ import com.demo.models.ArtistsInfor;
 @Repository("accountRepository")
 public interface AccountRepository extends PagingAndSortingRepository<Account, Integer> {
 
-	@Query(value = "select * from Account where is_artist = true order by follower desc limit 10", nativeQuery = true)
-	public List<Account> getAllPopularArtists();
+	@Query(value = "select * from Account where is_artist = true order by follower desc limit :n", nativeQuery = true)
+	public List<Account> getAllPopularArtists(@Param("n") int n);
 
 	@Query("from Account where username = :username")
 	public Account findByUsername(@Param("username") String username);
@@ -46,4 +46,7 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 
 	@Query("from Account where username = :username")
 	public Account find(@Param("username") String username);
+	
+	@Query("select count(id) from Account where isArtist = true")
+	public long countArtist();
 }

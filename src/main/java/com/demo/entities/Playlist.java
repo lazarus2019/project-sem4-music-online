@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,7 +25,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "playlist", catalog = "music_app")
-public class Playlist implements java.io.Serializable  {
+public class Playlist implements java.io.Serializable {
 
 	private Integer id;
 	private PlaylistCategory playlistCategory;
@@ -34,7 +36,7 @@ public class Playlist implements java.io.Serializable  {
 	private Date lastUpdated;
 	private String description;
 	private int likes;
-	private Set<PlaylistTrack> playlistTracks = new HashSet<PlaylistTrack>(0);
+	private Set<Track> tracks = new HashSet<Track>(0);
 	private Set<AccountPlaylist> accountPlaylists = new HashSet<AccountPlaylist>(0);
 
 	public Playlist() {
@@ -53,8 +55,7 @@ public class Playlist implements java.io.Serializable  {
 	}
 
 	public Playlist(PlaylistCategory playlistCategory, Status status, String title, String thumbnail, Date publishDate,
-			Date lastUpdated, String description, int likes, Set<PlaylistTrack> playlistTracks,
-			Set<AccountPlaylist> accountPlaylists) {
+			Date lastUpdated, String description, int likes, Set<Track> tracks, Set<AccountPlaylist> accountPlaylists) {
 		this.playlistCategory = playlistCategory;
 		this.status = status;
 		this.title = title;
@@ -63,7 +64,7 @@ public class Playlist implements java.io.Serializable  {
 		this.lastUpdated = lastUpdated;
 		this.description = description;
 		this.likes = likes;
-		this.playlistTracks = playlistTracks;
+		this.tracks = tracks;
 		this.accountPlaylists = accountPlaylists;
 	}
 
@@ -155,13 +156,16 @@ public class Playlist implements java.io.Serializable  {
 		this.likes = likes;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "playlist")
-	public Set<PlaylistTrack> getPlaylistTracks() {
-		return this.playlistTracks;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "playlist_track", catalog = "music_app", joinColumns = {
+			@JoinColumn(name = "playlist_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "track_id", nullable = false, updatable = false) })
+	public Set<Track> getTracks() {
+		return this.tracks;
 	}
 
-	public void setPlaylistTracks(Set<PlaylistTrack> playlistTracks) {
-		this.playlistTracks = playlistTracks;
+	public void setTracks(Set<Track> tracks) {
+		this.tracks = tracks;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "playlist")
@@ -172,15 +176,6 @@ public class Playlist implements java.io.Serializable  {
 	public void setAccountPlaylists(Set<AccountPlaylist> accountPlaylists) {
 		this.accountPlaylists = accountPlaylists;
 	}
-
-	public List<Track> findTracks(){
-		List<Track> tracks = new ArrayList<Track>();
-		for(PlaylistTrack playlistTrack : this.playlistTracks) {
-			tracks.add(playlistTrack.getTrack());
-		}
-		return tracks;
-	}
-
 
 	public Set<Account> findAccountThroughAccountPlaylist() {
 		Set<Account> accounts = new HashSet<Account>(0) ; 

@@ -42,5 +42,10 @@ public interface TrackService {
 	public boolean updateWeeklyListens();
 
 	public void updateBaseListens();
+	
+	public long countTrack();
+	
+	public List<Track> getBestTrack(int n);
+
 }
 

@@ -56,15 +56,15 @@
 					                                    		<br>   
 					                                    	</c:forEach>
 					                                    </td>
-					                                    <td class="text-center"><fmt:formatDate value="${track.publishDate }" type="date" pattern="MM/dd/yyyy"/></td>
+					                                    <td class="text-center"><fmt:formatDate value="${track.publishDate }" type="date" pattern="dd/MM/yyyy"/></td>
 					                                    <td class="text-center">${track.likes } <i class="fas fa-heart clr-red"></i></td>
-					                                    <td class="text-center">${track.listens } <i class="fas fa-headphones-alt"></i></i></td>
+					                                    <td class="text-center">${track.listens } <i class="fas fa-headphones-alt"></i></td>
 					                                    <td class="text-center">${track.genres.name }</td>
 					                                    <td class="text-center"><t:trackTime totalSeconds="${track.duration }"/></td>
 					                                    <td class="text-center">
-					                                    	<c:if test="${track.statusId == 1 }"><a id="status-btn" class="badge iq-bg-info toggle-track-status" data-id="${track.id}">Public</a></c:if>
-					                                    	<c:if test="${track.statusId == 2 }"><a class="badge iq-bg-danger">Pending</a></c:if>
-					                                    	<c:if test="${track.statusId == 3 }"><a id="status-btn" class="badge iq-bg-danger toggle-track-status" data-id="${track.id}">Hidden</a></c:if>
+					                                    	<c:if test="${track.statusId == 1 }"><button id="status-btn" type="button" class="badge iq-bg-info toggle-track-status" data-id="${track.id}">Public</button></c:if>
+					                                    	<c:if test="${track.statusId == 2 }"><button type="button" class="badge iq-bg-primary">Pending</button></c:if>
+					                                    	<c:if test="${track.statusId == 3 }"><button id="status-btn" type="button" class="badge iq-bg-danger toggle-track-status" data-id="${track.id}">Hidden</button></c:if>
 					                                    </td>
 					                                    <td>
 					                                        <div class="dropleft check-action text-center">
@@ -82,8 +82,8 @@
 					                                          	   href="${pageContext.request.contextPath }/admin/manage-track/edit?id=${track.id }">
 					                                          	   <i class="ri-pencil-line"></i>
 					                                            </a>
-					                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="Delete" 
-					                                          	   href="${pageContext.request.contextPath }/admin/manage-track/delete?id=${track.id }">
+					                                            <a class="bg-primary delete-btn" type="button" data-toggle="tooltip" data-placement="top" title="Delete" 
+					                                          	    data-id="${track.id }">
 					                                          	   <i class="ri-delete-bin-line"></i>
 					                                            </a>
 					                                            <a class="bg-primary toggle-view-lyric" type="button" data-placement="top" title="View lyrics"
@@ -238,21 +238,52 @@
 		        		  showConfirmButton: false,
 		        		  timer: 1500
 		        	});
-			    } else {
+			    }
+			    if(!flag) {
 			    	Swal.fire({
 		        		  position: 'center',
 		        		  icon: 'error',
-		        		  title: 'The song is already in this playlist or somthing wrong!',
+		        		  title: 'The track is already in this playlist!',
 		        		  showConfirmButton: false,
 		        		  timer: 2000
 		        	});
 			    }
-		    }, error: function () {
-				console.log("error")
-			    }
+		    }, error: function (e) {
+				console.table(e)
+			}
 		});
 	} 
-	
+</script>
+<script type="module" defer>
+	import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
+	$('.delete-btn').each(function (index) {
+    	$(this).click(function () {
+        	var id = $(this).data("id");
+        	confirmAlert(
+        	    function () {
+        	        console.log("id: " + id);
+         	       $.ajax({
+         	           type: 'GET',
+          	           data: {
+             	           id: id
+                    	},
+                    	url: '${pageContext.request.contextPath }/track/delete',
+                    	success: function (response) {
+                        	if (response) {
+                            	swalAlert(modal.MODAL_CONTENT.delete_success);
+                            	var url = '${pageContext.request.contextPath }/admin/manage-track';
+                            	window.location.replace(url);
+                        	}
+                        	if (!response) { 
+								swalAlert(modal.MODAL_CONTENT.delete_error) 
+							}
+                    	}
+                	})
+
+            	},
+            	modal.MODAL_CONTENT.confirm_delete_dialog)
+    	})
+	})
 </script>
 	</jsp:attribute>
 </mt:adminTemplate>

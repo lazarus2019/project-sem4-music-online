@@ -925,10 +925,16 @@ a.form-btn:hover {
 	justify-content: flex-start;
 	color: white !important;
 	padding-top: 5px;
+	margin: 25px 15px;
 }
 
 .chart__header h3 {
 	font-size: 65px;
+}
+
+.weekly__date {
+	font-size: 1.25rem;
+	justify-content: space-between;
 }
 
 /* Notification */

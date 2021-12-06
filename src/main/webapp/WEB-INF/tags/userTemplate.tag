@@ -80,7 +80,7 @@
 
                     <a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
                     <a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
-                    <a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+                    <a href="${pageContext.request.contextPath }/record-chart"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 
                 </div>
             </li>
