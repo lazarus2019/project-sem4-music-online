@@ -5,16 +5,6 @@
 
 <mt:userTemplate title="Your Track">
 	<jsp:attribute name="content">
-					<div class="row row--grid">
-				<!-- breadcrumb -->
-				<div class="col-12">
-					<ul class="breadcrumb">
-						<li class="breadcrumb__item"><a href="/">Home</a></li>
-						<li class="breadcrumb__item breadcrumb__item--active">Profile</li>
-					</ul>
-				</div>
-				<!-- end breadcrumb -->
-			</div>
 
 			<section class="row row--grid">
 				<!-- title -->

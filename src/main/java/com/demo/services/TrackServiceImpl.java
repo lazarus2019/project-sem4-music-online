@@ -29,6 +29,9 @@ public class TrackServiceImpl implements TrackService {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private ArtistTrackService artistTrackService;
 
 	@Override
 	public List<Track> getNewRelease(int statusId, int n) {
@@ -249,5 +252,44 @@ public class TrackServiceImpl implements TrackService {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public List<TrackInfo> searchTrackInManage(String option, String keyword, int artistId) {
+		List<TrackInfo> result = new ArrayList<TrackInfo>();
+		List<Track> tracks = artistTrackService.getTracksOfArtist(artistId);
+		int optionInt = 0;
+		if(option != "") {
+			optionInt = Integer.parseInt(option);
+		}
+		
+		for(Track track : tracks) {
+			if(optionInt != 0) {
+				if(track.getTitle().toLowerCase().contains(keyword) && track.getStatus().getId() == optionInt) {
+					TrackInfo trackInfo = setTrackToTrackInfo(track);
+					result.add(trackInfo);
+				}				
+			}else {
+				if(track.getTitle().toLowerCase().contains(keyword)) {
+					TrackInfo trackInfo = setTrackToTrackInfo(track);
+					result.add(trackInfo);
+				}			
+			}
+		}
+		
+		return result;
+	}
+	
+	public TrackInfo setTrackToTrackInfo(Track track) {
+		TrackInfo trackInfo = new TrackInfo();
+		trackInfo.setId(track.getId());
+		trackInfo.setTitle(track.getTitle());
+		trackInfo.setThumbnail(track.getThumbnail());
+		trackInfo.setGenresId(track.getGenres().getId());
+		trackInfo.setStatusId(track.getStatus().getId());
+		trackInfo.setLikes(track.getLikes());
+		trackInfo.setListens(track.getListens());
+		trackInfo.setPremium(track.isIsPremium());
+		return trackInfo;
 	}
 }

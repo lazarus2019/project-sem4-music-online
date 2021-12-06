@@ -42,5 +42,7 @@ public interface TrackService {
 	public boolean updateWeeklyListens();
 
 	public void updateBaseListens();
+	
+	public List<TrackInfo> searchTrackInManage(String option, String keyword, int artistId);
 }
 

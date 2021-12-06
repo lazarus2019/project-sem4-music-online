@@ -231,7 +231,7 @@ public class ManageTrackController implements ServletContextAware {
 			int trackId = (Integer) session.getAttribute("trackId");
 			PlaylistTrack playlistTrack = playlistTrackService.findById(new PlaylistTrackId(id, trackId));
 			if (playlistTrack != null) {
-				System.out.println(playlistTrack.getPlaylist().getId());
+//				System.out.println(playlistTrack.getPlaylist().getId());
 				return new ResponseEntity<Boolean>(false, HttpStatus.OK);
 			} else {
 				Playlist playlist = playlistService.find(id);

@@ -71,7 +71,7 @@ public class ArtistsController {
 				for( ArtistTrack artistTrack : account.getArtistTracks()) {
 					if( artistTrack.isIsOwn()) {
 						tracks.add(artistTrack.getTrack()) ; 
-						System.out.println(artistTrack.getTrack().getTitle());						
+//						System.out.println(artistTrack.getTrack().getTitle());						
 					}					
 				}
 				

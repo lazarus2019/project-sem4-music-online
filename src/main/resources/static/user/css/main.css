@@ -3215,6 +3215,10 @@ body::-webkit-scrollbar-thumb {
   overflow: hidden;
   padding: 20px;
   height: 300px;
+  background-image: attr(data-bg url) !important;
+  background-position:center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .event:before {
@@ -8037,6 +8041,8 @@ body::-webkit-scrollbar-thumb {
   color: var(--white);
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow-x: hidden;
+  width: 60%;
 }
 
 .form-track-option i{

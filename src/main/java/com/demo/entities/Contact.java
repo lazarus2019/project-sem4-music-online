@@ -18,7 +18,6 @@ import javax.persistence.Table;
 public class Contact implements java.io.Serializable {
 
 	private Integer id;
-	private ContactType contactType;
 	private String fullname;
 	private String email;
 	private String phoneNumber;
@@ -28,9 +27,8 @@ public class Contact implements java.io.Serializable {
 	public Contact() {
 	}
 
-	public Contact(ContactType contactType, String fullname, String email, String phoneNumber, String content,
+	public Contact(String fullname, String email, String phoneNumber, String content,
 			boolean isRead) {
-		this.contactType = contactType;
 		this.fullname = fullname;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
@@ -48,16 +46,6 @@ public class Contact implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "contact_type_id", nullable = false)
-	public ContactType getContactType() {
-		return this.contactType;
-	}
-
-	public void setContactType(ContactType contactType) {
-		this.contactType = contactType;
 	}
 
 	@Column(name = "fullname", nullable = false, length = 250)

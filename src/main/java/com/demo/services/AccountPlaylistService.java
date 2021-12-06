@@ -30,5 +30,7 @@ public interface AccountPlaylistService {
 	public void removeAccountHasAlbum(Playlist album);
 	
 	public void setOwnerAlbum(Playlist album, int artistId);
+	
+	public boolean checkAlbumOwner(int artistId, int albumId);
 
 }

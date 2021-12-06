@@ -147,7 +147,7 @@ public class HomeController {
 	// Get album contains tracks by id
 	@RequestMapping(value = { "getAlbumWithTracksById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AlbumInfo> getAlbumWithTracksById(@RequestParam("albumId") int albumId, ModelMap modelMap) {
-		System.out.println("albumId: " + albumId);
+//		System.out.println("albumId: " + albumId);
 		AlbumInfo albumInfo = albumService.findAlbumById(albumId);
 		for(Track track : playlistService.find(albumId).findTracks()) {
 			TrackInfo trackInfo = new TrackInfo();

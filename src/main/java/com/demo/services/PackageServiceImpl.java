@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.Account;
 import com.demo.entities.PackageInfo;
 import com.demo.entities.ServicePackage;
+import com.demo.models.PackageInfoModel;
+import com.demo.models.PackageModel;
 import com.demo.repositories.PackageRepository;
 
 @Service("packageService")
@@ -19,6 +21,9 @@ public class PackageServiceImpl implements PackageService {
 
 	@Autowired
 	private PackageRepository packageRepository;
+	
+	@Autowired
+	private PackageInfoService packageInfoService;
 	
 	@Override
 	public List<ServicePackage> getAllByStatus() {
@@ -106,6 +111,50 @@ public class PackageServiceImpl implements PackageService {
 		
 		//System.out.println(packageInfoFirst.getServicePackage().getName()); 
 		return packageInfoFirst;
+	}
+
+	@Override
+	public List<PackageModel> getAllPackageModel() {
+		List<PackageModel> result = new ArrayList<PackageModel>();
+		List<ServicePackage> servicePackages = getAllPackage();
+		for(ServicePackage servicePackage : servicePackages) {
+			PackageModel packageModel = new PackageModel();
+			packageModel.setId(servicePackage.getId());
+			packageModel.setName(servicePackage.getName());
+			packageModel.setPrice(servicePackage.getPrice());
+			packageModel.setDuration(servicePackage.getDuration());
+			packageModel.setStatus(servicePackage.isStatus());
+			packageModel.setDescription(servicePackage.getDescription());
+			packageModel.setDelete(servicePackage.isIsDelete());
+			packageModel.setAmountAccount(packageInfoService.getAmountAccountSignPackageById(servicePackage.getId()));
+			
+			result.add(packageModel);
+		}
+		return result;
+	}
+
+	@Override
+	public List<ServicePackage> getAllPackage() {
+		return packageRepository.getAllPackage();
+	}
+
+	@Override
+	public List<PackageInfoModel> getHistoryPackageSign(int packageId) {
+		List<PackageInfoModel> result = new ArrayList<PackageInfoModel>();
+		List<PackageInfo> packageInfos = packageInfoService.getPackageInfosById(packageId);
+		for(PackageInfo packageInfo : packageInfos) {
+			PackageInfoModel packageInfoModel = new PackageInfoModel();
+			packageInfoModel.setPackage_id(packageId);
+			packageInfoModel.setAccount_id(packageInfo.getAccount().getId());
+			packageInfoModel.setAccount_nickname(packageInfo.getAccount().getNickname());
+			packageInfoModel.setExpiration_date(packageInfo.getExpirationDate());
+			packageInfoModel.setPurchase_date(packageInfo.getPurchaseDate());
+			packageInfoModel.setPrice(packageInfo.getServicePackage().getPrice());
+			
+			result.add(packageInfoModel);
+		}
+		
+		return result;
 	}
 
 	

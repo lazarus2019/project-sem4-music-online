@@ -3,12 +3,13 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
 
 <mt:userTemplate title="Add New Track">
 	<jsp:attribute name="content">
 	
 	<!-- FORM -->
-            <form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
+            <s:form action="${pageContext.request.contextPath }/track/add" modelAttribute="track" method="POST" enctype="multipart/form-data">
                 <div class="row row--grid">
                     <div class="col-6">
                         <div class="step non-hidden">
@@ -160,7 +161,7 @@
                     </div>
                 </div>
                 
-            </form>
+            </s:form>
             <script>
 				function getAccId(name){
 				    var nameEQ = name + "=";
@@ -184,8 +185,7 @@
 				        $.ajax({
 				            type: 'GET',
 				            data: {
-				                /* id: parseInt(id) */
-				                id: 5
+				                id: parseInt(id)				                
 				            },
 				            url: '${pageContext.request.contextPath }/track/reloadAlbums',
 				            success: function (albums) {

@@ -104,17 +104,7 @@ const MODAL_CONTENT = {
         title: "You not allow to be here!",
         html: 'We will return you to the manage page <b></b>s.',
         timer: 2
-    },
-    send_mail_success: {
-        icon: 'success',
-        title: 'Done!',
-        text: 'Your reply had been sent!'
-    },
-    send_mail_error: {
-        icon: 'error',
-        title: 'Could not send the reply!',
-        text: 'Please check your request and try again'
-    },
+    }
 }
 
 export function swalAlert(modal) {

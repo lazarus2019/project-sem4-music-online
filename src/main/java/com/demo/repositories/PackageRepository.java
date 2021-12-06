@@ -13,7 +13,7 @@ import com.demo.entities.ServicePackage;
 @Repository("packageRepository")
 public interface PackageRepository extends CrudRepository<ServicePackage, Integer> {
 
-	@Query("from ServicePackage where status = true")
+	@Query("from ServicePackage where status = true AND is_delete = FALSE")
 	public List<ServicePackage> getAllByStatus();
 	
 	@Query( value = "select * from package_info where account_id = :accountId order by expiration_date desc limit 1", nativeQuery = true)
@@ -21,4 +21,8 @@ public interface PackageRepository extends CrudRepository<ServicePackage, Intege
 	
 	@Query("from ServicePackage where id = :id ") 
 	public ServicePackage getServicePackageById(@Param("id") int id ) ; 
+	
+
+	@Query("from ServicePackage where is_delete = FALSE")
+	public List<ServicePackage> getAllPackage();
 }

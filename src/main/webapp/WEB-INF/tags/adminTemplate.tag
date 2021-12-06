@@ -113,18 +113,16 @@
                         <li>
                             <a href="admin-add-song.html"><i class="ri-upload-cloud-line "></i><span>Song Uploader</span>    </a>
                         </li>
-                        <li class="mailbox nav-parent " data-toggle="collapse">
-                            <a href="#mailbox" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="mailbox" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-inbox"><span>Inbox</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-compose"><span>Compose</span></a>
-                                </li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-view"><span>View</span></a></li>
-                            </ul>
-                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/package" class="iq-waves-effect">
+                            	<i class="ri-pages-fill iq-arrow-left"></i><span>Service Package</span></a> 
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/contact" class="iq-waves-effect">
+                            	<i class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span></a> 
+                            </a>
+                        </li>                        
 
                         <li class="reports nav-parent " data-toggle="collapse">
                             <a href="#report" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span

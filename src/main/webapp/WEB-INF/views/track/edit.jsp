@@ -112,8 +112,11 @@
 		                                        
 		                                        </div>  
                                     		</div>
-                                    <div class="form-heading clr-white">Add to Albums:</div>
-                                    <div class="flex-box align-items-start flex-wrap flex-6">
+                                    <div class="flex-box align-items-center mb-2 justify-content-between">
+	                                    <div class="form-heading clr-white">Add to Albums:</div>
+	                                    <button type="button" class="circle-icon-lg ml-2" onclick="reloadAlbums()"><i class="las la-sync"></i></button>
+                                    </div>
+                                    <div class="flex-box align-items-start flex-wrap flex-6 album-container">
                                      <c:forEach items="${albums }" var="album">
                                         				<c:set var="s" value=""/>
 					                                        <c:if test="${not empty albumOwnIds}">
@@ -125,7 +128,7 @@
 
 														    	</c:forEach>                                        
 					                                        </c:if>
-										<div class="sign__group sign__group--checkbox mb-3">
+										<div class="sign__group sign__group--checkbox mb-3 mr-1">
 							            	 <input id="album-artist-${album.id }" name="albums" type="checkbox" value="${album.id }" ${s }>							    	
 					                         <label for="album-artist-${album.id }">${album.title }</label>
 	        	                        </div>
@@ -152,6 +155,69 @@
                     </div>
                 </div>
             </s:form>
+            
+            <script>
+				function getAccId(name){
+				    var nameEQ = name + "=";
+				    var ca = document.cookie.split(';');
+				    for (var i = 0; i < ca.length; i++) {
+				        var c = ca[i];
+				        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+				        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+				    }
+				    return null;
+				}
+		
+				function reloadAlbums(){
+				    const albumIdsChecked = []; // Array string id
+				    $('input[name="albums"]:checked').each(function(){
+				        albumIdsChecked.push($(this).val())
+				    })
+				    
+				    var id = getAccId('acc_id');
+				     if(id != null){
+				        $.ajax({
+				            type: 'GET',
+				            data: {
+				                id: parseInt(id)				                
+				            },
+				            url: '${pageContext.request.contextPath }/track/reloadAlbums',
+				            success: function (albums) {
+					            console.log(albums)
+				                
+				                var htmls = ""
+				                    
+				                    let flag = false
+				                    for(let i = 0; i < albums.length; i++){
+				                        let checked = ""
+				                        for(let j = 0; j < albumIdsChecked.length; j++){				            		    
+				                            if(parseInt(albumIdsChecked[j]) === albums[i].id){
+				                                flag = true
+				                                break
+				                            } 
+				                        }
+				                       
+				                        if(!flag){
+				                            checked = "" 
+				                        }
+				                        if(flag){
+				                            checked = "checked"
+				                        }
+
+				                        htmls += "<div class='sign__group sign__group--checkbox mb-3 mr-1'>"
+				                        htmls += "<input id='album-artist-"+ albums[i].id +"' name='albums' type='checkbox' value='"+ albums[i].id +"' "+ checked +">" 
+				                        htmls += "<label for='album-artist-"+ albums[i].id +"'>"+ albums[i].title +"</label>"
+				                        htmls += "</div>" 
+
+				                        flag = false
+				                    }
+				                    $('.album-container').html(htmls)				        
+				                }
+				           
+				        })
+				    }			
+				}
+		</script>
 		
 		<script type="module" defer>
 		import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom} from '${pageContext.request.contextPath }/resources/user/js/notification.js';
@@ -170,10 +236,22 @@
             	},
             	url: '${pageContext.request.contextPath }/track/delete',
             	success: function (response) {
-					var url = '${pageContext.request.contextPath }/track/manage'
-					if(response){redirectAlertURLCustom(modal.MODAL_CONTENT.redirect_track_manage, url)}
-
-					if(!response){swalAlert(modal.MODAL_CONTENT.delete_error)}
+					var url = ''
+                    if(response == "OK"){
+                        url = '${pageContext.request.contextPath }/track/manage'
+                        redirectAlertURLCustom(modal.MODAL_CONTENT.redirect_track_manage, url)
+                    }
+                    if(response == "ERROR"){
+                        swalAlert(modal.MODAL_CONTENT.delete_error)
+                    }
+                    if(response == "NOT_ALLOW"){
+                        url = '${pageContext.request.contextPath }/home'
+                        redirectAlertURLCustom(modal.MODAL_CONTENT.not_allow, url)
+                    }
+                    if(response == "MUST_SIGN_IN"){
+                        url = '${pageContext.request.contextPath }/login/login'
+                        redirectAlertURLCustom(modal.MODAL_CONTENT.must_sign_in, url)
+                    }
             	}
         	})
 			
