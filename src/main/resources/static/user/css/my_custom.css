@@ -1046,7 +1046,6 @@ Profile Edit
 
 .file-upload {
     display: none;
-<<<<<<< HEAD
 }
 
 .p-image {
@@ -1101,9 +1100,6 @@ ul.iq-edit-profile li:last-child a {
   	max-width: 400px;
 }
 
-=======
-}
-
 .p-image {
     position: absolute;
     top: auto;
@@ -1156,7 +1152,6 @@ ul.iq-edit-profile li:last-child a {
   	max-width: 400px;
 }
 
->>>>>>> origin/NTanh_Branch
 .image-button img {
 	width: 30%;
   	height: 30%;
@@ -1198,4 +1193,10 @@ ul.iq-edit-profile li:last-child a {
 
 .unPublish-status i{
 	font-size: 1.5rem;
+}
+
+.artist-nickname{
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }

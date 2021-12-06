@@ -40,6 +40,7 @@ import com.demo.services.ArtistTrackService;
 import com.demo.services.CookieService;
 import com.demo.services.PlaylistService;
 import com.demo.services.TrackService;
+import com.fasterxml.jackson.databind.deser.DataFormatReaders;
 
 @Controller
 @RequestMapping(value = { "playlist"} )
@@ -153,10 +154,19 @@ public class PlaylistUserController implements ServletContextAware{
 					if(thumbnail != null) {
 						PlaylistCategory playlistCategory = new PlaylistCategory();
 						playlistCategory.setId(3);
-						
+						Date nowDate = new Date();
+						Date publishDateDate;
 						Status status = new Status();
-						status.setId(1);
-						status.setId(3);
+						status.setId(1);							
+						try {
+							publishDateDate = simpleDateFormat.parse(publishDate);
+							System.out.println(publishDateDate);
+								if(publishDateDate.after(nowDate)) {
+									status.setId(3);							
+								}
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
 						
 						Playlist newAlbum = new Playlist();
 						newAlbum.setPlaylistCategory(playlistCategory);

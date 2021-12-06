@@ -14,7 +14,7 @@
                      <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
-                              <h4 class="card-title">Add New User</h4>
+                              <h4 class="card-title">Add New Artist</h4>
                            </div>
                         </div>
                         <div class="iq-card-body">
@@ -90,7 +90,7 @@
                                     
                                  </div>
                                  
-                                 <button type="submit" class="btn btn-primary">Add New User</button>
+                                 <button type="submit" class="btn btn-primary">Add New Artist</button>
                              
                            </div>
                         </div>

@@ -34,7 +34,7 @@
 							</c:if>	
                             <div class="dropdown__user-menu">
                             	<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
-	                            <a href="${pageContext.request.contextPath }/admin/artist">
+	                            <a href="${pageContext.request.contextPath }/admin">
 	                            	<i class="ri-album-line iq-arrow-left"></i>Admin Panel
 	                            </a>
 								</sec:authorize>

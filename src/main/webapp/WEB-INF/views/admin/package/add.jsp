@@ -21,12 +21,12 @@
                               <input type="text" class="form-control" name="name">
                            </div>                       
                            <div class="form-group">
-                              <label>Price:</label>
+                              <label>Price ($):</label>
                               <input type="number" class="form-control" name="price" step=".01" min="0">
                            </div>                       
                            <div class="form-group">
-                              <label>Duration:</label>
-                              <input type="number" class="form-control" name="duration" max="12" min="1">
+                              <label>Duration (months):</label>
+                              <input type="number" class="form-control" name="duration" min="1">
                            </div>                       
                            <div class="form-group">
                               <label>Description:</label>

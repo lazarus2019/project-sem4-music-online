@@ -69,9 +69,8 @@ public class BannerController implements ServletContextAware {
 	public String edit(@ModelAttribute("banner") Banner banner, @RequestParam("photo") MultipartFile photo) {
 		Banner newBanner = bannerService.findById(banner.getId());
 		if (!photo.isEmpty() && photo.getSize() > 0) {
-			FileUploadHelper fileHelper = new FileUploadHelper();
-			fileHelper.deleteImage(newBanner.getImage(), servletContext, "banner");
-			String image = fileHelper.uploadImage(photo, servletContext, "banner");
+			FileUploadHelper.deleteImage(newBanner.getImage(), servletContext, "banner");
+			String image = FileUploadHelper.uploadImage(photo, servletContext, "banner");
 			newBanner.setImage(image);
 		}
 		newBanner.setTitle(banner.getTitle());

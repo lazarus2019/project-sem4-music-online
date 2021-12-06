@@ -74,7 +74,7 @@
 					                                    	</c:if>
 					                                    </td>
 					                                    <td>
-					                                    	<p class="mb-0">${playlist.description }</p>
+					                                    	<p class="mb-0" style="height: 156px; overflow-y: auto">${playlist.description }</p>
 					                                    </td>
 					                                    <td>
 					                                       <div class="flex align-items-center text-center list-user-action">
