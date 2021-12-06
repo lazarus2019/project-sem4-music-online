@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.demo.entities.Account;
 import com.demo.entities.ServicePackage;
+import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 
@@ -28,6 +29,9 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 
 	@Query("select new com.demo.models.ArtistsInfor(id, nickname, image, follower) from Account where isArtist = true ")
 	public List<ArtistsInfor> getallArtists();
+	
+	@Query("select new com.demo.models.ArtistDetail(id, nickname, image, follower, description, country.countryName) from Account where id = :id and isArtist = true ")
+	public ArtistDetail getArtistByIdAccount(@Param("id") int id);
 
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE isArtist = true AND (nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%)")
 	public List<ArtistInfo> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);

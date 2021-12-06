@@ -117,4 +117,3 @@
 		</script>
 	</jsp:attribute>
 </mt:userTemplate>
-

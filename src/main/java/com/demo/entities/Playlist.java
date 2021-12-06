@@ -186,4 +186,3 @@ public class Playlist implements java.io.Serializable {
 	}
 
 }
-

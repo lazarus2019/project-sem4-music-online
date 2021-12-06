@@ -24,7 +24,7 @@ import com.demo.entities.Role;
 import com.demo.entities.Track;
 import com.demo.helpers.SendMailHelper;
 import com.demo.models.ArtistChartModel;
-import com.demo.helpers.SendMailHelper;
+import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 import com.demo.repositories.AccountRepository;
@@ -245,6 +245,9 @@ public class AccountServiceImpl implements AccountService {
 			artistChartModel.setAlbumLike(albumLike);
 		}
 		return null;
+	}
+	public ArtistDetail getArtistByIdAccount(int id) {
+		return accountRepository.getArtistByIdAccount(id);
 	}
 }
 
