@@ -203,6 +203,27 @@ public class PlaylistController implements ServletContextAware {
 			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> delete(@RequestParam("id") int playlistId) {
+		boolean result = false;
+		Playlist album = playlistService.find(playlistId);
+
+		accountPlaylistService.removeAccountHasAlbum(album);
+
+		for (Track track : album.getTracks()) {
+			album.getTracks().remove(track);
+		}
+
+		playlistService.delete(playlistId);
+
+		result = true;
+		try {
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@Override
 	public void setServletContext(ServletContext servletContext) {

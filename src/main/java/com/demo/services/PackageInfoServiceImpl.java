@@ -1,29 +1,19 @@
 package com.demo.services;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.PackageInfo;
-import com.demo.entities.ServicePackage;
 import com.demo.models.PackageChartModel;
 import com.demo.repositories.PackageInfoRepository;
-import com.demo.repositories.PackageRepository;
-
 @Service("packageInfoService")
-public class PackageInfoServiceImpl implements PackageInfoService {
-
+public class PackageInfoServiceImpl implements PackageInfoService{
+	
 	@Autowired
 	private PackageInfoRepository packageInfoRepository;
-
-	@Autowired
-	private PackageService packageService;
 
 	@Override
 	public List<PackageInfo> findAll() {
@@ -38,6 +28,22 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 	@Override
 	public List<PackageInfo> countByPackageId(int packageId) {
 		return packageInfoRepository.countByPackageId(packageId);
+	}
+
+	@Override
+	public List<Account> getAccountsSignPackageById(int packageId) {
+		return packageInfoRepository.getAccountsSignPackageById(packageId);
+	}
+
+	@Override
+	public int getAmountAccountSignPackageById(int packageId) {
+		List<Account> accounts = packageInfoRepository.getAccountsSignPackageById(packageId);
+		return accounts.size();
+	}
+
+	@Override
+	public List<PackageInfo> getPackageInfosById(int packageId) {
+		return packageInfoRepository.getPackageInfosById(packageId);
 	}
 
 }

@@ -35,10 +35,10 @@
                                 <a href="${pageContext.request.contextPath }/user/profile/index">
                                     <i class="lar la-user-circle"></i> Profile
                                 </a>
-                                <a href="${pageContext.request.contextPath }/artist/yourtrack">
+                                <a href="${pageContext.request.contextPath }/track/manage">
                                     <i class="las la-music"></i> Your Tracks
                                 </a>
-                                <a href="${pageContext.request.contextPath }/artist/youralbum">
+                                <a href="${pageContext.request.contextPath }/playlist/manage">
                                     <i class="las la-record-vinyl"></i> Your Albums
                                 </a>
                                 <a href="${pageContext.request.contextPath }/package">

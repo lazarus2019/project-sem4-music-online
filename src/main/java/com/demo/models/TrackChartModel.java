@@ -83,5 +83,4 @@ public class TrackChartModel {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-
 }

@@ -356,7 +356,7 @@
 	}
 </script>
 <script type="module" defer>	
-	import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom, swalAlertWithoutButton } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
+	import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
 	$('.delete-btn').each(function (index) {
     	$(this).click(function () {
         	var id = $(this).data("id");
@@ -368,7 +368,7 @@
           	           data: {
              	           id: id
                     	},
-                    	url: '${pageContext.request.contextPath }/playlist/delete',
+                    	url: '${pageContext.request.contextPath }/admin/playlist/delete',
                     	success: function (response) {
                         	if (response) {
                             	swalAlert(modal.MODAL_CONTENT.delete_success);

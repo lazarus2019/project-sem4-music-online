@@ -24,6 +24,7 @@ import com.demo.entities.Role;
 import com.demo.entities.Track;
 import com.demo.helpers.SendMailHelper;
 import com.demo.models.ArtistChartModel;
+import com.demo.helpers.SendMailHelper;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 import com.demo.repositories.AccountRepository;

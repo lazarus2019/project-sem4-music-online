@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.Playlist;
+import com.demo.entities.Track;
+import com.demo.models.AlbumInfo;
 import com.demo.models.PlaylistInfor;
 import com.demo.models.PlaylistModel;
+import com.demo.models.TrackInfo;
 import com.demo.repositories.PlaylistRepository;
 import com.demo.repositories.TrackRepository;
 
@@ -19,6 +22,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 
 	@Autowired
 	private PlaylistRepository playlistRepository;
+	
+	@Autowired
+	private AccountPlaylistService accountPlaylistService;
 	
 	@Override
 	public List<Playlist> getAllUpcommingAlbum() {
@@ -86,6 +92,30 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@Override
 	public PlaylistInfor getRecentPlaylistByAccountId(int id) {
 		return playlistRepository.getRecentPlaylistByAccountId(id);
+	}
+
+	@Override
+	public List<AlbumInfo> searchAlbumInManage(String option, String keyword, int artistId) {
+		List<AlbumInfo> result = new ArrayList<AlbumInfo>();
+		List<AlbumInfo> albumInfos = accountPlaylistService.getAlbumsByArtistId(artistId);
+		int optionInt = 0;
+		if(option != "") {
+			optionInt = Integer.parseInt(option);
+		}
+		
+		for(AlbumInfo albumInfo : albumInfos) {
+			if(optionInt != 0) {
+				if(albumInfo.getTitle().toLowerCase().contains(keyword) && albumInfo.getStatusId() == optionInt) {
+					result.add(albumInfo);
+				}				
+			}else {
+				if(albumInfo.getTitle().toLowerCase().contains(keyword)) {
+					result.add(albumInfo);
+				}			
+			}
+		}
+		
+		return result;
 	}
 	
 }

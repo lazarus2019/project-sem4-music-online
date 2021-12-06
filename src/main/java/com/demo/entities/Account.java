@@ -363,21 +363,21 @@ public class Account implements java.io.Serializable {
 				+ accountPlaylists + ", roles=" + roles + ", artistTracks=" + artistTracks + ", accountSettings="
 				+ accountSettings + "]";
 	}
+	
 
 	public Set<Track> findTrackThroughAtristTrack() {
-		Set<Track> tracks = new HashSet<Track>(0);
-		for (ArtistTrack artistTrack : artistTracks) {
-			tracks.add(artistTrack.getTrack());
+		Set<Track> tracks = new HashSet<Track>(0) ; 
+		for(ArtistTrack artistTrack: artistTracks) {
+			tracks.add(artistTrack.getTrack()) ; 
 		}
-		return tracks;
+		return tracks ;
 	}
-
+	
 	public Set<Playlist> findPlaylistThroughAccountPlaylist() {
-		Set<Playlist> playlists = new HashSet<Playlist>(0);
-		for (AccountPlaylist accountPlaylist : accountPlaylists) {
-			playlists.add(accountPlaylist.getPlaylist());
+		Set<Playlist> playlists = new HashSet<Playlist>(0) ; 
+		for(AccountPlaylist accountPlaylist : accountPlaylists) {
+			playlists.add(accountPlaylist.getPlaylist()) ; 
 		}
-		return playlists;
+		return playlists ;
 	}
-
 }

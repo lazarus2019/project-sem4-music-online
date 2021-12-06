@@ -4,10 +4,7 @@ import java.util.*;
 
 import org.springframework.data.domain.Pageable;
 
-<<<<<<< HEAD
-=======
 import com.demo.models.ArtistChartModel;
->>>>>>> origin/Viet_Branch
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 import com.demo.entities.Account;
