@@ -17,4 +17,19 @@ public class AboutUsServiceImpl implements AboutUsService {
 		return aboutUsRepositories.findAll();
 	}
 
+	@Override
+	public Aboutus save(Aboutus aboutus) {
+		return aboutUsRepositories.save(aboutus);
+	}
+
+	@Override
+	public Aboutus findById(int id) {
+		return aboutUsRepositories.findById(id).get();
+	}
+
+	@Override
+	public void delete(int id) {
+		aboutUsRepositories.deleteById(id);
+	}
+
 }

@@ -231,7 +231,6 @@ public class TrackServiceImpl implements TrackService {
 		} catch (Exception e) {
 			return false;
 		}
-
 	}
 
 	@Override
@@ -255,6 +254,14 @@ public class TrackServiceImpl implements TrackService {
 	}
 
 	@Override
+	public long countTrack() {
+		return trackRepository.count();
+	}
+
+	@Override
+	public List<Track> getBestTrack(int n) {
+		return trackRepository.getBestTrack(n);
+	}
 	public List<TrackInfo> searchTrackInManage(String option, String keyword, int artistId) {
 		List<TrackInfo> result = new ArrayList<TrackInfo>();
 		List<Track> tracks = artistTrackService.getTracksOfArtist(artistId);
@@ -291,5 +298,6 @@ public class TrackServiceImpl implements TrackService {
 		trackInfo.setListens(track.getListens());
 		trackInfo.setPremium(track.isIsPremium());
 		return trackInfo;
+
 	}
 }

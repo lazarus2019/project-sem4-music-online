@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -38,7 +39,8 @@ import com.demo.services.AccountService;
 import com.demo.services.ArtistTrackService;
 import com.demo.services.CookieService;
 import com.demo.services.PlaylistService;
-import com.demo.services.PlaylistTrackService;
+import com.demo.services.TrackService;
+import com.fasterxml.jackson.databind.deser.DataFormatReaders;
 
 @Controller
 @RequestMapping(value = { "playlist"} )
@@ -56,13 +58,13 @@ public class PlaylistUserController implements ServletContextAware{
 	private AccountPlaylistService accountPlaylistService;
 	
 	@Autowired
-	private PlaylistTrackService playlistTrackService;
-	
-	@Autowired
 	private CookieService cookieService;
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private TrackService trackService;
 
 	@RequestMapping( value = {"","index", "manage" })
 	public String index(ModelMap modelMap, Authentication authentication) {
@@ -152,10 +154,19 @@ public class PlaylistUserController implements ServletContextAware{
 					if(thumbnail != null) {
 						PlaylistCategory playlistCategory = new PlaylistCategory();
 						playlistCategory.setId(3);
-						
+						Date nowDate = new Date();
+						Date publishDateDate;
 						Status status = new Status();
-						status.setId(1);
-						status.setId(3);
+						status.setId(1);							
+						try {
+							publishDateDate = simpleDateFormat.parse(publishDate);
+							System.out.println(publishDateDate);
+								if(publishDateDate.after(nowDate)) {
+									status.setId(3);							
+								}
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
 						
 						Playlist newAlbum = new Playlist();
 						newAlbum.setPlaylistCategory(playlistCategory);
@@ -185,7 +196,8 @@ public class PlaylistUserController implements ServletContextAware{
 							if(tracks != null) {
 								for(String trackIdString : tracks) {
 									int trackId = Integer.parseInt(trackIdString);
-									playlistTrackService.addTrackToAlbum(albumTmp.getId(), trackId);
+									albumTmp.getTracks().add(trackService.findById(trackId));
+									playlistService.save(albumTmp);
 								}		
 							}							
 						}			
@@ -223,7 +235,7 @@ public class PlaylistUserController implements ServletContextAware{
 					if(accountPlaylistService.checkAlbumOwner(artistId, albumId)) {
 						Playlist album = playlistService.find(albumId);
 						modelMap.put("tracks", artistTrackService.getTracksOfArtist(artistId));
-						modelMap.put("chooseTracks", album.findTracks());
+						modelMap.put("chooseTracks", album.getTracks());
 						modelMap.put("albumId", album.getId());
 						modelMap.put("playlist", album);
 						modelMap.put("thumbnail", album.getThumbnail());
@@ -296,13 +308,15 @@ public class PlaylistUserController implements ServletContextAware{
 						playlistService.save(album);
 						
 						// Delete old tracks from album
-						playlistTrackService.removeAllTrackFromAlbum(album);
+						album.setTracks(new HashSet<Track>(0));
+						playlistService.save(album);
 						
 						// Add tracks to album
 						if(tracks != null) {
 							for(String trackIdString : tracks) {
 								int trackId = Integer.parseInt(trackIdString);
-								playlistTrackService.addTrackToAlbum(album.getId(), trackId);
+								album.getTracks().add(trackService.findById(trackId));
+								playlistService.save(album);
 							}		
 						}		
 					}else {
@@ -364,7 +378,9 @@ public class PlaylistUserController implements ServletContextAware{
 						
 						accountPlaylistService.removeAccountHasAlbum(album);
 						
-						playlistTrackService.removeAllTrackFromAlbum(album);
+						for (Track track : album.getTracks()) {
+							album.getTracks().remove(track);
+						}
 						
 						playlistService.delete(albumId);
 						

@@ -8,10 +8,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.apache.jasper.tagplugins.jstl.core.If;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -34,16 +31,14 @@ import com.demo.entities.Status;
 import com.demo.entities.Track;
 import com.demo.helpers.FileUploadHelper;
 import com.demo.models.AlbumInfo;
-import com.demo.models.ArtistInfo;
 import com.demo.models.TrackInfo;
 import com.demo.services.AccountPlaylistService;
-
 import com.demo.services.AccountService;
 import com.demo.services.ArtistTrackService;
 import com.demo.services.CommentService;
 import com.demo.services.CookieService;
 import com.demo.services.GenresService;
-import com.demo.services.PlaylistTrackService;
+import com.demo.services.PlaylistService;
 import com.demo.services.TrackService;
 
 @Controller
@@ -68,10 +63,10 @@ public class TrackController implements ServletContextAware{
 	private ArtistTrackService artistTrackService;
 	
 	@Autowired
-	private PlaylistTrackService playlistTrackService;
+	private CommentService commentService;
 	
 	@Autowired
-	private CommentService commentService;
+	private PlaylistService playlistService;
 	
 	@Autowired
 	CookieService cookieService ;
@@ -198,7 +193,10 @@ public class TrackController implements ServletContextAware{
 							if(albums != null) {
 								for(String albumIdString : albums) {
 									int albumId = Integer.parseInt(albumIdString);
-									playlistTrackService.addTrackToAlbum(albumId, trackTmp.getId());
+									Playlist album = playlistService.find(albumId);
+									album.getTracks().add(trackTmp);
+									// playlistTrackService.addTrackToAlbum(albumId, trackTmp.getId());
+									playlistService.save(album);
 								}						
 							}
 						}
@@ -238,7 +236,14 @@ public class TrackController implements ServletContextAware{
 						modelMap.put("genres", genresService.findAll());
 						modelMap.put("albums", accountPlaylistService.getAlbumsByArtistId(artistId));
 						modelMap.put("featArtistIds", artistTrackService.getFeatAccountIdByTrackId(trackId));
-						modelMap.put("albumOwnIds", playlistTrackService.getAlbumOwnIdsByTrackId(trackId));
+						List<Integer> albumIds = new ArrayList<Integer>();
+						for (Playlist album : track.getPlaylists()) {
+							if (album.getPlaylistCategory().getId() == 3) {
+								albumIds.add(album.getId());
+							}
+						}
+
+						modelMap.put("albumOwnIds", albumIds);
 						modelMap.put("trackId", track.getId());
 						modelMap.put("track", track);
 						modelMap.put("trackDate", track.getPublishDate());
@@ -330,14 +335,17 @@ public class TrackController implements ServletContextAware{
 						}
 						
 						// Delete old track from album
-						playlistTrackService.removeTrackFromAllAlbum(newTrack);
+						newTrack.setPlaylists(null);
+						trackService.save(newTrack);
 						
 						// Add track to album
 						if(albums != null) {
 							for(String albumIdString : albums) {
 								int albumId = Integer.parseInt(albumIdString);
-								playlistTrackService.addTrackToAlbum(albumId, newTrack.getId());
-							}						
+								Playlist album = playlistService.find(albumId);
+								album.getTracks().add(newTrack);
+								playlistService.save(album);
+							 }						
 						}						
 					}else {
 						modelMap.put("msg", "Sorry, but you didn't own this track!"); 
@@ -377,7 +385,9 @@ public class TrackController implements ServletContextAware{
 						
 						artistTrackService.removeAllArtistFromTrack(track);
 						
-						playlistTrackService.removeTrackFromAllAlbum(track);
+						for (Playlist album : track.getPlaylists()) {
+							track.getPlaylists().remove(album);
+						}
 						
 						commentService.removeAllCommentInTrack(track);
 						

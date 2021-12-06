@@ -25,7 +25,7 @@ public interface PlaylistService {
 	public List<PlaylistModel> getPlaylistModel(List<Playlist> playlists);
 	
 	public List<Playlist> searchByTitle(String keyword);
-
+	
 	//A
 	public PlaylistInfor getLikedPlaylistByAccountId(int id);
 

@@ -8,12 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.Contact;
+import com.demo.repositories.ContactRepository;
 import com.demo.helpers.SendMailHelper;
 import com.demo.models.ContactInfo;
-import com.demo.repositories.ContactRepositories;
-import com.demo.repositories.ContactRepository;
-import com.demo.repositories.ContactTypeRepository;
-
 @Service("contactService")
 public class ContactServiceImpl implements ContactService {
 	
@@ -91,7 +88,6 @@ public class ContactServiceImpl implements ContactService {
 		} catch (MessagingException e) {
 			System.err.println(e.getMessage());
 		}
-		
 	}
 
 	

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,13 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
@@ -31,10 +29,10 @@ import com.demo.entities.Track;
 import com.demo.helpers.FileUploadHelper;
 import com.demo.models.PlaylistModel;
 import com.demo.models.TrackInfo;
-import com.demo.repositories.AccountRepository;
 import com.demo.services.AccountPlaylistService;
 import com.demo.services.PlaylistCategoryService;
 import com.demo.services.PlaylistService;
+import com.demo.services.TrackService;
 
 @Controller
 @RequestMapping(value = "admin/playlist")
@@ -44,6 +42,9 @@ public class PlaylistController implements ServletContextAware {
 
 	@Autowired
 	private PlaylistService playlistService;
+	
+	@Autowired
+	private TrackService trackService;
 
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
@@ -51,6 +52,9 @@ public class PlaylistController implements ServletContextAware {
 	@Autowired
 	private PlaylistCategoryService playlistCategoryService;
 
+	@Autowired
+	private HttpSession session;
+	
 	@RequestMapping(value = { "", "index" })
 	public String index(ModelMap modelMap) {
 		List<PlaylistModel> playlistModels = new ArrayList<PlaylistModel>();
@@ -138,26 +142,42 @@ public class PlaylistController implements ServletContextAware {
 		return "redirect:/admin/playlist/index";
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id", required = false) int id) {
-		Playlist playlist = playlistService.find(id);
-		playlistService.delete(id);
-		FileUploadHelper fileHelper = new FileUploadHelper();
-		fileHelper.deleteImage(playlist.getThumbnail(), servletContext, "playlist");
-		return "redirect:/admin/playlist/index";
-	}
-
 	@RequestMapping(value = "view-tracks", method = RequestMethod.GET)
 	public ResponseEntity<List<TrackInfo>> viewTracks(@RequestParam(value = "id", required = false) int id) {
 		try {
 			Playlist playlist = playlistService.find(id);
 			List<TrackInfo> tracks = new ArrayList<TrackInfo>();
-			for (Track track : playlist.findTracks()) {
+			for (Track track : playlist.getTracks()) {
 				TrackInfo trackInfo = new TrackInfo();
+				trackInfo.setId(track.getId());
 				trackInfo.setTitle(track.getTitle());
 				trackInfo.setStatusId(track.getStatus().getId());
 				tracks.add(trackInfo);
 			}
+			session.setAttribute("playlistId", id);
+			return new ResponseEntity<List<TrackInfo>>(tracks, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<List<TrackInfo>>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "delete-track", method = RequestMethod.GET)
+	public ResponseEntity<List<TrackInfo>> deleteTrack(@RequestParam(value = "id", required = false) int id) {
+		try {
+			int playlistId = (Integer) session.getAttribute("playlistId");
+			
+			Playlist playlist = playlistService.find(playlistId);
+			playlist.getTracks().remove(trackService.findById(id));
+			playlistService.save(playlist);
+			List<TrackInfo> tracks = new ArrayList<TrackInfo>();
+			for (Track track : playlist.getTracks()) {
+				TrackInfo trackInfo = new TrackInfo();
+				trackInfo.setId(track.getId());
+				trackInfo.setTitle(track.getTitle());
+				trackInfo.setStatusId(track.getStatus().getId());
+				tracks.add(trackInfo);
+			}
+			
 			return new ResponseEntity<List<TrackInfo>>(tracks, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<List<TrackInfo>>(HttpStatus.BAD_REQUEST);
@@ -181,6 +201,27 @@ public class PlaylistController implements ServletContextAware {
 			return new ResponseEntity<Integer>(status.getId(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> delete(@RequestParam("id") int playlistId) {
+		boolean result = false;
+		Playlist album = playlistService.find(playlistId);
+
+		accountPlaylistService.removeAccountHasAlbum(album);
+
+		for (Track track : album.getTracks()) {
+			album.getTracks().remove(track);
+		}
+
+		playlistService.delete(playlistId);
+
+		result = true;
+		try {
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

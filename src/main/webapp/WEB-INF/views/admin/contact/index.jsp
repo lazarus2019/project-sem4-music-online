@@ -38,7 +38,6 @@
 				                              <thead>
 				                                 <tr>
 				                                    <th style="height: 50px;">No</th>
-				                                    <th style="height: 50px;">Type</th>
 				                                    <th style="height: 50px;">Time</th>
 				                                    <th style="height: 50px;">Fullname</th>
 				                                    <th style="height: 50px;">Email</th>
@@ -51,10 +50,7 @@
 				                              <tbody id="playlists-body">
 				                              	 <c:forEach var="contact" items="${contacts}" varStatus="i">
 					                                 <tr style="height: 100px;" class="contact-row" data-id="${contact.id }">
-					                                    <td class="text-center">${i.index + 1 }</td>
-					                                    <td>
-					                                       ${contact.contactType.name }
-					                                    </td>
+					                                    <td class="text-center">${i.index + 1 }</td>					                                    
 					                                    <td>00:00 AM/PM DD/MM/YYYY</td>
 					                                    <td>${contact.fullname }</td>
 					                                    <td class="text-center">${contact.email }</td>
@@ -101,8 +97,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-        	[From: <span class="sender"></span>]&nbsp;
-        	<span class="contact-type"></span>
+        	From: <span class="sender"></span>
+        	<
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -242,7 +238,6 @@ $('.toggle-read-mailbox').click(function(){
         url: '${pageContext.request.contextPath}/admin/contact/findById',
         success: function (mailbox) {
 		    $('.modal-title .sender').text(mailbox.fullname)
-		    $('.modal-title .contact-type').text(mailbox.contactTypeName)
 		    $('.modal-body .mailbox-content').text(mailbox.content)
 		    $('.contact-box-info .contact-email').text(mailbox.email)
 		    $('.modal-body .contact-phone').text(mailbox.phoneNumber)

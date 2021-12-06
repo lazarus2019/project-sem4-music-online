@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.demo.entities.Contact;
-import com.demo.entities.ContactType;
 import com.demo.services.ContactService;
 
 @Controller
@@ -29,9 +28,7 @@ public class ContactController {
 		
 		try {
 			
-			ContactType contactType = new ContactType();
-			contactType.setId(5);	
-			Contact contact = new Contact(contactType, fullname, email, phoneNumber, content, true);
+			Contact contact = new Contact(fullname, email, phoneNumber, content, true);
 			
 			contactService.save(contact);
 

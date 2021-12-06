@@ -22,12 +22,12 @@
                               <s:input class="form-control" path="name"></s:input>
                            </div>                       
                            <div class="form-group">
-                              <label>Price:</label>
+                              <label>Price ($):</label>
                               <s:input class="form-control" path="price" step=".01" min="0"></s:input>
                            </div>                       
                            <div class="form-group">
-                              <label>Duration:</label>
-                              <s:input class="form-control" path="duration" max="12" min="1"></s:input>
+                              <label>Duration (months):</label>
+                              <s:input class="form-control" path="duration" min="1"></s:input>
                            </div>                       
                            <div class="form-group">
                               <label>Description:</label>

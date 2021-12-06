@@ -6,23 +6,18 @@ public class ContactInfo {
 	private String email;
 	private String phoneNumber;
 	private String content;
-	private int contactTypeId;
-	private String contactTypeName;
 
 	public ContactInfo() {
 		super();
 	}
 
-	public ContactInfo(Integer id, String fullname, String email, String phoneNumber, String content, int contactTypeId,
-			String contactTypeName) {
+	public ContactInfo(Integer id, String fullname, String email, String phoneNumber, String content) {
 		super();
 		this.id = id;
 		this.fullname = fullname;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.content = content;
-		this.contactTypeId = contactTypeId;
-		this.contactTypeName = contactTypeName;
 	}
 
 	public Integer getId() {
@@ -65,20 +60,6 @@ public class ContactInfo {
 		this.content = content;
 	}
 
-	public int getContactTypeId() {
-		return contactTypeId;
-	}
-
-	public void setContactTypeId(int contactTypeId) {
-		this.contactTypeId = contactTypeId;
-	}
-
-	public String getContactTypeName() {
-		return contactTypeName;
-	}
-
-	public void setContactTypeName(String contactTypeName) {
-		this.contactTypeName = contactTypeName;
-	}
+	
 
 }

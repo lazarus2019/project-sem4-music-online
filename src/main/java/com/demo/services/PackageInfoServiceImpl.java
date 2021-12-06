@@ -7,12 +7,28 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.PackageInfo;
+import com.demo.models.PackageChartModel;
 import com.demo.repositories.PackageInfoRepository;
 @Service("packageInfoService")
 public class PackageInfoServiceImpl implements PackageInfoService{
 	
 	@Autowired
 	private PackageInfoRepository packageInfoRepository;
+
+	@Override
+	public List<PackageInfo> findAll() {
+		return (List<PackageInfo>) packageInfoRepository.findAll();
+	}
+
+	@Override
+	public List<PackageChartModel> getPackageChart() {
+		return null;
+	}
+
+	@Override
+	public List<PackageInfo> countByPackageId(int packageId) {
+		return packageInfoRepository.countByPackageId(packageId);
+	}
 
 	@Override
 	public List<Account> getAccountsSignPackageById(int packageId) {
@@ -29,12 +45,5 @@ public class PackageInfoServiceImpl implements PackageInfoService{
 	public List<PackageInfo> getPackageInfosById(int packageId) {
 		return packageInfoRepository.getPackageInfosById(packageId);
 	}
-
-	@Override
-	public Iterable<PackageInfo> findAll() {
-		return packageInfoRepository.findAll();
-	}
-	
-	
 
 }

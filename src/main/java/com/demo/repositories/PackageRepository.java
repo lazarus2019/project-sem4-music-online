@@ -21,7 +21,9 @@ public interface PackageRepository extends CrudRepository<ServicePackage, Intege
 	
 	@Query("from ServicePackage where id = :id ") 
 	public ServicePackage getServicePackageById(@Param("id") int id ) ; 
-	
+
+	@Query("select count(id) from ServicePackage where isDelete = false")
+	public long countPackage();
 
 	@Query("from ServicePackage where is_delete = FALSE")
 	public List<ServicePackage> getAllPackage();

@@ -21,7 +21,6 @@ import com.demo.services.AccountPlaylistService;
 import com.demo.services.AccountService;
 import com.demo.services.CookieService;
 import com.demo.services.PlaylistService;
-import com.demo.services.PlaylistTrackService;
 import com.demo.services.TrackService;
 
 @Controller
@@ -36,9 +35,6 @@ public class PlayerController {
 	
 	@Autowired
 	private AccountService accountService;
-	
-	@Autowired
-	private PlaylistTrackService playlistTrackService;
 	
 	@Autowired
 	private PlaylistService playlistService;
@@ -67,7 +63,8 @@ public class PlayerController {
 			}
 			
 			if(playlist.getId() != null) {
-				playlistTrackService.addTrackToAlbum(playlist.getId(), trackId);
+				playlist.getTracks().add(trackService.findById(trackId));
+				playlistService.save(playlist);
 			}else {
 				Status status = new Status();
 				status.setId(1);
@@ -85,7 +82,8 @@ public class PlayerController {
 				Playlist playlistTmp = playlistService.save(playlist);
 				if(playlistTmp.getId() != null) {
 					accountPlaylistService.setOwnerAlbum(playlistTmp, account.getId());
-					playlistTrackService.addTrackToAlbum(playlistTmp.getId(), trackId);
+					playlist.getTracks().add(trackService.findById(trackId));
+					playlistService.save(playlist);
 				}
 			}
 		}

@@ -107,14 +107,15 @@ const MODAL_CONTENT = {
     },
     send_mail_success: {
         icon: 'success',
-        title: 'Done!',
-        text: 'Your reply had been sent!'
+        title: 'Sent!',
+        text: 'Your mail was sent!'
     },
     send_mail_error: {
         icon: 'error',
-        title: 'Could not send the reply!',
+        title: 'Failed!',
         text: 'Please check your request and try again'
-    },
+
+    }
 }
 
 export function swalAlert(modal) {
@@ -211,5 +212,5 @@ export function redirectAlertURLCustom(modal, url){
     // })
 }
 
-export default {MODAL_CONTENT}
 
+export default {MODAL_CONTENT}

@@ -15,14 +15,11 @@ import com.demo.entities.Contact;
 import com.demo.models.ContactInfo;
 import com.demo.services.AccountService;
 import com.demo.services.ContactService;
-import com.demo.services.ContactTypeService;
 
 @Controller
 @RequestMapping(value = { "admin/contact" })
 public class MailboxController {
 
-	@Autowired
-	private ContactTypeService contactTypeService;
 
 	@Autowired
 	private ContactService contactService;
@@ -32,7 +29,6 @@ public class MailboxController {
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
-		modelMap.put("contactTypes", contactTypeService.findAll());
 		modelMap.put("amountMailbox", contactService.getAmountUnreadMailbox());
 		modelMap.put("contacts", contactService.findAll());
 		return "admin/contact/index";

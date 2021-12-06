@@ -1,11 +1,7 @@
 package com.demo.controllers.admin;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,20 +21,16 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.demo.entities.Account;
-import com.demo.entities.AccountPlaylist;
 import com.demo.entities.Playlist;
-import com.demo.entities.PlaylistTrack;
-import com.demo.entities.PlaylistTrackId;
 import com.demo.entities.Status;
 import com.demo.entities.Track;
 import com.demo.helpers.FileUploadHelper;
 import com.demo.models.PlaylistModel;
 import com.demo.models.TrackInfo;
-import com.demo.models.TrackInfor;
-import com.demo.services.AccountService;
+import com.demo.services.ArtistTrackService;
+import com.demo.services.CommentService;
 import com.demo.services.GenresService;
 import com.demo.services.PlaylistService;
-import com.demo.services.PlaylistTrackService;
 import com.demo.services.TrackService;
 
 @Controller
@@ -58,10 +49,13 @@ public class ManageTrackController implements ServletContextAware {
 	private PlaylistService playlistService;
 
 	@Autowired
-	private PlaylistTrackService playlistTrackService;
+	private HttpSession session;
+	
+	@Autowired
+	private ArtistTrackService artistTrackService;
 
 	@Autowired
-	private HttpSession session;
+	private CommentService commentService;
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
@@ -134,13 +128,6 @@ public class ManageTrackController implements ServletContextAware {
 		status.setId(1);
 		newTrack.setStatus(status);
 		trackService.save(newTrack);
-		return "redirect:/admin/manage-track/index";
-	}
-
-	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id", required = false) int id) {
-		Track track = trackService.findById(id);
-		// trackService.save(track);
 		return "redirect:/admin/manage-track/index";
 	}
 
@@ -228,21 +215,45 @@ public class ManageTrackController implements ServletContextAware {
 	public ResponseEntity<Boolean> addToPlaylist(@RequestParam(value = "id", required = false) int id,
 			HttpServletRequest request) {
 		try {
+			System.out.println("id: " + id);
+			boolean flag = false;
 			int trackId = (Integer) session.getAttribute("trackId");
-			PlaylistTrack playlistTrack = playlistTrackService.findById(new PlaylistTrackId(id, trackId));
-			if (playlistTrack != null) {
-//				System.out.println(playlistTrack.getPlaylist().getId());
-				return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+			Track track = trackService.findById(trackId);
+			Playlist playlist = playlistService.find(id);
+			boolean status = playlist.getTracks().contains(track);
+
+			if (!status) {
+				playlist.getTracks().add(track);
+				playlistService.save(playlist);
+				flag = true;
 			} else {
-				Playlist playlist = playlistService.find(id);
-				Track track = trackService.findById(trackId);
-				PlaylistTrack newPlaylistTrack = new PlaylistTrack();
-				newPlaylistTrack.setId(new PlaylistTrackId(id, trackId));
-				newPlaylistTrack.setPlaylist(playlist);
-				newPlaylistTrack.setTrack(track);
-				playlistTrackService.save(newPlaylistTrack);
-				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+				flag = false;
 			}
+
+			return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> delete(@RequestParam("id") int trackId) {
+		boolean result = false;
+		Track track = trackService.findById(trackId);
+
+		artistTrackService.removeAllArtistFromTrack(track);
+		for (Playlist album : track.getPlaylists()) {
+
+			track.getPlaylists().remove(album);
+		}
+		// playlistTrackService.removeTrackFromAllAlbum(track);
+
+		commentService.removeAllCommentInTrack(track);
+
+		trackService.delete(trackId);
+
+		result = true;
+		try {
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
