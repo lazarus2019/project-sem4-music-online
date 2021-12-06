@@ -63,6 +63,7 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 					// Check track is on this album or not
 					result.add(albumInfo);
 				}
+
 			}			
 		}
 		return result;

@@ -32,18 +32,14 @@ import com.demo.services.ArtistService;
 import com.demo.services.CookieService;
 
 @Controller
-@RequestMapping(value = { "admin/artist" })
-public class ArtistController implements ServletContextAware  {
+@RequestMapping(value = { "admin/manageAdmin" })
+public class AdminController implements ServletContextAware  {
 
 	private ServletContext servletContext;
-	
-	@Autowired
-	private ArtistService artistService;
 
 	@Autowired
 	private CookieService cookieService;
 
-	
 	@Autowired
 	private AccountService accountService;
 	
@@ -54,56 +50,40 @@ public class ArtistController implements ServletContextAware  {
 	public String index(ModelMap modelMap) {
 		String id = cookieService.getValue("acc_id", "") ; 
 		
-		List<Account> artists = artistService.getArtistByStatus(true);
-		List<Account> artists2 = new ArrayList<Account>() ;
-		for (Account account : artists) {
+		List<Account> admins = new ArrayList<Account>();
+		Iterable<Account> accounts = accountService.findAll();
+		for (Account account : accounts) {
 			if( checkRole(account.getRoles())) {
-				if( account.getId() != Integer.parseInt(id)) {					
-					artists2.add(account) ; 
+				if( account.getId() != Integer.parseInt(id)) {
+					
+					admins.add(account) ; 
 				}
 			}
 		}
-		List<Account> users = artistService.getArtistByStatus(false);
-		List<Account> users2 = new ArrayList<Account>() ;
-		for (Account account : users) {
-			if( checkRole(account.getRoles())) {
-				if( account.getId() != Integer.parseInt(id)) {					
-					users2.add(account) ; 
-				}
-			}
-		}
-		modelMap.put("artists", artists2);
-		modelMap.put("users", users2);
+		modelMap.put("admins", admins);
 		
-		return "admin/artist/index";
+		return "admin/manageAdmin/index";
 	}
 
-	@RequestMapping(value = { "artistRequest" })
-	public String artistRequest(ModelMap modelMap) {
-		List<Account> artists = artistService.getRequestArtist();
-		modelMap.put("artists", artists);
 
-		return "admin/artist/artistRequest";
-	}
-
-	@RequestMapping(value = { "addNewArtist" })
-	public String addNewArtist(ModelMap modelMap) {
+	@RequestMapping(value = { "addNewAdmin" })
+	public String addNewAdmin(ModelMap modelMap) {
 		List<String> gender = new ArrayList<String>();
 		gender.add("Male");
 		gender.add("Female");
 		modelMap.put("gender", gender);
 		modelMap.put("countries", countryRepository.findAll());
 		modelMap.put("accountNew", new Account()) ;
-		return "admin/artist/addNewArtist";
+		return "admin/manageAdmin/addNewAdmin";
 	}
 	
-	@RequestMapping(value = { "addNewArtist" } , method = RequestMethod.POST)
-	public String addNewArtist(@ModelAttribute("accountNew") Account account , @RequestParam("imageArtist") MultipartFile photo   ) {
+	@RequestMapping(value = { "addNewAdmin" } , method = RequestMethod.POST)
+	public String addNewAdmin(@ModelAttribute("accountNew") Account account , @RequestParam("imageArtist") MultipartFile photo   ) {
  
 		String imageName = FileUploadHelper.uploadImage(photo, servletContext, "artist");
-		artistService.addNewArtist(account, imageName);
+		accountService.addNewAdmin(account, imageName);
 		
-		return "redirect:/admin/artist/index";
+		return "redirect:/admin/manageAdmin/index";
 	}
 
 	@RequestMapping(value = {
@@ -127,11 +107,11 @@ public class ArtistController implements ServletContextAware  {
 	
 	public boolean checkRole(Set<Role> roles) {
 		for (Role role : roles) {
-			if( role.getId() == 2 || role.getId() == 3) {
-				return false ; 
+			if( role.getId() == 2) {
+				return true ; 
 			}			
 		}
-		return true ;
+		return false ;
 	}
 
 }

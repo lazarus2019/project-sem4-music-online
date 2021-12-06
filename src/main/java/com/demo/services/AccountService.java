@@ -58,6 +58,8 @@ public interface AccountService {
 	public List<ArtistChartModel> getAccountChart();
 	
 	public ArtistDetail getArtistByIdAccount(int id);
+	
+	public Account addNewAdmin(Account account , String image) ;
 
 }
 

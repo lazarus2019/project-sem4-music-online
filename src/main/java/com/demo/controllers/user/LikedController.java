@@ -1,7 +1,5 @@
 package com.demo.controllers.user;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
-import com.demo.entities.AccountPlaylistId;
 import com.demo.entities.Playlist;
-import com.demo.models.PlaylistInfor;
 import com.demo.services.AccountPlaylistService;
 import com.demo.services.AccountService;
 import com.demo.services.CookieService;
@@ -29,7 +25,7 @@ public class LikedController {
 
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
-	
+
 	@Autowired
 	private AccountService accountService;
 
@@ -57,11 +53,6 @@ public class LikedController {
 		}
 		
 		modelMap.put("lik", playlist.getTracks());
-		
-//		for(Track track : playlist.getTracks() ) {
-//			
-//		}
-
 		return "liked/index";
 
 	}

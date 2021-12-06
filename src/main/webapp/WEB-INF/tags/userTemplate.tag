@@ -77,10 +77,11 @@
                 <div class="dropdown-menu">
                     <a href="releases.html"><i class="las la-music"></i> New Release</a>
                     <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
-
-                    <a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
-                    <a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
-                    <a href="${pageContext.request.contextPath }/record-chart"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+					<c:if test="${pageContext.request.userPrincipal.name  != null }">
+                    	<a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
+                    	<a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
+                    </c:if>
+                    <a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 
                 </div>
             </li>

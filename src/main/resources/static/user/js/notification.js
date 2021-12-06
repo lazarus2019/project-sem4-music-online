@@ -92,7 +92,6 @@ const MODAL_CONTENT = {
         title: "It's Done",
         html: 'We will return you to the manage page <b></b>s.',
         timer: 2
-<<<<<<< HEAD
     },
     must_sign_in:{
         icon: 'info',
@@ -115,8 +114,7 @@ const MODAL_CONTENT = {
         icon: 'error',
         title: 'Failed!',
         text: 'Please check your request and try again'
-=======
->>>>>>> origin/NTanh_Branch
+
     }
 }
 
@@ -213,10 +211,6 @@ export function redirectAlertURLCustom(modal, url){
     //   }
     // })
 }
-<<<<<<< HEAD
-=======
 
-export default {MODAL_CONTENT}
->>>>>>> origin/NTanh_Branch
 
 export default {MODAL_CONTENT}

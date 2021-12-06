@@ -246,8 +246,42 @@ public class AccountServiceImpl implements AccountService {
 		}
 		return null;
 	}
+	
+	@Override
 	public ArtistDetail getArtistByIdAccount(int id) {
 		return accountRepository.getArtistByIdAccount(id);
+		
+	}
+	
+	@Override
+	public Account addNewAdmin(Account account , String image) {
+		account.setUsername(account.getEmail()); 
+		account.setJoinDate(new Date());
+		account.setIsActive(true);
+		account.setIsArtist(true);
+
+		Role role = new Role();
+		role.setId(2);
+		account.getRoles().add(role);
+		account.setImage(image);
+		account.setFollower(0);
+		account.setAuthProvider(AuthenticationProvider.LOCAL);
+		SendMailHelper mailHelper = new SendMailHelper() ;
+		String emailContent = "<h3>Congratulaion, you are an admin from now</h3> <br> Dear " + account.getNickname()  ;
+		emailContent += ".  We send you your account password. Use your email and password to login <br>";
+		emailContent += "Your password here : <b><i>" + account.getPassword() + "</b></i>"; 
+		
+		account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
+		String subject = " Announcement about becoming the admin of the website Muzik" ; 
+		
+		try {
+			mailHelper.sendSimpleEmail(account.getEmail(), subject, emailContent , emailSender);
+		} catch (MessagingException e) {
+			System.err.println(e.getMessage());
+		}
+		
+		
+		return accountRepository.save(account);
 	}
 }
 

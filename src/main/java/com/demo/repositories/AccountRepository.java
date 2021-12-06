@@ -50,7 +50,7 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 
 	@Query("from Account where username = :username")
 	public Account find(@Param("username") String username);
-
+	
 	@Query("select count(id) from Account where isArtist = true")
 	public long countArtist();
 }

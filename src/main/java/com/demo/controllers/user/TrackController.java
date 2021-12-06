@@ -8,10 +8,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.apache.jasper.tagplugins.jstl.core.If;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -34,10 +31,8 @@ import com.demo.entities.Status;
 import com.demo.entities.Track;
 import com.demo.helpers.FileUploadHelper;
 import com.demo.models.AlbumInfo;
-import com.demo.models.ArtistInfo;
 import com.demo.models.TrackInfo;
 import com.demo.services.AccountPlaylistService;
-
 import com.demo.services.AccountService;
 import com.demo.services.ArtistTrackService;
 import com.demo.services.CommentService;

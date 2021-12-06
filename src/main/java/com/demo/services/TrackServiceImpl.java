@@ -231,7 +231,6 @@ public class TrackServiceImpl implements TrackService {
 		} catch (Exception e) {
 			return false;
 		}
-
 	}
 
 	@Override
@@ -299,5 +298,6 @@ public class TrackServiceImpl implements TrackService {
 		trackInfo.setListens(track.getListens());
 		trackInfo.setPremium(track.isIsPremium());
 		return trackInfo;
+
 	}
 }

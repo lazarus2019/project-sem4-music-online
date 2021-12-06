@@ -1,5 +1,6 @@
 package com.demo.repositories;
 
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -26,4 +27,5 @@ public interface ContactRepository extends CrudRepository<Contact, Integer> {
 //
 //	@Query("SELECT * FROM Contact WHERE contact_type_id = :type AND fullname LIKE %:keyword% OR email LIKE %:keyword% OR phone_number LIKE %:keyword%")
 //	public List<Contact> filterContact(@Param("keyword") String keyword, @Param("type") int mail_type);
+
 }

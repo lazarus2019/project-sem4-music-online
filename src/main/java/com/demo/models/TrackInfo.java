@@ -73,7 +73,6 @@ public class TrackInfo {
 	public void setGenres(Genres genres) {
 		this.genres = genres;
 	}
-
 	public TrackInfo() {
 		super();
 	}

@@ -12,7 +12,6 @@ import com.demo.services.TrackService;
 
 @Component
 public class UpdateDbSchedule {
-
 	@Autowired
 	private TrackService trackService;
 
@@ -42,3 +41,4 @@ public class UpdateDbSchedule {
 	}
 
 }
+

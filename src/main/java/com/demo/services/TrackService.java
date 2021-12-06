@@ -48,6 +48,5 @@ public interface TrackService {
 	public List<Track> getBestTrack(int n);
 
 	public List<TrackInfo> searchTrackInManage(String option, String keyword, int artistId);
-
 }
 

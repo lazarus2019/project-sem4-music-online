@@ -235,7 +235,6 @@ public class ManageTrackController implements ServletContextAware {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
 	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> delete(@RequestParam("id") int trackId) {
 		boolean result = false;

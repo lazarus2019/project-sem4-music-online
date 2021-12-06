@@ -364,7 +364,6 @@ public class Account implements java.io.Serializable {
 				+ accountSettings + "]";
 	}
 	
-
 	public Set<Track> findTrackThroughAtristTrack() {
 		Set<Track> tracks = new HashSet<Track>(0) ; 
 		for(ArtistTrack artistTrack: artistTracks) {
@@ -380,4 +379,5 @@ public class Account implements java.io.Serializable {
 		}
 		return playlists ;
 	}
+
 }
