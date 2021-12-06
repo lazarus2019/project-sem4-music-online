@@ -330,6 +330,7 @@ audio {
 
 .lyric-thumbnail img {
 	height: 100%;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -351,7 +352,7 @@ audio {
 	position: relative;
 }
 
-.dropdown-song-menu, .song__menu-list, .dropdown-track-menu-artist {
+.dropdown-song-menu, .song__menu-list, .dropdown-track-menu-artist, .dropdown-album-menu-artist {
 	position: absolute;
 	right: 40px;
 	min-width: 180px;
@@ -372,13 +373,13 @@ audio {
 	bottom: 0;
 }
 
-.song__menu-list, .dropdown-track-menu-artist {
+.song__menu-list, .dropdown-track-menu-artist, .dropdown-album-menu-artist {
 	top: 0;
 	display: none;
 }
 
 .dropdown-song-menu.show, .song__menu-list.show,
-	.dropdown-track-menu-artist.show {
+	.dropdown-track-menu-artist.show, .dropdown-album-menu-artist {
 	transform: translateY(0);
 	opacity: 1;
 	visibility: visible;
@@ -397,7 +398,7 @@ audio {
 	font-size: 40px;
 }
 
-.dropdown-song-menu a, .song__menu-list a, .dropdown-track-menu-artist a
+.dropdown-song-menu a, .song__menu-list a, .dropdown-track-menu-artist a, .dropdown-album-menu-artist a
 	{
 	display: flex;
 	justify-content: flex-start;
@@ -409,17 +410,17 @@ audio {
 }
 
 .dropdown-song-menu a:hover, .song__menu-list a:hover,
-	.dropdown-track-menu-artist a:hover {
+	.dropdown-track-menu-artist a:hover, .dropdown-album-menu-artist a:hover {
 	background-color: rgb(248, 248, 248);
 }
 
 .dropdown-song-menu a i, .song__menu-list a i,
-	.dropdown-track-menu-artist a i {
+	.dropdown-track-menu-artist a i, .dropdown-album-menu-artist a i {
 	margin-right: 10px;
 }
 
 .dropdown-song-menu a span, .song__menu-list a span,
-	.dropdown-track-menu-artist a span {
+	.dropdown-track-menu-artist a span, .dropdown-album-menu-artist a span {
 	font-size: 14px;
 }
 
@@ -588,7 +589,7 @@ audio {
 	display: block;
 }
 
-.btn-dropdown-track-menu-artist:focus>.dropdown-track-menu-artist {
+.btn-dropdown-track-menu-artist:focus>.dropdown-track-menu-artist, .btn-dropdown-album-menu-artist:focus>.dropdown-album-menu-artist {
 	transform: translateY(0);
 	opacity: 1;
 	visibility: visible;
@@ -790,20 +791,26 @@ audio {
 	opacity: 1;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .circle-icon-sm i{
     color: var(--white);
     font-size: 15px;
 }
 
-=======
->>>>>>> origin/Thu_Branch3
-=======
->>>>>>> origin/NTanh_Branch
 /* Color text */
 .yellow__icon {
 	color: var(--yellow);
+}
+
+.orange__icon {
+	color: var(--orange);
+}
+
+.blue__icon {
+	color: var(--blue);
+}
+
+.white__icon {
+	color: var(--white);
 }
 
 .clr-dark {
@@ -901,6 +908,10 @@ a.form-btn:hover {
 	flex: 25%;
 }
 
+.flex-6>div {
+	flex: 50%;
+}
+
 /* Playlist Chart */
 .chart__list {
 	margin-top: 15px;
@@ -948,8 +959,6 @@ a.form-btn:hover {
 
 .item {
 	padding: 6px 20px !important;
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
 
 /* hidden */
@@ -973,6 +982,14 @@ a.form-btn:hover {
     background: var(--yellow);
 }
 
+.bg-clr-orange{
+    background: var(--orange);
+}
+
+.bg-clr-green{
+    background: var(--green);
+}
+
 /* Hover */
 .none-hover:hover{
     background: transparent !important;
@@ -987,19 +1004,135 @@ a.form-btn:hover {
 .tabs-2{
     width: 50% !important;
     margin: 0 30px !important;
-=======
 }
 
-/* hidden */
-.hide{
-	display: none
-}
->>>>>>> origin/Thu_Branch3
-=======
+.disabled{
+    pointer-events:none;
+    opacity:0.4;
 }
 
-/* hidden */
-.hide{
-	display: none
+/* Toggle Request Artist Block*/
+.display-block{
+	display: block;	
 }
->>>>>>> origin/NTanh_Branch
+
+.display-none { 
+	display: none ; 
+}
+
+/*---------------------------------------------------------------------
+Profile Edit 
+-----------------------------------------------------------------------*/
+
+.profile-pic {
+    max-width: 100%;
+    display: block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+.profile-img-edit {
+    position: relative;
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+}
+
+.file-upload {
+    display: none;
+}
+
+.p-image {
+    position: absolute;
+    top: auto;
+    right: 8px;
+    bottom: 10px;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    background: var(--iq-primary);
+    color: var(--iq-white);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.upload-button {
+    font-size: 1.5em;
+}
+
+.iq-edit-profile .nav-link {
+    padding: 20px 15px;
+    border-radius: 0;
+    color: var(--iq-body-text);
+    text-align: center;
+    font-size: 16px;
+    border-left: 1px solid var(--iq-light-primary);
+}
+
+.iq-edit-profile.nav-pills .nav-link.active,
+.iq-edit-profile.nav-pills .show>.nav-link {
+    color: var(--iq-white);
+    background: var(--iq-primary);
+}
+
+ul.iq-edit-profile li:first-child a {
+    border-radius: 15px 0 0 15px;
+    border-left: none;
+}
+
+ul.iq-edit-profile li:last-child a {
+    border-radius: 0 15px 15px 0;
+}
+
+
+.image-button {
+	position: relative;
+  	width: 100%;
+  	max-width: 400px;
+}
+
+.image-button img {
+	width: 30%;
+  	height: 30%;
+}
+
+#photoAccount {
+	width: 130px ; 
+	height: 130px ;
+}
+
+.image-button i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.publish-date{
+	padding: 5px 10px;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.unPublish-status{
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+}
+
+.unPublish-status i{
+	font-size: 1.5rem;
+}

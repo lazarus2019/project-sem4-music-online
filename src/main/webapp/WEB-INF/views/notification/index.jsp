@@ -67,24 +67,7 @@
 			            </div>
 			       	</form>
 		            <!-- /.card-body -->
-		            <div class="card-footer p-0">
-		              <div class="mailbox-controls">
-						<!-- pagination -->	                
-		                <div class="float-right">
-		                  1-50/200
-		                  <div class="btn-group">
-		                    <button type="button" class="btn btn-default btn-sm">
-		                      <i class="fas fa-chevron-left"></i>
-		                    </button>
-		                    <button type="button" class="btn btn-default btn-sm">
-		                      <i class="fas fa-chevron-right"></i>
-		                    </button>
-		                  </div>
-		                  <!-- /.btn-group -->
-		                </div>
-		                <!-- /.float-right -->
-		              </div>
-		            </div>
+		            
 	          	</c:if>
 	          </div>
 	          <!-- /.card -->
@@ -115,6 +98,7 @@
 		      $(this).data('clicks', !clicks)
 		    })
 		    console.log("b")
+
 		  })
 		</script>
 	</jsp:attribute>

@@ -1,7 +1,6 @@
 package com.demo.services;
 
 import java.util.*;
-
 import org.springframework.data.repository.query.Param;
 
 import com.demo.entities.*;
@@ -23,6 +22,9 @@ public interface PlaylistService {
 	public List<Playlist> getAllAlbum();
 	
 	public List<PlaylistModel> getPlaylistModel(List<Playlist> playlists);
+	
+	public List<Playlist> searchByTitle(String keyword);
+
 	//A
 	public PlaylistInfor getLikedPlaylistByAccountId(int id);
 

@@ -1,3 +1,4 @@
+
 package com.demo.services;
 
 import java.util.ArrayList;
@@ -6,18 +7,29 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.demo.entities.Account;
+import com.demo.entities.ArtistTrack;
+import com.demo.entities.ArtistTrackId;
+import com.demo.entities.Track;
 import com.demo.models.ArtistInfo;
 import com.demo.repositories.ArtistRepository;
 import com.demo.repositories.ArtistTrackRepository;
+import com.demo.repositories.TrackRepository;
 
 @Service("artistTrackService")
 public class ArtistTrackServiceImpl implements ArtistTrackService{
-
+	
+	@Autowired
+	private TrackService trackService;
+	
 	@Autowired
 	private ArtistTrackRepository artistTrackRepository;
 	
 	@Autowired 
 	private ArtistRepository artistRepository;
+	
+	@Autowired
+	private AccountService accountService;
 	
 	@Override
 	public List<ArtistInfo> getAccountByTrackId(int id) {		
@@ -28,6 +40,109 @@ public class ArtistTrackServiceImpl implements ArtistTrackService{
 		}
 		
 		return accounts;
+	}
+
+	@Override
+	public ArtistTrack save(ArtistTrack artistTrack) {
+		return artistTrackRepository.save(artistTrack);
+	}
+
+	
+
+	@Override
+	public Iterable<ArtistTrack> findAll() {
+		return artistTrackRepository.findAll();
+	}
+
+	@Override
+	public List<Integer> getFeatAccountIdByTrackId(int trackId) {
+		return artistTrackRepository.getFeatAccountIdByTrackId(trackId);
+	}
+
+	@Override
+	public void delete(ArtistTrackId artistTrackId) {
+		try {
+			ArtistTrack artistTrack = findById(artistTrackId);
+			artistTrackRepository.delete(artistTrack);			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public ArtistTrack findById(ArtistTrackId artistTrackId) {
+		return artistTrackRepository.findById(artistTrackId).get();
+	}
+
+	@Override
+	public List<Track> getTracksOfArtist(int artistId) {
+		List<Track> result = new ArrayList<Track>();
+		List<Integer> trackIds = artistTrackRepository.getTracksOfArtist(artistId);
+		for(int trackId : trackIds) {
+			result.add(trackService.findById(trackId));
+		}
+		return result;
+	}
+
+	@Override
+	public void removeAllArtistFromTrack(Track track) {
+		try {
+			for(Account account : track.findAccountThroughAtristTrack()) {
+				for(ArtistTrack artistTrack : account.getArtistTracks()) {
+					if(artistTrack.getTrack().getId() == track.getId()) {
+						delete(artistTrack.getId());					
+					}					
+				}
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public void removeFeatArtistFromTrack(Track track, int artistId) {
+		try {
+			for(Account account : track.findAccountThroughAtristTrack()) {
+				if(account.getId() != artistId) {
+					for(ArtistTrack artistTrack : account.getArtistTracks()) {
+						if(artistTrack.getTrack().getId() == track.getId()) {
+							delete(artistTrack.getId());					
+						}					
+					}
+				}
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public void addFeatArtistToTrack(Track track, int featArtistId) {
+		try {
+			ArtistTrack featArtistTrack = new ArtistTrack();
+			featArtistTrack.setId(new ArtistTrackId(featArtistId, track.getId()));
+			featArtistTrack.setAccount(accountService.findById(featArtistId));
+			featArtistTrack.setTrack(track);
+			featArtistTrack.setIsOwn(false);
+			save(featArtistTrack);	
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public void setOwnerTrack(int artistId, int trackId) {
+		try {
+			ArtistTrack artistTrack = new ArtistTrack();
+			artistTrack.setId(new ArtistTrackId(artistId, trackId));
+			artistTrack.setAccount(accountService.findById(artistId));
+			artistTrack.setTrack(trackService.findById(trackId));
+			artistTrack.setIsOwn(true);
+			save(artistTrack);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
 	}
 
 }

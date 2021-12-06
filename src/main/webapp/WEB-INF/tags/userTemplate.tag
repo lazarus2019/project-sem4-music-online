@@ -26,7 +26,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/adminlte.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/icheck-bootstrap.min.css">
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
+	
+	    <!-- Remix Icon -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/remixicon.css">
 
 	<!-- CSS Listen -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/1.3.0/css/line-awesome.min.css">
@@ -73,9 +77,11 @@
                 <div class="dropdown-menu">
                     <a href="releases.html"><i class="las la-music"></i> New Release</a>
                     <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
+
                     <a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
                     <a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
                     <a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+
                 </div>
             </li>
 
@@ -100,52 +106,10 @@
             <!-- notification button -->
             <t:notification />
             <!-- end notification button -->
-    
-            <div class="header__action header__action--signin">
-                <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <a class="header__action-btn" href="${pageContext.request.contextPath }/user/login/login">
-                        <span>Sign in</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M20,12a1,1,0,0,0-1-1H11.41l2.3-2.29a1,1,0,1,0-1.42-1.42l-4,4a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l4,4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L11.41,13H19A1,1,0,0,0,20,12ZM17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V16a1,1,0,0,0-2,0v3a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,17,2Z" />
-                        </svg>
-                    </a>
-                </c:if>
-                <div class="header__action-btn">
-                    <c:if test="${pageContext.request.userPrincipal.name  != null }">
-                        <span>${ accountSignined.nickname }</span>
-    
-                        <div class="user__box">
-                            <i class="las la-crown"></i>
-                            <img src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
-                                alt="" class="user__avatar">
-                            <div class="dropdown__user-menu">
-                                <a href="${pageContext.request.contextPath }/user/profile/index">
-                                    <i class="lar la-user-circle"></i> Profile
-                                </a>
-                                <a href="${pageContext.request.contextPath }/artist/yourtrack">
-                                    <i class="las la-music"></i> Your Tracks
-                                </a>
-                                <a href="${pageContext.request.contextPath }/artist/youralbum">
-                                    <i class="las la-record-vinyl"></i> Your Albums
-                                </a>
-                                <a href="#">
-                                    <i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
-                                        class="las la-crown yellow__icon"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="las la-user-cog"></i> Settings
-                                </a>
-                                <a href="${pageContext.request.contextPath }/user/login/logout">
-                                    <i class="las la-sign-out-alt"></i> Log out
-                                </a>
-                            </div>
-                        </div>
-                    </c:if>
-                </div>
-            
-            
-            </div>
+
+
+    		<t:nickname/> 
+
         </div>
     
         <button class="header__btn" type="button">
@@ -620,6 +584,8 @@
 
 	<!-- JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.magnific-popup.min.js"></script>
@@ -629,6 +595,7 @@
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.inputmask.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/plyr.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 	<!-- My custom JS -->
 	<script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
@@ -646,9 +613,10 @@
 	        this.elements.image = this.elements.root.querySelector('.playlist__list-item-image img')
 	        this.elements.title = this.elements.root.querySelector('.playlist__song-content h3')
 	        this.elements.singer = this.elements.root.querySelector('.playlist__song-content span')
+	        this.elements.removeBtn = this.elements.root.querySelector('.remove-song')
 
 	        this.elements.root.dataset.id = id
-	        // this.elements.image.src = `resources/image/document.querySelector{image}`
+	        this.elements.removeBtn.dataset.id = id
 	        this.elements.image.src = image
 	        this.elements.title.textContent = title
 	        this.elements.singer.textContent = singer
@@ -691,6 +659,10 @@
 	                    <i class="las la-info-circle small__icon"></i>
 	                    <span>Song Info</span>
 	                    </a>
+	                <a class="dropdown-song-link remove-song" onclick="removeSong(this)">
+	                    <i class="las la-minus-circle small__icon"></i>
+	                    <span>Remove Song</span>
+	                    </a>
 	                    </div>
 	                    </button>
 	                    </li>
@@ -732,36 +704,6 @@
 	
 	let songPlaylist = JSON.parse(localStorage.getItem(PLAYLIST_STORAGE_KEY)) || []
 
-	let newSongs = [
-	{
-	    id: 7,
-	    title: "Tu Phir Se Aana",
-	    singer: "Raftaar x Salim Merchant x Karma",
-	    path: "https://docs.google.com/uc?export=download&id=1BXF9GlkjfHAfM3rfP0nvKvop7K43zFh8",
-	    image:
-	        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg",
-	    duration: 246
-	},
-	{
-	    id: 40,
-	    title: "Ibiza",
-	    singer: "MBB",
-	    path: "https://docs.google.com/uc?export=download&id=10wjlQf92ph-EAma7TFqmcIlIegCDNI9G",
-	    image:
-	        "https://www.stockbiz.vn/Handlers/GetThumbnail.axd?i=202003270834059375000&w=220",
-	    duration: 246
-	},
-	{
-	    id: 25,
-	    title: "For You",
-	    singer: "Why Don't We",
-	    path: "https://docs.google.com/uc?export=download&id=19Lh7YjzCBrGlNVAADVkiEXwHLzpY2K8b",
-	    image:
-	        "https://avatar-ex-swe.nixcdn.com/song/2020/08/06/6/0/8/0/1596669230164_640.jpg",
-	    duration: 246
-	}
-	]
-
 	let waitingPlaylist = [
 	{
 	    id: 40,
@@ -771,69 +713,22 @@
 	    image:
 	        "https://www.stockbiz.vn/Handlers/GetThumbnail.axd?i=202003270834059375000&w=220",
 	    duration: 246
-	},
-	{
-	    id: 25,
-	    title: "For You",
-	    singer: "Why Don't We",
-	    path: "https://docs.google.com/uc?export=download&id=19Lh7YjzCBrGlNVAADVkiEXwHLzpY2K8b",
-	    image:
-	        "https://avatar-ex-swe.nixcdn.com/song/2020/08/06/6/0/8/0/1596669230164_640.jpg",
-	    duration: 246
-	},
-	{
-	    id: 8,
-	    title: "Tu Phir Se Aana",
-	    singer: "Raftaar x Salim Merchant x Karma",
-	    path: "https://docs.google.com/uc?export=download&id=1BXF9GlkjfHAfM3rfP0nvKvop7K43zFh8",
-	    image:
-	        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg",
-	    duration: 246
-	},
-	{
-	    id: 9,
-	    title: "Tu Phir Se Aana",
-	    singer: "Raftaar x Salim Merchant x Karma",
-	    path: "https://docs.google.com/uc?export=download&id=1BXF9GlkjfHAfM3rfP0nvKvop7K43zFh8",
-	    image:
-	        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg",
-	    duration: 246
-	},
-	{
-	    id: 3,
-	    duration: 130,
-	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
-	    title: "Feeling You",
-	    path: "https://docs.google.com/uc?export=download&id=1kC4OK-CMPKfHUbRgB1uRkqX6YBYpaCyd",
-	    singer: "Raftaar x Harjas"
-	},
-	{
-	    id: 4,
-	    duration: 130,
-	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
-	    title: "Sax",
-	    path: "https://docs.google.com/uc?export=download&id=16ELzmbgvkTcU0L8GUngXL8MYcpjYq7oD",
-	    singer: "Raftaar x Harjas"
-	},
-	{
-	    id: 2,
-	    duration: 130,
-	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
-	    title: "Smell Like Summer",
-	    path: "https://docs.google.com/uc?export=download&id=1CEQDcny85bzP8Xvonukm9BMQF0hPsw35",
-	    singer: "Raftaar x Harjas"
-	},
-	{
-	    id: 1,
-	    duration: 130,
-	    image: "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp",
-	    title: "Steam Like Gone",
-	    path: "https://docs.google.com/uc?export=download&id=1CXF1XCQeiLuGvC515vFkKHtYT2JrreQm",
-	    singer: "Raftaar x Harjas"
 	}
 	]
 
 	let isPremium = false;
+
+	function getAccIdInCookie(name){
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for (var i = 0; i < ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	    }
+	    return null;
+	}
+	//alert( getAccIdInCookie('acc_id') );
 
 	const app = {
 	oldIndex: 0,
@@ -1108,9 +1003,10 @@
 	    advertisement.autoplay = true
 	},
 	renderLyrics: function () {
-	    let htmls = this.currentSong.lyrics.map(line => "<p>"+line+"</p>")
+		let title = "<p>Song: " + this.currentSong.title + " - " + this.currentSong.singer + "</p>"
+	    let htmls = this.currentSong.lyrics.split("/n").map(line => "<p>"+line+"</p>")
 
-	    lyricContent.innerHTML = htmls.join('')
+	    lyricContent.innerHTML = title + htmls.join('')
 	},
 	loadConfig: function () {
 	    this.currentIndex = this.config.currentIndex || 0
@@ -1437,9 +1333,10 @@
 	},
 	renderLyrics: function () {
 		if(this.currentSong.lyrics){
-		    let htmls = this.currentSong.lyrics.map(line => "<p>"+line+"</p>")
+			let title = "<p>Song: " + this.currentSong.title + " - " + this.currentSong.singer + "</p>"
+		    let htmls = this.currentSong.lyrics.split("/n").map(line => "<p>"+line+"</p>")
 
-		    lyricContent.innerHTML = htmls.join('')
+		    lyricContent.innerHTML = title + htmls.join('')
 		}
 	},
 	loadConfig: function () {
@@ -1605,7 +1502,13 @@
 	    const songActive = playlist.querySelector('.playlist__list-item.active')
 	    if (songActive) {
 	        const currentSong = findSong(songActive.dataset.id)
-	        if (currentSong) app.currentIndex = songPlaylist.indexOf(currentSong)
+	        if (currentSong) {
+			        if(isPremium){
+			        	appPremium.currentIndex = songPlaylist.indexOf(currentSong)				        
+				    }else{
+			       		app.currentIndex = songPlaylist.indexOf(currentSong)
+					}
+		        }
 	    }
 	}
 	}
@@ -1654,25 +1557,36 @@
             url: '${pageContext.request.contextPath }/home/getTrackById',
             success: function (track) {
                 if (track) {
-                    console.log(track)
-                    var singer = ""
-                    if(track.artist){
-                    	singer = track.artist.map(artist => artist.nickname + " - ")
+                     console.log(track) 
+                   
+                    let flag = false
+                    for(let i = 0; i < songPlaylist.length; i++){
+                        if(songPlaylist[i].id == track.id){
+							flag = true
+							break
                         }
-                    var playTrack = {
-							id: track.id,
-							title:track.title,
-							image: '${pageContext.request.contextPath }/resources/user/img/tracks/' + track.thumbnail,
-							path: '${pageContext.request.contextPath }/resources/user/audio/tracks/' + track.fileName,
-							duration: track.duration,
-							singer: singer,
-							lyrics: track.lyrics
-                        }
-                    addSongs(playTrack)
-                    playSong(playTrack.id)
-                    var lyrics = renderLyrics(track.lyrics)
-	                            var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
-	                            $(".lyric-content").html(songTitle + lyrics)
+                    }
+                    if(!flag){
+                    	 var singer = ""
+                         if(track.artist){
+                            singer = track.artist.map(artist => artist.nickname + " - ")
+                         }
+                         var playTrack = {
+         						id: track.id,
+         						title:track.title,
+         						image: '${pageContext.request.contextPath }/uploads/images/track/' + track.thumbnail,
+         						path: '${pageContext.request.contextPath }/uploads/audio/track/' + track.fileName,
+         						duration: track.duration,
+         						singer: singer,
+         						lyrics: track.lyrics
+                            }
+                             
+	                    addSongs(playTrack)
+	                    playSong(playTrack.id)
+	                    var lyrics = renderLyrics(track.lyrics)
+	                    var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
+	                    $(".lyric-content").html(songTitle + lyrics)
+                    }
                 }
             }
         })
@@ -1752,7 +1666,7 @@
 	            },
 	            url: '${pageContext.request.contextPath}/home/searchTopTrack',
 	            success: function (tracks) {
-		             console.log(tracks)
+		             /* console.log(tracks) */
 	            	if(tracks.length < 6){
 						$("#track-result-all").addClass("hide")
 			            }else{
@@ -1761,8 +1675,7 @@
 	                var htmls = "";
                for (var i = 0; i < tracks.length; i++) {
 	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "' onclick='getTrackById(this)'><div class='track-box-image'>" +
-
-	                        "<img src='${pageContext.request.contextPath}/resources/user/img/tracks/" + tracks[i].thumbnail + "' /></div>" +
+	                        "<img src='${pageContext.request.contextPath}/uploads/images/track/" + tracks[i].thumbnail + "' /></div>" +
 	                        "<div class='track-box-content'><p>" + tracks[i].title + "</p><span>"+ "aritst" + "</span></div></div>"
 	                }
 	                $("#track-container").html(htmls);
@@ -1813,37 +1726,7 @@
 	        var keyword = $('.input-search').val();
 			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=album'
 	        window.location.replace(url);
-	    })
-	    /* Button get track by id */
-	    $(".btn-track-id").click(function () {
-	        var trackId = $(".btn-track-id").data("id");
-	        $.ajax({
-	            type: 'GET',
-	            data: {
-	                trackId: trackId
-	            },
-	            url: '${pageContext.request.contextPath }/home/getTrackById',
-	            success: function (track) {
-	                if (track) {
-	                    console.log("playing track:" + track.title)
-	                    $.ajax({
-	                        type: 'GET',
-	                        data: {
-	                            trackId: track.id,
-	                            genresId: track.genresId
-	                        },
-	                        url: '${pageContext.request.contextPath }/home/getWaitingTrack',
-	                        success: function (data) {
-	                            console.log("waiting track:" + data.title)
-	                            var lyrics = renderLyrics(data.lyrics)
-	                            var songTitle = "<p>Song: " + data.title + " - " + data.artists + "</p>"
-	                            $(".lyric-content").html(songTitle + lyrics)
-	                        }
-	                    })
-	                }
-	            }
-	        })
-	    })
+	    })	    
 	</script>
 	
 </body>

@@ -27,7 +27,7 @@
                                 <a href="${pageContext.request.contextPath}/artist/${artist.id}" class="artist-box"
                                     data-id="${artist.id }">
                                     <div class="artist-image-box">
-                                        <img src="${pageContext.request.contextPath}/resources/user/img/artists/${artist.image}"
+                                        <img src="${pageContext.request.contextPath}/uploads/images/artists/${artist.image}"
                                             alt="">
                                     </div>
                                     <p class="artist-name">${artist.nickname }</p>
@@ -49,7 +49,7 @@
                                 <div class="track-box" data-id="${track.id }" onclick="getTrackById(this)">
                                     <div class="track-box-image">
                                         <img
-                                            src="${pageContext.request.contextPath}/resources/user/img/tracks/${track.thumbnail}" />
+                                            src="${pageContext.request.contextPath}/uploads/images/track/${track.thumbnail}" />
                                     </div>
                                     <div class="track-box-content">
                                         <p>${track.title }</p>
@@ -83,7 +83,7 @@
                             <c:if test="${i.index < 6 }">
                                 <div class="album-box" data-id="${ album.id}" onclick="getListTrackByAlbumId(this)">
                                     <div class="album-box-image">
-                                        <img src="${pageContext.request.contextPath}/playlist/${album.thumbnail}"
+                                        <img src="${pageContext.request.contextPath}/uploads/images/playlist/${album.thumbnail}"
                                             alt="">
                                     </div>
                                     <div class="album-box-content">

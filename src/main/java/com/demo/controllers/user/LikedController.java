@@ -17,6 +17,7 @@ import com.demo.entities.Playlist;
 import com.demo.models.PlaylistInfor;
 import com.demo.services.AccountPlaylistService;
 import com.demo.services.AccountService;
+import com.demo.services.CookieService;
 import com.demo.services.PlaylistService;
 
 @Controller
@@ -28,26 +29,38 @@ public class LikedController {
 
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
+	
+	@Autowired
+	private AccountService accountService;
+
+	@Autowired
+	CookieService cookieService ;
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
 
-		int accountId = 9;
-		List<AccountPlaylistId> acc = accountPlaylistService.getPlaylistOfAccount(accountId);
-
-		List<PlaylistInfor> play = new ArrayList<PlaylistInfor>();
-		PlaylistInfor pl = new PlaylistInfor();
-
-		for (AccountPlaylistId ac : acc) {
-			int playId = ac.getPlaylistId();
-			
-			pl = playlistService.getLikedPlaylistByAccountId(ac.getPlaylistId());
-			if (pl.getPlaylistCategoryId() == 2) {
-				play.add(playlistService.getLikedPlaylistByAccountId(playId));
-			}
-
+		Account account = new Account();
+		String id = cookieService.getValue("acc_id", "");
+		if (id.equalsIgnoreCase("")) {
+			return "redirect:/login/login";
+		} else {
+			account = accountService.findById(Integer.parseInt(id));
 		}
-		modelMap.put("lik", play);
+		
+		
+		Set<AccountPlaylist> s = account.getAccountPlaylists();
+		Playlist playlist = new Playlist();
+		for (AccountPlaylist accountPlaylist : s) {
+			if(accountPlaylist.getPlaylist().getPlaylistCategory().getId() == 2) {
+				playlist = accountPlaylist.getPlaylist();
+			}
+		}
+		
+		modelMap.put("lik", playlist.getTracks());
+		
+//		for(Track track : playlist.getTracks() ) {
+//			
+//		}
 
 		return "liked/index";
 

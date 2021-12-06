@@ -142,15 +142,19 @@
                                     <img src="${pageContext.request.contextPath }/resources/user/img/logo.svg" alt="">
                                 </a>
                                 
-                                <h3 class="mb-4 text-white" >Sign In</h3>
-								<c:if test="${msg != null }"><span class="sign__text"> ${msg } </span></c:if>
+                                <h3 class="mb-4 text-blue" >Sign In</h3>
+								<c:if test="${msg != null }">
+								<div class="sign__group">
+                                    <span class="sign__text"> ${msg }</span>
+                                </div>
+								 </c:if>
 								
                                 <div class="sign__group">
-                                    <input type="text" class="sign__input form-control" name="email" placeholder="Email">
+                                    <input type="email" class="sign__input form-control" value="${email}" required="required" name="email" placeholder="Email">
                                 </div>
 
                                 <div class="sign__group">
-                                    <input type="password" class="sign__input form-control" name="password" placeholder="Password">
+                                    <input type="password" class="sign__input form-control" name="password" required="required" placeholder="Password">
                                 </div>
 
                                 <div class="sign__group sign__group--checkbox">
@@ -170,7 +174,7 @@
 
                                 <span class="sign__text">Don't have an account? <a href="${pageContext.request.contextPath }/user/login/signup">Sign up!</a></span>
 
-                                <span class="sign__text"><a href="forgot.html">Forgot password?</a></span>
+                                <span class="sign__text"><a href="${pageContext.request.contextPath }/login/forgotPw">Forgot password?</a></span>
                             </form>
                             <!-- end authorization form -->
                         </div>
@@ -256,7 +260,7 @@
                             <a href="#" target="_blank"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="../../../www.w3.org/2000/svg.html"><path d="M14.9999 0C6.71586 0 0 6.71569 0 14.9997C0 23.2847 6.71586 30 14.9999 30C23.2843 30 30 23.2847 30 14.9997C30 6.71569 23.2843 0 14.9999 0" fill="#1ED760"/><path d="M21.5494 21.3091C21.2839 21.7445 20.717 21.8809 20.2832 21.6156C16.814 19.4952 12.4472 19.0164 7.30464 20.191C6.80908 20.3046 6.31511 19.9941 6.2022 19.4987C6.08859 19.0032 6.39803 18.5092 6.89464 18.3961C12.5224 17.1097 17.3497 17.6633 21.2438 20.0428C21.678 20.308 21.8147 20.8751 21.5494 21.3091" fill="white"/><path d="M23.3571 17.2862C23.023 17.8283 22.3141 17.9984 21.7727 17.6655C17.8025 15.2251 11.7482 14.518 7.05106 15.9438C6.44207 16.1278 5.79867 15.7845 5.6136 15.1764C5.43013 14.5674 5.77361 13.9252 6.38173 13.74C11.7475 12.1117 18.4181 12.9003 22.9781 15.7027C23.5196 16.0361 23.69 16.7453 23.3571 17.2862" fill="white"/><path d="M23.5131 13.0974C18.7508 10.2692 10.8956 10.0092 6.34947 11.389C5.61927 11.6105 4.84726 11.1984 4.62621 10.4684C4.40498 9.73787 4.81656 8.96639 5.54711 8.74445C10.7659 7.16039 19.4411 7.4663 24.9235 10.7207C25.5803 11.1106 25.7956 11.9586 25.4064 12.6142C25.0169 13.2708 24.1681 13.4873 23.5131 13.0974" fill="white"/></svg></a>
                             <a href="#" target="_blank"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="../../../www.w3.org/2000/svg.html"><path d="M0 15C0 6.71573 6.71573 0 15 0C23.2843 0 30 6.71573 30 15C30 23.2843 23.2843 30 15 30C6.71573 30 0 23.2843 0 15Z" fill="#FF0000"/><path d="M22.6656 11.2958C22.4816 10.5889 21.9395 10.0322 21.251 9.84333C20.0034 9.5 15 9.5 15 9.5C15 9.5 9.99664 9.5 8.74891 9.84333C8.06045 10.0322 7.51827 10.5889 7.33427 11.2958C7 12.5769 7 15.25 7 15.25C7 15.25 7 17.923 7.33427 19.2042C7.51827 19.9111 8.06045 20.4678 8.74891 20.6568C9.99664 21 15 21 15 21C15 21 20.0034 21 21.251 20.6568C21.9395 20.4678 22.4816 19.9111 22.6656 19.2042C23 17.923 23 15.25 23 15.25C23 15.25 23 12.5769 22.6656 11.2958" fill="white"/><path d="M13.5 18V13L17.5 15.5001L13.5 18Z" fill="#FF0000"/></svg></a>
                         </div>
-                        <small class="footer__copyright">© Volna, 2021. Created by <a href="../../../themeforest.net/user/dmitryvolkov/portfolio.html" target="_blank">Dmitry Volkov</a>.</small>
+                        <small class="footer__copyright"> Volna, 2021. Created by <a href="../../../themeforest.net/user/dmitryvolkov/portfolio.html" target="_blank">Dmitry Volkov</a>.</small>
                     </div>
                 </div>
             </div>

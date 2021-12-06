@@ -31,10 +31,8 @@ public class PayPalSucess {
 			res = in.readLine();
 			System.out.println("res: " + res);
 			if (res.equals("SUCCESS")) {
-				System.out.println("aaaaa");
 				while ((res = in.readLine()) != null) {
 					temp = res.split("=");
-					System.out.println("temp: " + temp[0]);
 					if (temp.length == 1)
 						continue;
 					temp[1] = URLDecoder.decode(temp[1], "UTF-8");

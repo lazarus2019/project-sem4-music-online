@@ -12,3 +12,4 @@ public interface AlbumService {
 	public AlbumInfo findAlbumById(int id);
 
 }
+

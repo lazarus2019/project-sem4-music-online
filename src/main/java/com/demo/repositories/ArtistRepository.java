@@ -22,15 +22,14 @@ public interface ArtistRepository extends PagingAndSortingRepository<Account, In
 	
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account ORDER BY follower DESC")
 	public List<ArtistInfo> getPopularArtists(Pageable pageable);
-	
-	
-	
+
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id != :id")
 	public List<ArtistInfo> getArtistsWithoutId(@Param("id")int id);
-//	
-//	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE accountRoles.role.id = 3 AND (nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%)")
-//	public List<ArtistInfo> searchByKeyword(@Param("keyword")String keyword, Pageable pageable);
-//	
-//	@Query("SELECT new com.demo.mo.ArtistInfo(id,nickname,image) FROM Account WHERE isArtist = true AND nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%")
-//	public List<ArtistInfo> searchArtistByKeyword(@Param("keyword")String keyword);
+
+	@Query("from Account where isArtist = true")
+	public List<Account> getAllArtist() ;
+	
+	@Query("from Account where isArtist = false and isRequest = true")
+	public List<Account> getRequestArtist() ;
+
 }

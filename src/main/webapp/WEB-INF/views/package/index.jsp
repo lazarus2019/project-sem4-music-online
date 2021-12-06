@@ -45,12 +45,21 @@
 											<input type="hidden" name="amount_1" value="${pack.price }"> 
 											<input type="hidden" name="quantity_1" value="1">
 											
-											<button class="plan__btn" type="submit">Buy Now!</button>
+											<button class="plan__btn" type="submit" data-id="${pack.id }">Buy Now!</button>
 										</form>
 									</div>
 								</div>
 							</c:forEach>
 						</div>
 						<!-- end package -->
+<script>
+	$(document).ready(function() {
+		$('.plan__btn').click(function() {
+			var id = $(this).data("id");
+			console.log("packId: " + id);
+			localStorage.setItem("packageId", id);
+		});
+	})
+</script>
 	</jsp:attribute>
 </mt:userTemplate>

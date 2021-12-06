@@ -1,4 +1,5 @@
 package com.demo.entities;
+// Generated Dec 6, 2021, 9:25:23 AM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,17 +39,16 @@ public class Track implements java.io.Serializable {
 	private int baseListens;
 	private int weeklyListens;
 	private boolean isPremium;
-	private boolean isDelete;
 	private Date publishDate;
 	private Set<Comment> comments = new HashSet<Comment>(0);
-	private Set<PlaylistTrack> playlistTracks = new HashSet<PlaylistTrack>(0);
+	private Set<Playlist> playlists = new HashSet<Playlist>(0);
 	private Set<ArtistTrack> artistTracks = new HashSet<ArtistTrack>(0);
 
 	public Track() {
 	}
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
-			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, boolean isDelete,
+			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium,
 			Date publishDate) {
 		this.genres = genres;
 		this.status = status;
@@ -60,13 +62,12 @@ public class Track implements java.io.Serializable {
 		this.baseListens = baseListens;
 		this.weeklyListens = weeklyListens;
 		this.isPremium = isPremium;
-		this.isDelete = isDelete;
 		this.publishDate = publishDate;
 	}
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
-			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium, boolean isDelete,
-			Date publishDate, Set<Comment> comments, Set<PlaylistTrack> playlistTracks, Set<ArtistTrack> artistTracks) {
+			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium,
+			Date publishDate, Set<Comment> comments, Set<Playlist> playlists, Set<ArtistTrack> artistTracks) {
 		this.genres = genres;
 		this.status = status;
 		this.fileName = fileName;
@@ -79,10 +80,9 @@ public class Track implements java.io.Serializable {
 		this.baseListens = baseListens;
 		this.weeklyListens = weeklyListens;
 		this.isPremium = isPremium;
-		this.isDelete = isDelete;
 		this.publishDate = publishDate;
 		this.comments = comments;
-		this.playlistTracks = playlistTracks;
+		this.playlists = playlists;
 		this.artistTracks = artistTracks;
 	}
 
@@ -207,15 +207,6 @@ public class Track implements java.io.Serializable {
 	public void setIsPremium(boolean isPremium) {
 		this.isPremium = isPremium;
 	}
-	
-	@Column(name = "is_delete", nullable = false)
-	public boolean isIsDelete() {
-		return this.isDelete;
-	}
-	
-	public void setIsDelete(boolean isDelete) {
-		this.isDelete = isDelete;
-	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "publish_date", nullable = false, length = 10)
@@ -236,13 +227,16 @@ public class Track implements java.io.Serializable {
 		this.comments = comments;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "track")
-	public Set<PlaylistTrack> getPlaylistTracks() {
-		return this.playlistTracks;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "playlist_track", catalog = "music_app", joinColumns = {
+			@JoinColumn(name = "track_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "playlist_id", nullable = false, updatable = false) })
+	public Set<Playlist> getPlaylists() {
+		return this.playlists;
 	}
 
-	public void setPlaylistTracks(Set<PlaylistTrack> playlistTracks) {
-		this.playlistTracks = playlistTracks;
+	public void setPlaylists(Set<Playlist> playlists) {
+		this.playlists = playlists;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "track")
@@ -252,14 +246,6 @@ public class Track implements java.io.Serializable {
 
 	public void setArtistTracks(Set<ArtistTrack> artistTracks) {
 		this.artistTracks = artistTracks;
-	}
-	
-	public Set<Account> findAccountThroughAtristTrack() {
-		Set<Account> accounts = new HashSet<Account>(0) ; 
-		for(ArtistTrack artistTrack: artistTracks) {
-			accounts.add(artistTrack.getAccount()) ; 
-		}
-		return accounts ;
 	}
 
 }
