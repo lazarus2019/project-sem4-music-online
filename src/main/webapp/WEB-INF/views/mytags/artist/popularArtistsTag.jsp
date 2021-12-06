@@ -24,7 +24,6 @@
 								<a href="artist.html" class="artist">
 									<div class="artist__cover">
 										<img src="${pageContext.request.contextPath }/uploads/images/artist/${popularArtist.image }" alt="">
-
 									</div>
 									<h3 class="artist__title">${popularArtist.nickname }</h3>	
 								</a> 

@@ -21,7 +21,9 @@ import com.demo.services.CookieService;
 
 @Controller
 
-@RequestMapping(value = { "login", "user/login", })
+
+@RequestMapping(value = {"login" ,"user/login" })
+
 
 public class LoginController {
 
@@ -50,12 +52,12 @@ public class LoginController {
 	@RequestMapping(value = { "notfound" }, method = RequestMethod.GET)
 	public String notfound() {
 
-		return "login/notfound";
-
+		return "login/notfound" ; 
 	}
 
 	@RequestMapping(value = "signup", method = RequestMethod.GET)
 	public String signup(ModelMap modelMap) {
+
 		Account account = new Account();
 		modelMap.put("account", account);
 
@@ -64,6 +66,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
+
+
 	public String register(@ModelAttribute("account") Account account, ModelMap modelMap) {
 
 		Account accoundCheck = accountService.findByEmail(account.getEmail());
@@ -108,7 +112,9 @@ public class LoginController {
 		}
 
 		return "redirect:/login/";
+
 	}
+
 
 	@RequestMapping(value = "forgotPw", method = RequestMethod.GET)
 	public String forgotPw(ModelMap modelMap) {
@@ -132,3 +138,4 @@ public class LoginController {
 	}
 
 }
+

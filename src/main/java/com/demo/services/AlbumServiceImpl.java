@@ -3,7 +3,6 @@ package com.demo.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.demo.models.AlbumInfo;
@@ -24,5 +23,5 @@ public class AlbumServiceImpl implements AlbumService{
 	public AlbumInfo findAlbumById(int id) {
 		return albumRepository.findAlbumById(id);
 	}
-
 }
+

@@ -11,9 +11,7 @@
 	        <!-- /.col -->
 	        <div class="col-md-9 m-0-auto">
 	          <div class="card card-primary card-outline">
-
 	            <div class="card-header notification">
-
 	              <h3 class="card-title">Notifications</h3>
 	            </div>
 	            <!-- /.card-header -->
@@ -69,24 +67,7 @@
 			            </div>
 			       	</form>
 		            <!-- /.card-body -->
-		            <div class="card-footer p-0">
-		              <div class="mailbox-controls">
-						<!-- pagination -->	                
-		                <div class="float-right">
-		                  1-50/200
-		                  <div class="btn-group">
-		                    <button type="button" class="btn btn-default btn-sm">
-		                      <i class="fas fa-chevron-left"></i>
-		                    </button>
-		                    <button type="button" class="btn btn-default btn-sm">
-		                      <i class="fas fa-chevron-right"></i>
-		                    </button>
-		                  </div>
-		                  <!-- /.btn-group -->
-		                </div>
-		                <!-- /.float-right -->
-		              </div>
-		            </div>
+		            
 	          	</c:if>
 	          </div>
 	          <!-- /.card -->

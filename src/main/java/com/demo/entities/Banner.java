@@ -18,15 +18,12 @@ import javax.persistence.Table;
 public class Banner implements java.io.Serializable {
 
 	private Integer id;
-	private Setting setting;
-	private String name;
+	private String image;
+	private String title;
+	private String description;
+	private boolean status;
 
 	public Banner() {
-	}
-
-	public Banner(Setting setting, String name) {
-		this.setting = setting;
-		this.name = name;
 	}
 
 	@Id
@@ -41,25 +38,39 @@ public class Banner implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "setting_id", nullable = false)
-	public Setting getSetting() {
-		return this.setting;
+	@Column(name = "image", length = 250)
+	public String getImage() {
+		return this.image;
 	}
 
-	public void setSetting(Setting setting) {
-		this.setting = setting;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	@Column(name = "name", nullable = false, length = 250)
-	public String getName() {
-		return this.name;
+	@Column(name = "title", nullable = false, length = 250)
+	public String getTitle() {
+		return this.title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
+	@Column(name = "description", nullable = false, length = 65535)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Column(name = "status", nullable = false)
+	public boolean isStatus() {
+		return this.status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 }
-
-

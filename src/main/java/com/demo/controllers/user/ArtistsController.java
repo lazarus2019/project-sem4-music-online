@@ -23,6 +23,8 @@ import com.demo.models.ArtistsInfor;
 import com.demo.services.AccountService;
 import com.demo.services.CookieService;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping(value = { "artist" })
@@ -34,7 +36,6 @@ public class ArtistsController {
 
 	@Autowired
 	CookieService cookieService ;
-	
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
@@ -116,11 +117,28 @@ public class ArtistsController {
 		} 
 		return "artist/youralbum" ; 
 	}
+
 	
 	@RequestMapping(value = "albumDetail" , method = RequestMethod.GET) 
 	public String albumDetail() {
 		return "artist/albumDetail" ; 
 	}
 
+
+
+	
+	//New
+	
+	@RequestMapping( value = {"search" } , method = RequestMethod.GET )
+	public String search(@RequestParam("keyword") String keyword ,ModelMap modelMap) {
+		try {
+			List<ArtistsInfor> searchArtis = accountService.getSearchArtis(keyword);
+			modelMap.put("arti", searchArtis );
+		} catch (Exception e) {
+			modelMap.put("erro", e.getMessage());
+		}
+		
+		return "artist/index";
+	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.Playlist;
+import com.demo.models.PlaylistInfor;
 import com.demo.models.PlaylistModel;
 import com.demo.repositories.PlaylistRepository;
 import com.demo.repositories.TrackRepository;
@@ -26,9 +27,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 
 	@Override
 	public Playlist save(Playlist playlist) {
-		playlist.setPlaylistTracks(null);
-		playlistRepository.save(playlist);
-		return null;
+		return playlistRepository.save(playlist);
 	}
 
 	@Override
@@ -72,6 +71,21 @@ public class PlaylistServiceImpl implements PlaylistService {
 			playlistModelies.add(playlistModel);
 		}
 		return playlistModelies;
+	}
+
+	@Override
+	public List<Playlist> searchByTitle(String keyword) {
+		return playlistRepository.searchByTitle(keyword);
+	}
+
+	@Override
+	public PlaylistInfor getLikedPlaylistByAccountId(int id) {
+		return playlistRepository.getLikedPlaylistByAccountId(id);
+	}
+
+	@Override
+	public PlaylistInfor getRecentPlaylistByAccountId(int id) {
+		return playlistRepository.getRecentPlaylistByAccountId(id);
 	}
 	
 }

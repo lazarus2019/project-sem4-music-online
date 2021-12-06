@@ -1,11 +1,25 @@
 package com.demo.helpers;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
 
 
 public class CalculateDateTimeHelper {
+	
+	public String weeklyChartDate() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar c = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		c2.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		c2.add(Calendar.DATE, -7);
+		String weeklyDate = (c2.get(Calendar.DATE)) + "/" + (c2.get(Calendar.MONTH) + 1) + "/" + c2.get(Calendar.YEAR) + " - " 
+				+ (c.get(Calendar.DATE) - 1) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR); 
+		return weeklyDate;
+	}
 	
 	public String FormatSecondToMinute(int totalSecs) {
 		long hours = totalSecs / 3600;
@@ -87,4 +101,3 @@ public class CalculateDateTimeHelper {
 		}
 	
 }
-

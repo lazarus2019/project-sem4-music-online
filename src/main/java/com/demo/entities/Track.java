@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,7 +40,7 @@ public class Track implements java.io.Serializable {
 	private boolean isPremium;
 	private Date publishDate;
 	private Set<Comment> comments = new HashSet<Comment>(0);
-	private Set<PlaylistTrack> playlistTracks = new HashSet<PlaylistTrack>(0);
+	private Set<Playlist> playlists = new HashSet<Playlist>(0);
 	private Set<ArtistTrack> artistTracks = new HashSet<ArtistTrack>(0);
 
 	public Track() {
@@ -64,7 +66,7 @@ public class Track implements java.io.Serializable {
 
 	public Track(Genres genres, Status status, String fileName, String title, String lyrics, String thumbnail,
 			int likes, int duration, int listens, int baseListens, int weeklyListens, boolean isPremium,
-			Date publishDate, Set<Comment> comments, Set<PlaylistTrack> playlistTracks, Set<ArtistTrack> artistTracks) {
+			Date publishDate, Set<Comment> comments, Set<Playlist> playlists, Set<ArtistTrack> artistTracks) {
 		this.genres = genres;
 		this.status = status;
 		this.fileName = fileName;
@@ -79,7 +81,7 @@ public class Track implements java.io.Serializable {
 		this.isPremium = isPremium;
 		this.publishDate = publishDate;
 		this.comments = comments;
-		this.playlistTracks = playlistTracks;
+		this.playlists = playlists;
 		this.artistTracks = artistTracks;
 	}
 
@@ -224,13 +226,16 @@ public class Track implements java.io.Serializable {
 		this.comments = comments;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "track")
-	public Set<PlaylistTrack> getPlaylistTracks() {
-		return this.playlistTracks;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "playlist_track", catalog = "music_app", joinColumns = {
+			@JoinColumn(name = "track_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "playlist_id", nullable = false, updatable = false) })
+	public Set<Playlist> getPlaylists() {
+		return this.playlists;
 	}
 
-	public void setPlaylistTracks(Set<PlaylistTrack> playlistTracks) {
-		this.playlistTracks = playlistTracks;
+	public void setPlaylists(Set<Playlist> playlists) {
+		this.playlists = playlists;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "track")
@@ -241,6 +246,7 @@ public class Track implements java.io.Serializable {
 	public void setArtistTracks(Set<ArtistTrack> artistTracks) {
 		this.artistTracks = artistTracks;
 	}
+
 	public Set<Account> findAccountThroughAtristTrack() {
 		Set<Account> accounts = new HashSet<Account>(0) ; 
 		for(ArtistTrack artistTrack: artistTracks) {
@@ -249,3 +255,4 @@ public class Track implements java.io.Serializable {
 		return accounts ;
 	}
 }
+

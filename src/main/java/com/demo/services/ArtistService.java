@@ -12,10 +12,12 @@ public interface ArtistService {
 	
 	public List<ArtistInfo> getPopularArtists(Pageable pageable);
 	
-	public List<ArtistInfo> getArtistWithoutId(int id);
+	public List<ArtistInfo> getArtistWithoutId(int id);	
 	
-	public List<Account> getAllArtist() ;
+	public List<Account> getArtistByStatus(boolean status) ;
 	
 	public List<Account> getRequestArtist() ;	
 	
+	public Account addNewArtist(Account account , String image) ;
+
 }

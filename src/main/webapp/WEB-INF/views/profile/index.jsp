@@ -11,18 +11,6 @@
 	<jsp:attribute name="content">
         <div class="container-fluid">
             <div class="row row--grid">
-                <!-- breadcrumb -->
-                <div class="col-12">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb__item"><a
-							href="index.html">Home</a></li>
-                        <li
-							class="breadcrumb__item breadcrumb__item--active">Profile</li>
-                    </ul>
-                </div>
-                <!-- end breadcrumb -->
-
-                <!-- title -->
                 <div class="col-12">
                     <div class="main__title main__title--page">
                         <h1>Profile</h1>
@@ -85,13 +73,6 @@
                         </div>
                         <div class="iq-card-body">
                            <ul class="list-inline p-0 mb-0">
-                              <li>
-                                 <div
-									class="d-flex align-items-center justify-content-between mb-3">
-                                    <h6>ID 	</h6>
-                                    <p class="mb-0">${accountSignined.id }</p>
-                                 </div>
-                              </li>
                               <li>
                                  <div
 									class="d-flex align-items-center justify-content-between mb-3">
