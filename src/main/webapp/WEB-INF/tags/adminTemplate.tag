@@ -169,10 +169,10 @@
 						<li>
                             <a href="#setting" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
 
-                           class="ripple rippleEffect"></span><i class="ri-settings-2-line" ></i><span>Settings</span><i
+                           class="ripple rippleEffect"></span><i class="ri-settings-2-line" ></i><span>General</span><i
                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="setting" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a href="${pageContext.request.contextPath }/admin/setting/index">General</a></li>
+                                <li><a href="${pageContext.request.contextPath }/admin/banner/index">Banner</a></li>
                                 <li><a href="${pageContext.request.contextPath }/admin/aboutus/index">About</a></li>
                             </ul>
                         </li>

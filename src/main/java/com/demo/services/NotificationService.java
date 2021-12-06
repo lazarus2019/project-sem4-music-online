@@ -15,5 +15,7 @@ public interface NotificationService {
 	public Notification save(Notification notification);
 
 	public void delete(int[] ids);
+	
+	public Notification findById(int id);
 
 }

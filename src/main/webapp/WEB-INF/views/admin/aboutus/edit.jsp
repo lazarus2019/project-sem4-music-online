@@ -11,20 +11,21 @@
                   <div class="iq-card">
                      <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                           <h4 class="card-title">Add new About us</h4>
+                           <h4 class="card-title">Edit About us</h4>
                         </div>
                      </div>
                      <div class="iq-card-body">
-                        <s:form method="post" action="${pageContext.request.contextPath }/admin/aboutus/add" modelAttribute="aboutus">
+                        <s:form method="post" action="${pageContext.request.contextPath }/admin/aboutus/edit" modelAttribute="aboutus">
                            <div class="form-group">
                               <label>Title:</label>
-                              <input class="form-control" name="title">
+                              <s:input class="form-control" path="title"></s:input>
                            </div>
                            <div class="form-group">
-                              <textarea class="form-control" rows="5" name="content"></textarea>
+                              <s:textarea class="form-control" rows="5" path="content"></s:textarea>
                            </div>
                            <button type="submit" class="btn btn-primary">Submit</button>
                            <button type="reset" class="btn btn-danger">Reset</button>
+                           <s:hidden path="id" />
                         </s:form>
                      </div>
                   </div>

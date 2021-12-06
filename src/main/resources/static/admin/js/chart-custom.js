@@ -7984,6 +7984,7 @@ if(jQuery('#progress-chart-1').length){
     chart.render();
 }
 
+/*
 if (jQuery("#progress-chart-2").length) {
   var options = {
     series: [{
@@ -8069,6 +8070,7 @@ if (jQuery("#progress-chart-2").length) {
     apexChartUpdate(chart, e.detail)
   })
 }
+
 if(jQuery('#menu-chart-demo3').length){
 
         var options = {
@@ -8124,4 +8126,4 @@ if(jQuery('#menu-chart-demo3').length){
         chart.render();
     }
 
-
+*/

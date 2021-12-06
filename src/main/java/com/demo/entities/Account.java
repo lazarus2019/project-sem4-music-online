@@ -41,12 +41,12 @@ public class Account implements java.io.Serializable {
 	private String firstname;
 	private String lastname;
 	private String email;
-	
+
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date birthday;
 	private String gender;
 	private String image;
-	
+
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date joinDate;
 	private boolean isArtist;
@@ -57,8 +57,8 @@ public class Account implements java.io.Serializable {
 	private String emailCode;
 
 	@Enumerated(EnumType.STRING)
-	private AuthenticationProvider authProvider ;
-	
+	private AuthenticationProvider authProvider;
+
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<PackageInfo> packageInfos = new HashSet<PackageInfo>(0);
 	private Set<Notification> notifications = new HashSet<Notification>(0);
@@ -81,10 +81,9 @@ public class Account implements java.io.Serializable {
 
 	public Account(Country country, String username, String password, String nickname, String firstname,
 			String lastname, String email, Date birthday, String gender, String image, Date joinDate, boolean isArtist,
-			int follower, String description, boolean isActive, boolean isRequest,
-			Set<Comment> comments, Set<PackageInfo> packageInfos, Set<Notification> notifications,
-			Set<AccountPlaylist> accountPlaylists, Set<Role> roles, Set<ArtistTrack> artistTracks,
-			Set<AccountSetting> accountSettings) {
+			int follower, String description, boolean isActive, boolean isRequest, Set<Comment> comments,
+			Set<PackageInfo> packageInfos, Set<Notification> notifications, Set<AccountPlaylist> accountPlaylists,
+			Set<Role> roles, Set<ArtistTrack> artistTracks, Set<AccountSetting> accountSettings) {
 		this.country = country;
 		this.username = username;
 		this.password = password;
@@ -269,7 +268,7 @@ public class Account implements java.io.Serializable {
 		this.isRequest = isRequest;
 	}
 
-	@Column(name = "auth_provider" , nullable = false, length = 25)
+	@Column(name = "auth_provider", nullable = false, length = 25)
 	public AuthenticationProvider getAuthProvider() {
 		return authProvider;
 	}
@@ -286,7 +285,7 @@ public class Account implements java.io.Serializable {
 	public void setEmailCode(String emailCode) {
 		this.emailCode = emailCode;
 	}
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
 	public Set<Comment> getComments() {
 		return this.comments;
@@ -363,6 +362,22 @@ public class Account implements java.io.Serializable {
 				+ ", packageInfos=" + packageInfos + ", notifications=" + notifications + ", accountPlaylists="
 				+ accountPlaylists + ", roles=" + roles + ", artistTracks=" + artistTracks + ", accountSettings="
 				+ accountSettings + "]";
+	}
+
+	public Set<Track> findTrackThroughAtristTrack() {
+		Set<Track> tracks = new HashSet<Track>(0);
+		for (ArtistTrack artistTrack : artistTracks) {
+			tracks.add(artistTrack.getTrack());
+		}
+		return tracks;
+	}
+
+	public Set<Playlist> findPlaylistThroughAccountPlaylist() {
+		Set<Playlist> playlists = new HashSet<Playlist>(0);
+		for (AccountPlaylist accountPlaylist : accountPlaylists) {
+			playlists.add(accountPlaylist.getPlaylist());
+		}
+		return playlists;
 	}
 
 }

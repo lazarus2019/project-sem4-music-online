@@ -14,7 +14,7 @@
 								<!-- title -->
 								<div class="col-12">
 									<div class="main__title">
-										<h2><a class="clr-light" href="#">All</a></h2>
+										<h2><a class="clr-light" href="${pageContext.request.contextPath }/record-chart/all-track-weekly">All</a></h2>
 									</div>
 								</div>
 								<!-- end title -->
@@ -53,7 +53,7 @@
 											</li>
 										</c:forEach>
 									</ul>
-									<a href="#" class="see__all">View all</a>
+									<a href="${pageContext.request.contextPath }/record-chart/all-track-weekly" class="see__all">View all</a>
 								</div>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 								<!-- title -->
 								<div class="col-12">
 									<div class="main__title">
-										<h2><a class="clr-light" href="#">US - UK</a></h2>
+										<h2><a class="clr-light" href="${pageContext.request.contextPath }/record-chart/us-uk-track-weekly">US - UK</a></h2>
 									</div>
 								</div>
 								<!-- end title -->
@@ -103,7 +103,7 @@
 											</li>
 										</c:forEach>
 									</ul>
-									<a href="#" class="see__all">View all</a>
+									<a href="${pageContext.request.contextPath }/record-chart/us-uk-track-weekly" class="see__all">View all</a>
 								</div>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 									<!-- title -->
 									<div class="col-12">
 										<div class="main__title">
-											<h2><a class="clr-light" href="#">Viet Nam</a></h2>
+											<h2><a class="clr-light" href="${pageContext.request.contextPath }/record-chart/vietnam-track-weekly">Viet Nam</a></h2>
 										</div>
 									</div>
 									<!-- end title -->
@@ -153,7 +153,7 @@
 											</li>
 										</c:forEach>
 									</ul>
-									<a href="#" class="see__all">View all</a>
+									<a href="${pageContext.request.contextPath }/record-chart/vietnam-track-weekly" class="see__all">View all</a>
 								</div>
 									
 								</div>

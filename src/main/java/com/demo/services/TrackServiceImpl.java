@@ -250,4 +250,14 @@ public class TrackServiceImpl implements TrackService {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@Override
+	public long countTrack() {
+		return trackRepository.count();
+	}
+
+	@Override
+	public List<Track> getBestTrack(int n) {
+		return trackRepository.getBestTrack(n);
+	}
 }

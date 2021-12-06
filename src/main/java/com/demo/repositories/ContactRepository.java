@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.demo.entities.Contact;
-import com.demo.entities.ContactType;
 import com.demo.entities.Playlist;
 import com.demo.entities.ServicePackage;
 import com.demo.entities.Track;

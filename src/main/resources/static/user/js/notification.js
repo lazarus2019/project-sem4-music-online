@@ -92,6 +92,21 @@ const MODAL_CONTENT = {
         title: "It's Done",
         html: 'We will return you to the manage page <b></b>s.',
         timer: 2
+<<<<<<< HEAD
+=======
+    },
+    must_sign_in:{
+        icon: 'info',
+        title: "You must sign in first",
+        html: 'We will return you to the login page <b></b>s.',
+        timer: 2
+    },
+    not_allow:{
+        icon: 'warning',
+        title: "You not allow to be here!",
+        html: 'We will return you to the manage page <b></b>s.',
+        timer: 2
+>>>>>>> origin/Viet_Branch
     }
 }
 
@@ -101,6 +116,14 @@ export function swalAlert(modal) {
         title: modal.title,
         text: modal.text,
         confirmButtonText: 'OK'
+    })
+}
+
+export function swalAlertWithoutButton(modal) {
+    Swal.fire({
+        icon: modal.icon,
+        title: modal.title,
+        text: modal.text,
     })
 }
 

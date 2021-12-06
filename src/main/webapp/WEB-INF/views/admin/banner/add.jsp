@@ -11,17 +11,25 @@
                   <div class="iq-card">
                      <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                           <h4 class="card-title">Add new About us</h4>
+                           <h4 class="card-title">Add new banner</h4>
                         </div>
                      </div>
                      <div class="iq-card-body">
-                        <s:form method="post" action="${pageContext.request.contextPath }/admin/aboutus/add" modelAttribute="aboutus">
+                        <s:form method="post" action="${pageContext.request.contextPath }/admin/banner/add" modelAttribute="banner" enctype="multipart/form-data">
                            <div class="form-group">
                               <label>Title:</label>
                               <input class="form-control" name="title">
                            </div>
                            <div class="form-group">
-                              <textarea class="form-control" rows="5" name="content"></textarea>
+                              <textarea class="form-control" rows="5" name="description"></textarea>
+                           </div>
+                           <div class="form-group">
+                              <label>Thumbnail:</label>
+                              <input type="file" name="photo">
+                              <!-- <div class="custom-file">
+                                 <input type="file" class="custom-file-input" id="customFile"  name="photo">
+                                 <label class="custom-file-label" for="customFile"></label>
+                              </div> -->
                            </div>
                            <button type="submit" class="btn btn-primary">Submit</button>
                            <button type="reset" class="btn btn-danger">Reset</button>
