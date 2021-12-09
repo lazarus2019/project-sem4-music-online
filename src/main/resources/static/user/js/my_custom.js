@@ -42,11 +42,19 @@ function togglePlaylist() {
 }
 
 function toggleLyrics() {
+	hideComment();
 	document.querySelector('.lyric-box').classList.toggle('show');
+}
+function toggleComment() {
+	hideLyrics();
+	document.querySelector('.comment-box').classList.toggle('show');
 }
 
 function hideLyrics() {
 	document.querySelector('.lyric-box').classList.remove('show');
+}
+function hideComment() {
+	document.querySelector('.comment-box').classList.remove('show');
 }
 
 function changeVolumeIcon(e) {
@@ -342,11 +350,18 @@ function load(file) {
 }
 
 function setMinForAllDateInput(dateInputs) {
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
 	if (dateInputs) {
 		const today = new Date().toISOString().split('T')[0]
 		dateInputs.forEach(dateInput => {
 			dateInput.setAttribute('min', today)
+			dateInput.value = new Date().toDateInputValue()
 		})
+		
 	}
 }
 

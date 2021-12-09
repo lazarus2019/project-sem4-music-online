@@ -73,9 +73,10 @@
 			            id: id
 			        },
 		            url: '${pageContext.request.contextPath}/ajaxArtist/acceptArtist',
-		            success: function (data) {
-			            console.log(data) ;
-		            	if(data) {
+		            success: function (data, status) {
+			            console.log(data.length)
+			            console.log(status) ;
+		            	if(status) {
            					Swal.fire(
            						  'Congratulations!',
            						  'Your are an artist from now!',
@@ -89,6 +90,24 @@
            					  text: 'Something went wrong!'
            					}) 
                			} 
+						var result = "" ; 
+						for (var i = 0; i < data.length; i++) {
+							result += '<tr> ' ; 
+							result += '<td> ' + ( i + 1 ) + '</td>' ;
+							result += '<td>  <img src="${pageContext.request.contextPath }/uploads/images/artist/' + data[i].image + '" class="img-fluid avatar-50 rounded" alt="author-profile"> </td>'
+                            result += '<td>'+ data[i].nickname +'</td>' ; 
+                            result += '<td>'+ data[i].email +'</td>' ;   
+                            result += '<td>' + data[i].country+ '</td>' ;
+                            result += '<td> <p class="mb-0">' +data[i].description+ '</p> </td>' ;
+                            result += '<td>  <div class="flex align-items-center list-user-action">' ; 
+                            result += '<a class="bg-primary" data-toggle="tooltip" data-placement="top" id="acceptArtist" onclick="acceptArtist(this)" title="" data-id="'+data[i].id+'" data-original-title="Accept" ><i class="ri-check-line"></i></a>' ; 
+                            result += '<a class="bg-primary" data-toggle="tooltip" data-placement="top" id="rejectArtist" onclick="rejectArtist(this)" title="" data-id="'+data[i].id+'" data-original-title="Reject" ><i class="ri-close-fill"></i></a>' ; 
+                            result += '</div> </td>  </tr>' ;							
+						}
+						$("#tableAccountRequest").html(result) ;
+
+
+               			
 		            },
 		        })  
 			}	
@@ -121,6 +140,22 @@
            					  text: 'Something went wrong!'
            					}) 
                			} 
+
+		            	var result = "" ; 
+						for (var i = 0; i < data.length; i++) {
+							result += '<tr> ' ; 
+							result += '<td> ' + ( i + 1 ) + '</td>' ;
+							result += '<td>  <img src="${pageContext.request.contextPath }/uploads/images/artist/' + data[i].image + '" class="img-fluid avatar-50 rounded" alt="author-profile"> </td>'
+                            result += '<td>'+ data[i].nickname +'</td>' ; 
+                            result += '<td>'+ data[i].email +'</td>' ;   
+                            result += '<td>' + data[i].country+ '</td>' ;
+                            result += '<td> <p class="mb-0">' +data[i].description+ '</p> </td>' ;
+                            result += '<td>  <div class="flex align-items-center list-user-action">' ; 
+                            result += '<a class="bg-primary" data-toggle="tooltip" data-placement="top" id="acceptArtist" onclick="acceptArtist(this)" title="" data-id="'+data[i].id+'" data-original-title="Accept" ><i class="ri-check-line"></i></a>' ; 
+                            result += '<a class="bg-primary" data-toggle="tooltip" data-placement="top" id="rejectArtist" onclick="rejectArtist(this)" title="" data-id="'+data[i].id+'" data-original-title="Reject" ><i class="ri-close-fill"></i></a>' ; 
+                            result += '</div> </td>  </tr>' ;							
+						}
+						$("#tableAccountRequest").html(result) ;
 
 		            }
 		        })  

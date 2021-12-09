@@ -1,8 +1,6 @@
 package com.demo.mytags;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
@@ -12,10 +10,8 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
-import com.demo.entities.Notification;
 import com.demo.services.CookieService;
 import com.demo.services.NotificationService;
-import com.demo.services.PlaylistService;
 
 public class NotificationTag extends RequestContextAwareTag {
 
@@ -55,7 +51,7 @@ public class NotificationTag extends RequestContextAwareTag {
 						notificationService.getAllNewByStatus(Integer.parseInt(accountId)));
 				request.setAttribute("readNotifications", notificationService.getAllReadByStatus(Integer.parseInt(accountId), n));
 			}
-
+			request.setAttribute("accountId", accountId);
 			request.getRequestDispatcher(jspPage);
 			pageContext.include(jspPage);
 		} catch (Exception e) {

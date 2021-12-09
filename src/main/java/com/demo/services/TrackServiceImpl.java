@@ -6,20 +6,22 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.ArtistTrack;
-import com.demo.entities.ServicePackage;
+import com.demo.entities.Status;
 import com.demo.entities.Track;
 import com.demo.helpers.CalculateDateTimeHelper;
+import com.demo.models.ArtistInfo;
 import com.demo.models.TrackInfo;
 import com.demo.models.TrackInfor;
 import com.demo.models.WeeklyTrackModel;
-import com.demo.repositories.TrackRepository;
 import com.demo.repositories.AccountRepository;
+import com.demo.repositories.TrackRepository;
 
 @Service("trackService")
 public class TrackServiceImpl implements TrackService {
@@ -29,7 +31,7 @@ public class TrackServiceImpl implements TrackService {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	
+
 	@Autowired
 	private ArtistTrackService artistTrackService;
 
@@ -112,6 +114,7 @@ public class TrackServiceImpl implements TrackService {
 			trackInfo.setThumbnail(track.getThumbnail());
 			trackInfo.setDuration(track.getDuration());
 			trackInfo.setPremium(track.isIsPremium());
+			trackInfo.setArtistLength(track.getArtistTracks().size());
 			List<Account> accounts = new ArrayList<Account>();
 			for (Account account : track.findAccountThroughAtristTrack()) {
 				accounts.add(account);
@@ -137,7 +140,7 @@ public class TrackServiceImpl implements TrackService {
 					}
 				}
 			}
-			if (ownerTrack.getCountry().getCountryCode().equalsIgnoreCase("US")) {
+			if (ownerTrack != null && ownerTrack.getCountry().getCountryCode().equalsIgnoreCase("US")) {
 				trackInfos.add(trackInfo);
 			}
 		}
@@ -167,7 +170,7 @@ public class TrackServiceImpl implements TrackService {
 					}
 				}
 			}
-			if (ownerTrack.getCountry().getCountryCode().equalsIgnoreCase("VN")) {
+			if (ownerTrack != null && ownerTrack.getCountry().getCountryCode().equalsIgnoreCase("VN")) {
 				trackInfos.add(trackInfo);
 			}
 		}
@@ -199,7 +202,27 @@ public class TrackServiceImpl implements TrackService {
 
 	@Override
 	public TrackInfo findByTrackId(int trackId) {
-		return trackRepository.findByTrackId(trackId);
+		TrackInfo trackInfo = trackRepository.findByTrackId(trackId);
+		Track track = findById(trackId);
+		List<ArtistInfo> artistInfos = new ArrayList<ArtistInfo>();
+		for(ArtistTrack artistTrack: track.getArtistTracks()) {
+			if(artistTrack.isIsOwn()) {
+				ArtistInfo artistInfo = new ArtistInfo();
+				artistInfo.setId(artistTrack.getAccount().getId());
+				artistInfo.setNickname(artistTrack.getAccount().getNickname());
+				artistInfos.add(artistInfo);				
+			}
+		}
+		for(ArtistTrack artistTrack: track.getArtistTracks()) {
+			if(!artistTrack.isIsOwn()) {
+				ArtistInfo artistInfo = new ArtistInfo();
+				artistInfo.setId(artistTrack.getAccount().getId());
+				artistInfo.setNickname(artistTrack.getAccount().getNickname());
+				artistInfos.add(artistInfo);				
+			}
+		}
+		trackInfo.setArtists(artistInfos);
+		return trackInfo;
 	}
 
 	@Override
@@ -248,7 +271,7 @@ public class TrackServiceImpl implements TrackService {
 		try {
 			Track track = findById(id);
 			trackRepository.delete(track);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -262,31 +285,32 @@ public class TrackServiceImpl implements TrackService {
 	public List<Track> getBestTrack(int n) {
 		return trackRepository.getBestTrack(n);
 	}
+
 	public List<TrackInfo> searchTrackInManage(String option, String keyword, int artistId) {
 		List<TrackInfo> result = new ArrayList<TrackInfo>();
 		List<Track> tracks = artistTrackService.getTracksOfArtist(artistId);
 		int optionInt = 0;
-		if(option != "") {
+		if (option != "") {
 			optionInt = Integer.parseInt(option);
 		}
-		
-		for(Track track : tracks) {
-			if(optionInt != 0) {
-				if(track.getTitle().toLowerCase().contains(keyword) && track.getStatus().getId() == optionInt) {
+
+		for (Track track : tracks) {
+			if (optionInt != 0) {
+				if (track.getTitle().toLowerCase().contains(keyword) && track.getStatus().getId() == optionInt) {
 					TrackInfo trackInfo = setTrackToTrackInfo(track);
 					result.add(trackInfo);
-				}				
-			}else {
-				if(track.getTitle().toLowerCase().contains(keyword)) {
+				}
+			} else {
+				if (track.getTitle().toLowerCase().contains(keyword)) {
 					TrackInfo trackInfo = setTrackToTrackInfo(track);
 					result.add(trackInfo);
-				}			
+				}
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	public TrackInfo setTrackToTrackInfo(Track track) {
 		TrackInfo trackInfo = new TrackInfo();
 		trackInfo.setId(track.getId());
@@ -305,6 +329,29 @@ public class TrackServiceImpl implements TrackService {
 	public List<TrackInfor> getAll() {
 		return trackRepository.getAll();
 	}
-	
-	
+
+	public boolean publishTrack() {
+		try {
+			Status status = new Status();
+			status.setId(1);
+			for (Track track : trackRepository.findAll()) {
+				Track newTrack = new Track();
+				newTrack = track;
+				Date beforeTwoDays = new Date(new Date().getTime() + (2 * 1000 * 60 * 60 * 24));
+				if(newTrack.getStatus().getId() == 2 && newTrack.getPublishDate().before(beforeTwoDays)) {
+					newTrack.setStatus(status);
+					trackRepository.save(newTrack);					
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public List<TrackInfo> searchByTitle(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -15,49 +15,51 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.demo.entities.Account;
+import com.demo.entities.Playlist;
 import com.demo.entities.ServicePackage;
+import com.demo.entities.Status;
 import com.demo.models.PackageInfoModel;
 import com.demo.services.PackageInfoService;
 import com.demo.services.PackageService;
 
 @Controller
-@RequestMapping(value = {"admin/package"})
+@RequestMapping(value = { "admin/package" })
 public class ServicePackageController {
-	
+
 	@Autowired
 	private PackageService packageService;
-	
+
 	@Autowired
 	private PackageInfoService packageInfoService;
-	
-	@RequestMapping( value = {"","index" } , method = RequestMethod.GET )
+
+	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
 		modelMap.put("packages", packageService.getAllPackageModel());
 		modelMap.put("packageInfos", packageInfoService.findAll());
 		return "admin/package/index";
 	}
-	
+
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String add(ModelMap modelMap) {
 		ServicePackage servicePackage = new ServicePackage();
 		modelMap.put("servicePackage", servicePackage);
 		return "admin/package/add";
 	}
-	
+
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String add(@ModelAttribute("servicePackage") ServicePackage servicePackage) {
 		servicePackage.setIsDelete(false);
 		packageService.save(servicePackage);
 		return "redirect:/admin/package/index";
 	}
-	
+
 	@RequestMapping(value = { "edit" }, method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "id", required = false) int packageId, ModelMap modelMap) {
 		ServicePackage servicePackage = packageService.findById(packageId);
 		modelMap.put("servicePackage", servicePackage);
 		return "admin/package/edit";
 	}
-	
+
 	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	public String edit(@ModelAttribute("servicePackage") ServicePackage servicePackage) {
 		ServicePackage tmp = packageService.findById(servicePackage.getId());
@@ -65,8 +67,8 @@ public class ServicePackageController {
 		packageService.save(servicePackage);
 		return "redirect:/admin/package/index";
 	}
-	
-	@RequestMapping(value = {"delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.TEXT_PLAIN_VALUE)
+
+	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> deleteMailbox(@RequestParam("id") int packageId) {
 		String result = "";
 		ServicePackage servicePackage = packageService.findById(packageId);
@@ -79,8 +81,28 @@ public class ServicePackageController {
 			return new ResponseEntity<String>("ERROR", HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@RequestMapping(value = {"getAccountsSign" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(value = {
+			"edit-status" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> editStatus(@RequestParam(value = "id", required = false) int id) {
+		boolean result = false;
+		try {
+			ServicePackage servicePackage = packageService.findById(id);
+			if (servicePackage.isStatus()) {
+				servicePackage.setStatus(false);
+			} else {
+				servicePackage.setStatus(true);
+				result = true;
+			}
+			packageService.save(servicePackage);
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = {
+			"getAccountsSign" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PackageInfoModel>> getAccounsSignByPackageId(@RequestParam("id") int packageId) {
 		List<PackageInfoModel> packageInfoModels = packageService.getHistoryPackageSign(packageId);
 		try {

@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
+import com.demo.entities.AccountPlaylist;
 import com.demo.entities.Playlist;
-import com.demo.entities.Track;
+import com.demo.entities.Status;
 import com.demo.models.AlbumInfo;
 import com.demo.models.PlaylistInfor;
 import com.demo.models.PlaylistModel;
-import com.demo.models.TrackInfo;
 import com.demo.repositories.PlaylistRepository;
-import com.demo.repositories.TrackRepository;
 
 @Service("playlistService")
 public class PlaylistServiceImpl implements PlaylistService {
@@ -116,6 +115,46 @@ public class PlaylistServiceImpl implements PlaylistService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public boolean publishAlbum() {
+		try {
+			Status status = new Status();
+			status.setId(1);
+			for (Playlist album : playlistRepository.findAll()) {
+				Playlist newAlbum = new Playlist();
+				newAlbum = album;
+				if(newAlbum.getStatus().getId() == 3 && newAlbum.getPublishDate().before(new Date())) {
+					newAlbum.setStatus(status);
+					playlistRepository.save(newAlbum);
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	@Override
+	public List<PlaylistModel> getBestAlbum() {
+		List<PlaylistModel> bestAlbums = new ArrayList<PlaylistModel>();
+		for (Playlist playlist : playlistRepository.getBestAlbum()) {
+			PlaylistModel playlistModel = new PlaylistModel();
+			playlistModel.setId(playlist.getId());
+			playlistModel.setTitle(playlist.getTitle());
+			playlistModel.setThumbnail(playlist.getThumbnail());
+			playlistModel.setLikes(playlist.getLikes());
+			List<Account> accounts = new ArrayList<Account>();
+			for (AccountPlaylist accountPlaylist : playlist.getAccountPlaylists()) {
+				if(accountPlaylist.isIsOwn() == true) {
+					accounts.add(accountPlaylist.getAccount());
+					playlistModel.setAccounts(accounts);
+				}
+			}
+			bestAlbums.add(playlistModel);
+		}
+		return bestAlbums;
 	}
 	
 }

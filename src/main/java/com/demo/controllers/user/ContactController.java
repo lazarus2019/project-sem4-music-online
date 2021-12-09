@@ -29,9 +29,8 @@ public class ContactController {
 	public String save(@RequestParam("fullname") String fullname, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("content") String content) {
 		
 		try {
-			Date date = new Date();
-			Contact contact = new Contact(fullname, email, phoneNumber, content, false, date);
-			
+
+			Contact contact = new Contact(fullname, email, phoneNumber, content, false, new Date());
 			contactService.save(contact);
 
 		} catch (Exception e) {

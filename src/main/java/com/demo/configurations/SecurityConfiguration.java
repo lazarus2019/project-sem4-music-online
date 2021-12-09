@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/oauth2/**").permitAll()
+			.antMatchers("/notification/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
 			.antMatchers("/admin/manageAdmin").access("hasRole('ROLE_MANAGER')")
 			.antMatchers("/admin/manageAdmin/addNewAdmin").access("hasRole('ROLE_MANAGER')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")

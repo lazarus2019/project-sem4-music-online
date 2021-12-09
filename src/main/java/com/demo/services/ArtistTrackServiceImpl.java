@@ -2,7 +2,9 @@
 package com.demo.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,12 +89,15 @@ public class ArtistTrackServiceImpl implements ArtistTrackService{
 	@Override
 	public void removeAllArtistFromTrack(Track track) {
 		try {
-			for(Account account : track.findAccountThroughAtristTrack()) {
-				for(ArtistTrack artistTrack : account.getArtistTracks()) {
-					if(artistTrack.getTrack().getId() == track.getId()) {
-						delete(artistTrack.getId());					
-					}					
-				}
+			Set<Account> accounts = track.findAccountThroughAtristTrack();
+			if(accounts != null) {
+				for(Account account : accounts) {
+					for(ArtistTrack artistTrack : account.getArtistTracks()) {
+						if(artistTrack.getTrack().getId() == track.getId()) {
+							delete(artistTrack.getId());					
+						}					
+					}
+				}				
 			}
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -102,15 +107,15 @@ public class ArtistTrackServiceImpl implements ArtistTrackService{
 	@Override
 	public void removeFeatArtistFromTrack(Track track, int artistId) {
 		try {
-			for(Account account : track.findAccountThroughAtristTrack()) {
-				if(account.getId() != artistId) {
-					for(ArtistTrack artistTrack : account.getArtistTracks()) {
-						if(artistTrack.getTrack().getId() == track.getId()) {
-							delete(artistTrack.getId());					
-						}					
+			for(Account accountTmp : track.findAccountThroughAtristTrack()) {
+				for(ArtistTrack artistTrack : accountTmp.getArtistTracks()) {
+					if(!artistTrack.isIsOwn()) {
+						artistTrack.setAccount(accountService.findById(artistTrack.getId().getAccountId()));
+							delete(artistTrack.getId());
 					}
 				}
 			}
+			
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
@@ -159,4 +164,13 @@ public class ArtistTrackServiceImpl implements ArtistTrackService{
 	}
 
 
+	public List<Account> findAccountThroughAtristTrack(List<Integer> accountIds){
+		List<Account> accounts = new ArrayList<Account>();
+		if(accountIds != null) {
+			for(int accountId : accountIds) {
+				accounts.add(accountService.findById(accountId));
+			}
+		}
+		return accounts;
+	}
 }

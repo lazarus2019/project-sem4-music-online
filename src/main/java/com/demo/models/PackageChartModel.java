@@ -1,29 +1,26 @@
 package com.demo.models;
 
-import java.util.Date;
-
 public class PackageChartModel {
 
 	private int packageId;
-	private int accountId;
-	private Date purchaseDate;
-	private Date expirationDate;
-	private int amount;
+	private String name;
+	private double price;
 	private long average;
+	private int amount;
+	private String month;
 
 	public PackageChartModel() {
 		super();
 	}
 
-	public PackageChartModel(int packageId, int accountId, Date purchaseDate, Date expirationDate, int amount,
-			long average) {
+	public PackageChartModel(int packageId, String name, double price, long average, int amount, String month) {
 		super();
 		this.packageId = packageId;
-		this.accountId = accountId;
-		this.purchaseDate = purchaseDate;
-		this.expirationDate = expirationDate;
-		this.amount = amount;
+		this.name = name;
+		this.price = price;
 		this.average = average;
+		this.amount = amount;
+		this.month = month;
 	}
 
 	public int getPackageId() {
@@ -34,36 +31,20 @@ public class PackageChartModel {
 		this.packageId = packageId;
 	}
 
-	public int getAccountId() {
-		return accountId;
+	public String getName() {
+		return name;
 	}
 
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Date getPurchaseDate() {
-		return purchaseDate;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setPurchaseDate(Date purchaseDate) {
-		this.purchaseDate = purchaseDate;
-	}
-
-	public Date getExpirationDate() {
-		return expirationDate;
-	}
-
-	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public long getAverage() {
@@ -72,6 +53,22 @@ public class PackageChartModel {
 
 	public void setAverage(long average) {
 		this.average = average;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 }

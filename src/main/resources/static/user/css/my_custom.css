@@ -287,7 +287,7 @@ audio {
 	cursor: pointer;
 }
 
-.lyric-box {
+.lyric-box , .comment-box {
 	position: fixed;
 	max-height: calc(100% - 90px);
 	top: 0;
@@ -303,48 +303,48 @@ audio {
 	transition: transform .75s ease, opacity .75s ease;
 }
 
-.lyric-box.show {
+.lyric-box.show , .comment-box.show {
 	opacity: 1;
 	transform: translateY(0);
 }
 
-.lyric-box .hide-lyric-box {
+.lyric-box .hide-lyric-box , .comment-box .hide-comment-box {
 	position: absolute;
 	top: 1rem;
 	right: 1rem;
 }
 
-.hide-lyric-box i {
+.hide-lyric-box i , .hide-comment-box i {
 	font-size: 30px;
 }
 
-.lyric-box .row, .lyric-box .row .col-6 {
+.lyric-box .row, .lyric-box .row .col-6 , .comment-box .row, .comment-box .row .col-6  {
 	height: 100%;
 	width: 100%;
 }
 
-.lyric-thumbnail {
+.lyric-thumbnail, .comment-thumbnail {
 	height: 100%;
 	display: flex;
 }
 
-.lyric-thumbnail img {
+.lyric-thumbnail img, .comment-thumbnail img {
 	height: 100%;
 	width: 100%;
 	margin: 0 auto;
 }
 
-.lyric-content {
+.lyric-content,  .comment-content{
 	overflow-y: auto;
 	height: 100%;
 }
 
-.lyric-content p {
+.lyric-content p , .comment-content p {
 	font-size: 40px;
 	font-weight: 600;
 }
 
-.lyric-content::-webkit-scrollbar {
+.lyric-content::-webkit-scrollbar , .comment-content::-webkit-scrollbar {
 	display: none;
 }
 
@@ -354,7 +354,7 @@ audio {
 
 .dropdown-song-menu, .dropdown-track-menu-artist, .dropdown-album-menu-artist {
 	position: absolute;
-	right: 40px;
+	right: 30px;
 	min-width: 180px;
 	border-radius: 15px;
 	list-style-type: none;
@@ -395,7 +395,7 @@ audio {
 }
 
 .dropdown-song-menu.show, .song__menu-list.show,
-	.dropdown-track-menu-artist.show, .dropdown-album-menu-artist {
+	.dropdown-track-menu-artist.show, .dropdown-album-menu-artist.show {
 	transform: translateY(0);
 	opacity: 1;
 	visibility: visible;
@@ -605,7 +605,7 @@ audio {
 	display: block;
 }
 
-.btn-dropdown-track-menu-artist:focus>.dropdown-track-menu-artist, .btn-dropdown-album-menu-artist:focus>.dropdown-album-menu-artist {
+.btn-dropdown-track-menu-artist:hover>.dropdown-track-menu-artist, .btn-dropdown-album-menu-artist:hover>.dropdown-album-menu-artist {
 	transform: translateY(0);
 	opacity: 1;
 	visibility: visible;
@@ -1215,4 +1215,19 @@ ul.iq-edit-profile li:last-child a {
 	white-space: nowrap;
     text-overflow: ellipsis;
     overflow-x: hidden;
+}
+
+.top-45{
+	top: 45px !important;
+}
+
+.right-15{
+	right: 15px !important;
+}
+.thumb-post {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  max-height: 250px;
+  margin-bottom: 1rem;
 }

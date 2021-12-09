@@ -13,9 +13,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Muzik- Responsive Bootstrap 4 Admin Dashboard Template</title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/admin/images/favicon.ico" />
+
+	<title>Netfzik - Record label & Music streaming </title>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
+	
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
     <!-- Datatable CSS -->
@@ -56,16 +58,19 @@
         <!-- Sidebar  -->
         <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-                <a href="index.html" class="header-logo">
-                    <img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" class="img-fluid rounded-normal" alt="">
+                <a class="header-logo">
+                		<%-- <link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
+	
+					<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png"> --%>
+                    <img src="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" class="img-fluid rounded-normal" alt="">
                     <div class="logo-title">
-                        <span class="text-primary text-uppercase">Muzik</span>
+                        <span class="text-success text-uppercase">Netfzik</span>
                     </div>
                 </a>
                 <div class="iq-menu-bt-sidebar">
                     <div class="iq-menu-bt align-self-center">
-                        <div class="wrapper-menu">
-                            <div class="main-circle"><i class="las la-bars"></i></div>
+                        <div class="wrapper-menu text-success ">
+                            <div class="main-circle"><i class="las la-bars " ></i></div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +99,8 @@
 
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/artist" class="iq-waves-effect">
-                            	<i class="ri-folder-user-line iq-arrow-left"></i><span>Manage Artist</span> <span class="messageCustomAccount badge badge-primary">5</span>
+
+                            	<i class="ri-folder-user-line iq-arrow-left"></i><span>Manage Artist</span> <t:amountRequest/>
                             </a>
                         </li>
 
@@ -103,24 +109,23 @@
                             <a href="${pageContext.request.contextPath }/admin/package" class="iq-waves-effect">
                             	<i class="ri-pages-fill iq-arrow-left"></i><span>Service Package</span></a> 
                             </a>
-                        </li>                        
+                        </li>       
+                                         
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/advertisement" class="iq-waves-effect">
+                            	<i class="ri-money-dollar-circle-fill iq-arrow-left"></i><span>Advertisement</span>
+                            </a>
+                        </li>   
+                                             
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/contact" class="iq-waves-effect">
                             	<i class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span></a> 
                             </a>
-                        </li>                        
-
-                        <li class="genres nav-parent " data-toggle="collapse">
-                            <a href="#genres" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-headphone-line iq-arrow-left"></i><span>Genres</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="genres" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a class="nav-link" href="admin-category.html"><span>Genres</span></a></li>
-                                <li><a class="nav-link" href="admin-add-category.html"><span>Add Genre</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/edit-genre"><span>Edit Genre</span></a>
-                                </li>
-                            </ul>
+                        </li>  
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/genres" class="iq-waves-effect">
+                            	<i class="ri-headphone-line iq-arrow-left"></i><span>Genres</span>
+                            </a>
                         </li>
 
 						<li>
@@ -152,14 +157,14 @@
             <div class="iq-navbar-custom">
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-menu-bt d-flex align-items-center">
-                        <div class="wrapper-menu">
+                        <div class="wrapper-menu text-success">
                             <div class="main-circle"><i class="las la-bars"></i></div>
                         </div>
                         <div class="iq-navbar-logo d-flex justify-content-between">
                             <a href="index.html" class="header-logo">
-                                <img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" class="img-fluid rounded-normal" alt="">
+                                <img src="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" class="img-fluid rounded-normal" alt="">
                                 <div class="pt-2 pl-2 logo-title">
-                                    <span class="text-primary text-uppercase">Muzik</span>
+                                    <span class="text-success text-uppercase">Netfzik</span>
                                 </div>
                             </a>
                         </div>
@@ -200,76 +205,11 @@
                                     <span class=" dots"></span>
                                 </a>
                             </li>
-                            <li class="nav-item nav-icon">
-                                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
-                                    <i class="ri-mail-line"></i>
-                                    <span class="massage-icon dots badge badge-primary">5</span>
-                                </a>
-                                <div class="iq-sub-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                        <div class="iq-card-body p-0 ">
-                                            <div class="bg-primary p-3">
-                                                <h5 class="mb-0 text-white">All Messages<small class="badge  badge-light float-right pt-1">5</small></h5>
-                                            </div>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/01.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Bni Emma Watson</h6>
-                                                        <small class="float-left font-size-12">13 Jun</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/02.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
-                                                        <small class="float-left font-size-12">20 Apr</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/03.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Why do we use it?</h6>
-                                                        <small class="float-left font-size-12">30 Jun</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/04.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Variations Passages</h6>
-                                                        <small class="float-left font-size-12">12 Sep</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/05.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Lorem Ipsum generators</h6>
-                                                        <small class="float-left font-size-12">5 Dec</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            
+                            <!-- mailbox -->
+                            <mailbox></mailbox>
+                            <!-- mailbox end -->
+                            
                             <li class="nav-item nav-icon">
                                 <a href="#" class="search-toggle iq-waves-effect text-black rounded">
                                     <i class="ri-notification-line block"></i>

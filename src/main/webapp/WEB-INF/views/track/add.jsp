@@ -17,8 +17,7 @@
                                 <h3 class="clr-white">Track Info</h3>
                                 <div class="form-heading clr-white">Track Title:</div>
                                 <div class="sign__group">
-                                    <input type="text"
-									class="sign__input" placeholder="Title" name="title" required>
+                                    <input type="text" class="sign__input" placeholder="Title" name="title" required>
                                 </div>
                                 <div class="form-heading clr-white">Feature Artists:</div>
                                 <div class="sign__group">
@@ -33,10 +32,13 @@
                                 <div class="form-heading clr-white">Genres:</div>
                                 <div class="sign__group">
                                     <select name="genres.id" id="genres"
-									class="sign__input select__form" data-dropdown required>
-                                        <option value="">Select genres</option>
-                             			<c:forEach items="${genres}" var="genre">
-                             					<option value="${genre.id }">${genre.name }</option>
+									class="sign__input select__form" data-dropdown required>                                        
+                             			<c:forEach items="${genres}" var="genre" varStatus="i">
+                             					<c:set var="isCh" value=""></c:set>
+                             					<c:if test="${i.index == 0 }">
+                             						<c:set var="isCh" value="seleced"></c:set>
+                             					</c:if>
+                             					<option value="${genre.id }" ${isCh }>${genre.name }</option>
                              			</c:forEach>
                                     </select>
 
@@ -50,8 +52,7 @@
 									class="form-btn">Import Lyrics</label>
                                 </div>
                                 <div class="sign__group">
-                                    <textarea type="text"
-									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics" required></textarea>
+                                    <textarea class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" name="lyrics" required></textarea>
                                 </div>
                                 
 

@@ -24,30 +24,28 @@ public class LikedController {
 	private AccountService accountService;
 
 	@Autowired
-	CookieService cookieService ;
+	CookieService cookieService;
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
-
 		Account account = new Account();
 		String id = cookieService.getValue("acc_id", "");
 		if (id.equalsIgnoreCase("")) {
 			return "redirect:/login/login";
 		} else {
 			account = accountService.findById(Integer.parseInt(id));
-			
+
 			Set<AccountPlaylist> s = account.getAccountPlaylists();
 			Playlist playlist = new Playlist();
 			for (AccountPlaylist accountPlaylist : s) {
-				if(accountPlaylist.getPlaylist().getPlaylistCategory().getId() == 2) {
+				if (accountPlaylist.getPlaylist().getPlaylistCategory().getId() == 2) {
 					playlist = accountPlaylist.getPlaylist();
 				}
 			}
-			
+
 			modelMap.put("lik", playlist.getTracks());
 		}
-		
-		
+
 		return "liked/index";
 
 	}

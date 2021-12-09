@@ -1,5 +1,7 @@
 package com.demo.services;
 
+import java.util.List;
+
 import com.demo.entities.Comment;
 import com.demo.entities.CommentId;
 import com.demo.entities.Track;
@@ -14,4 +16,6 @@ public interface CommentService {
 	public Comment save(Comment comment);
 	
 	public void removeAllCommentInTrack(Track track);
+	
+	public List<Comment> findByTrackId(int id) ;
 }

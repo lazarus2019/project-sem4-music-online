@@ -1,6 +1,5 @@
 package com.demo.schedules;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,7 +15,8 @@ public class UpdateDbSchedule {
 	private TrackService trackService;
 
 	// second, minute, hour, day of month, month and day of week.
-	@Scheduled(cron = "0 0 0 * * *", zone = "Asia/Ho_Chi_Minh")
+	//@Scheduled(cron = "0 0 0 * * ?", zone = "Asia/Ho_Chi_Minh")
+	@Scheduled(cron = "@midnight")
 	public void mondaySchedule() {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -38,6 +38,25 @@ public class UpdateDbSchedule {
 			System.out.println("Updated db: " + new Date());
 		}
 
+	}
+	// second, minute, hour, day of month, month and day of week.
+	@Scheduled(cron = "9 0 0 * * *", zone = "Asia/Ho_Chi_Minh")
+	public void publicTrackAndAlbumSchedule() {
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		Date monday = c.getTime();
+		Date today = new Date();
+		int result = today.compareTo(monday);
+		
+		if (result == 0) {
+			if (trackService.updateWeeklyListens()) {
+				trackService.updateBaseListens();
+			} else {
+				System.out.println("Update Failed");
+				mondaySchedule();
+			}
+			System.out.println("Updated publish track & album: " + new Date());
+		}
 	}
 
 }

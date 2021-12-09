@@ -21,6 +21,7 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.demo.entities.Account;
+import com.demo.entities.ArtistTrack;
 import com.demo.entities.Playlist;
 import com.demo.entities.Status;
 import com.demo.entities.Track;
@@ -30,6 +31,7 @@ import com.demo.models.TrackInfo;
 import com.demo.services.ArtistTrackService;
 import com.demo.services.CommentService;
 import com.demo.services.GenresService;
+import com.demo.services.NotificationService;
 import com.demo.services.PlaylistService;
 import com.demo.services.TrackService;
 
@@ -56,6 +58,10 @@ public class ManageTrackController implements ServletContextAware {
 
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private NotificationService notificationService;
+
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
@@ -107,7 +113,23 @@ public class ManageTrackController implements ServletContextAware {
 		newTrack.setGenres(track.getGenres());
 		newTrack.setIsPremium(track.isIsPremium());
 		newTrack.setLyrics(track.getLyrics());
-		trackService.save(newTrack);
+		Track ediTrack = trackService.save(newTrack);
+
+		// send notification
+		int accountId = 0;
+		for (ArtistTrack artistTrack : ediTrack.getArtistTracks()) {
+			if (artistTrack.isIsOwn() == true) {
+				accountId = artistTrack.getAccount().getId();
+				System.out.println("account id: " + accountId);
+			}
+		}
+
+		if (ediTrack != null) {
+			String message = "Your track " + newTrack.getTitle().toUpperCase()
+					+ " was changed something by admin. If you unsatisfied, send feedback please!";
+			notificationService.sendNotification(accountId, message);
+		}
+
 		return "redirect:/admin/manage-track/index";
 	}
 
@@ -127,7 +149,22 @@ public class ManageTrackController implements ServletContextAware {
 		newTrack.setIsPremium(track.isIsPremium());
 		status.setId(1);
 		newTrack.setStatus(status);
-		trackService.save(newTrack);
+		Track saveTrack = trackService.save(newTrack);
+		// send notification
+		int accountId = 0;
+		for (ArtistTrack artistTrack : saveTrack.getArtistTracks()) {
+			if (artistTrack.isIsOwn() == true) {
+				accountId = artistTrack.getAccount().getId();
+				System.out.println("account id: " + accountId);
+			}
+		}
+
+		if (saveTrack != null) {
+			String message = "Your track " + newTrack.getTitle().toUpperCase()
+					+ " was public. Now everyone can listen this track!";
+			notificationService.sendNotification(accountId, message);
+		}
+
 		return "redirect:/admin/manage-track/index";
 	}
 
@@ -235,21 +272,28 @@ public class ManageTrackController implements ServletContextAware {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}
 	}
+
 	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> delete(@RequestParam("id") int trackId) {
 		boolean result = false;
 		Track track = trackService.findById(trackId);
-
 		artistTrackService.removeAllArtistFromTrack(track);
 		for (Playlist album : track.getPlaylists()) {
-
 			track.getPlaylists().remove(album);
 		}
-		// playlistTrackService.removeTrackFromAllAlbum(track);
-
 		commentService.removeAllCommentInTrack(track);
-
 		trackService.delete(trackId);
+
+		int accountId = 0;
+		for (ArtistTrack artistTrack : track.getArtistTracks()) {
+			if (artistTrack.isIsOwn() == true) {
+				accountId = artistTrack.getAccount().getId();
+				System.out.println("account id: " + accountId);
+			}
+		}
+		String message = "Your track " + track.getTitle().toUpperCase()
+				+ " was deleted by admin. If you unsatisfied, send feedback please!";
+		notificationService.sendNotification(accountId, message);
 
 		result = true;
 		try {

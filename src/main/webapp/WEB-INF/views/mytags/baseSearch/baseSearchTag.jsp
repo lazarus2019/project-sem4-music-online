@@ -54,15 +54,10 @@
                                     <div class="track-box-content">
                                         <p>${track.title }</p>
                                         <span>
-                                        	 <%-- <c:forEach items="${ track.artists} }" var="artist" varStatus="j">
-                                        	  <c:if test="${j.index < track.artists.length}">
-                                        	 <a href="${pageContext.request.contextPath}/artist/${artist.id}">${artist.nickname }</a> & 
-                                        	 </c:if>
-                                        	 <c:if test="${j.index == track.artists.length}">
-                                        	 <a href="${pageContext.request.contextPath}/artist/${artist.id}">${artist.nickname }</a>
-                                        	 </c:if>
-                                        	  
-                                        </c:forEach> --%>
+                                        <c:forEach var="artist" items="${track.accounts }" varStatus="j">
+		                                    <a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname}</a>
+		                                    <c:if test="${(j.index+1) < track.artistLength}">, </c:if>
+		                                </c:forEach>                                        	
                                         
                                         </span>
                                     </div>

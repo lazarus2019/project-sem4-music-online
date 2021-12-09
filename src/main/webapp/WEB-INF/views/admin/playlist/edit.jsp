@@ -38,10 +38,10 @@
                            </div>
                            <div class="form-group">
                               <label>Thumbnail:</label>
-                              <input type="file" name="photo">
+                              <input type="file" name="photo" onchange="previewChangeAccountImage(this)">
                               <br>
                               <span>
-                              	<img src="${pageContext.request.contextPath }/uploads/images/playlist/${thumbnail }" class="img-responsive rounded "  alt="thumbnail" width="300" height="300">
+                              	<img src="${pageContext.request.contextPath }/uploads/images/playlist/${thumbnail }" id="thumbnail" class="img-responsive rounded "  alt="thumbnail" width="300" height="300">
                               </span>
                               <!-- <div class="custom-file">
                                  <input type="file" class="custom-file-input" id="customFile"  name="photo">
@@ -56,5 +56,22 @@
                   </div>
                </div>
             </div>
+     <script>
+	     function previewChangeAccountImage(e) {
+	  	    const img = document.getElementById("thumbnail") || null
+	  	    const file = e.files[0];
+	  	    if (file) {
+	  	        const reader = new FileReader();
+	  	        reader.onload = function() {
+	  	            const result = reader.result;
+	  	            if (img) {
+	  	                img.src = result
+	  	            }
+	  	        }
+	
+	  	        reader.readAsDataURL(file);
+	  	    }
+	  	 }
+     </script>
 	</jsp:attribute>
 </mt:adminTemplate>	
