@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,11 +86,11 @@ public class PlayerController {
 				status.setId(1);
 				PlaylistCategory playlistCategory = new PlaylistCategory();
 				playlistCategory.setId(1);
-				playlist.setDescription("");
+				playlist.setDescription("Recent Played");
 				playlist.setLikes(0);
 				playlist.setPublishDate(new Date());
 				playlist.setLastUpdated(new Date());
-				playlist.setThumbnail("");
+				playlist.setThumbnail("Recent Played");
 				playlist.setStatus(status);
 				playlist.setTitle("Recent Played");
 				playlist.setPlaylistCategory(playlistCategory);
@@ -160,22 +161,26 @@ public class PlayerController {
 		}
 	}
 	
-	@RequestMapping(value = { "savePlaylistToLibrary" }, method = RequestMethod.GET, produces = MimeTypeUtils.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> savePlaylistToLibrary(@RequestParam("title") String title, @RequestParam("trackIds") String[] trackIds) {
+	@RequestMapping(value = { "savePlaylistToLibrary" }, method = RequestMethod.POST, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public String savePlaylistToLibrary(@RequestParam("title") String title , @RequestParam("songsPlayer") String[] trackIds, ModelMap modelMap) {
 		String result = "";
 		String id = cookieService.getValue("acc_id", ""); 
 		if(!id.equalsIgnoreCase("")) {
+//			System.out.println("title: "+title);
+//			for(String trackId : trackIds) {
+//				System.out.println(trackId);
+//			}
 			int accountId = Integer.parseInt(id);			
 			Playlist playlist = new Playlist();
 			Status status = new Status();
 			status.setId(1);
 			PlaylistCategory playlistCategory = new PlaylistCategory();
 			playlistCategory.setId(1);
-			playlist.setDescription("");
+			playlist.setDescription(title);
 			playlist.setLikes(0);
 			playlist.setPublishDate(new Date());
 			playlist.setLastUpdated(new Date());
-			playlist.setThumbnail("");
+			playlist.setThumbnail(title);
 			playlist.setStatus(status);
 			playlist.setTitle(title);
 			playlist.setPlaylistCategory(playlistCategory);
@@ -184,22 +189,21 @@ public class PlayerController {
 			if(playlistTmp.getId() != null) {
 				accountPlaylistService.setPlaylistForAccount(accountId, playlistTmp.getId());
 				if(trackIds != null) {
+					
 					for(String trackId : trackIds) {
 						int trackIdInt = Integer.parseInt(trackId);
 						playlist.getTracks().add(trackService.findById(trackIdInt));
 						playlistService.save(playlist);										
 					}
 				}
-				result = playlistTmp.getId().toString();
+				modelMap.put("id", playlistTmp.getId().toString());
+				modelMap.put("playlistTitle", title);
+				return "redirect:/index";
 			}
 		}else {
 			result = "MUST_SIGN_IN";
 		}
-		try {
-			return new ResponseEntity<String>(result, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-		}
+		return result;
 	}
 	
 	

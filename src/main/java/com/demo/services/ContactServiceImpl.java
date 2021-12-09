@@ -62,7 +62,7 @@ public class ContactServiceImpl implements ContactService {
 		SendMailHelper mailHelper = new SendMailHelper() ;
 		String emailContent = "<h3>After receiving your feedback about the website as well as the question you sent.\r\n"
 				+ "\r\n"
-				+ "Our team has discussed and found the most suitable solution / answer for your problem.</h3> <br> Dear "  ;
+				+ "Our team has discussed and found the most suitable solution / answer for your problem.</h3> <br> "  ;
 		emailContent += content + "</br>";
 		
 		String subject = "[Muzik] Reply Contact"; 

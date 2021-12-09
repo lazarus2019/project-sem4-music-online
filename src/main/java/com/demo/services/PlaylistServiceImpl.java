@@ -11,6 +11,7 @@ import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
 import com.demo.entities.Playlist;
 import com.demo.entities.Status;
+import com.demo.entities.Track;
 import com.demo.models.AlbumInfo;
 import com.demo.models.PlaylistInfor;
 import com.demo.models.PlaylistModel;
@@ -24,6 +25,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 	
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
+	
+	@Autowired
+	private TrackService trackService;
 	
 	@Override
 	public List<Playlist> getAllUpcommingAlbum() {
@@ -155,6 +159,21 @@ public class PlaylistServiceImpl implements PlaylistService {
 			bestAlbums.add(playlistModel);
 		}
 		return bestAlbums;
+	}
+
+	@Override
+	public void removeAlbumFromTrack(int trackId) {
+		try {
+			Track track = trackService.findById(trackId);
+			for (Playlist album : track.getPlaylists()) {
+				if(album.getPlaylistCategory().getId() != null && album.getPlaylistCategory().getId() == 3) {
+					delete(album.getId());							
+				}
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 }

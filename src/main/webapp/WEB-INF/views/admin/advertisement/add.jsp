@@ -20,11 +20,11 @@
                         	<div class="col-6">
                         		<div class="form-group">
                               	<label>Title:</label>
-                              <input type="text" class="form-control" name="title">
+                              <input type="text" class="form-control" name="title" required="required">
 	                           </div>  
 	                           <div class="form-group">
 	                              <label>Description:</label>
-	                              <textarea class="form-control" rows="4" name="description"></textarea>
+	                              <textarea class="form-control" rows="4" name="description" required="required"></textarea>
 	                           </div>  
                         	</div>
                         	<div class="col-6">

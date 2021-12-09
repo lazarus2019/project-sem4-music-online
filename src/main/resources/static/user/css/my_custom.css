@@ -1216,7 +1216,6 @@ ul.iq-edit-profile li:last-child a {
     text-overflow: ellipsis;
     overflow-x: hidden;
 }
-
 .top-45{
 	top: 45px !important;
 }
@@ -1230,4 +1229,10 @@ ul.iq-edit-profile li:last-child a {
   width: 100%;
   max-height: 250px;
   margin-bottom: 1rem;
+}
+.pending-tag{
+	position: absolute;
+    top: -4px;
+    color: white;
+
 }

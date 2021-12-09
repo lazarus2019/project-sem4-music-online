@@ -326,11 +326,11 @@ public class TrackController implements ServletContextAware{
 							trackService.save(newTrack);
 							
 							// Delete old track from album
-							for (Playlist album : newTrack.getPlaylists()) {
-								if(album.getPlaylistCategory().getId() != null && album.getPlaylistCategory().getId() == 3) {
-									newTrack.getPlaylists().remove(album);								
-								}
+							for(Playlist album : newTrack.findAllTrackAlbums()) {
+										newTrack.getPlaylists().remove(album);
 							}
+							trackService.save(newTrack);
+
 							// Delete old feat artists from artist track
 							artistTrackService.removeFeatArtistFromTrack(newTrack, artistId);
 							
@@ -343,8 +343,7 @@ public class TrackController implements ServletContextAware{
 									artistTrackService.addFeatArtistToTrack(newTrack, featArtistId);
 								}						
 							}
-							
-							
+
 							// Add track to album
 							if(albums != null) {
 								for(String albumIdString : albums) {

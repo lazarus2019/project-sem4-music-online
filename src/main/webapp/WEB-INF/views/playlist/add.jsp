@@ -16,7 +16,7 @@
                                 <h3 class="clr-white">Album Info</h3>
                                 <div class="form-heading clr-white">Album Title:</div>
                                 <div class="sign__group">
-                                    <input type="text" class="sign__input" placeholder="Title" name="title">
+                                    <input type="text" class="sign__input" placeholder="Title" name="title" required>
                                 </div>
                                 <div class="grid-box grid-split-2 mb-1">
                                     <div class="grid-box-item">
@@ -84,7 +84,7 @@
                                             </div>
                                         </div>
                                         <textarea type="text" class="form__textarea" placeholder="Enter Description"
-                                            name="description" style="height: 361.406px"></textarea>
+                                            name="description" style="height: 361.406px" required></textarea>
                                     </div>
                                     <div class="grid-box-item">
                                         <div class="flex-box justify-content-between align-items-center mb-2">

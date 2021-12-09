@@ -14,7 +14,10 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
 import com.demo.entities.Account;
+import com.demo.entities.AccountPlaylist;
+import com.demo.entities.Playlist;
 import com.demo.entities.Track;
+import com.demo.models.AlbumInfo;
 import com.demo.models.TrackInfo;
 import com.demo.services.AccountService;
 import com.demo.services.PlaylistService;
@@ -75,7 +78,22 @@ public class BaseSearchTag extends RequestContextAwareTag {
 				newReleasesTrack.add(trackInfo);
 			}
 			request.setAttribute("newReleaseTracks", newReleasesTrack);
-			request.setAttribute("upcomingAlbums", playlistService.getAllUpcommingAlbum());
+			List<AlbumInfo> albumInfos = new ArrayList<AlbumInfo>();
+			for(Playlist playlist : playlistService.getAllUpcommingAlbum()) {
+				AlbumInfo albumInfo = new AlbumInfo();
+				albumInfo.setTitle(playlist.getTitle());
+				albumInfo.setThumbnail(playlist.getThumbnail());
+				albumInfo.setId(playlist.getId());
+				for(AccountPlaylist accountPlaylist : playlist.getAccountPlaylists()) {
+					if(accountPlaylist.isIsOwn()) {
+						albumInfo.setArtistId(accountPlaylist.getId().getAccountId());
+						albumInfo.setArtistNickName(accountPlaylist.getAccount().getNickname());
+						break;
+					}
+				}
+				albumInfos.add(albumInfo);
+			}
+			request.setAttribute("upcomingAlbums", albumInfos);
 			request.getRequestDispatcher(jspPage);
 			pageContext.include(jspPage);
 		}catch(Exception e){

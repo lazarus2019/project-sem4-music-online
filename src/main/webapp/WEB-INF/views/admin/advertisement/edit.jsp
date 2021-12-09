@@ -19,12 +19,12 @@
                         <div class="row">
                         	<div class="col-6">
                            <div class="form-group">
-                              <label>Title:</label>
-                              <s:input class="form-control" path="title"/>
+                              <label>Title:</label> 
+                              <s:input class="form-control" path="title" required="required"/>
                            </div>                       
                            <div class="form-group">
                               <label>Description:</label>
-                              <s:textarea class="form-control" rows="4" path="description"></s:textarea>
+                              <s:textarea class="form-control" rows="4" path="description" required="required"></s:textarea>
                            </div>
                            </div>
                            <div class="col-6">

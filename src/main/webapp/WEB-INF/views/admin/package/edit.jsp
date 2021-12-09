@@ -19,19 +19,19 @@
                            modelAttribute="servicePackage" enctype="multipart/form-data">
                            <div class="form-group">
                               <label>Name:</label>
-                              <s:input class="form-control" path="name"></s:input>
+                              <s:input class="form-control" path="name" required="required"></s:input>
                            </div>                       
                            <div class="form-group">
                               <label>Price ($):</label>
-                              <s:input class="form-control" path="price" step=".01" min="0"></s:input>
+                              <s:input class="form-control" path="price" step=".01" min="0" required="required"></s:input>
                            </div>                       
                            <div class="form-group">
                               <label>Duration (months):</label>
-                              <s:input class="form-control" path="duration" min="1"></s:input>
+                              <s:input class="form-control" path="duration" min="1" required="required"></s:input>
                            </div>                       
                            <div class="form-group">
                               <label>Description:</label>
-                              <s:textarea class="form-control" rows="4" path="description"></s:textarea>
+                              <s:textarea class="form-control" rows="4" path="description" required="required"></s:textarea>
                            </div>
                            <div class="custom-control custom-checkbox checkbox-icon custom-control-inline">
                               <s:checkbox path="status" class="custom-control-input" id="customCheck-30"></s:checkbox>

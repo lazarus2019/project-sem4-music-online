@@ -17,7 +17,7 @@
                                 <h3 class="clr-white">Track Info</h3>
                                 <div class="form-heading clr-white">Track Title:</div>
                                 <div class="sign__group">
-                                    <s:input path="title" class="sign__input" id="title" placeholder="Title"></s:input>
+                                    <s:input path="title" class="sign__input" id="title" placeholder="Title" required="required"></s:input>
                                 </div>
                                 <div class="form-heading clr-white">Feature Artists:</div>
                                 <div class="sign__group">                                
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="sign__group">
                                     <s:textarea type="text"
-									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" path="lyrics"></s:textarea>
+									class="form__textarea" placeholder="Track Lyrics" id="lyrics-textarea" path="lyrics" required="required"></s:textarea>
                                 </div>
                                 
 
@@ -75,6 +75,11 @@
                     <div class="col-6">
                         <div class="step non-hidden">
                             <div class="add-edit-track-form">
+                             <c:if test="${statusId == 2 }">
+                            	<div class="pending-tag publish-date bg-clr-orange">
+                            		Pending
+                            	</div>
+                             </c:if>
                                 <h3 class="clr-white">Track Assets</h3>
                                 <div class="grid-box grid-split-2 mb-1">
                                     <div class="grid-box-item">

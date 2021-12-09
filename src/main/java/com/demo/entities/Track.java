@@ -257,5 +257,15 @@ public class Track implements java.io.Serializable {
 		}
 		return accounts ;
 	}
+	
+	public Set<Playlist> findAllTrackAlbums(){
+		Set<Playlist> albums = new HashSet<Playlist>(0);
+		for(Playlist playlist : playlists) {
+			if(playlist.getPlaylistCategory().getId() == 3) {
+				albums.add(playlist);
+			}
+		}
+		return albums;
+	}
 }
 
