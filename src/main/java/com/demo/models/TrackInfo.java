@@ -31,6 +31,18 @@ public class TrackInfo {
 	private Genres genres;
 	private List<Account> accounts = new ArrayList<Account>();
 	private List<ArtistInfo> artists = new ArrayList<ArtistInfo>();
+	
+	public TrackInfo(Integer id, int genresId, int statusId, String title, String thumbnail, int likes, int listens, boolean premium) {
+		super();
+		this.id = id;
+		this.genresId = genresId;
+		this.statusId = statusId;
+		this.title = title;
+		this.thumbnail = thumbnail;
+		this.likes = likes;
+		this.listens = listens;
+		this.premium = premium;
+	}
 
 	public TrackInfo(Integer id, int genresId, String title, String thumbnail) {
 		super();
@@ -61,7 +73,6 @@ public class TrackInfo {
 	public void setGenres(Genres genres) {
 		this.genres = genres;
 	}
-
 	public TrackInfo() {
 		super();
 	}

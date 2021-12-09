@@ -34,17 +34,17 @@
 							</c:if>	
                             <div class="dropdown__user-menu">
                             	<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
-	                            <a href="${pageContext.request.contextPath }/admin/artist">
+	                            <a href="${pageContext.request.contextPath }/admin">
 	                            	<i class="ri-album-line iq-arrow-left"></i>Admin Panel
 	                            </a>
 								</sec:authorize>
                                 <a href="${pageContext.request.contextPath }/user/profile/index">
                                     <i class="lar la-user-circle"></i> Profile
                                 </a>
-                                <a href="${pageContext.request.contextPath }/artist/yourtrack">
+                                <a href="${pageContext.request.contextPath }/track/manage">
                                     <i class="las la-music"></i> Your Tracks
                                 </a>
-                                <a href="${pageContext.request.contextPath }/artist/youralbum">
+                                <a href="${pageContext.request.contextPath }/playlist/manage">
                                     <i class="las la-record-vinyl"></i> Your Albums
                                 </a>
                                 <a href="${pageContext.request.contextPath }/package">

@@ -13,9 +13,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Muzik- Responsive Bootstrap 4 Admin Dashboard Template</title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/admin/images/favicon.ico" />
+
+	<title>Netfzik - Record label & Music streaming HTML Template</title>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
+	
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/bootstrap.min.css">
     <!-- Datatable CSS -->
@@ -30,7 +32,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/remixicon.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/all.min.css">
-    <!-- Custom CSS -->
+        <!-- Custom CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/custom.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
@@ -38,6 +40,7 @@
    	<!-- jQuery -->
    	<script src="${pageContext.request.contextPath }/resources/admin/js/jquery.min.js"></script>
    	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+   	
    	<!-- Sweetalert CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.min.css">
 </head>
@@ -55,16 +58,19 @@
         <!-- Sidebar  -->
         <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-                <a href="index.html" class="header-logo">
-                    <img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" class="img-fluid rounded-normal" alt="">
+                <a class="header-logo">
+                		<%-- <link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
+	
+					<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png"> --%>
+                    <img src="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" class="img-fluid rounded-normal" alt="">
                     <div class="logo-title">
-                        <span class="text-primary text-uppercase">Muzik</span>
+                        <span class="text-success text-uppercase">Netfzik</span>
                     </div>
                 </a>
                 <div class="iq-menu-bt-sidebar">
                     <div class="iq-menu-bt align-self-center">
-                        <div class="wrapper-menu">
-                            <div class="main-circle"><i class="las la-bars"></i></div>
+                        <div class="wrapper-menu text-success ">
+                            <div class="main-circle"><i class="las la-bars " ></i></div>
                         </div>
                     </div>
                 </div>
@@ -83,6 +89,7 @@
                             </a>
                         </li>
 
+
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/manage-track" class="iq-waves-effect">
                             	<i class="ri-album-line iq-arrow-left"></i><span>Manage Track</span>
@@ -92,74 +99,34 @@
 
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/artist" class="iq-waves-effect">
-                            	<i class="ri-folder-user-line iq-arrow-left"></i><span>Manage Artist</span>
+                            	<i class="ri-folder-user-line iq-arrow-left"></i><span>Manage Artist</span> <t:amountRequest/>
                             </a>
                         </li>
 
+
                         <li>
-                            <a href="admin-add-song.html"><i class="ri-upload-cloud-line "></i><span>Song Uploader</span>    </a>
+                            <a href="${pageContext.request.contextPath }/admin/package" class="iq-waves-effect">
+                            	<i class="ri-pages-fill iq-arrow-left"></i><span>Service Package</span></a> 
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/contact" class="iq-waves-effect">
+                            	<i class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span></a> 
+                            </a>
+                        </li>   
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/genres" class="iq-waves-effect">
+                            	<i class="ri-headphone-line iq-arrow-left"></i><span>Genres</span>
+                            </a>
                         </li>
-                        <li class="mailbox nav-parent " data-toggle="collapse">
-                            <a href="#mailbox" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="mailbox" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-inbox"><span>Inbox</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-compose"><span>Compose</span></a>
-                                </li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/mail-view"><span>View</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="reports nav-parent " data-toggle="collapse">
-                            <a href="#report" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-pie-chart-line iq-arrow-left"></i><span>Report</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="report" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a class="nav-link active" href="/zestreact/appnew/music/reports-songs" aria-current="page"><span>Songs</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/reports-statistics"><span>Statistics</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/reports-trending"><span>Trending</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/reports-visitors"><span>Visitors</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="genres nav-parent " data-toggle="collapse">
-                            <a href="#genres" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-headphone-line iq-arrow-left"></i><span>Genres</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="genres" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a class="nav-link" href="admin-category.html"><span>Genres</span></a></li>
-                                <li><a class="nav-link" href="admin-add-category.html"><span>Add Genre</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/edit-genre"><span>Edit Genre</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="songs nav-parent " data-toggle="collapse">
-                            <a href="#song" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
-                           class="ripple rippleEffect"></span><i
-                           class="ri-disc-line iq-arrow-left"></i><span>Song</span><i
-                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="song" class="nav iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-
-                                <li><a class="nav-link" href="admin-song.html"><span>Song</span></a></li>
-                                <li><a class="nav-link" href="admin-add-song.html"><span>Add Song</span></a></li>
-                                <li><a class="nav-link" href="/zestreact/appnew/music/edit-song"><span>Edit Song</span></a></li>
-                                
-	                        </ul>
-                        </li>
-
 
 						<li>
                             <a href="#setting" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
+                           class="ripple rippleEffect"></span><i class="ri-settings-2-line" ></i><span>General</span><i
 
-                           class="ripple rippleEffect"></span><i class="ri-settings-2-line" ></i><span>Settings</span><i
                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="setting" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li><a href="${pageContext.request.contextPath }/admin/setting/index">General</a></li>
+                                <li><a href="${pageContext.request.contextPath }/admin/banner/index">Banner</a></li>
                                 <li><a href="${pageContext.request.contextPath }/admin/aboutus/index">About</a></li>
                             </ul>
                         </li>
@@ -182,14 +149,14 @@
             <div class="iq-navbar-custom">
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-menu-bt d-flex align-items-center">
-                        <div class="wrapper-menu">
+                        <div class="wrapper-menu text-success">
                             <div class="main-circle"><i class="las la-bars"></i></div>
                         </div>
                         <div class="iq-navbar-logo d-flex justify-content-between">
                             <a href="index.html" class="header-logo">
-                                <img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" class="img-fluid rounded-normal" alt="">
+                                <img src="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" class="img-fluid rounded-normal" alt="">
                                 <div class="pt-2 pl-2 logo-title">
-                                    <span class="text-primary text-uppercase">Muzik</span>
+                                    <span class="text-success text-uppercase">Netfzik</span>
                                 </div>
                             </a>
                         </div>
@@ -416,6 +383,8 @@
     <!-- color-customizer END -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     
     <script src="${pageContext.request.contextPath }/resources/admin/js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/js/bootstrap.min.js"></script>
@@ -470,20 +439,13 @@
     <script src="${pageContext.request.contextPath }/resources/admin/js/style-customizer.js"></script>
     <!-- Chart Custom JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/chart-custom.js"></script>
-    <!-- Music js -->
-    <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/music-player.js"></script> --%>
-    <!-- Music-player js -->
-    <%-- <script src="${pageContext.request.contextPath }/resources/admin/js/music-player-dashboard.js"></script> --%>
-    <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin/js/custom.js"></script>
     <script defer type="module" src="${pageContext.request.contextPath }/resources/user/js/alert_custom.js"></script>
     <!-- Sweetalert -->
     <script src="${pageContext.request.contextPath }/resources/user/css/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <!-- JQuery  -->
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 </body>
 
 <!-- Mirrored from templates.iqonic.design/muzik/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Nov 2021 05:03:36 GMT -->
+
 
 </html>

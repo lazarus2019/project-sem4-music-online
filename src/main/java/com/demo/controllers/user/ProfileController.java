@@ -91,8 +91,6 @@ public class ProfileController implements ServletContextAware {
 				modelMap.put("accountSignined", account);
 
 				modelMap.put("accountUpdate", account);
-
-			
 				List<String> gender = new ArrayList<String>();
 				gender.add("Male");
 				gender.add("Female");
@@ -169,7 +167,6 @@ public class ProfileController implements ServletContextAware {
 		try {
 			System.out.println("id : " + id);
 			Account newAccount = accountService.findById(Integer.parseInt(id));
-
 			boolean checkPw = BCrypt.checkpw(oldPass, newAccount.getPassword());
 			if (!checkPw) {
 				modelMap.put("tab4", true);
@@ -177,7 +174,6 @@ public class ProfileController implements ServletContextAware {
 				modelMap.put("accountSignined", newAccount);
 
 				modelMap.put("accountUpdate", newAccount);
-
 				List<String> gender = new ArrayList<String>();
 				gender.add("Male");
 				gender.add("Female");

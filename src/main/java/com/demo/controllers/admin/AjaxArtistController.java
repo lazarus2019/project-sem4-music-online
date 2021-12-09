@@ -1,5 +1,6 @@
 package com.demo.controllers.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.entities.Account;
+import com.demo.models.AccountRquestInfo;
 import com.demo.services.AccountService;
 import com.demo.services.ArtistService;
 
@@ -27,33 +29,46 @@ public class AjaxArtistController {
 
 	@RequestMapping(value = {
 			"acceptArtist" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> editStatus(@RequestParam(value = "id", required = false) int id) {
+	public ResponseEntity<List<AccountRquestInfo>> editStatus(@RequestParam(value = "id", required = false) int id) {
 		try {
 			Account account = accountService.findById(id);
-
 			account.setIsArtist(true);
-			account.setIsRequest(false); 			
-			return new ResponseEntity<Boolean>(accountService.acceptOrRejectArtist(account), HttpStatus.OK);
+			account.setIsRequest(false); 	
+			accountService.acceptOrRejectArtist(account);
+			List<AccountRquestInfo> requestInfos = new ArrayList<AccountRquestInfo>();
+			for( Account acc : artistService.getRequestArtist()) {
+				AccountRquestInfo accountRquestInfo = new AccountRquestInfo(acc);
+				requestInfos.add(accountRquestInfo) ; 
+			}
+			
+			return new ResponseEntity<List<AccountRquestInfo>>(requestInfos, HttpStatus.OK);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<List<AccountRquestInfo>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@RequestMapping(value = {
 	"rejectArtist" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> rejectArtist(@RequestParam(value = "id", required = false) int id) {
+	public ResponseEntity<List<AccountRquestInfo>> rejectArtist(@RequestParam(value = "id", required = false) int id) {
 		try {
 			Account account = accountService.findById(id);
 
 			account.setIsArtist(false);
-			account.setIsRequest(false); 			
-			return new ResponseEntity<Boolean>(accountService.acceptOrRejectArtist(account), HttpStatus.OK);
+			account.setIsRequest(false); 
+			accountService.acceptOrRejectArtist(account);
+			List<AccountRquestInfo> requestInfos = new ArrayList<AccountRquestInfo>();
+			for( Account acc : artistService.getRequestArtist()) {
+				AccountRquestInfo accountRquestInfo = new AccountRquestInfo(acc);
+				requestInfos.add(accountRquestInfo) ; 
+			}
+			
+			return new ResponseEntity<List<AccountRquestInfo>>(requestInfos, HttpStatus.OK);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<List<AccountRquestInfo>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 }

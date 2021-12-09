@@ -287,7 +287,7 @@ audio {
 	cursor: pointer;
 }
 
-.lyric-box {
+.lyric-box , .comment-box {
 	position: fixed;
 	max-height: calc(100% - 90px);
 	top: 0;
@@ -303,48 +303,48 @@ audio {
 	transition: transform .75s ease, opacity .75s ease;
 }
 
-.lyric-box.show {
+.lyric-box.show , .comment-box.show {
 	opacity: 1;
 	transform: translateY(0);
 }
 
-.lyric-box .hide-lyric-box {
+.lyric-box .hide-lyric-box , .comment-box .hide-comment-box {
 	position: absolute;
 	top: 1rem;
 	right: 1rem;
 }
 
-.hide-lyric-box i {
+.hide-lyric-box i , .hide-comment-box i {
 	font-size: 30px;
 }
 
-.lyric-box .row, .lyric-box .row .col-6 {
+.lyric-box .row, .lyric-box .row .col-6 , .comment-box .row, .comment-box .row .col-6  {
 	height: 100%;
 	width: 100%;
 }
 
-.lyric-thumbnail {
+.lyric-thumbnail, .comment-thumbnail {
 	height: 100%;
 	display: flex;
 }
 
-.lyric-thumbnail img {
+.lyric-thumbnail img, .comment-thumbnail img {
 	height: 100%;
 	width: 100%;
 	margin: 0 auto;
 }
 
-.lyric-content {
+.lyric-content,  .comment-content{
 	overflow-y: auto;
 	height: 100%;
 }
 
-.lyric-content p {
+.lyric-content p , .comment-content p {
 	font-size: 40px;
 	font-weight: 600;
 }
 
-.lyric-content::-webkit-scrollbar {
+.lyric-content::-webkit-scrollbar , .comment-content::-webkit-scrollbar {
 	display: none;
 }
 
@@ -900,8 +900,8 @@ a.form-btn:hover {
 }
 
 .grid-split-2 {
-	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 1.5rem;
+	grid-template-columns: repeat(2, 48.5%);
+	grid-gap: 3%;
 }
 
 .flex-4>div {
@@ -925,10 +925,16 @@ a.form-btn:hover {
 	justify-content: flex-start;
 	color: white !important;
 	padding-top: 5px;
+	margin: 25px 15px;
 }
 
 .chart__header h3 {
 	font-size: 65px;
+}
+
+.weekly__date {
+	font-size: 1.25rem;
+	justify-content: space-between;
 }
 
 /* Notification */
@@ -1094,6 +1100,58 @@ ul.iq-edit-profile li:last-child a {
   	max-width: 400px;
 }
 
+.p-image {
+    position: absolute;
+    top: auto;
+    right: 8px;
+    bottom: 10px;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    background: var(--iq-primary);
+    color: var(--iq-white);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.upload-button {
+    font-size: 1.5em;
+}
+
+.iq-edit-profile .nav-link {
+    padding: 20px 15px;
+    border-radius: 0;
+    color: var(--iq-body-text);
+    text-align: center;
+    font-size: 16px;
+    border-left: 1px solid var(--iq-light-primary);
+}
+
+.iq-edit-profile.nav-pills .nav-link.active,
+.iq-edit-profile.nav-pills .show>.nav-link {
+    color: var(--iq-white);
+    background: var(--iq-primary);
+}
+
+ul.iq-edit-profile li:first-child a {
+    border-radius: 15px 0 0 15px;
+    border-left: none;
+}
+
+ul.iq-edit-profile li:last-child a {
+    border-radius: 0 15px 15px 0;
+}
+
+
+.image-button {
+	position: relative;
+  	width: 100%;
+  	max-width: 400px;
+}
+
 .image-button img {
 	width: 30%;
   	height: 30%;
@@ -1135,4 +1193,18 @@ ul.iq-edit-profile li:last-child a {
 
 .unPublish-status i{
 	font-size: 1.5rem;
+}
+
+.artist-nickname{
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.thumb-post {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  max-height: 250px;
+  margin-bottom: 1rem;
 }

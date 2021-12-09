@@ -62,12 +62,13 @@
 						<c:forEach var="as" items="${arti }">
 					
 							<div class="col-6 col-sm-4 col-md-3 col-xl-2">
-								<a href="artist.html" class="artist">
+								<a href="${pageContext.request.contextPath }/artist/id/${as.id}" class="artist">
 									<div class="artist__cover">
 										<img src="${pageContext.request.contextPath }/uploads/images/artist/${as.image}"
 													alt="">
 									</div>
 									<h3 class="artist__title">${as.nickname }</h3>
+									
 								</a>
 							</div>
 

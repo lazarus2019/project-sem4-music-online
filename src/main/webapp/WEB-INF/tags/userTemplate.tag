@@ -43,12 +43,13 @@
 
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
+	
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
 
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="Dmitry Volkov">
-	<title>Volna - Record label & Music streaming HTML Template</title>
+	<title>Netfzik - Record label & Music streaming HTML Template</title>
 
 </head>
 
@@ -76,18 +77,19 @@
                 <a href="#" class="link">Library</a>
                 <div class="dropdown-menu">
                     <a href="releases.html"><i class="las la-music"></i> New Release</a>
-                    <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
 					<c:if test="${pageContext.request.userPrincipal.name  != null }">
+                    	<a href="${pageContext.request.contextPath }/customPlaylist"><i class="las la-stream"></i> Playlist</a>
                     	<a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
                     	<a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
                     </c:if>
-                    <a href="record_chart.html"><i class="las la-sort-numeric-down"></i> Record Chart</a>
+                    <a href="${pageContext.request.contextPath }/record-chart"><i class="las la-sort-numeric-down"></i> Record Chart</a>
 
                 </div>
             </li>
 
-
-            <a href="${pageContext.request.contextPath }/artist">Artist</a>
+			<li>
+            	<a href="${pageContext.request.contextPath }/artist">Artist</a>
+			</li>
         </ul>
 
 		<!-- base search -->
@@ -162,9 +164,12 @@
 			</div>
 		</div>
 		<div class="audio-info">
+			<button id="lyrics" class="default-btn" onclick="toggleComment()">
+				<i class="ri-discuss-line audio__icon"></i>
+			</button>
 			<button id="lyrics" class="default-btn" onclick="toggleLyrics()">
 				<i class="las la-file-alt audio__icon"></i>
-			</button>
+			</button> 
 			<span class="duration-info">
 				<span class="current-time">00:00</span> /
 				<span class="base-duration">03:22</span>
@@ -227,6 +232,29 @@
 	</div>
 	<!-- end Lyric box -->
 
+	<div class="comment-box ">
+		<button class="default-btn hide-lyric-box" onclick="hideComment()">
+			<i class="las la-angle-down audio__icon"></i>
+		</button>
+		<div class="row row--grid">
+			<div class="col-6">
+				<div class="comment-thumbnail">
+					<img id="trackImageComment" src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
+						alt="">
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="comment-content">	
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Comment Box -->
+
+	<!-- End Comment Box -->
 	<!-- Playlist box -->
 	<div class="playlist__box">
 		<div class="playlist-title">
@@ -852,8 +880,7 @@
 	            audio.play()
 	        } else {
 	            if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
-	                addSongs(waitingPlaylist[0])
-	                playSong(waitingPlaylist[0].id)
+	                _this.findAndSongToWaiting()	                
 	            } else {
 	                nextBtn.click()
 	            }
@@ -950,7 +977,7 @@
 	},
 	loadCurrentSong: function () {
 	    this.activeSong()
-
+		
 	    if (this.amount % adsStep === 0 && this.amount !== 0) {
 	        this.isAdvertisement = true
 	        this.setConfig('isAdvertisement', this.isAdvertisement)
@@ -1009,9 +1036,14 @@
 
 	    lyricContent.innerHTML = title + htmls.join('')
 	},
+	findAndSongToWaiting: function(){
+		getWaitingTrack(this.currentSong)
+	},
 	loadConfig: function () {
 	    this.currentIndex = this.config.currentIndex || 0
 	    this.currentSong = this.config.currentSong || songPlaylist[this.currentIndex] || {}
+	    this.amount = this.config.amount || 0
+	    this.isAdvertisement = this.config.isAdvertisement || false
 
 	    this.volume = this.config.volume || .5
 	    audioVolume.value = this.volume * 100
@@ -1029,9 +1061,7 @@
 	    if (this.isPlaying) {
 	        audio.autoplay = true
 	    }
-
-	    this.amount = this.config.amount || 0
-	    this.isAdvertisement = this.config.isAdvertisement || false
+	    
 	    this.isRandom = this.config.isRandom || false
 	    this.isRepeat = this.config.isRepeat || false
 	    this.isCountdown = this.config.isCountdown || false
@@ -1047,6 +1077,7 @@
 	    if (this.currentIndex >= songPlaylist.length) {
 	        this.currentIndex = 0
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	prevSong: function () {
@@ -1054,6 +1085,7 @@
 	    if (this.currentIndex < 0) {
 	        this.currentIndex = songPlaylist.length - 1
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	playRandomSong: function () {
@@ -1063,6 +1095,7 @@
 	    } while (newIndex === this.currentIndex);
 
 	    this.currentIndex = newIndex
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	addNewSong: function (songs) {
@@ -1218,8 +1251,7 @@
 	            audio.play()
 	        } else {
 	            if (!_this.isRandom && _this.currentIndex === (songPlaylist.length - 1)) {
-	                addSongs(waitingPlaylist[0])
-	                playSong(waitingPlaylist[0].id)
+	            	_this.findAndSongToWaiting()	                
 	            } else {
 	                nextBtn.click()
 	            }
@@ -1309,7 +1341,7 @@
 	},
 	loadCurrentSong: function () {
 	    this.activeSong()
-
+		
 	    audio.src = this.currentSong.path
 	    cdThumb.src = this.currentSong.image
 	    songName.textContent = this.currentSong.title;
@@ -1339,6 +1371,9 @@
 
 		    lyricContent.innerHTML = title + htmls.join('')
 		}
+	},
+	findAndSongToWaiting: function(){
+		getWaitingTrack(this.currentSong)
 	},
 	loadConfig: function () {
 	    this.currentIndex = this.config.currentIndex || 0
@@ -1375,6 +1410,7 @@
 	    if (this.currentIndex >= songPlaylist.length) {
 	        this.currentIndex = 0
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	prevSong: function () {
@@ -1382,6 +1418,7 @@
 	    if (this.currentIndex < 0) {
 	        this.currentIndex = songPlaylist.length - 1
 	    }
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	playRandomSong: function () {
@@ -1391,6 +1428,7 @@
 	    } while (newIndex === this.currentIndex);
 
 	    this.currentIndex = newIndex
+	    plusListenForTrack(this.currentSong.id)
 	    this.loadCurrentSong()
 	},
 	addNewSong: function (songs) {
@@ -1515,16 +1553,16 @@
 	}
 
 	function playSong(songId) {
-	const currentSong = findSong(songId)
-	if (isPremium) {
-	    appPremium.currentIndex = songPlaylist.indexOf(currentSong)
-
-	    appPremium.loadCurrentSong()
-	} else {
-	    app.currentIndex = songPlaylist.indexOf(currentSong)
-
-	    app.loadCurrentSong()
-	}
+		const currentSong = findSong(songId)
+		if (isPremium) {
+		    appPremium.currentIndex = songPlaylist.indexOf(currentSong)
+	
+		    appPremium.loadCurrentSong()
+		} else {
+		    app.currentIndex = songPlaylist.indexOf(currentSong)
+	
+		    app.loadCurrentSong()
+		}
 	}
 
 	// Save waiting songs
@@ -1546,6 +1584,8 @@
 	// replaceNewPlaylist(waitingPlaylist)
 
 		
+		// Get comment of this track 
+	
 		//==== Click functions: Track - Album ====
 
  function getTrackById(e){
@@ -1557,8 +1597,14 @@
             },
             url: '${pageContext.request.contextPath }/home/getTrackById',
             success: function (track) {
+            	 
                 if (track) {
                      console.log(track) 
+	                 console.log('${pageContext.request.contextPath }/uploads/images/track/' + track.thumbnail )
+	                 // Thu dung ke 
+	                 const img = document.getElementById("trackImageComment") || null
+	                 img.src = '${pageContext.request.contextPath }/uploads/images/track/' + track.thumbnail ; 
+	                 ///////
                    
                     let flag = false
                     for(let i = 0; i < songPlaylist.length; i++){
@@ -1579,20 +1625,84 @@
          						path: '${pageContext.request.contextPath }/uploads/audio/track/' + track.fileName,
          						duration: track.duration,
          						singer: singer,
-         						lyrics: track.lyrics
+         						lyrics: track.lyrics,
+         						genresId: track.genresId
                             }
                              
 	                    addSongs(playTrack)
 	                    playSong(playTrack.id)
+	                    plusListenForTrack(playTrack.id)
 	                    var lyrics = renderLyrics(track.lyrics)
 	                    var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
 	                    $(".lyric-content").html(songTitle + lyrics)
+	                    
                     }
                 }
+
+                $.ajax({
+                    type: 'GET',
+                    data: {
+                        trackId: trackId
+                    },
+                    url: '${pageContext.request.contextPath }/home/getCommentByTrackId',
+                    success: function (comments) {
+						var result = "" ; 
+						 for (var i = 0; i < comments.length; i++) {
+							result += '<li class="comments__item">' ;
+							result += '<div class="comments__autor">' ; 
+							result += '<img class="comments__avatar" src="${pageContext.request.contextPath }/uploads/images/artist/' + comments[i].accountImage +'" alt="">'
+							result += '<span class="comments__name">'+comments[i].accountName+'</span>' ;
+							result += '<span class="comments__time">'+ comments[i].date +'</span>' ; 		
+							result += '</div> <p class="comments__text">'+ comments[i].message+'</p> </li>' ;		
+							result += '' ; 
+								
+								/* <div class="comments__actions">
+									<div class="comments__rate">
+										<button type="button"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="../../../www.w3.org/2000/svg.html"><path d="M19 2H5C4.20435 2 3.44129 2.31607 2.87868 2.87868C2.31607 3.44129 2 4.20435 2 5V19C2 19.7956 2.31607 20.5587 2.87868 21.1213C3.44129 21.6839 4.20435 22 5 22H19C19.7956 22 20.5587 21.6839 21.1213 21.1213C21.6839 20.5587 22 19.7956 22 19V5C22 4.20435 21.6839 3.44129 21.1213 2.87868C20.5587 2.31607 19.7956 2 19 2ZM20 19C20 19.2652 19.8946 19.5196 19.7071 19.7071C19.5196 19.8946 19.2652 20 19 20H5C4.73478 20 4.48043 19.8946 4.29289 19.7071C4.10536 19.5196 4 19.2652 4 19V5C4 4.73478 4.10536 4.48043 4.29289 4.29289C4.48043 4.10536 4.73478 4 5 4H19C19.2652 4 19.5196 4.10536 19.7071 4.29289C19.8946 4.48043 20 4.73478 20 5V19ZM16 11H8C7.73478 11 7.48043 11.1054 7.29289 11.2929C7.10536 11.4804 7 11.7348 7 12C7 12.2652 7.10536 12.5196 7.29289 12.7071C7.48043 12.8946 7.73478 13 8 13H16C16.2652 13 16.5196 12.8946 16.7071 12.7071C16.8946 12.5196 17 12.2652 17 12C17 11.7348 16.8946 11.4804 16.7071 11.2929C16.5196 11.1054 16.2652 11 16 11Z"/><path d="M13 16V8C13 7.73478 12.8946 7.48043 12.7071 7.29289C12.5196 7.10536 12.2652 7 12 7C11.7348 7 11.4804 7.10536 11.2929 7.29289C11.1054 7.48043 11 7.73478 11 8V16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16Z"/></svg> 12</button>
+
+										<button type="button">7 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="../../../www.w3.org/2000/svg.html"><path d="M19 2H5C4.20435 2 3.44129 2.31607 2.87868 2.87868C2.31607 3.44129 2 4.20435 2 5V19C2 19.7956 2.31607 20.5587 2.87868 21.1213C3.44129 21.6839 4.20435 22 5 22H19C19.7956 22 20.5587 21.6839 21.1213 21.1213C21.6839 20.5587 22 19.7956 22 19V5C22 4.20435 21.6839 3.44129 21.1213 2.87868C20.5587 2.31607 19.7956 2 19 2ZM20 19C20 19.2652 19.8946 19.5196 19.7071 19.7071C19.5196 19.8946 19.2652 20 19 20H5C4.73478 20 4.48043 19.8946 4.29289 19.7071C4.10536 19.5196 4 19.2652 4 19V5C4 4.73478 4.10536 4.48043 4.29289 4.29289C4.48043 4.10536 4.73478 4 5 4H19C19.2652 4 19.5196 4.10536 19.7071 4.29289C19.8946 4.48043 20 4.73478 20 5V19ZM16 11H8C7.73478 11 7.48043 11.1054 7.29289 11.2929C7.10536 11.4804 7 11.7348 7 12C7 12.2652 7.10536 12.5196 7.29289 12.7071C7.48043 12.8946 7.73478 13 8 13H16C16.2652 13 16.5196 12.8946 16.7071 12.7071C16.8946 12.5196 17 12.2652 17 12C17 11.7348 16.8946 11.4804 16.7071 11.2929C16.5196 11.1054 16.2652 11 16 11Z"/></svg></button>
+									</div>
+
+									<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.707,11.293l-8-8A.99991.99991,0,0,0,12,4V7.54492A11.01525,11.01525,0,0,0,2,18.5V20a1,1,0,0,0,1.78418.62061,11.45625,11.45625,0,0,1,7.88672-4.04932c.0498-.00635.1748-.01611.3291-.02588V20a.99991.99991,0,0,0,1.707.707l8-8A.99962.99962,0,0,0,21.707,11.293ZM14,17.58594V15.5a.99974.99974,0,0,0-1-1c-.25488,0-1.2959.04932-1.56152.085A14.00507,14.00507,0,0,0,4.05176,17.5332,9.01266,9.01266,0,0,1,13,9.5a.99974.99974,0,0,0,1-1V6.41406L19.58594,12Z"/></svg><span>Reply</span></button>
+									<button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.3,10.75A1,1,0,1,0,9,9.25,3,3,0,1,1,7,4,3,3,0,0,1,9.23,5H8A1,1,0,0,0,8,7h3a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0h0a5,5,0,1,0,.3,7.75ZM19,6H15a1,1,0,0,0,0,2h4a1,1,0,0,1,1,1v9.72l-1.57-1.45a1,1,0,0,0-.68-.27H9a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v1a3,3,0,0,0,3,3h8.36l3,2.73A1,1,0,0,0,21,22a1.1,1.1,0,0,0,.4-.08A1,1,0,0,0,22,21V9A3,3,0,0,0,19,6Z"/></svg><span>Quote</span></button>
+								</div> */
+							$(".comment-content").html(result)	
+
+						}
+                        
+                        console.log("ok")
+                    },
+                    error: function() {
+                        console.log("error")
+                       
+                    }
+                })
             }
         })
 }
 
+
+
+	
+	
+	
+	
+	
+	function plusListenForTrack(trackId){
+		$.ajax({
+            type: 'GET',
+            data: {
+                trackId: trackId,
+            },
+            url: '${pageContext.request.contextPath }/player/plusListenTrack',
+            success: function (response) {
+            	/* console.log("OK")     */
+            }
+            ,error: function(){
+            	console.log("ERROR")
+           	}
+        })
+	}
 	function getWaitingTrack(track){
 		$.ajax({
             type: 'GET',
@@ -1603,7 +1713,23 @@
             url: '${pageContext.request.contextPath }/home/getWaitingTrack',
             success: function (waitingTrack) {
                 console.log("waiting track:" + waitingTrack.title)
-                addSongToWaiting(waitingTrack)
+                var singer = ""
+                    if(track.artist){
+                       singer = track.artist.map(artist => artist.nickname + " - ")
+                    }
+                var playTrack = {
+         						id: waitingTrack.id,
+         						title: waitingTrack.title,
+         						image: '${pageContext.request.contextPath }/uploads/images/track/' + waitingTrack.thumbnail,
+         						path: '${pageContext.request.contextPath }/uploads/audio/track/' + waitingTrack.fileName,
+         						duration: waitingTrack.duration,
+         						singer: singer,
+         						lyrics: waitingTrack.lyrics,
+         						genresId: waitingTrack.genresId
+                            }
+                addSongToWaiting(playTrack)   
+                addSongs(playTrack)
+                playSong(waitingPlaylist[0].id)             
             }
         })
 	}

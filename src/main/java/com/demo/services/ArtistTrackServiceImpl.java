@@ -145,4 +145,18 @@ public class ArtistTrackServiceImpl implements ArtistTrackService{
 		
 	}
 
+	@Override
+	public boolean checkTrackOwner(int artistId, int trackId) {
+		boolean result = false;
+		List<Integer> trackIds = artistTrackRepository.getTracksOfArtist(artistId);
+		for(int trackIdTmp : trackIds) {
+			if(trackIdTmp == trackId) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+
+
 }

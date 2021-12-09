@@ -27,6 +27,8 @@ import com.demo.entities.Track;
 import com.demo.helpers.FileUploadHelper;
 import com.demo.models.PlaylistModel;
 import com.demo.models.TrackInfo;
+import com.demo.services.ArtistTrackService;
+import com.demo.services.CommentService;
 import com.demo.services.GenresService;
 import com.demo.services.PlaylistService;
 import com.demo.services.TrackService;
@@ -48,6 +50,12 @@ public class ManageTrackController implements ServletContextAware {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private ArtistTrackService artistTrackService;
+
+	@Autowired
+	private CommentService commentService;
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
@@ -223,6 +231,29 @@ public class ManageTrackController implements ServletContextAware {
 			}
 
 			return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> delete(@RequestParam("id") int trackId) {
+		boolean result = false;
+		Track track = trackService.findById(trackId);
+
+		artistTrackService.removeAllArtistFromTrack(track);
+		for (Playlist album : track.getPlaylists()) {
+
+			track.getPlaylists().remove(album);
+		}
+		// playlistTrackService.removeTrackFromAllAlbum(track);
+
+		commentService.removeAllCommentInTrack(track);
+
+		trackService.delete(trackId);
+
+		result = true;
+		try {
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 		}

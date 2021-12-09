@@ -11,14 +11,15 @@ import org.springframework.stereotype.Repository;
 
 import com.demo.entities.Account;
 import com.demo.entities.ServicePackage;
+import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 
 @Repository("accountRepository")
 public interface AccountRepository extends PagingAndSortingRepository<Account, Integer> {
 
-	@Query(value = "select * from Account where is_artist = true order by follower desc limit 10", nativeQuery = true)
-	public List<Account> getAllPopularArtists();
+	@Query(value = "select * from Account where is_artist = true order by follower desc limit :n", nativeQuery = true)
+	public List<Account> getAllPopularArtists(@Param("n") int n);
 
 	@Query("from Account where username = :username")
 	public Account findByUsername(@Param("username") String username);
@@ -28,6 +29,9 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 
 	@Query("select new com.demo.models.ArtistsInfor(id, nickname, image, follower) from Account where isArtist = true ")
 	public List<ArtistsInfor> getallArtists();
+	
+	@Query("select new com.demo.models.ArtistDetail(id, nickname, image, follower, description, country.countryName) from Account where id = :id and isArtist = true ")
+	public ArtistDetail getArtistByIdAccount(@Param("id") int id);
 
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE isArtist = true AND (nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%)")
 	public List<ArtistInfo> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
@@ -46,4 +50,7 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, I
 
 	@Query("from Account where username = :username")
 	public Account find(@Param("username") String username);
+	
+	@Query("select count(id) from Account where isArtist = true")
+	public long countArtist();
 }

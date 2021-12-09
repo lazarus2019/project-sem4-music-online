@@ -31,5 +31,8 @@ public interface ArtistRepository extends PagingAndSortingRepository<Account, In
 	
 	@Query("from Account where isArtist = false and isRequest = true")
 	public List<Account> getRequestArtist() ;
+	
+	@Query("from Account where isArtist = true")
+	public List<Account> getAllArtist() ;
 
 }

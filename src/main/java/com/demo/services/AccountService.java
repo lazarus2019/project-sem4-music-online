@@ -3,7 +3,8 @@ package com.demo.services;
 import java.util.*;
 
 import org.springframework.data.domain.Pageable;
-
+import com.demo.models.ArtistChartModel;
+import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
 import com.demo.entities.Account;
@@ -11,7 +12,7 @@ import com.demo.entities.AuthenticationProvider;
 
 public interface AccountService {
 
-	public List<Account> getAllPopularArtists();
+	public List<Account> getAllPopularArtists(int n);
 
 	/* extends UserDetailsService */
 	public Iterable<Account> findAll();
@@ -50,8 +51,15 @@ public interface AccountService {
 
 	public void forgotPassword(Account account);
 	
-	public Account addNewAdmin(Account account , String image) ;
+	public long countArtist();
 
+	public long countUser();
+	
+	public List<ArtistChartModel> getAccountChart();
+	
+	public ArtistDetail getArtistByIdAccount(int id);
+	
+	public Account addNewAdmin(Account account , String image) ;
 
 }
 

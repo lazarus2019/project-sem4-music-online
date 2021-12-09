@@ -52,12 +52,17 @@
 		<tag-class>com.demo.mytags.BaseSearchTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
+
 	<tag>
 		<name>profile</name>
 		<tag-class>com.demo.mytags.ProfileTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
-
+	<tag>
+		<name>amountRequest</name>
+		<tag-class>com.demo.mytags.AmountRequestTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
 	<tag>
 
 		<name>timeAgo</name>

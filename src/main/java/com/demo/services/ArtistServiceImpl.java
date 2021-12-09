@@ -87,5 +87,9 @@ public class ArtistServiceImpl implements ArtistService{
 		
 		return accountRepository.save(account);
 	}
+	@Override
+	public List<Account> getAllArtist() {
+		return artistRepository.getAllArtist();
+	}
 
 }
