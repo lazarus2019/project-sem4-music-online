@@ -40,9 +40,9 @@
                                 	</a>
                                 </h4>
                                 <span class="artist-nickname">
-									<c:forEach var="artist" items="${topTrack.accounts }">
-										<a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname } </a>
-										<c:if test="${(i.index + 1 ) != topTrack.artistLength && i.index != 0}"> , </c:if>
+									<c:forEach var="artist" items="${topTrack.accounts }" varStatus="j">
+		                                    <a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname}</a>
+		                                    <c:if test="${(j.index+1) < topTrack.artistLength}">, </c:if>
 									</c:forEach>
 								</span>
                             </div>

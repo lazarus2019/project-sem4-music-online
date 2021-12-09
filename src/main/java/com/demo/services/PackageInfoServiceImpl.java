@@ -77,6 +77,11 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 	}
 
 	@Override
+	public List<PackageInfo> countByPackageId(int packageId) {
+		return packageInfoRepository.countByPackageId(packageId);
+	}
+
+	@Override
 	public List<Account> getAccountsSignPackageById(int packageId) {
 		return packageInfoRepository.getAccountsSignPackageById(packageId);
 	}
@@ -110,6 +115,17 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 	@Override
 	public PackageInfo save(PackageInfo packageInfo) {
 		return packageInfoRepository.save(packageInfo);
+	}
+
+	public boolean checkPremiumByAccountId(int accountId) {
+		boolean result = false;
+		PackageInfo packageInfo = packageInfoRepository.getTheLastSignPackage(accountId);
+		if(packageInfo != null) {
+			if(packageInfo.getExpirationDate().after(new Date())) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 }

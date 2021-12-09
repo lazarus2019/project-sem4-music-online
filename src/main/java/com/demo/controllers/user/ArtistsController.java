@@ -6,37 +6,33 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.TitlePaneLayout;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
 import com.demo.entities.ArtistTrack;
 import com.demo.entities.Playlist;
-import com.demo.entities.PlaylistCategory;
 import com.demo.entities.Track;
 import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistsInfor;
 import com.demo.models.PlaylistModel;
 import com.demo.services.AccountService;
+import com.demo.services.ArtistService;
 import com.demo.services.CookieService;
 import com.demo.services.PlaylistService;
 import com.demo.services.TrackService;
-
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = { "artist" })
@@ -56,6 +52,9 @@ public class ArtistsController {
 
 	@Autowired
 	private TrackService trackService;
+	
+	@Autowired
+	private ArtistService artistService;
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
@@ -67,6 +66,18 @@ public class ArtistsController {
 			modelMap.put("erro", e.getMessage());
 		}
 
+		return "artist/index";
+	}
+	
+	@RequestMapping(value = { "search-base" }, method = RequestMethod.GET)
+	public String index(@RequestParam("keyword") String keyword, ModelMap modelMap) {
+		try {			
+			modelMap.put("arti", artistService.searchByKeyword(keyword));
+			
+		} catch (Exception e) {
+			modelMap.put("erro", e.getMessage());
+		}
+		
 		return "artist/index";
 	}
 

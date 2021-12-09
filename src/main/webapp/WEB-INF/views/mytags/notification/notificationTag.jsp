@@ -4,7 +4,7 @@
 <%@ page import="com.demo.helpers.CalculateDateTimeHelper"%>
 <%@ taglib prefix="t" uri="http://mytags.com" %>
 
-<div class="header__action header__action--note">
+<div class="header__action header__action--note ml-1">
 	<a href="#" class="header__action-btn"><span class="icon-x7"><i class="far fa-bell clr-white"></i></span></a>
 	<div class="header__drop">
 		<c:if test="${newNotifications.size() != 0 || readNotifications.size() != 0 || not empty accountId }">

@@ -21,4 +21,7 @@ public interface PackageInfoService {
 
 	public List<Double> getTotalPricePerMonth();
 
+	public List<PackageInfo> countByPackageId(int packageId);
+	
+	public boolean checkPremiumByAccountId(int accountId);
 }

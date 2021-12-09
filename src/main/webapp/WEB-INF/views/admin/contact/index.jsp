@@ -51,7 +51,7 @@
 				                              	 <c:forEach var="contact" items="${contacts}" varStatus="i">
 					                                 <tr style="height: 100px;" class="contact-row" data-id="${contact.id }">
 					                                    <td class="text-center">${i.index + 1 }</td>					                                    
-					                                    <td>00:00 AM/PM DD/MM/YYYY</td>
+					                                    <td><fmt:formatDate value="${contact.date }" type="date" pattern="hh:ss a dd/MM/yyyy"/></td>
 					                                    <td>${contact.fullname }</td>
 					                                    <td class="text-center">${contact.email }</td>
 					                                    <%-- <td>${contact.phoneNumber }</td> --%>					                                    
@@ -97,8 +97,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-        	From: <span class="sender"></span>
-        	<
+        	From: <span class="sender"></span>        	
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

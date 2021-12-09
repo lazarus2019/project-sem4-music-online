@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.jsp.PageContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -91,6 +90,12 @@ public class TrackController implements ServletContextAware{
 	 * @RequestMapping( value = {"index" }) public String index() { return
 	 * "track/index" ; }
 	 */
+
+	@RequestMapping( value = { "search" })
+	public String index(@RequestParam("keyword")String keyword, ModelMap modelMap) {
+		modelMap.put("listtrack", trackService.searchByTitle(keyword));
+		return "track/all" ; 
+	}
 	
 	@RequestMapping( value = { "add" })
 	public String add(ModelMap modelMap, Authentication authentication) {
@@ -144,7 +149,7 @@ public class TrackController implements ServletContextAware{
 					return "redirect:/home" ;
 				}else {
 					modelMap.put("accountSignined", account) ; 
-					int artistId = account.getId();
+					int artistId = account.getId();				
 					FileUploadHelper fileHelper = new FileUploadHelper();
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					String directionThumbnail = "images/track/";
@@ -283,76 +288,74 @@ public class TrackController implements ServletContextAware{
 					return "redirect:/home" ;
 				}else {
 					modelMap.put("accountSignined", account) ; 
-					int artistId = account.getId();
-					if(artistTrackService.checkTrackOwner(artistId, track.getId())) {
-						Track newTrack = trackService.findById(track.getId());
-						FileUploadHelper fileHelper = new FileUploadHelper();
-						String directionThumbnail = "images/track/";
-						
-						// Set new thumbnail
-						if (!thumbnailTrack.isEmpty() && thumbnailTrack.getSize() > 0) {
-							String thumbnail = fileHelper.uploadFile(thumbnailTrack, directionThumbnail, servletContext);
-							if(thumbnail != null) {
-								boolean isDelete = fileHelper.deleteFile(track.getThumbnail(), directionThumbnail, servletContext);
-								if(isDelete) {
-									newTrack.setThumbnail(thumbnail);
-								}				
+					int artistId = account.getId();					
+						if(artistTrackService.checkTrackOwner(artistId, track.getId())) {
+							Track newTrack = trackService.findById(track.getId());
+							FileUploadHelper fileHelper = new FileUploadHelper();
+							String directionThumbnail = "images/track/";
+							
+							// Set new thumbnail
+							if (!thumbnailTrack.isEmpty() && thumbnailTrack.getSize() > 0) {
+								String thumbnail = fileHelper.uploadFile(thumbnailTrack, directionThumbnail, servletContext);
+								if(thumbnail != null) {
+									boolean isDelete = fileHelper.deleteFile(track.getThumbnail(), directionThumbnail, servletContext);
+									if(isDelete) {
+										newTrack.setThumbnail(thumbnail);
+									}				
+								}
 							}
-						}
-						// Check/Set publish/hidden
-						if(isHidden != null) {
-							if(newTrack.getStatus().getId() == 1){
-								Status status = new Status();			
-								status.setId(3);
-								newTrack.setStatus(status);		
+							// Check/Set publish/hidden
+							if(isHidden != null) {
+								if(newTrack.getStatus().getId() == 1){
+									Status status = new Status();			
+									status.setId(3);
+									newTrack.setStatus(status);		
+								}
+							}else {
+								if(newTrack.getStatus().getId() == 3 && newTrack.getStatus().getId() != 2) {
+									Status status = new Status();			
+									status.setId(1);
+									newTrack.setStatus(status);	
+								}
 							}
-						}else {
-							if(newTrack.getStatus().getId() == 3 && newTrack.getStatus().getId() != 2) {
-								Status status = new Status();			
-								status.setId(1);
-								newTrack.setStatus(status);	
+							
+							newTrack.setGenres(track.getGenres());
+							newTrack.setTitle(track.getTitle());
+							newTrack.setLyrics(track.getLyrics());
+							newTrack.setIsPremium(track.isIsPremium());
+							trackService.save(newTrack);
+							
+							// Delete old feat artists from artist track
+							artistTrackService.removeFeatArtistFromTrack(newTrack, artistId);
+							
+
+							
+							// Add new feat artists
+							if(artists != null) {
+								for(String featArtistIdString : artists) {
+									int featArtistId = Integer.parseInt(featArtistIdString);
+									artistTrackService.addFeatArtistToTrack(newTrack, featArtistId);
+								}						
 							}
-						}
-						
-						newTrack.setGenres(track.getGenres());
-						newTrack.setTitle(track.getTitle());
-						newTrack.setLyrics(track.getLyrics());
-						newTrack.setLikes(track.getLikes());
-						newTrack.setDuration(track.getDuration());
-						newTrack.setListens(track.getListens());
-						newTrack.setBaseListens(track.getBaseListens());
-						newTrack.setWeeklyListens(track.getWeeklyListens());
-						newTrack.setIsPremium(track.isIsPremium());
-						trackService.save(newTrack);
-						
-						// Delete old feat artists from artist track
-						artistTrackService.removeFeatArtistFromTrack(newTrack, artistId);
-						
-						// Add new feat artists
-						if(artists != null) {
-							for(String featArtistIdString : artists) {
-								int featArtistId = Integer.parseInt(featArtistIdString);
-								artistTrackService.addFeatArtistToTrack(newTrack, featArtistId);
+							
+							// Delete old track from album
+							for (Playlist album : newTrack.getPlaylists()) {
+								newTrack.getPlaylists().remove(album);
+							}
+							
+							// Add track to album
+							if(albums != null) {
+								for(String albumIdString : albums) {
+									int albumId = Integer.parseInt(albumIdString);
+									Playlist album = playlistService.find(albumId);
+									album.getTracks().add(newTrack);
+									playlistService.save(album);
+								 }						
 							}						
+						}else {
+							modelMap.put("msg", "Sorry, but you didn't own this track!"); 
+							return "redirect:/track/manage" ;
 						}
-						
-						// Delete old track from album
-						newTrack.setPlaylists(null);
-						trackService.save(newTrack);
-						
-						// Add track to album
-						if(albums != null) {
-							for(String albumIdString : albums) {
-								int albumId = Integer.parseInt(albumIdString);
-								Playlist album = playlistService.find(albumId);
-								album.getTracks().add(newTrack);
-								playlistService.save(album);
-							 }						
-						}						
-					}else {
-						modelMap.put("msg", "Sorry, but you didn't own this track!"); 
-						return "redirect:/track/manage" ;
-					}
 				}			
 			}
 		} 

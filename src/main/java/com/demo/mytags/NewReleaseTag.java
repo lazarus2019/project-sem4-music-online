@@ -41,7 +41,6 @@ public class NewReleaseTag extends RequestContextAwareTag {
 			String jspPage = "../mytags/track/newReleaseTag.jsp";
 			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 			//get new release track by status = true and get limit 12
-			request.setAttribute("newReleases", trackService.getNewRelease(1, 12));
 			List<TrackInfo> newReleasesTrack = new ArrayList<TrackInfo>();
 			for (Track track: trackService.getNewRelease(1, 12)) {
 				TrackInfo trackInfo = new TrackInfo();

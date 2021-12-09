@@ -7,4 +7,5 @@ public interface AdvertisementService {
 	public Iterable<Advertisement> findAll();
 	public Advertisement save(Advertisement advertisement);
 	public void delete(int id);
+	public Advertisement findActiveAds();
 }

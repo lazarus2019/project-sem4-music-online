@@ -92,4 +92,9 @@ public class ArtistServiceImpl implements ArtistService{
 		return artistRepository.getAllArtist();
 	}
 
+	@Override
+	public List<ArtistInfo> searchByKeyword(String keyword) {
+		return artistRepository.searchByKeyword(keyword);
+	}
+
 }

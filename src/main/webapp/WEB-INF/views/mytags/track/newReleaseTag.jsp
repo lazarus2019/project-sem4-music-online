@@ -41,9 +41,9 @@
 								<a href="release.html">${newRelease.title }</a>
 							</h3>
 							<span class="artist-nickname">
-								<c:forEach var="artist" items="${newRelease.accounts }">
-                                    <a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname}</a>
-                                    <c:if test="${(i.index + 1 ) != newRelease.artistLength && i.index != 0}"> , </c:if>
+								<c:forEach var="artist" items="${newRelease.accounts }" varStatus="j">
+		                                    <a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname}</a>
+		                                    <c:if test="${(j.index+1) < newRelease.artistLength}">, </c:if>
                                 </c:forEach>
 
 							</span>

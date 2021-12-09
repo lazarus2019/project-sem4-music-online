@@ -103,7 +103,14 @@
                             <a href="${pageContext.request.contextPath }/admin/package" class="iq-waves-effect">
                             	<i class="ri-pages-fill iq-arrow-left"></i><span>Service Package</span></a> 
                             </a>
-                        </li>                        
+                        </li>       
+                                         
+                        <li>
+                            <a href="${pageContext.request.contextPath }/admin/advertisement" class="iq-waves-effect">
+                            	<i class="ri-money-dollar-circle-fill iq-arrow-left"></i><span>Advertisement</span>
+                            </a>
+                        </li>   
+                                             
                         <li>
                             <a href="${pageContext.request.contextPath }/admin/contact" class="iq-waves-effect">
                             	<i class="ri-mail-unread-line iq-arrow-left"></i><span>Mailbox</span></a> 
@@ -200,76 +207,11 @@
                                     <span class=" dots"></span>
                                 </a>
                             </li>
-                            <li class="nav-item nav-icon">
-                                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
-                                    <i class="ri-mail-line"></i>
-                                    <span class="massage-icon dots badge badge-primary">5</span>
-                                </a>
-                                <div class="iq-sub-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                        <div class="iq-card-body p-0 ">
-                                            <div class="bg-primary p-3">
-                                                <h5 class="mb-0 text-white">All Messages<small class="badge  badge-light float-right pt-1">5</small></h5>
-                                            </div>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/01.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Bni Emma Watson</h6>
-                                                        <small class="float-left font-size-12">13 Jun</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/02.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
-                                                        <small class="float-left font-size-12">20 Apr</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/03.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Why do we use it?</h6>
-                                                        <small class="float-left font-size-12">30 Jun</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/04.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Variations Passages</h6>
-                                                        <small class="float-left font-size-12">12 Sep</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded" src="${pageContext.request.contextPath }/resources/admin/images/user/05.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Lorem Ipsum generators</h6>
-                                                        <small class="float-left font-size-12">5 Dec</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            
+                            <!-- mailbox -->
+                            <mailbox></mailbox>
+                            <!-- mailbox end -->
+                            
                             <li class="nav-item nav-icon">
                                 <a href="#" class="search-toggle iq-waves-effect text-black rounded">
                                     <i class="ri-notification-line block"></i>

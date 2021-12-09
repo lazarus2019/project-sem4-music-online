@@ -20,4 +20,5 @@ public interface NotificationService {
 	
 	public void sendNotification(int accountId, String message);
 
+
 }

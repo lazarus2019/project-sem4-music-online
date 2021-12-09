@@ -152,7 +152,7 @@ public class PackageServiceImpl implements PackageService {
 			packageInfoModel.setAccount_nickname(packageInfo.getAccount().getNickname());
 			packageInfoModel.setExpiration_date(packageInfo.getExpirationDate());
 			packageInfoModel.setPurchase_date(packageInfo.getPurchaseDate());
-			packageInfoModel.setPrice(packageInfo.getServicePackage().getPrice());
+			packageInfoModel.setPrice(packageInfo.getPrice());
 			
 			result.add(packageInfoModel);
 		}

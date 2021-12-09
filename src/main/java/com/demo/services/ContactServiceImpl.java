@@ -1,5 +1,7 @@
 package com.demo.services;
 
+import java.util.List;
+
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,11 @@ public class ContactServiceImpl implements ContactService {
 		} catch (MessagingException e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public List<Contact> getTopUnreadContact() {
+		return contactRepository.getTopUnreadContact();
 	}
 
 	

@@ -35,7 +35,7 @@
 							<c:forEach var="album" items="${albums }">
 							<div class="col-12 col-sm-6 col-lg-4">
 								<div class="event" data-bg="${pageContext.request.contextPath }/uploads/images/playlist/${album.thumbnail }">
-									<span class="event__date"><fmt:formatDate value="${album.publishDate }" type="date" pattern="MMM-dd-yyyy"/></span>
+									<span class="event__date">${album.publishDate }</span>
 									<h3 class="event__title">
 										<a href="${pageContext.request.contextPath }/playlist/edit/${album.id}">${album.title }</a>
 									</h3>
@@ -46,6 +46,10 @@
 									<button class="btn-dropdown-album-menu-artist">
 										<i class="las la-braille audio__icon"></i>
 										<div class="dropdown-album-menu-artist">
+											<a class="dropdown-song-link-menu" data-id="${album.id}" onclick="getListTrackByAlbumId(this)">
+												<i class="las la-play small__icon"></i>
+												<span>Play album</span>
+											</a>
 											<a href="${pageContext.request.contextPath }/playlist/edit/${album.id}" class="dropdown-song-link-menu">
 												<i class="las la-edit small__icon"></i>
 												<span>Edit Album</span>
@@ -98,12 +102,12 @@
 			    
 			                            htmls += "<div class='col-12 col-sm-6 col-lg-4'>"
 			                            htmls += "<div class='event' data-bg='${pageContext.request.contextPath }/uploads/images/playlist/"+ albums[i].thumbnail  +"'>"
-			                            htmls += "<span class='event__date'></span>"
+			                            htmls += "<span class='event__date'>"+ albums[i].publishDate +"</span>"
 			                            htmls += "<h3 class='event__title'><a href='${pageContext.request.contextPath }/playlist/edit/"+ albums[i].id +"'>"+ albums[i].title +"</a></h3>"
 			                            htmls += "<p class='event__address' style='max-height: 54px'>"+ albums[i].description +"</p>"
 			                            htmls += status
 			                            htmls += "<button class='btn-dropdown-album-menu-artist'><i class='las la-braille audio__icon'></i><div class='dropdown-album-menu-artist'>"
-			                            htmls += "<a href='${pageContext.request.contextPath }/playlist/edit/"+ albums[i].id +"' class='dropdown-song-link-menu'>"
+			                            htmls += "<a class='dropdown-song-link-menu' data-id='"+albums[i].id +"' onclick='getListTrackByAlbumId(this)'><i class='las la-play small__icon'></i><span>Play this album</span></a><a href='${pageContext.request.contextPath }/playlist/edit/"+ albums[i].id +"' class='dropdown-song-link-menu'>"
 			                            htmls += "<i class='las la-edit small__icon'></i><span>Edit Album</span></a><a class='dropdown-song-link-menu favorite-link' data-favorite='true'><i class='las la-heart'></i><span>Add To Library</span></a>"
 			                            htmls += "<a class='dropdown-song-link-menu share-link' href='${pageContext.request.contextPath }/playlist/"+ albums[i].id +"'>"
 			                            htmls += "<i class='las la-share small__icon'></i><span>Share</span></a></div></button></div></div>" 		

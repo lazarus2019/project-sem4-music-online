@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
 import com.demo.entities.Playlist;
+import com.demo.entities.Status;
 import com.demo.entities.Track;
 import com.demo.models.AlbumInfo;
 import com.demo.models.PlaylistInfor;
@@ -117,6 +118,25 @@ public class PlaylistServiceImpl implements PlaylistService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public boolean publishAlbum() {
+		try {
+			Status status = new Status();
+			status.setId(1);
+			for (Playlist album : playlistRepository.findAll()) {
+				Playlist newAlbum = new Playlist();
+				newAlbum = album;
+				if(newAlbum.getStatus().getId() == 3 && newAlbum.getPublishDate().before(new Date())) {
+					newAlbum.setStatus(status);
+					playlistRepository.save(newAlbum);
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	@Override

@@ -31,10 +31,19 @@ public class TrackInfo {
 	private Genres genres;
 	private int artistLength;
 	private List<Account> accounts = new ArrayList<Account>();
-	private List<ArtistInfo> artists = new ArrayList<ArtistInfo>();
+	private List<ArtistInfo> artists = new ArrayList<ArtistInfo>();	
+	
+	
+	public TrackInfo(Integer id, String title, String thumbnail, int likes, int listens) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.thumbnail = thumbnail;
+		this.likes = likes;
+		this.listens = listens;
+	}
 
-	public TrackInfo(Integer id, int genresId, int statusId, String title, String thumbnail, int likes, int listens,
-			boolean premium) {
+	public TrackInfo(Integer id, int genresId, int statusId, String title, String thumbnail, int likes, int listens, boolean premium) {
 		super();
 		this.id = id;
 		this.genresId = genresId;
@@ -75,7 +84,6 @@ public class TrackInfo {
 	public void setGenres(Genres genres) {
 		this.genres = genres;
 	}
-
 	public TrackInfo() {
 		super();
 	}

@@ -28,6 +28,9 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private PlaylistService playlistService;
 
 	@Override
 	public List<AlbumInfo> checkAndGetAlbum(List<AlbumInfo> album) {
@@ -143,5 +146,19 @@ public class AccountPlaylistServiceImpl implements AccountPlaylistService {
 		}	
 		
 		return result;
+	}
+
+	@Override
+	public void setPlaylistForAccount(int accountId, int playlistId) {
+	try {
+		AccountPlaylist accountPlaylist = new AccountPlaylist();
+		accountPlaylist.setId(new AccountPlaylistId(playlistId, accountId));
+		accountPlaylist.setAccount(accountService.findById(accountId));
+		accountPlaylist.setPlaylist(playlistService.find(playlistId));
+		accountPlaylist.setIsOwn(false);		
+		accountPlaylistRepository.save(accountPlaylist);
+	}catch(Exception e) {
+		System.out.println(e.getMessage());
+	}
 	}
 }

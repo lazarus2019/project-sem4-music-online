@@ -1,5 +1,8 @@
 package com.demo.services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,8 +19,12 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
+import com.demo.entities.Playlist;
 import com.demo.entities.Role;
+import com.demo.entities.Track;
 import com.demo.helpers.SendMailHelper;
+
+import com.demo.models.ArtistChartModel;
 import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
@@ -218,6 +225,28 @@ public class AccountServiceImpl implements AccountService {
 	public long countUser() {
 		return accountRepository.count();
 	}
+
+	@Override
+	public List<ArtistChartModel> getAccountChart() {
+		List<ArtistChartModel> artistChartModels = new ArrayList<ArtistChartModel>();
+		//get 10 best artist
+		for (Account account : getAllPopularArtists(10)) {
+			ArtistChartModel artistChartModel = new ArtistChartModel();
+			artistChartModel.setAccountId(account.getId());
+			artistChartModel.setNickname(account.getNickname());
+			int trackLike = 0;
+			for (Track track: account.findTrackThroughAtristTrack()) {
+				trackLike += track.getLikes();
+			}
+			artistChartModel.setTrackLike(trackLike);
+			int albumLike = 0;
+			for (Playlist playlist: account.findPlaylistThroughAccountPlaylist()) {
+				albumLike += playlist.getLikes();
+			}
+			artistChartModel.setAlbumLike(albumLike);
+		}
+		return null;
+	}
 	
 	@Override
 	public ArtistDetail getArtistByIdAccount(int id) {
@@ -255,4 +284,11 @@ public class AccountServiceImpl implements AccountService {
 		
 		return accountRepository.save(account);
 	}
+
+	@Override
+	public Account save(Account account) {
+		return accountRepository.save(account);
+	}
+
+
 }

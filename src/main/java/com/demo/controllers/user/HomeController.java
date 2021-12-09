@@ -149,15 +149,18 @@ public class HomeController {
 //		System.out.println("albumId: " + albumId);
 		AlbumInfo albumInfo = albumService.findAlbumById(albumId);
 		for(Track track : playlistService.find(albumId).getTracks()) {
-			TrackInfo trackInfo = new TrackInfo();
-			trackInfo.setDuration(track.getDuration());
-			trackInfo.setId(track.getId());
-			trackInfo.setThumbnail(track.getThumbnail());
-			trackInfo.setFileName(track.getFileName());
-			trackInfo.setLyrics(track.getLyrics());
-			trackInfo.setArtists(artistTrackService.getAccountByTrackId(track.getId()));
-			
-			albumInfo.getTrackInfos().add(trackInfo);
+			if(track.getStatus().getId() == 1) {
+				TrackInfo trackInfo = new TrackInfo();
+				trackInfo.setTitle(track.getTitle());
+				trackInfo.setDuration(track.getDuration());
+				trackInfo.setId(track.getId());
+				trackInfo.setThumbnail(track.getThumbnail());
+				trackInfo.setFileName(track.getFileName());
+				trackInfo.setLyrics(track.getLyrics());
+				trackInfo.setArtists(artistTrackService.getAccountByTrackId(track.getId()));
+				
+				albumInfo.getTrackInfos().add(trackInfo);				
+			}
 		}
 		try {
 			return new ResponseEntity<AlbumInfo>(albumInfo, HttpStatus.OK);
