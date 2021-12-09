@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.demo.entities.Account;
+import com.demo.entities.Playlist;
 import com.demo.entities.ServicePackage;
+import com.demo.entities.Status;
 import com.demo.models.PackageInfoModel;
 import com.demo.services.PackageInfoService;
 import com.demo.services.PackageService;
@@ -78,6 +80,24 @@ public class ServicePackageController {
 		} catch (Exception e) {
 			return new ResponseEntity<String>("ERROR", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+		@RequestMapping(value = {"edit-status" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> editStatus(@RequestParam(value = "id", required = false) int id) {
+			boolean result = false;
+	try {
+		ServicePackage servicePackage = packageService.findById(id);
+		if (servicePackage.isStatus()) {
+			servicePackage.setStatus(false);
+		} else{
+			servicePackage.setStatus(true);
+			result = true;
+		}
+		packageService.save(servicePackage);
+		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+	} catch (Exception e) {
+		return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+	}
 	}
 	
 	@RequestMapping(value = {"getAccountsSign" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)

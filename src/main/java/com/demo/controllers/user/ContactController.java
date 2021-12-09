@@ -1,5 +1,7 @@
 package com.demo.controllers.user;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class ContactController {
 		
 		try {
 			
-			Contact contact = new Contact(fullname, email, phoneNumber, content, true);
+			Contact contact = new Contact(fullname, email, phoneNumber, content, true, new Date());
 			
 			contactService.save(contact);
 

@@ -32,4 +32,6 @@ public interface PlaylistService {
 	public PlaylistInfor getRecentPlaylistByAccountId(int id);
 	
 	public List<AlbumInfo> searchAlbumInManage(String option, String keyword, int artistId);
+	
+	public boolean publishAlbum();
 }

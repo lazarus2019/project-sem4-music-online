@@ -3,6 +3,7 @@
 <%@ taglib prefix="mt" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="t" uri="http://mytags.com" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <mt:adminTemplate title="Manage Package">
 	<jsp:attribute name="content">
@@ -70,9 +71,9 @@
 					                                    	</c:if>
 					                                    </td>
 					                                    <td class="text-center contact-status">
-					                                    	<c:if test="${pack.status == true }"><a id="status-btn" class="badge iq-bg-info">Publish</a>
+					                                    	<c:if test="${pack.status == true }"><a id="status-btn" class="badge iq-bg-info toggle-package-status" data-id="${pack.id }">Publish</a>
 					                                    	</c:if>
-					                                    	<c:if test="${pack.status == false }"><a id="status-btn" class="badge iq-bg-danger">Hiden</a>
+					                                    	<c:if test="${pack.status == false }"><a id="status-btn" class="badge iq-bg-danger toggle-package-status" data-id="${pack.id }">Hiden</a>
 					                                    	</c:if>
 					                                    </td>
 					                                    <td>
@@ -109,7 +110,7 @@
 						</div>
 						<!-- end Package Tab -->
 										
-						<!-- Album Tab -->
+						<!-- History Tab -->
 						<div class="tab-pane fade" id="album-tab" role="tabpanel">
 							<div class="row row--grid">
 								<div class="col-12">
@@ -119,7 +120,7 @@
                            						<h4 class="card-title">History Sign In Package</h4>
                         					</div>
                         					<div class="iq-card-header-toolbar d-flex align-items-center">	
-                        						<a href="${pageContext.request.contextPath }/admin/package/add" class="btn btn-primary">Export to Excel</a>				                           
+                        						<a style="color: white" class="btn btn-primary export-file">Export to Excel</a>				                           
 					                        </div>
                      					</div>
 				                     <div class="iq-card-body">
@@ -128,7 +129,8 @@
 				                     <c:forEach var="packageInfo" items="${packageInfos }">
 				                     	<c:set var="total" value="${total + packageInfo.servicePackage.price}"></c:set>
 				                     </c:forEach>
-				                     $${total }
+				                     <fmt:formatNumber var="totalOk" value="${total}"  maxFractionDigits="2" />
+				                     Total: ${totalOk }
 				                     </p>
 				                        <div class="table-responsive">				                    
 				                           <table class="data-tables table table-striped table-bordered" style="width:100%">
@@ -190,7 +192,7 @@
                  Total: $<span class="package-total"></span>	
 			</div>
       </div>
-
+	<div class="table-here">
       	<table class="data-tables table table-striped table-bordered" id="table-accounts" style="width:100%">
 				                              <thead>
 				                                 <tr>
@@ -203,7 +205,8 @@
 				                              <tbody class="list-accounts-body">  
 				                              	
 				                              </tbody>
-	    </table>
+	    </table>		
+	</div>
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -252,6 +255,22 @@
 		}, modal.MODAL_CONTENT.confirm_delete_dialog)
     		});
 		});
+
+		$('.export-file').click(function(){
+	        $.ajax({
+	            type: 'GET',	            
+	            url: '${pageContext.request.contextPath }/admin/excel/export',
+	            success: function (status) {
+	                if (status) {
+	                    singleAlert('success', 'Done!', 'Now you could check your file')
+	                } else{
+	                    singleAlert('error', 'Oh no!', 'Something went wrong, please check your request!')
+	                }
+
+	            }
+	        });
+		})
+			
 	</script>
 
 <script defer>
@@ -268,6 +287,16 @@
 		        if(packageInfos){
 			        if(packageInfos.length > 0){
 				        let htmls = ""
+				        	htmls += "<table class='table table-striped table-bordered' id='table-accounts' style='width:100%'>"
+				        		htmls += "<thead>"
+				        		htmls += "<tr>"
+				        		htmls += "<th>No</th>"
+				        		htmls += "<th>Nickname</th>"
+				        		htmls += "<th>Purchase Date</th>"
+				        		htmls += "<th>Expiration Date</th>"
+				        		htmls += "</tr>"
+				        		htmls += "</thead>"
+				        		htmls += "<tbody class='list-accounts-body'>"
 				        for(let i = 0; i < packageInfos.length; i++){
 				        	htmls += "<tr>"
 				        	htmls += "<td>"+ (i+1) +"</td>"
@@ -277,13 +306,16 @@
 				        	htmls += "</tr>"
 							
 					   	}
-				        $('.package-total').text(packageInfos[0].price * packageInfos.length)
+				        		htmls += "</tbody>"
+				        			htmls += "</table>"
+				        $('.package-total').text(Math.round(packageInfos[0].price * packageInfos.length * 100) / 100)
 					   	$('.package-amount').text(packageInfos.length)
-					   	$('.list-accounts-body').html(htmls)
+					   	$('.table-here').html(htmls)
+					   	$('#table-accounts').DataTable();
 				    }else{
 				    	 $('.package-total').text("0")
 						 $('.package-amount').text("0")
-						 $('.list-accounts-body').html("")
+						 $('.table-here').html("")
 					}
 				   	$('.package-name').text(name)				   	
 			    }
@@ -291,6 +323,32 @@
 	        }
 		}); 
 	}
+
+	$('.toggle-package-status').each(function (index) {
+	    $(this).on("click", function () {
+	        var id = $(this).data("id")
+	        var self = $(this);
+	        $.ajax({
+	            type: 'GET',
+	            data: {
+	                id: id
+	            },
+	            url: '${pageContext.request.contextPath}/admin/package/edit-status',
+	            success: function (status) {
+	                if (status) {
+	                    self.text('Public');
+	                    self.addClass('iq-bg-info')
+	                    self.removeClass('iq-bg-danger')
+	                } else{
+	                    self.text('Hidden')
+	                    self.addClass('iq-bg-danger')
+	                    self.removeClass('iq-bg-info')
+	                }
+
+	            }
+	        });
+	    });
+	});
 </script>
 	</jsp:attribute>
 </mt:adminTemplate>

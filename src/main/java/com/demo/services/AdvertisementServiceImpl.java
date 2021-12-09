@@ -1,12 +1,11 @@
 package com.demo.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.demo.entities.Advertisement;
 import com.demo.repositories.AdvertisementRepository;
-
+@Service("advertisementService")
 public class AdvertisementServiceImpl implements AdvertisementService{
 	
 	@Autowired
@@ -34,6 +33,11 @@ public class AdvertisementServiceImpl implements AdvertisementService{
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public Advertisement findActiveAds() {
+		return advertisementRepository.findActiveAds();
 	}
 
 }

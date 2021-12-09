@@ -115,7 +115,22 @@ const MODAL_CONTENT = {
         title: 'Failed!',
         text: 'Please check your request and try again'
 
-    }
+    },
+        must_have_one: {
+        icon: 'error',
+        title: 'Can not delete!',
+        text: 'The website must have at least 1 advertisement!'
+    },
+        save_playlist: {
+        icon: 'question',
+        title: 'New Playlist!',
+        text: "Do you want to save this playlist to your library"
+    },
+        save_album: {
+        icon: 'question',
+        title: 'New Album!',
+        text: "Do you want to save this album to your library"
+    },
 }
 
 export function swalAlert(modal) {
@@ -145,6 +160,21 @@ export function confirmAlert(myFunc, modal) {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            myFunc();
+        }
+    })
+}
+export function confirmAlertCustom(myFunc, modal, title) {
+    Swal.fire({
+        title: modal.title,
+        text: modal.text,
+        icon: modal.icon,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: title
     }).then((result) => {
         if (result.isConfirmed) {
             myFunc();

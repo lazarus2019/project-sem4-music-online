@@ -18,4 +18,6 @@ public interface PackageInfoService {
 	public List<PackageChartModel> getPackageChart(); 
 
 	public List<PackageInfo> countByPackageId(int packageId);
+	
+	public boolean checkPremiumByAccountId(int accountId);
 }

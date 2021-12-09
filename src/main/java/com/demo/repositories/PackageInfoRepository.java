@@ -7,9 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import com.demo.entities.Account;
 import com.demo.entities.PackageInfo;
-import com.demo.entities.PackageInfoId;
 
-public interface PackageInfoRepository extends CrudRepository<PackageInfo, PackageInfoId>{
+public interface PackageInfoRepository extends CrudRepository<PackageInfo, Integer>{
 
 	@Query("SELECT account FROM PackageInfo WHERE package_id = :id")
 	public List<Account> getAccountsSignPackageById(@Param("id") int packageId);
@@ -19,4 +18,7 @@ public interface PackageInfoRepository extends CrudRepository<PackageInfo, Packa
 	
 	@Query(value = "select count(servicePackage.id) PackageInfo where packageId = :packageId", nativeQuery = true)
 	public List<PackageInfo> countByPackageId(@Param("packageId") int packageId);
+	
+	@Query(value = "select * FROM package_info where account_id = :id ORDER BY id DESC LIMIT 1", nativeQuery = true)
+	public PackageInfo getTheLastSignPackage(@Param("id") int accountId);
 }

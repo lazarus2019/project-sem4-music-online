@@ -26,6 +26,7 @@ import com.demo.entities.Track;
 import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistsInfor;
 import com.demo.services.AccountService;
+import com.demo.services.ArtistService;
 import com.demo.services.CookieService;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +38,9 @@ public class ArtistsController {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private ArtistService artistService;
 
 	@Autowired
 	CookieService cookieService ;
@@ -51,6 +55,18 @@ public class ArtistsController {
 			modelMap.put("erro", e.getMessage());
 		}
 
+		return "artist/index";
+	}
+	
+	@RequestMapping(value = { "" }, method = RequestMethod.GET)
+	public String index(@RequestParam("keyword") String keyword, ModelMap modelMap) {
+		try {			
+			modelMap.put("arti", artistService.searchByKeyword(keyword));
+			
+		} catch (Exception e) {
+			modelMap.put("erro", e.getMessage());
+		}
+		
 		return "artist/index";
 	}
 	

@@ -1,5 +1,6 @@
 package com.demo.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,18 @@ public class PackageInfoServiceImpl implements PackageInfoService{
 	@Override
 	public List<PackageInfo> getPackageInfosById(int packageId) {
 		return packageInfoRepository.getPackageInfosById(packageId);
+	}
+
+	@Override
+	public boolean checkPremiumByAccountId(int accountId) {
+		boolean result = false;
+		PackageInfo packageInfo = packageInfoRepository.getTheLastSignPackage(accountId);
+		if(packageInfo != null) {
+			if(packageInfo.getExpirationDate().after(new Date())) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 }

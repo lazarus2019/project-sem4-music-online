@@ -297,6 +297,9 @@ public class PlaylistUserController implements ServletContextAware{
 							status.setId(3);
 						}else {
 							status.setId(1);
+							if(album.getPublishDate().after(new Date())) {
+								album.setPublishDate(new Date());								
+							}
 						}
 						album.setStatus(status);	
 						
@@ -380,9 +383,11 @@ public class PlaylistUserController implements ServletContextAware{
 						
 						for (Track track : album.getTracks()) {
 							album.getTracks().remove(track);
+							System.out.println(track.getId());
+							playlistService.save(album);
 						}
 						
-						playlistService.delete(albumId);
+//						playlistService.delete(albumId);
 						
 						result = "OK";					
 					}

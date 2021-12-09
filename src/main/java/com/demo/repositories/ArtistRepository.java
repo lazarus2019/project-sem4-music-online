@@ -17,6 +17,9 @@ public interface ArtistRepository extends PagingAndSortingRepository<Account, In
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE isArtist = true AND (nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%)")
 	public List<ArtistInfo> searchByKeyword(@Param("keyword")String keyword, Pageable pageable);
 	
+	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE isArtist = true AND (nickname LIKE %:keyword% OR firstname LIKE %:keyword% OR lastname LIKE %:keyword%)")
+	public List<ArtistInfo> searchByKeyword(@Param("keyword")String keyword);
+	
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id = :id")
 	public ArtistInfo getArtistById(@Param("id")int id);
 	

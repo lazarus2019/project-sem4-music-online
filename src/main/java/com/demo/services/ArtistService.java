@@ -10,6 +10,8 @@ import com.demo.models.ArtistInfo;
 public interface ArtistService {
 	public List<ArtistInfo> searchByKeyword(String keyword, Pageable pageable);
 	
+	public List<ArtistInfo> searchByKeyword(String keyword);
+	
 	public List<ArtistInfo> getPopularArtists(Pageable pageable);
 	
 	public List<ArtistInfo> getArtistWithoutId(int id);	

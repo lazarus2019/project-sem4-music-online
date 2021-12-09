@@ -15,6 +15,9 @@ public interface AlbumRepository extends PagingAndSortingRepository<Playlist, In
 	
 	@Query("SELECT new com.demo.models.AlbumInfo(id,title, thumbnail) FROM Playlist WHERE status.id = 1 AND category_id = 3 AND title LIKE %:keyword%")
 	public List<AlbumInfo> searchByKeyword(@Param("keyword")String keyword);	
+	
+	@Query("FROM Playlist WHERE status_id = 1 AND category_id = 3 AND title LIKE %:keyword%")
+	public List<Playlist> searchAlbumByKeyword(@Param("keyword")String keyword);	
 
 	
 //	@Query("SELECT new com.demo.models.AlbumInfo(pl.id,pl.title,pl.description,pl.thumbnail,pl.status.id,pl.publishDate) FROM Playlist AS pl JOIN AccountPlaylist AS ac_pl ON pl.id = ac_pl.playlist.id WHERE pl.playlistCategory.id = 3 AND ac_pl.account.id = :id")
