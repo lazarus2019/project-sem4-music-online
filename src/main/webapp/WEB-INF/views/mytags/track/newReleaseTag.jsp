@@ -45,6 +45,7 @@
                                     <a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname}</a>
                                     <c:if test="${(i.index + 1 ) != newRelease.artistLength && i.index != 0}"> , </c:if>
                                 </c:forEach>
+
 							</span>
 						</div>
 					</div>

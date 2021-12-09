@@ -9,6 +9,7 @@
 	<div class="header__drop">
 		<c:if test="${newNotifications.size() != 0 || readNotifications.size() != 0 || not empty accountId }">
 			<a href="${pageContext.request.contextPath }/notification/index" class="header__all">View all</a>
+
 			<c:forEach var="newNotification" items="${newNotifications }">
 				<div class="header__note header__note--succ">
 					<p><button><i class="far fa-circle clr-blue"></i></button> <a href="${pageContext.request.contextPath }/notification/index">${newNotification.message }</a></p>

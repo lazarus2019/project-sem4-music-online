@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.jsp.PageContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,6 +79,14 @@ public class TrackController implements ServletContextAware{
 		modelMap.put("listtrack", trackService.findTrackByGenresId(id));
 		return "track/index" ; 
 	}
+
+	@RequestMapping( value = {"all" } , method = RequestMethod.GET )
+	public String allTrack(ModelMap modelMap) {
+		modelMap.put("listtrack", trackService.getAll());
+		return "track/all" ; 
+	}
+
+	
 	/*
 	 * @RequestMapping( value = {"index" }) public String index() { return
 	 * "track/index" ; }

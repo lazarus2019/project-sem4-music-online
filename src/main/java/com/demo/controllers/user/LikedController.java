@@ -21,12 +21,6 @@ import com.demo.services.PlaylistService;
 public class LikedController {
 
 	@Autowired
-	private PlaylistService playlistService;
-
-	@Autowired
-	private AccountPlaylistService accountPlaylistService;
-
-	@Autowired
 	private AccountService accountService;
 
 	@Autowired
@@ -41,18 +35,19 @@ public class LikedController {
 			return "redirect:/login/login";
 		} else {
 			account = accountService.findById(Integer.parseInt(id));
-		}
-		
-		
-		Set<AccountPlaylist> s = account.getAccountPlaylists();
-		Playlist playlist = new Playlist();
-		for (AccountPlaylist accountPlaylist : s) {
-			if(accountPlaylist.getPlaylist().getPlaylistCategory().getId() == 2) {
-				playlist = accountPlaylist.getPlaylist();
+			
+			Set<AccountPlaylist> s = account.getAccountPlaylists();
+			Playlist playlist = new Playlist();
+			for (AccountPlaylist accountPlaylist : s) {
+				if(accountPlaylist.getPlaylist().getPlaylistCategory().getId() == 2) {
+					playlist = accountPlaylist.getPlaylist();
+				}
 			}
+			
+			modelMap.put("lik", playlist.getTracks());
 		}
 		
-		modelMap.put("lik", playlist.getTracks());
+		
 		return "liked/index";
 
 	}

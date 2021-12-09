@@ -45,6 +45,8 @@
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
 
+	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
+
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="Dmitry Volkov">
@@ -191,14 +193,11 @@
 						<i class="las la-plus small__icon"></i>
 						<span>Add to Playlist</span>
 					</a>
-					<a class="dropdown-song-link share-link" href="abc.com">
+					<a href="${pageContext.request.contextPath }/uploads/audio/tracks/song1.mp3" download class="dropdown-song-link share-link" href="abc.com">
 						<i class="las la-share small__icon"></i>
-						<span>Share</span>
+						<span>Dowload</span>
 					</a>
-					<a class="dropdown-song-link" href="#">
-						<i class="las la-info-circle small__icon"></i>
-						<span>Song Info</span>
-					</a>
+					
 				</div>
 			</div>
 			<button id="playlist" class="default-btn" onclick="togglePlaylist()">
@@ -584,10 +583,11 @@
     
 
 	<!-- JS -->
-	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	
+	<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
+	 -->
+	 <script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.magnific-popup.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/smooth-scrollbar.js"></script>

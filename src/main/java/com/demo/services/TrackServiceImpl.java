@@ -302,4 +302,9 @@ public class TrackServiceImpl implements TrackService {
 		return trackInfo;
 
 	}
+
+	@Override
+	public List<TrackInfor> getAll() {
+		return trackRepository.getAll();
+	}
 }

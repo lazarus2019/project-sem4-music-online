@@ -54,7 +54,13 @@
                                 <a href="#">
                                     <i class="las la-user-cog"></i> Settings
                                 </a>
+                                <a href="${pageContext.request.contextPath }/aboutus">
+                                    <i class="far fa-address-card"></i> About Us
+                                </a>
                                 
+                                <a href="${pageContext.request.contextPath }/contact">
+                                    <i class="far fa-envelope"></i> Contact
+                                </a>
                                 <a href="${pageContext.request.contextPath }/user/login/logout">
                                     <i class="las la-sign-out-alt"></i> Log out
                                 </a>

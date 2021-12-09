@@ -60,4 +60,3 @@ public interface AccountService {
 	public Account addNewAdmin(Account account , String image) ;
 
 }
-

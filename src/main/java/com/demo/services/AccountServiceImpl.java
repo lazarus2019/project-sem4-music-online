@@ -1,8 +1,5 @@
 package com.demo.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,11 +16,8 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
-import com.demo.entities.Playlist;
 import com.demo.entities.Role;
-import com.demo.entities.Track;
 import com.demo.helpers.SendMailHelper;
-import com.demo.models.ArtistChartModel;
 import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;

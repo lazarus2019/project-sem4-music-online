@@ -38,6 +38,12 @@ public interface TrackRepository extends PagingAndSortingRepository<Track, Integ
 	@Query(" select new com.demo.models.TrackInfor(id, title, fileName, lyrics, thumbnail, likes, listens) from Track where status.id = 1 AND genres.id = :id ")
 	public List<TrackInfor> findTrackByGenresId(@Param("id") int id);
 	
+	//GET ALL
+	@Query(" select new com.demo.models.TrackInfor(id, title, fileName, lyrics, thumbnail, likes, listens) from Track  ")
+	public List<TrackInfor> getAll();
+//	@Query(value = "select * from Track order by publishdate desc", nativeQuery = true)
+//	public List<Track> getAll();
+	
 	@Query("SELECT new com.demo.models.TrackInfo(id, genres.id, title, thumbnail) FROM Track WHERE status.id = 1 AND title LIKE %:keyword%")
 	public List<TrackInfo> searchByTitle(@Param("keyword")String keyword, Pageable pageable);
 	
