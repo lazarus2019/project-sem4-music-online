@@ -18,19 +18,19 @@
                         <s:form method="post" action="${pageContext.request.contextPath }/admin/package/add" modelAttribute="servicePackage" enctype="multipart/form-data">
                            <div class="form-group">
                               <label>Name:</label>
-                              <input type="text" class="form-control" name="name">
+                              <input type="text" class="form-control" name="name" required="required">
                            </div>                       
                            <div class="form-group">
                               <label>Price ($):</label>
-                              <input type="number" class="form-control" name="price" step=".01" min="0">
+                              <input type="number" class="form-control" name="price" step=".01" min="0" required="required">
                            </div>                       
                            <div class="form-group">
                               <label>Duration (months):</label>
-                              <input type="number" class="form-control" name="duration" min="1">
+                              <input type="number" class="form-control" name="duration" min="1" required="required">
                            </div>                       
                            <div class="form-group">
                               <label>Description:</label>
-                              <textarea class="form-control" rows="4" name="description"></textarea>
+                              <textarea class="form-control" rows="4" name="description" required="required"></textarea>
                            </div>
                            <div class="custom-control custom-checkbox checkbox-icon custom-control-inline">
                               <input type="checkbox" name="status" class="custom-control-input" id="customCheck-30" checked>

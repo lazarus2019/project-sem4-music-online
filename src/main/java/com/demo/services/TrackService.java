@@ -38,6 +38,10 @@ public interface TrackService {
 	public List<TrackInfo> searchByTitle(String keyword);
 
 	public TrackInfo findByTrackId(int trackId);
+	
+	public List<TrackInfor> getAll();
+	
+	//public List<Track> getAll();
 
 	public List<TrackInfo> getWaitingTrackByGenres(int id, int genresId, Pageable pageable);
 	

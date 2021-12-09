@@ -248,27 +248,35 @@ function previewUpload(e) {
 	const img = document.querySelector('.form__thumbnail-track img') || null
 	const previewText = document.querySelector('.form__thumbnail-track p') || null
 	const file = e.files[0];
-	if (file) {
-		const reader = new FileReader();
-		reader.onload = function() {
-			const result = reader.result;
-			if (img && previewText) {
-				previewText.style.display = "none"
-				img.style.display = "block"
-				img.src = result
+	if(sizeToMBNumber(file.size) > 10){
+		Swal.fire(
+		  'Upload Error!',
+		  'File size must be under 10MB',
+		  'info'
+		)
+	}else{
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = function() {
+				const result = reader.result;
+				if (img && previewText) {
+					previewText.style.display = "none"
+					img.style.display = "block"
+					img.src = result
+				}
+				// wrapper.classList.add("active");
 			}
-			// wrapper.classList.add("active");
+			// cancelBtn.addEventListener("click", function () {
+			//   img.src = "";
+			//   wrapper.classList.remove("active");
+			// });
+			reader.readAsDataURL(file);
 		}
-		// cancelBtn.addEventListener("click", function () {
-		//   img.src = "";
-		//   wrapper.classList.remove("active");
-		// });
-		reader.readAsDataURL(file);
+		// if (this.value) {
+		//   let valueStore = this.value.match(regExp);
+		//   fileName.textContent = valueStore;
+		// }	
 	}
-	// if (this.value) {
-	//   let valueStore = this.value.match(regExp);
-	//   fileName.textContent = valueStore;
-	// }
 }
 
 function uploadTrack(e) {
@@ -277,21 +285,29 @@ function uploadTrack(e) {
 	const elSize = document.querySelector('.file-size-upload')
 	const elName = document.querySelector('.file-name-upload')
 	const durationInput = document.querySelector('#duration')
-	load(file)
-	computeLength(file)
-		.then((result) => {
-			let secondDuration = Number.parseInt(result.duration);
-			if(durationInput){durationInput.value = secondDuration}
-			if (elDuration && elSize && elName) {
-				if (secondDuration < 3600) {
-					elDuration.value = new Date(secondDuration * 1000).toISOString().substr(14, 5);
-				} else {
-					elDuration.value = new Date(secondDuration * 1000).toISOString().substr(11, 8);
+	if(sizeToMBNumber(file.size) > 10){
+		Swal.fire(
+		  'Upload Error!',
+		  'File size must be under 10MB',
+		  'info'
+		)
+	}else{
+		load(file)
+		computeLength(file)
+			.then((result) => {
+				let secondDuration = Number.parseInt(result.duration);
+				if(durationInput){durationInput.value = secondDuration}
+				if (elDuration && elSize && elName) {
+					if (secondDuration < 3600) {
+						elDuration.value = new Date(secondDuration * 1000).toISOString().substr(14, 5);
+					} else {
+						elDuration.value = new Date(secondDuration * 1000).toISOString().substr(11, 8);
+					}
+					elName.value = result.file.name
+					elSize.value = sizeToMB(result.file.size)
 				}
-				elName.value = result.file.name
-				elSize.value = sizeToMB(result.file.size)
-			}
-		})
+			})	
+	}
 }
 
 function computeLength(file) {
@@ -315,6 +331,11 @@ function computeLength(file) {
 function sizeToMB(size) {
 	const mb = Math.round(size / (1024 * 1024) * 100) / 100
 	return `${mb}MB`
+}
+
+function sizeToMBNumber(size) {
+	const mb = Math.round(size / (1024 * 1024) * 100) / 100
+	return mb
 }
 
 function load(file) {
@@ -453,3 +474,26 @@ function moveToElement(childEl, parentEl){
 	    return null;
 	}
 	//alert( getAccIdInCookie('acc_id') );
+	function search_playlist(e){
+var keyword = $(e).val();
+$.ajax({
+	type: 'GET',
+    data: {
+    	keyword: keyword
+    },
+    url: '${pageContext.request.contextPath}/artist/search-playlist',
+    success: function (playlists) {	
+        var result = "";
+        if(playlists.length == 0){
+	        var text = "Have no result";
+	        result += "<button class='dropdown-item'>" + text + "</button>";
+        	$('.show-btn').html(result);
+		}
+        for (var i = 0; i < playlists.length; i++){
+			result += "<button class='dropdown-item' onclick='add_to_playlist(this)' data-id='" + playlists[i].id + "'>" + playlists[i].title + "</button>";
+        }
+		$('.show-btn').html(result);
+    } 
+});
+}
+

@@ -163,6 +163,7 @@ public class ArtistTrackServiceImpl implements ArtistTrackService{
 		return result;
 	}
 
+
 	public List<Account> findAccountThroughAtristTrack(List<Integer> accountIds){
 		List<Account> accounts = new ArrayList<Account>();
 		if(accountIds != null) {

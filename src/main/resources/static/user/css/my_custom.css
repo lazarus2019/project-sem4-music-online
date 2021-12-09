@@ -352,7 +352,7 @@ audio {
 	position: relative;
 }
 
-.dropdown-song-menu, .song__menu-list, .dropdown-track-menu-artist, .dropdown-album-menu-artist {
+.dropdown-song-menu, .dropdown-track-menu-artist, .dropdown-album-menu-artist {
 	position: absolute;
 	right: 30px;
 	min-width: 180px;
@@ -362,6 +362,22 @@ audio {
 	box-shadow: 0 2px 6px 2px rgb(34 38 41/ 15%);
 	padding: 0;
 	overflow: hidden;
+	transform: translateY(10%);
+	opacity: 0;
+	transition: all .3s ease;
+	visibility: hidden;
+	z-index: 104;
+}
+
+.song__menu-list{
+	position: absolute;
+	right: 15px;
+	min-width: 180px;
+	border-radius: 15px;
+	list-style-type: none;
+	background-color: #fff;
+	box-shadow: 0 2px 6px 2px rgb(34 38 41/ 15%);
+	padding: 0;
 	transform: translateY(10%);
 	opacity: 0;
 	transition: all .3s ease;
@@ -582,7 +598,7 @@ audio {
 	display: block;
 }
 
-.btn-song-menu:focus>.song__menu-list {
+.btn-song-menu:hover>.song__menu-list {
 	transform: translateY(0);
 	opacity: 1;
 	visibility: visible;
@@ -1200,11 +1216,15 @@ ul.iq-edit-profile li:last-child a {
     text-overflow: ellipsis;
     overflow-x: hidden;
 }
-
 .top-45{
 	top: 45px !important;
 }
 
 .right-15{
 	right: 15px !important;
+}
+.pending-tag{
+	position: absolute;
+    top: -4px;
+    color: white;
 }

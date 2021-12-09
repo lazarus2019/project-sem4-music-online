@@ -1,6 +1,8 @@
 package com.demo.mytags;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
@@ -11,6 +13,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
+import com.demo.entities.Account;
+import com.demo.entities.AccountPlaylist;
+import com.demo.entities.Playlist;
+import com.demo.entities.Track;
+import com.demo.models.AlbumInfo;
+import com.demo.models.TrackInfo;
 import com.demo.services.AccountService;
 import com.demo.services.PlaylistService;
 import com.demo.services.TrackService;
@@ -53,8 +61,39 @@ public class BaseSearchTag extends RequestContextAwareTag {
 			String jspPage = "../mytags/baseSearch/baseSearchTag.jsp";
 			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 			request.setAttribute("popularArtists", accountService.getPopularArtists(PageRequest.of(0, 6)));
-			request.setAttribute("newReleaseTracks", trackService.getNewRelease(1, 6));
-			request.setAttribute("upcomingAlbums", playlistService.getAllUpcommingAlbum());
+			List<TrackInfo> newReleasesTrack = new ArrayList<TrackInfo>();
+			for (Track track: trackService.getNewRelease(1, 12)) {
+				TrackInfo trackInfo = new TrackInfo();
+				trackInfo.setId(track.getId());
+				trackInfo.setThumbnail(track.getThumbnail());
+				trackInfo.setTitle(track.getTitle());
+				trackInfo.setLikes(track.getLikes());
+				trackInfo.setListens(track.getListens());
+				trackInfo.setArtistLength(track.getArtistTracks().size());
+				List<Account> accounts = new ArrayList<Account>();
+				for (Account account : track.findAccountThroughAtristTrack()) {
+					accounts.add(account);
+				}
+				trackInfo.setAccounts(accounts);
+				newReleasesTrack.add(trackInfo);
+			}
+			request.setAttribute("newReleaseTracks", newReleasesTrack);
+			List<AlbumInfo> albumInfos = new ArrayList<AlbumInfo>();
+			for(Playlist playlist : playlistService.getAllUpcommingAlbum()) {
+				AlbumInfo albumInfo = new AlbumInfo();
+				albumInfo.setTitle(playlist.getTitle());
+				albumInfo.setThumbnail(playlist.getThumbnail());
+				albumInfo.setId(playlist.getId());
+				for(AccountPlaylist accountPlaylist : playlist.getAccountPlaylists()) {
+					if(accountPlaylist.isIsOwn()) {
+						albumInfo.setArtistId(accountPlaylist.getId().getAccountId());
+						albumInfo.setArtistNickName(accountPlaylist.getAccount().getNickname());
+						break;
+					}
+				}
+				albumInfos.add(albumInfo);
+			}
+			request.setAttribute("upcomingAlbums", albumInfos);
 			request.getRequestDispatcher(jspPage);
 			pageContext.include(jspPage);
 		}catch(Exception e){

@@ -257,7 +257,7 @@ public class PlaylistUserController implements ServletContextAware{
 	public String edit(@ModelAttribute("playlist") Playlist playlist, @RequestParam("thumbnailAlbum") MultipartFile thumbnailAlbum, @RequestParam(value = "tracks", required = false) String[] tracks, @RequestParam(value = "isHidden", required = false) String isHidden, ModelMap modelMap, Authentication authentication) {
 		if( authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 			modelMap.put("msg", "You must sign in first") ; 
-			return "redirect:/login/login" ; 
+			return "redirect:/login/login" ;  
 		}
 		else {			
 			Account account = new Account() ; 
@@ -383,7 +383,6 @@ public class PlaylistUserController implements ServletContextAware{
 						
 						for (Track track : album.getTracks()) {
 							album.getTracks().remove(track);
-							System.out.println(track.getId());
 							playlistService.save(album);
 						}
 						

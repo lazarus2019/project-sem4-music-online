@@ -4,11 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,13 +78,22 @@ public class TrackController implements ServletContextAware{
 		modelMap.put("listtrack", trackService.findTrackByGenresId(id));
 		return "track/index" ; 
 	}
+
+	@RequestMapping( value = {"all" } , method = RequestMethod.GET )
+	public String allTrack(ModelMap modelMap) {
+		modelMap.put("listtrack", trackService.getAll());
+		return "track/all" ; 
+	}
+
+	
 	/*
 	 * @RequestMapping( value = {"index" }) public String index() { return
 	 * "track/index" ; }
 	 */
-	@RequestMapping( value = { "" })
+
+	@RequestMapping( value = { "search" })
 	public String index(@RequestParam("keyword")String keyword, ModelMap modelMap) {
-			modelMap.put("listtrack", trackService.searchByTitle(keyword));
+		modelMap.put("listtrack", trackService.searchByTitle(keyword));
 		return "track/all" ; 
 	}
 	
@@ -318,6 +325,12 @@ public class TrackController implements ServletContextAware{
 							newTrack.setIsPremium(track.isIsPremium());
 							trackService.save(newTrack);
 							
+							// Delete old track from album
+							for(Playlist album : newTrack.findAllTrackAlbums()) {
+										newTrack.getPlaylists().remove(album);
+							}
+							trackService.save(newTrack);
+							
 							// Delete old feat artists from artist track
 							artistTrackService.removeFeatArtistFromTrack(newTrack, artistId);
 							
@@ -329,11 +342,6 @@ public class TrackController implements ServletContextAware{
 									int featArtistId = Integer.parseInt(featArtistIdString);
 									artistTrackService.addFeatArtistToTrack(newTrack, featArtistId);
 								}						
-							}
-							
-							// Delete old track from album
-							for (Playlist album : newTrack.getPlaylists()) {
-								newTrack.getPlaylists().remove(album);
 							}
 							
 							// Add track to album

@@ -1,7 +1,7 @@
 package com.demo.services;
 
-import java.util.List;
 
+import java.util.List;
 import com.demo.entities.Account;
 import com.demo.entities.Contact;
 import com.demo.models.ContactInfo;

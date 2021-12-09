@@ -52,9 +52,9 @@ public interface AccountService {
 	public void forgotPassword(Account account);
 	
 	public long countArtist();
-
-	public long countUser();
 	
+	public long countUser();
+
 	public List<ArtistChartModel> getAccountChart();
 	
 	public ArtistDetail getArtistByIdAccount(int id);
@@ -62,5 +62,6 @@ public interface AccountService {
 	public Account addNewAdmin(Account account , String image) ;
 
 	public Account save(Account account);
-}
 
+
+}

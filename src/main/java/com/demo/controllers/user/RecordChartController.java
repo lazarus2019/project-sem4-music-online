@@ -32,19 +32,18 @@ public class RecordChartController {
 		List<TrackChartModel> trackList = new ArrayList<TrackChartModel>();
 		for (Track track : trackService.getTopAll(showTopCount)) {
 			TrackChartModel trackChartModel = new TrackChartModel();
-			trackChartModel.setTrackId(track.getId());
+			trackChartModel.setId(track.getId());
 			trackChartModel.setThumbnail(track.getThumbnail());
 			trackChartModel.setTitle(track.getTitle());
 			trackChartModel.setDuration(track.getDuration());
 			trackChartModel.setLikes(track.getLikes());
 			trackChartModel.setPremium(track.isIsPremium());
-			List<String> nicknames = new ArrayList<String>();
+			trackChartModel.setArtistLength(track.getArtistTracks().size());
+			List<Account> accounts = new ArrayList<Account>();
 			for (Account account : track.findAccountThroughAtristTrack()) {
-				if (account.getNickname() != null) {
-					nicknames.add(account.getNickname());
-				}
+				accounts.add(account);
 			}
-			trackChartModel.setArtistNicknames(nicknames);
+			trackChartModel.setAccounts(accounts);
 			trackList.add(trackChartModel);
 		}
 		modelMap.put("topCount", 50);

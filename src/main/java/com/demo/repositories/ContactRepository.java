@@ -1,6 +1,5 @@
 package com.demo.repositories;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -16,21 +15,10 @@ public interface ContactRepository extends CrudRepository<Contact, Integer> {
 
 	@Query("SELECT COUNT(id) FROM Contact WHERE is_read = false")
 	public int getAmountUnreadContact();
-	
+
 	@Query(value = "FROM Contact WHERE is_read = false LIMIT 5", nativeQuery = true)
 	public List<Contact> getTopUnreadContact();
 	
 	@Query("SELECT new com.demo.models.ContactInfo(id, fullname, email, phoneNumber, content) FROM Contact WHERE id = :id")
 	public ContactInfo findContactInfoById(@Param("id") int contactId);
-//
-//	@Query("SELECT new com.demo.entities.ContactInfo(id,) FROM Contact")
-//	public List<Contact> findAllContact();
-
-//
-//	@Query("SELECT * FROM Contact WHERE fullname LIKE %:keyword% OR email LIKE %:keyword% OR phone_number LIKE %:keyword%")
-//	public List<Contact> findContactByKeyword(@Param("keyword") String keyword);
-//
-//	@Query("SELECT * FROM Contact WHERE contact_type_id = :type AND fullname LIKE %:keyword% OR email LIKE %:keyword% OR phone_number LIKE %:keyword%")
-//	public List<Contact> filterContact(@Param("keyword") String keyword, @Param("type") int mail_type);
-
 }

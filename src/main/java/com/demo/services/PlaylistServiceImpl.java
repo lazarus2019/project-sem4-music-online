@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
+import com.demo.entities.AccountPlaylist;
 import com.demo.entities.Playlist;
 import com.demo.entities.Status;
 import com.demo.entities.Track;
@@ -26,6 +27,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 	
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
+	
+	@Autowired
+	private TrackService trackService;
 	
 	@Override
 	public List<Playlist> getAllUpcommingAlbum() {
@@ -136,6 +140,42 @@ public class PlaylistServiceImpl implements PlaylistService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	@Override
+	public List<PlaylistModel> getBestAlbum() {
+		List<PlaylistModel> bestAlbums = new ArrayList<PlaylistModel>();
+		for (Playlist playlist : playlistRepository.getBestAlbum()) {
+			PlaylistModel playlistModel = new PlaylistModel();
+			playlistModel.setId(playlist.getId());
+			playlistModel.setTitle(playlist.getTitle());
+			playlistModel.setThumbnail(playlist.getThumbnail());
+			playlistModel.setLikes(playlist.getLikes());
+			List<Account> accounts = new ArrayList<Account>();
+			for (AccountPlaylist accountPlaylist : playlist.getAccountPlaylists()) {
+				if(accountPlaylist.isIsOwn() == true) {
+					accounts.add(accountPlaylist.getAccount());
+					playlistModel.setAccounts(accounts);
+				}
+			}
+			bestAlbums.add(playlistModel);
+		}
+		return bestAlbums;
+	}
+
+	@Override
+	public void removeAlbumFromTrack(int trackId) {
+		try {
+			Track track = trackService.findById(trackId);
+			for (Playlist album : track.getPlaylists()) {
+				if(album.getPlaylistCategory().getId() != null && album.getPlaylistCategory().getId() == 3) {
+					delete(album.getId());							
+				}
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 }

@@ -17,7 +17,7 @@
                                 <h3 class="clr-white">Album Info</h3>
                                 <div class="form-heading clr-white">Album Title:</div>
                                 <div class="sign__group">
-                                    <s:input path="title" class="sign__input" placeholder="Title"></s:input>
+                                    <s:input path="title" class="sign__input" placeholder="Title" required="required"></s:input>
                                 </div>
                                 <div class="grid-box grid-split-2 mb-1">
                                     <div class="grid-box-item">
@@ -119,7 +119,7 @@
                                             </div>
                                         </div>
                                         <s:textarea path="description" class="form__textarea" placeholder="Enter Description"
-                                            name="description" style="height: 361.406px"></s:textarea>
+                                            name="description" style="height: 361.406px" required="required"></s:textarea>
                                     </div>
                                     <div class="grid-box-item">
                                         <div class="flex-box justify-content-between align-items-center mb-2">

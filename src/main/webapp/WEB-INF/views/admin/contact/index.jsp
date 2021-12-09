@@ -50,7 +50,7 @@
 				                              <tbody id="playlists-body">
 				                              	 <c:forEach var="contact" items="${contacts}" varStatus="i">
 					                                 <tr style="height: 100px;" class="contact-row" data-id="${contact.id }">
-					                                    <td class="text-center">${i.index + 1 }</td>					                                    
+					                                    <td class="text-center">${i.index + 1 }</td>
 					                                    <td><fmt:formatDate value="${contact.date }" type="date" pattern="hh:ss a dd/MM/yyyy"/></td>
 					                                    <td>${contact.fullname }</td>
 					                                    <td class="text-center">${contact.email }</td>

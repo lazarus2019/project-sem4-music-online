@@ -65,7 +65,6 @@ public class Account implements java.io.Serializable {
 	private Set<AccountPlaylist> accountPlaylists = new HashSet<AccountPlaylist>(0);
 	private Set<Role> roles = new HashSet<Role>(0);
 	private Set<ArtistTrack> artistTracks = new HashSet<ArtistTrack>(0);
-	private Set<AccountSetting> accountSettings = new HashSet<AccountSetting>(0);
 
 	public Account() {
 	}
@@ -83,7 +82,7 @@ public class Account implements java.io.Serializable {
 			String lastname, String email, Date birthday, String gender, String image, Date joinDate, boolean isArtist,
 			int follower, String description, boolean isActive, boolean isRequest, Set<Comment> comments,
 			Set<PackageInfo> packageInfos, Set<Notification> notifications, Set<AccountPlaylist> accountPlaylists,
-			Set<Role> roles, Set<ArtistTrack> artistTracks, Set<AccountSetting> accountSettings) {
+			Set<Role> roles, Set<ArtistTrack> artistTracks) {
 		this.country = country;
 		this.username = username;
 		this.password = password;
@@ -106,7 +105,6 @@ public class Account implements java.io.Serializable {
 		this.accountPlaylists = accountPlaylists;
 		this.roles = roles;
 		this.artistTracks = artistTracks;
-		this.accountSettings = accountSettings;
 	}
 
 	@Id
@@ -343,14 +341,6 @@ public class Account implements java.io.Serializable {
 		this.artistTracks = artistTracks;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-	public Set<AccountSetting> getAccountSettings() {
-		return this.accountSettings;
-	}
-
-	public void setAccountSettings(Set<AccountSetting> accountSettings) {
-		this.accountSettings = accountSettings;
-	}
 
 	@Override
 	public String toString() {
@@ -361,7 +351,7 @@ public class Account implements java.io.Serializable {
 				+ isActive + ", isRequest=" + isRequest + ", authProvider=" + authProvider + ", comments=" + comments
 				+ ", packageInfos=" + packageInfos + ", notifications=" + notifications + ", accountPlaylists="
 				+ accountPlaylists + ", roles=" + roles + ", artistTracks=" + artistTracks + ", accountSettings="
-				+ accountSettings + "]";
+				+ "]";
 	}
 	
 	public Set<Track> findTrackThroughAtristTrack() {

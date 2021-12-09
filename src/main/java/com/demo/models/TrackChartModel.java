@@ -2,38 +2,41 @@ package com.demo.models;
 
 import java.util.List;
 
+import com.demo.entities.Account;
+
 public class TrackChartModel {
 
-	private int trackId;
+	private int id;
 	private String thumbnail;
 	private String title;
 	private int duration;
 	private int likes;
 	private boolean premium;
-	private List<String> artistNicknames;
+	private int artistLength;
+	private List<Account> accounts;
 
 	public TrackChartModel() {
 		super();
 	}
 
-	public TrackChartModel(int trackId, String thumbnail, String title, int duration, int likes, boolean premium,
-			List<String> artistNicknames) {
+	public TrackChartModel(int id, String thumbnail, String title, int duration, int likes, boolean premium,
+			List<Account> accounts) {
 		super();
-		this.trackId = trackId;
+		this.id = id;
 		this.thumbnail = thumbnail;
 		this.title = title;
 		this.duration = duration;
 		this.likes = likes;
 		this.premium = premium;
-		this.artistNicknames = artistNicknames;
+		this.accounts = accounts;
 	}
 
-	public int getTrackId() {
-		return trackId;
+	public int getId() {
+		return id;
 	}
 
-	public void setTrackId(int trackId) {
-		this.trackId = trackId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -68,12 +71,12 @@ public class TrackChartModel {
 		this.premium = premium;
 	}
 
-	public List<String> getArtistNicknames() {
-		return artistNicknames;
+	public List<Account> getAccounts() {
+		return accounts;
 	}
 
-	public void setArtistNicknames(List<String> artistNicknames) {
-		this.artistNicknames = artistNicknames;
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 
 	public String getThumbnail() {
@@ -82,5 +85,13 @@ public class TrackChartModel {
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	public int getArtistLength() {
+		return artistLength;
+	}
+
+	public void setArtistLength(int artistLength) {
+		this.artistLength = artistLength;
 	}
 }

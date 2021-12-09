@@ -115,6 +115,7 @@ const MODAL_CONTENT = {
         title: 'Failed!',
         text: 'Please check your request and try again'
 
+
     },
         must_have_one: {
         icon: 'error',

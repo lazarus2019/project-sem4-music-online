@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "comment", catalog = "music_app")
-public class Comment implements java.io.Serializable {
+public class Comment implements java.io.Serializable /* , Comparable<Comment> */ {
 
 	private CommentId id;
 	private Account account;
@@ -88,5 +88,12 @@ public class Comment implements java.io.Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+//	@Override
+//	public int compareTo(Comment o) {
+//		if (getDate() == null || o.getDate() == null)
+//		      return 0;
+//		    return getDate().compareTo(o.getDate());
+//	}
 
 }

@@ -23,5 +23,15 @@ public class GenresServiceImpl implements GenresService{
 	public GenresName getNameById(int id) {
 		return genresRepository.getNameById(id);		
 	}
+
+	@Override
+	public Genres find(int id) {
+		return genresRepository.findById(id).get();
+	}
+
+	@Override
+	public Genres save(Genres genres) {
+		return genresRepository.save(genres);
+	}
 	
 }

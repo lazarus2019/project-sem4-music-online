@@ -19,10 +19,10 @@ public interface PackageRepository extends CrudRepository<ServicePackage, Intege
 	@Query( value = "select * from package_info where account_id = :accountId order by expiration_date desc limit 1", nativeQuery = true)
 	public PackageInfo getPackageInforByAccountId(@Param("accountId") int accountId ) ; 
 	
-	@Query("from ServicePackage where id = :id ") 
+	@Query("from ServicePackage where is_delete = false and id = :id ") 
 	public ServicePackage getServicePackageById(@Param("id") int id ) ; 
 
-	@Query("select count(id) from ServicePackage where isDelete = false")
+	@Query("select count(id) from ServicePackage where is_delete = false")
 	public long countPackage();
 
 	@Query("from ServicePackage where is_delete = FALSE")

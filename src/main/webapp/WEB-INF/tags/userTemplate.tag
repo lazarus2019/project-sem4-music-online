@@ -45,6 +45,8 @@
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
 
+	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
+
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="Dmitry Volkov">
@@ -75,7 +77,7 @@
             <li class="dropdown-btn">
                 <a href="#" class="link">Library</a>
                 <div class="dropdown-menu">
-                    <a href="releases.html"><i class="las la-music"></i> New Release</a>
+                    <a href="${pageContext.request.contextPath }/track/all"><i class="las la-music"></i> New Release</a>
                     <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
 					<c:if test="${pageContext.request.userPrincipal.name  != null }">
                     	<a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
@@ -103,6 +105,15 @@
                     </svg></button>
             </div>
             <!-- end search box -->
+            
+            <ul class="header__nav mr-0">
+            <li>
+    		<a href="${pageContext.request.contextPath }/aboutus">About Us</a>
+            </li>
+            <li>
+            <a href="${pageContext.request.contextPath }/contact">Contact</a>
+            </li>
+        </ul>
     
             <!-- notification button -->
             <t:notification />
@@ -118,6 +129,8 @@
             <span></span>
             <span></span>
         </button>
+    	
+    	
     </div>
 </header>
 <!-- end header -->
@@ -191,14 +204,11 @@
 						<i class="las la-plus small__icon"></i>
 						<span>Add to Playlist</span>
 					</a>
-					<a class="dropdown-song-link share-link" href="abc.com">
+					<a href="${pageContext.request.contextPath }/uploads/audio/tracks/song1.mp3" download class="dropdown-song-link share-link" href="abc.com">
 						<i class="las la-share small__icon"></i>
-						<span>Share</span>
+						<span>Dowload</span>
 					</a>
-					<a class="dropdown-song-link" href="#">
-						<i class="las la-info-circle small__icon"></i>
-						<span>Song Info</span>
-					</a>
+					
 				</div>
 			</div>
 			<button id="playlist" class="default-btn" onclick="togglePlaylist()">
@@ -228,19 +238,29 @@
 	<!-- end Lyric box -->
 
 	<!-- Playlist box -->
-	<div class="playlist__box">
+	<form class="playlist__box" method="post" action="${pageContext.request.contextPath}/player/savePlaylistToLibrary">
+			<input class="playlist-id-modelMap" value="${id }" style="display: none">
 		<div class="playlist-title">
 			<div class="playlist-title-content d-flex align-items-center">
-				<button class="btn-save-playlist mr-2"><i class="las la-save audio__icon clr-white"></i></button> <span class="playlist-title-text">Listen Special</span>
+				<button class="btn-save-playlist mr-2" type="button"><i class="las la-save audio__icon clr-white"></i></button> 
+				<span class="playlist-title-text">
+				<c:set var="playlistTitleFinal" value="Listen Special"/>
+					<input class="playlist-title-modelMap" value="${playlistTitle }" style="display: none">
+				<c:if test="${playlistTitle not empty }">
+					<c:set var="playlistTitleFinal" value="${playlistTitle }"/>
+				</c:if>
+				${ playlistTitleFinal}				
+				</span>
+				<input name="title" class="playlist-title-input" style="display: none" value="">
 			</div>
-			<button class="default-btn show-timer-btn" onclick="showTimer()">
+			<button class="default-btn show-timer-btn" type="button" onclick="showTimer()">
 				<i class="las la-stopwatch audio__icon"></i>
 			</button>
 		</div>
 		<ul class="playlist__list">
 
 		</ul>
-	</div>
+	</form>
 	<!-- end Playlist box -->
 
 	<!-- audio -->
@@ -584,10 +604,11 @@
     
 
 	<!-- JS -->
-	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	
+	<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
+	 -->
+	 <script src="${pageContext.request.contextPath }/resources/user/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery.magnific-popup.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/user/js/smooth-scrollbar.js"></script>
@@ -614,8 +635,10 @@
 	        this.elements.title = this.elements.root.querySelector('.playlist__song-content h3')
 	        this.elements.singer = this.elements.root.querySelector('.playlist__song-content span')
 	        this.elements.removeBtn = this.elements.root.querySelector('.remove-song')
+	        this.elements.songInfo = this.elements.root.querySelector('.song-info-player')
 
 	        this.elements.root.dataset.id = id
+	        this.elements.songInfo.value = id
 	        this.elements.removeBtn.dataset.id = id
 	        this.elements.image.src = image
 	        this.elements.title.textContent = title
@@ -630,6 +653,7 @@
 
 	        return range.createContextualFragment(`
 	        <li class="playlist__list-item">
+	        		<input class="song-info-player" name="songsPlayer" style="display: none">     
 	        <div class="playlist__item-desc">
 	            <div class="playlist__list-item-image">
 	                <img src=""
@@ -640,7 +664,7 @@
 	                    <span></span>
 	                    </div>
 	                    </div>
-	                    <button class="btn-dropdown-playlist-menu default-btn">
+	                    <button class="btn-dropdown-playlist-menu default-btn" type="button">
 	                        <i class="las la-braille audio__icon"></i>
 	                        <div class="dropdown__playlist-item-menu">
 	                <a class="dropdown-song-link favorite-link" data-favorite="true">
@@ -719,6 +743,29 @@
 	}
 	]
 
+	function getPlaylistCustomId(){
+		let id = document.querySelector('.playlist-id-modelMap') || null
+		if(id != null){
+			localStorage.setItem("playlist_id", id)
+		}
+		let title = document.querySelector('.playlist-title-modelMap') || null
+		if(title != null){
+			localStorage.setItem("playlist_title", title)
+		}
+	}
+
+	getPlaylistCustomId()
+	
+	
+	function setPlaylistCustomTitle(){
+		let title = localStorage.getItem("playlist_title", title) || null
+		if(title != null){
+			document.querySelector('.playlist-title-text').textContent(title)
+		}
+	}
+	
+	setPlaylistCustomTitle()
+
 	function getAds(){
 		$.ajax({
             type: 'GET',
@@ -741,6 +788,8 @@
             type: 'GET',
             url: '${pageContext.request.contextPath }/player/checkPremium',
             success: function (response) {
+                let localhost = '${pageContext.request.contextPath }'
+                localStorage.setItem("LOCALHOST", localhost)
                 console.log("response premium:", response)
                 if(response){
                 	isPremium = true
@@ -811,16 +860,28 @@
 	    const _this = this;
 
 	    playBtn.onclick = () => {
-	        _this.setConfig('isPlaying', !_this.isPlaying)
-	        if (!_this.isAdvertisement) {
-	            if (_this.isPlaying) {
-	                audio.pause()
-	            } else {
-	                audio.play()
-	            }
-	        } else {
-	            _this.runAdvertisement()
-	        }
+		    if(songPlaylist.length == 0){
+		    	Swal.fire(
+		    			  'Empty playlist',
+		    			  'You have to add some track before click play!',
+		    			  'info'
+		    			)
+			}else{
+		    	if(_this.currentSong.premium){
+	            	_this.showUpgradeAccount()               
+		        }else{
+			        _this.setConfig('isPlaying', !_this.isPlaying)
+			        if (!_this.isAdvertisement) {	        	
+			            if (_this.isPlaying) {
+			                audio.pause()
+			            } else {
+			                audio.play()
+			            }
+			        } else {
+			            _this.runAdvertisement()
+			        }		        
+			    }				
+			}
 	    }
 
 	    audio.onplay = () => {
@@ -914,11 +975,16 @@
 	            // audio.src = songNode.dataset.filename
 	            const id = Number(songNode.dataset.id)
 	            const currentSong = songPlaylist.find(song => song.id === id)
-	            _this.currentIndex = songPlaylist.indexOf(currentSong)
-	            // _this.currentIndex = Number(songNode.dataset.id)
-	            _this.loadCurrentSong()
-	            // _this.renderFirstTime()
-	            // }
+	            if(currentSong.premium){
+	            	_this.showUpgradeAccount()               
+		        }
+		        if(!currentSong.premium){
+		        	_this.currentIndex = songPlaylist.indexOf(currentSong)
+		            // _this.currentIndex = Number(songNode.dataset.id)
+		            _this.loadCurrentSong()
+		            // _this.renderFirstTime()
+		            // }
+			    }
 
 	            if (e.target.closest('.btn-dropdown-playlist-menu')) {
 
@@ -947,6 +1013,24 @@
 	        _this.removeCountDown()
 	    }
 	},
+	showUpgradeAccount: function (){		
+        	Swal.fire({
+        		  title: '<strong>Premium Track</strong>',
+        		  icon: 'info',
+        		  html:
+        		    '<b>Click the link to upgrade premium</b>, ' +
+        		    '<a href="'+ localStorage.getItem("LOCALHOST") + '/package">Join now</a> ',
+        		  showCloseButton: true,
+        		  showCancelButton: true,
+        		  focusConfirm: false,
+        		  confirmButtonText:
+        		    '<i class="fa fa-thumbs-up"></i> Great!',
+        		  confirmButtonAriaLabel: 'Thumbs up, great!',
+        		  cancelButtonText:
+        		    '<i class="fa fa-thumbs-down"></i>',
+        		  cancelButtonAriaLabel: 'Thumbs down'
+        		})
+		},
 	audioCalTime: function (time) {
 	    const duration = Number.parseInt(time)
 	    if (duration < 3600) {
@@ -997,6 +1081,7 @@
 	    }
 		if(this.amount <= 1){
 			this.isAdvertisement = false
+	        this.setConfig('isAdvertisement', this.isAdvertisement)
 		}
 	    
 	    if (this.isAdvertisement) {
@@ -1076,9 +1161,13 @@
 	    }
 
 	    this.isPlaying = this.config.isPlaying || false
-	    if (this.isPlaying) {
-	        audio.autoplay = true
-	    }
+	    if(this.currentSong.premium){
+	    	this.isPlaying = false
+		}else{
+		    if (this.isPlaying) {
+		        audio.autoplay = true
+		    }
+		}
 	    
 	    this.isRandom = this.config.isRandom || false
 	    this.isRepeat = this.config.isRepeat || false
@@ -1632,8 +1721,17 @@
                     if(!flag){
                     	localStorage.setItem("album_id", "")
                     	createTrack(track)
-	                    playSong(track.id)
-	                    plusListenForTrack(track.id)
+                    	localStorage.setItem('startTime', 0)
+                    	if(!isPremium){
+                        	if(!track.premium){
+                        		playSong(track.id)
+        	                    plusListenForTrack(track.id)
+                           	}
+                        }
+                    	else{
+                    		playSong(track.id)
+    	                    plusListenForTrack(track.id)
+                    	}
 	                    addEventRemoveSong()
 	                    var lyrics = renderLyrics(track.lyrics)
 	                    var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
@@ -1692,7 +1790,17 @@
                     for(let i = 0; i < album.trackInfos.length; i++){
                     	createTrack(album.trackInfos[i])
                     }
-                    playSong(songPlaylist[0].id)      
+                	localStorage.setItem('startTime', 0)
+                	if(!isPremium){
+                    	if(!songPlaylist[0].premium){
+                    		playSong(songPlaylist[0].id)
+    	                    plusListenForTrack(songPlaylist[0].id)
+                       	}
+                    }
+                	else{
+                		playSong(songPlaylist[0].id)
+	                    plusListenForTrack(songPlaylist[0].id)
+                	}
                 }
             }
         })
@@ -1718,7 +1826,8 @@
  						singer: singer,
  						lyrics: track.lyrics,
  						genresId: track.genresId,
- 						artists: track.artists
+ 						artists: track.artists,
+ 						premium: track.premium
                     }
         addSongs(playTrack)
 	}
@@ -1750,7 +1859,7 @@
 	                var htmls = "";
 	                for (var i = 0; i < artists.length; i++) {
 
-	                    htmls += "<a href='${pageContext.request.contextPath}/artist/" + artists[i].id + "' class='artist-box'><div class='artist-image-box'>" +
+	                    htmls += "<a href='${pageContext.request.contextPath}/artist/id/" + artists[i].id + "' class='artist-box'><div class='artist-image-box'>" +
 	                        "<img src='${pageContext.request.contextPath}/resources/user/img/artists/" + artists[i].image + "'></div>" +
 	                        "<p class='artist-name'>" + artists[i].nickname + "</p></a>"
 	                }
@@ -1766,6 +1875,7 @@
 	            },
 	            url: '${pageContext.request.contextPath}/home/searchTopTrack',
 	            success: function (tracks) {
+		            console.log(tracks)
 	            	if(tracks.length < 6){
 						$("#track-result-all").addClass("hide")
 			            }else{
@@ -1776,9 +1886,10 @@
                for (var i = 0; i < tracks.length; i++) {
                    singer= "";
                    	if(tracks[i].artists){
-                           for(let i = 0; i < tracks[i].artists.length; i++){
-                              singer += tracks[i].artists[i].nickname
-                              if(i + 1 < tracks[i].artists.length){
+                           for(let j = 0; j < tracks[i].artists.length; j++){
+                        	   
+                              singer += "<a href='${pageContext.request.contextPath }/artist/id/"+ tracks[i].artists[j].id +"'>"+ tracks[i].artists[j].nickname + "</a>"
+                              if(j + 1 < tracks[i].artists.length){
                                    singer += ", "
                                }
                           }
@@ -1809,7 +1920,7 @@
 	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "' onclick='getListTrackByAlbumId(this)'><div class='album-box-image'>" +
 
 	                        "<img src='${pageContext.request.contextPath}/resources/user/img/playlist/" + albums[i].thumbnail + "'/></div>" +
-	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
+	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/id/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
 	                }
 	                $("#album-container").html(htmls);
 	            }
@@ -1819,21 +1930,21 @@
 	    /* Show All Artist */
 	    $("#artist-result-all").click(function () {
 	        var keyword = $('.input-search').val();
-			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword
+			var url = '${pageContext.request.contextPath }/artist/search-base?keyword='+ keyword
 	        window.location.replace(url);
 	    })
 
 	    /* Show All Track */
 	    $("#track-result-all").click(function () {
 	        var keyword = $('.input-search').val();
-			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword
+			var url = '${pageContext.request.contextPath }/track/search?keyword='+ keyword
 	        window.location.replace(url);
 	    })
 
 	    /* Show All Album */
 	    $("#album-result-all").click(function () {
 	        var keyword = $('.input-search').val();
-			var url = '${pageContext.request.contextPath }/track?keyword='+ keyword + '&' + 'type=album'
+			var url = '${pageContext.request.contextPath }/album?keyword='+ keyword
 	        window.location.replace(url);
 	    })	    
 	</script>
@@ -1887,34 +1998,38 @@
 						    Swal.showValidationMessage(
           					`Please enter playlist name`
         				)}else{
-							let listSongStorage = JSON.parse(localStorage.getItem("MUSIC_APP_PLAYLIST"))
-							let trackIds = []
-							for(let i = 0; i < listSongStorage.length; i++){
-								trackIds.push(listSongStorage[i].id)
-							}
-							console.log(trackIds)
-							$.ajax({
-            					type: 'GET',
-								data: {
-									title: input,
-									trackIds: Object.assign({}, trackIds)
-								},
-           						 url: '${pageContext.request.contextPath }/player/savePlaylistToLibrary',
-           						 success: function (status) {
-              						 if(status != "MUST_SIGN_IN"){
-										swalAlert(modal.MODAL_CONTENT.save_success)
-										localStorage.setItem("playlist_id", status)
-									}
-									if(status == "MUST_SIGN_IN"){
-										swalAlert(modal.MODAL_CONTENT.must_sign_in)
-									}
-           						 }
-      						  })
+							document.querySelector('.playlist-title-input').value = input
+							document.querySelector('.playlist__box').submit()
 						}
   					}
 				})	
 		}
     
+		 async function savePlaylistForm() {
+			let listSongStorage = JSON.parse(localStorage.getItem("MUSIC_APP_PLAYLIST"))
+			let trackIds = []
+			for(let i = 0; i < listSongStorage.length; i++){
+				trackIds.push(listSongStorage[i].id.toString())
+			}
+             let formData = new FormData(); 
+             formData.append("trackIds", trackIds);
+             formData.append("title", document.querySelector('.playlist-title-input').value);
+             let response = await fetch('${pageContext.request.contextPath}/player/savePlaylistToLibrary', {
+               method: "POST", 
+               body: formData
+             }); 
+
+             if (response.status == 200) {
+            	 Swal.fire('Saved!', '', 'success');
+             }
+             else {
+            	 Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text: 'Something went wrong!'
+                 })
+                }
+           }
 </script>
 </body>
 

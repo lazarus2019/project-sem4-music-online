@@ -2,15 +2,10 @@ package com.demo.models;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.demo.entities.Account;
 import com.demo.entities.Genres;
-import com.demo.entities.Status;
-
-import javassist.expr.NewArray;
 
 public class TrackInfo {
 
@@ -29,6 +24,7 @@ public class TrackInfo {
 	private boolean premium;
 	private Date publishDate;
 	private Genres genres;
+	private int artistLength;
 	private List<Account> accounts = new ArrayList<Account>();
 	private List<ArtistInfo> artists = new ArrayList<ArtistInfo>();	
 	
@@ -213,6 +209,14 @@ public class TrackInfo {
 
 	public void setArtists(List<ArtistInfo> artists) {
 		this.artists = artists;
+	}
+
+	public int getArtistLength() {
+		return artistLength;
+	}
+
+	public void setArtistLength(int artistLength) {
+		this.artistLength = artistLength;
 	}
 
 }

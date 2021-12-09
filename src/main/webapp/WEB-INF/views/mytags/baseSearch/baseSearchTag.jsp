@@ -24,7 +24,7 @@
 
                         <c:forEach items="${ popularArtists}" var="artist" varStatus="i">
                             <c:if test="${i.index < 6 }">
-                                <a href="${pageContext.request.contextPath}/artist/${artist.id}" class="artist-box"
+                                <a href="${pageContext.request.contextPath}/artist/id/${artist.id}" class="artist-box"
                                     data-id="${artist.id }">
                                     <div class="artist-image-box">
                                         <img src="${pageContext.request.contextPath}/uploads/images/artists/${artist.image}"
@@ -54,15 +54,10 @@
                                     <div class="track-box-content">
                                         <p>${track.title }</p>
                                         <span>
-                                        	 <%-- <c:forEach items="${ track.artists} }" var="artist" varStatus="j">
-                                        	  <c:if test="${j.index < track.artists.length}">
-                                        	 <a href="${pageContext.request.contextPath}/artist/${artist.id}">${artist.nickname }</a> & 
-                                        	 </c:if>
-                                        	 <c:if test="${j.index == track.artists.length}">
-                                        	 <a href="${pageContext.request.contextPath}/artist/${artist.id}">${artist.nickname }</a>
-                                        	 </c:if>
-                                        	  
-                                        </c:forEach> --%>
+                                        <c:forEach var="artist" items="${track.accounts }" varStatus="j">
+		                                    <a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname}</a>
+		                                    <c:if test="${(j.index+1) < track.artistLength}">, </c:if>
+		                                </c:forEach>                                        	
                                         
                                         </span>
                                     </div>
@@ -81,15 +76,15 @@
 
                         <c:forEach items="${ upcomingAlbums}" var="album" varStatus="i">
                             <c:if test="${i.index < 6 }">
-                                <div class="album-box" data-id="${ album.id}" onclick="getListTrackByAlbumId(this)">
+                                <div class="album-box">
                                     <div class="album-box-image">
                                         <img src="${pageContext.request.contextPath}/uploads/images/playlist/${album.thumbnail}"
                                             alt="">
                                     </div>
                                     <div class="album-box-content">
-                                        <p>${album.title}</p>
+                                        <a href="${pageContext.request.contextPath}/album/details/${album.id}"><p>${album.title}</p></a>
                                         <span>                                       
-                                            <a href="${pageContext.request.contextPath}/artist/1">Juice WRLD</a>
+                                            <a href="${pageContext.request.contextPath}/artist/id/${album.artistId}">J${album.artistNickName }</a>
                                         </span>
                                     </div>
                                 </div>

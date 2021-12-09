@@ -1,9 +1,13 @@
 package com.demo.controllers.user;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +23,12 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.data.domain.PageRequest;
 
 import com.demo.entities.Account;
+import com.demo.entities.Comment;
 import com.demo.entities.Track;
 import com.demo.helpers.CalculateDateTimeHelper;
 import com.demo.models.AlbumInfo;
 import com.demo.models.ArtistInfo;
+import com.demo.models.CommentModel;
 import com.demo.models.TrackInfo;
 import com.demo.repositories.AccountRepository;
 import com.demo.security.database.CustomUserDetails;
@@ -32,6 +38,7 @@ import com.demo.services.AccountService;
 import com.demo.services.AlbumService;
 
 import com.demo.services.ArtistTrackService;
+import com.demo.services.CommentService;
 import com.demo.services.CookieService;
 import com.demo.services.NotificationService;
 import com.demo.services.PlaylistService;
@@ -60,12 +67,14 @@ public class HomeController {
 	@Autowired
 	private AccountPlaylistService accountPlaylistService;
 
-	@Autowired 
+	@Autowired
 	private PlaylistService playlistService;
-	
+
 	@Autowired
 	private ArtistTrackService artistTrackService;
 
+	@Autowired
+	private CommentService commentService;
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap, @RequestParam(value = "local", required = false) String local,
@@ -74,7 +83,7 @@ public class HomeController {
 		// Authentication authentication =
 		// SecurityContextHolder.getContext().getAuthentication() ;
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-			
+
 		} else {
 			String loginType = cookieService.getValue("login_type", "");
 
@@ -94,8 +103,8 @@ public class HomeController {
 
 				modelMap.put("accountSignined", account);
 				cookieService.add("acc_id", String.valueOf(account.getId()), 5);
-				//cookieService.add("acc_nickname", account.getNickname(), 5 ) ; 
-				
+				// cookieService.add("acc_nickname", account.getNickname(), 5 ) ;
+
 			}
 		}
 		return "home/index";
@@ -118,7 +127,7 @@ public class HomeController {
 	public ResponseEntity<List<TrackInfo>> searchTopTrack(@RequestParam("keyword") String keyword, ModelMap modelMap) {
 		List<TrackInfo> trackInfos = trackService.searchByTitle(keyword, PageRequest.of(0, 6));
 
-		for(TrackInfo trackInfo : trackInfos) {
+		for (TrackInfo trackInfo : trackInfos) {
 			trackInfo.setArtists(artistTrackService.getAccountByTrackId(trackInfo.getId()));
 		}
 
@@ -142,9 +151,10 @@ public class HomeController {
 			return new ResponseEntity<List<AlbumInfo>>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	// Get album contains tracks by id
-	@RequestMapping(value = { "getAlbumWithTracksById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = {
+			"getAlbumWithTracksById" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AlbumInfo> getAlbumWithTracksById(@RequestParam("albumId") int albumId, ModelMap modelMap) {
 //		System.out.println("albumId: " + albumId);
 		AlbumInfo albumInfo = albumService.findAlbumById(albumId);
@@ -161,6 +171,7 @@ public class HomeController {
 				
 				albumInfo.getTrackInfos().add(trackInfo);				
 			}
+
 		}
 		try {
 			return new ResponseEntity<AlbumInfo>(albumInfo, HttpStatus.OK);
@@ -179,6 +190,38 @@ public class HomeController {
 			return new ResponseEntity<TrackInfo>(track, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<TrackInfo>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	// Get Comment by trackId
+	@RequestMapping(value = {
+			"getCommentByTrackId" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CommentModel>> getCommentByTrackId(@RequestParam("trackId") int trackId,
+			ModelMap modelMap) {
+
+		Track track = trackService.findById(trackId);
+
+		List<CommentModel> comments2 = new ArrayList<CommentModel>();
+		// List<Comment> comments2 = commentService.findByTrackId(trackId);
+
+		if (track.getComments().size() > 0) {
+
+			for (Comment comment : track.getComments()) {
+				CommentModel commentModel = new CommentModel(comment);
+				//System.out.println("Date : " + comment.getDate());
+				comments2.add(commentModel);
+			}
+
+			if (comments2.size() > 0) {
+				Collections.sort(comments2, (o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+			}
+
+		}
+
+		try {
+			return new ResponseEntity<List<CommentModel>>(comments2, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<List<CommentModel>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
