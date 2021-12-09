@@ -142,6 +142,10 @@ public class PlayerController {
 				result = "HAS_OWN";
 			}else {
 				accountPlaylistService.setPlaylistForAccount(accountId, albumId);				
+				Playlist album = playlistService.find(albumId);
+				int like = album.getLikes();
+				album.setLikes(like++);
+				playlistService.save(album);
 				result = "OK";
 			}
 		}else {
