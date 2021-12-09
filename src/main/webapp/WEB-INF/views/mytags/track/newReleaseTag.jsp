@@ -38,7 +38,7 @@
 						</div>
 						<div class="album__title">
 							<h3>
-								<a href="release.html">${newRelease.title }</a>
+								<a onclick="getTrackById(this)" data-id="${Change profile.id}" >${newRelease.title }</a>
 							</h3>
 							<span class="artist-nickname">
 								<c:forEach var="artist" items="${newRelease.accounts }" varStatus="j">

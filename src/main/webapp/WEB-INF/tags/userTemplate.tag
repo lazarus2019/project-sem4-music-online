@@ -2010,6 +2010,153 @@
 		}
     
 </script>
+
+<!-- Begin Script playlist -->
+<script defer>
+$('.toggle-show-playlist').on("click", function(){
+    var id = $(this).data("id");
+    $.ajax({
+    	type: 'GET',
+        data: {
+            id: id
+        },
+        url: '${pageContext.request.contextPath}/artist/show-playlist',
+        success: function (playlists) {	
+	        
+	         var result = "<h5 class='text-center'>Add to playlist</h5>";
+	        result += "<input class='form-control' type='text' onkeyup='search_playlist(this)' placeholder='Search playlist' aria-label='Search'>";
+		    result += "<div class='show-btn'>";
+	        for (var i = 0; i < playlists.length; i++){
+				result += "<button class='dropdown-item' onclick='add_to_playlist(this)' data-id='" + playlists[i].id + "'>" + playlists[i].title + "</button>";
+		    }
+			result += "</div>";
+		    $('.show-playlist-body').html(result);  
+        }
+	});
+}); 
+
+function search_playlist(e){
+var keyword = $(e).val();
+$.ajax({
+	type: 'GET',
+    data: {
+    	keyword: keyword
+    },
+    url: '${pageContext.request.contextPath}/artist/search-playlist',
+    success: function (playlists) {	
+        var result = "";
+        if(playlists.length == 0){
+	        var text = "Have no result";
+	        result += "<button class='dropdown-item'>" + text + "</button>";
+        	$('.show-btn').html(result);
+		}
+        for (var i = 0; i < playlists.length; i++){
+			result += "<button class='dropdown-item' onclick='add_to_playlist(this)' data-id='" + playlists[i].id + "'>" + playlists[i].title + "</button>";
+        }
+		$('.show-btn').html(result);
+    } 
+});
+}
+
+function add_to_playlist(e){
+var id = $(e).data("id");
+$.ajax({
+	type: 'GET',
+    data: {
+        id: id
+    },
+    url: '${pageContext.request.contextPath}/artist/add-to-playlist',
+    success: function (flag) {
+        if(flag){
+        	Swal.fire({
+        		  position: 'center',
+        		  icon: 'success',
+        		  title: 'Your work has been saved!',
+        		  showConfirmButton: false,
+        		  timer: 1500
+        	});
+	    }
+	    if(!flag) {
+	    	Swal.fire({
+        		  position: 'center',
+        		  icon: 'error',
+        		  title: 'The track is already in this playlist!',
+        		  showConfirmButton: false,
+        		  timer: 2000
+        	});
+	    }
+    }, error: function (e) {
+		console.table(e)
+	}
+})
+}
+
+function add_to_liked(e){
+	var id = $(e).data("id");
+	$.ajax({
+		type: 'GET',
+	    data: {
+	        id: id
+	    },
+	    url: '${pageContext.request.contextPath}/artist/add-to-liked',
+	    success: function (flag) {
+	        if(flag){
+	        	Swal.fire({
+	        		  position: 'center',
+	        		  icon: 'success',
+	        		  title: 'You add this song into favorites!',
+	        		  showConfirmButton: false,
+	        		  timer: 1500
+	        	});
+		    }
+		    if(!flag) {
+		    	Swal.fire({
+		    		  position: 'center',
+	        		  icon: 'success',
+	        		  title: 'You removed this song from favorites!',
+	        		  showConfirmButton: false,
+	        		  timer: 1500
+	        	});
+		    }
+	    }, error: function (e) {
+			console.table(e)
+		}
+	})
+}
+</script>
+<script type="module" defer>
+	import modal, { swalAlert, redirectAlert, singleAlert, confirmAlert, redirectAlertURLCustom } from '${pageContext.request.contextPath }/resources/user/js/notification.js';
+	$('.delete-btn').each(function (index) {
+    	$(this).click(function () {
+        	var id = $(this).data("id");
+        	confirmAlert(
+        	    function () {
+        	        console.log("id: " + id);
+         	       $.ajax({
+         	           type: 'GET',
+          	           data: {
+             	           id: id
+                    	},
+                    	url: '${pageContext.request.contextPath }/artist/delete',
+                    	success: function (response) {
+                        	if (response) {
+                            	swalAlert(modal.MODAL_CONTENT.delete_success);
+                            	var url = '${pageContext.request.contextPath }/artist';
+                            	window.location.replace(url);
+                        	}
+                        	if (!response) { 
+								swalAlert(modal.MODAL_CONTENT.delete_error) 
+							}
+                    	}
+                	})
+
+            	},
+            	modal.MODAL_CONTENT.confirm_delete_dialog)
+    	})
+	})
+</script>
+
+<!-- END Script -->
 </body>
 
 <!-- Mirrored from dmitryvolkov.me/demo/volna/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Nov 2021 02:17:54 GMT -->
