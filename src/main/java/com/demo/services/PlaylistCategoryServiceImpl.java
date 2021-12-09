@@ -27,7 +27,7 @@ public class PlaylistCategoryServiceImpl implements PlaylistCategoryService {
 		List<PlaylistCategory> playlistCategories = new ArrayList<PlaylistCategory>();
 
 		for (int i = 0; i < allList.size(); i++) {
-			if(allList.get(i).getId() != 1 && allList.get(i).getId() != 2 && allList.get(i).getId() != 3) {
+			if(allList.get(i).getId() != 1 && allList.get(i).getId() != 2 && allList.get(i).getId() != 3 && allList.get(i).getId() != 4) {
 				playlistCategories.add(allList.get(i));
 			}
 		}

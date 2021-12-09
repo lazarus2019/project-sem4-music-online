@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.entities.Account;
+import com.demo.entities.AccountPlaylist;
 import com.demo.services.AccountService;
 import com.demo.services.ArtistService;
+import com.demo.services.NotificationService;
 
 @RestController
 @RequestMapping("ajaxArtist")
@@ -25,6 +27,9 @@ public class AjaxArtistController {
 	@Autowired
 	private ArtistService artistService;
 
+	@Autowired
+	private NotificationService notificationService;
+
 	@RequestMapping(value = {
 			"acceptArtist" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> editStatus(@RequestParam(value = "id", required = false) int id) {
@@ -32,9 +37,12 @@ public class AjaxArtistController {
 			Account account = accountService.findById(id);
 
 			account.setIsArtist(true);
-			account.setIsRequest(false); 			
-			return new ResponseEntity<Boolean>(accountService.acceptOrRejectArtist(account), HttpStatus.OK);
+			account.setIsRequest(false); 
+
+			String message = "Your request to become a Artist was accepted. If you unsatisfied, send feedback please!";
+			notificationService.sendNotification(account.getId(), message);
 			
+			return new ResponseEntity<Boolean>(accountService.acceptOrRejectArtist(account), HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
@@ -48,9 +56,12 @@ public class AjaxArtistController {
 			Account account = accountService.findById(id);
 
 			account.setIsArtist(false);
-			account.setIsRequest(false); 			
-			return new ResponseEntity<Boolean>(accountService.acceptOrRejectArtist(account), HttpStatus.OK);
+			account.setIsRequest(false); 
 			
+			String message = "Your request to become a Artist was rejected. If you unsatisfied, send feedback please!";
+			notificationService.sendNotification(account.getId(), message);
+			
+			return new ResponseEntity<Boolean>(accountService.acceptOrRejectArtist(account), HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);

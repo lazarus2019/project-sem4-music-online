@@ -55,7 +55,7 @@ public class NotificationTag extends RequestContextAwareTag {
 						notificationService.getAllNewByStatus(Integer.parseInt(accountId)));
 				request.setAttribute("readNotifications", notificationService.getAllReadByStatus(Integer.parseInt(accountId), n));
 			}
-
+			request.setAttribute("accountId", accountId);
 			request.getRequestDispatcher(jspPage);
 			pageContext.include(jspPage);
 		} catch (Exception e) {

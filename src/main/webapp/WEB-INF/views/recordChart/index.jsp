@@ -13,7 +13,7 @@
 		<!-- top chart -->
 		<div class="top__list">
 				<div class="chart__header">
-					<h3 class="top__list__header text-primary">Top ${topCount } Tracks</h3>
+					<h3 class="top__list__header text-primary">Top Tracks</h3>
 				</div>
 					
 				<ul class="main__list main__list--playlist main__list--dashbox">
@@ -21,7 +21,7 @@
                         <li class="single-item single-item-chart item">
                             <a data-playlist data-title="1. Got What I Got" data-artist="Jason Aldean"
 								data-img="${pageContext.request.contextPath }/resources/user/img/covers/cover3.jpg"
-								href="../blast2.0/audio/12071151_epic-cinematic-trailer_by_audiopizza_preview.mp3"
+								onclick="getTrackById(this)" data-id="${topTrack.id}"
 								class="single-item__cover">
 					        <img src="${pageContext.request.contextPath }/uploads/images/track/${topTrack.thumbnail }" alt="">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -39,9 +39,12 @@
                                 		<c:if test="${topTrack.premium == true }"><i class="las la-crown crown-icon flex-column yellow__icon"></i></c:if>
                                 	</a>
                                 </h4>
-                                <c:forEach var="nickname" items="${topTrack.artistNicknames }">
-                                    <span><a href="#">${nickname}</a></span> 
-                                </c:forEach>
+                                <span class="artist-nickname">
+									<c:forEach var="artist" items="${topTrack.accounts }">
+										<a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname } </a>
+										<c:if test="${(i.index + 1 ) != topTrack.artistLength && i.index != 0}"> , </c:if>
+									</c:forEach>
+								</span>
                             </div>
                             <span class="single-item__time"><t:trackTime totalSeconds="${topTrack.duration }"/></span>
                             <a href="#" class="single-item__add">

@@ -83,13 +83,6 @@ public class TrackController implements ServletContextAware{
 	 * "track/index" ; }
 	 */
 	
-	@RequestMapping( value = { "" })
-	public String index(@RequestParam("keyword")String keyword, @RequestParam("type")String type) {
-		System.out.println("keyword:" + keyword);
-		System.out.println("type:" + type);
-		return "track/index" ; 
-	}
-	
 	@RequestMapping( value = { "add" })
 	public String add(ModelMap modelMap, Authentication authentication) {
 		if( authentication == null || authentication instanceof AnonymousAuthenticationToken) {

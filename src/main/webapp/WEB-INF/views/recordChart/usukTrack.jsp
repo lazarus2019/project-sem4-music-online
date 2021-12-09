@@ -18,7 +18,7 @@
                         <li class="single-item single-item-chart item">
                             <a data-playlist data-title="1. Got What I Got" data-artist="Jason Aldean"
 								data-img="${pageContext.request.contextPath }/resources/user/img/covers/cover3.jpg"
-								href="../blast2.0/audio/12071151_epic-cinematic-trailer_by_audiopizza_preview.mp3"
+								onclick="getTrackById(this)" data-id="${weeklyTrack.id}"
 								class="single-item__cover">
 					        <img src="${pageContext.request.contextPath }/uploads/images/track/${weeklyTrack.thumbnail }" alt="">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -36,9 +36,12 @@
                                 		<c:if test="${weeklyTrack.premium == true }"><i class="las la-crown crown-icon flex-column yellow__icon"></i></c:if>
                                 	</a>
                                 </h4>
-                                <c:forEach var="account" items="${weeklyTrack.accounts }">
-                                    <span><a href="#">${account.nickname}</a></span> 
-                                </c:forEach>
+                                <span class="artist-nickname">
+									<c:forEach var="artist" items="${weeklyTrack.accounts }">
+										<a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname } </a>
+										<c:if test="${(i.index + 1 ) != weeklyTrack.artistLength && i.index != 0}"> , </c:if>
+									</c:forEach>
+								</span>
                             </div>
                             <span class="single-item__time"><t:trackTime totalSeconds="${weeklyTrack.duration }"/></span>
                             <a href="#" class="single-item__add">

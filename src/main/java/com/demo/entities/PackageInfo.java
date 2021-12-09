@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,43 +25,38 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "package_info", catalog = "music_app")
 public class PackageInfo implements java.io.Serializable {
 
-	private PackageInfoId id;
+	private Integer id;
 	private Account account;
 	private ServicePackage servicePackage;
-	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private double price;
 	private Date purchaseDate;
-	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date expirationDate;
 
 	public PackageInfo() {
 	}
 
-	public PackageInfo(PackageInfoId id, Account account, ServicePackage servicePackage, Date purchaseDate,
+	public PackageInfo(Account account, ServicePackage servicePackage, double price, Date purchaseDate,
 			Date expirationDate) {
-		this.id = id;
 		this.account = account;
 		this.servicePackage = servicePackage;
+		this.price = price;
 		this.purchaseDate = purchaseDate;
 		this.expirationDate = expirationDate;
 	}
 
-	@EmbeddedId
-
-	@AttributeOverrides({
-			@AttributeOverride(name = "packageId", column = @Column(name = "package_id", nullable = false)),
-			@AttributeOverride(name = "accountId", column = @Column(name = "account_id", nullable = false)) })
-	public PackageInfoId getId() {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(PackageInfoId id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "account_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "account_id", nullable = false)
 	public Account getAccount() {
 		return this.account;
 	}
@@ -68,13 +66,22 @@ public class PackageInfo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "package_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "package_id", nullable = false)
 	public ServicePackage getServicePackage() {
 		return this.servicePackage;
 	}
 
 	public void setServicePackage(ServicePackage servicePackage) {
 		this.servicePackage = servicePackage;
+	}
+
+	@Column(name = "price", nullable = false, precision = 22, scale = 0)
+	public double getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	@Temporal(TemporalType.DATE)

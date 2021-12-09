@@ -26,6 +26,8 @@ public interface PlaylistService {
 	
 	public List<Playlist> searchByTitle(String keyword);
 	
+	public List<PlaylistModel> getBestAlbum();
+	
 	//A
 	public PlaylistInfor getLikedPlaylistByAccountId(int id);
 
