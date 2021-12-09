@@ -41,4 +41,9 @@ public class NotificationServiceImpl implements NotificationService {
 		}
 	}
 
+	@Override
+	public Notification findById(int id) {
+		return notificationRepository.findById(id).get();
+	}
+
 }

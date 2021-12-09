@@ -5,6 +5,7 @@ import java.util.List;
 public class TrackChartModel {
 
 	private int trackId;
+	private String thumbnail;
 	private String title;
 	private int duration;
 	private int likes;
@@ -15,10 +16,11 @@ public class TrackChartModel {
 		super();
 	}
 
-	public TrackChartModel(int trackId, String title, int duration, int likes, boolean premium,
+	public TrackChartModel(int trackId, String thumbnail, String title, int duration, int likes, boolean premium,
 			List<String> artistNicknames) {
 		super();
 		this.trackId = trackId;
+		this.thumbnail = thumbnail;
 		this.title = title;
 		this.duration = duration;
 		this.likes = likes;
@@ -74,5 +76,11 @@ public class TrackChartModel {
 		this.artistNicknames = artistNicknames;
 	}
 
+	public String getThumbnail() {
+		return thumbnail;
+	}
 
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 }

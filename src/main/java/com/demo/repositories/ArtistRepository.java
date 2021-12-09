@@ -26,10 +26,13 @@ public interface ArtistRepository extends PagingAndSortingRepository<Account, In
 	@Query("SELECT new com.demo.models.ArtistInfo(id,nickname,image) FROM Account WHERE id != :id")
 	public List<ArtistInfo> getArtistsWithoutId(@Param("id")int id);
 
-	@Query("from Account where isArtist = true")
-	public List<Account> getAllArtist() ;
+	@Query("from Account where isArtist = :status")
+	public List<Account> getArtistByStatus(@Param("status") boolean status) ;
 	
 	@Query("from Account where isArtist = false and isRequest = true")
 	public List<Account> getRequestArtist() ;
+	
+	@Query("from Account where isArtist = true")
+	public List<Account> getAllArtist() ;
 
 }

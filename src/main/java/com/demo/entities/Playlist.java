@@ -1,8 +1,9 @@
 package com.demo.entities;
-// Generated Dec 6, 2021, 9:25:23 AM by Hibernate Tools 5.1.10.Final
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -176,4 +177,13 @@ public class Playlist implements java.io.Serializable {
 		this.accountPlaylists = accountPlaylists;
 	}
 
+	public Set<Account> findAccountThroughAccountPlaylist() {
+		Set<Account> accounts = new HashSet<Account>(0);
+		for (AccountPlaylist accountPlaylist : accountPlaylists) {
+			accounts.add(accountPlaylist.getAccount());
+		}
+		return accounts;
+	}
+
 }
+

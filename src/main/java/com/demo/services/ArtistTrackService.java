@@ -30,4 +30,6 @@ public interface ArtistTrackService {
 	public void addFeatArtistToTrack(Track track, int artistId);
 	
 	public void setOwnerTrack(int artistId, int trackId);
+	
+	public boolean checkTrackOwner(int artistId, int trackId);
 }

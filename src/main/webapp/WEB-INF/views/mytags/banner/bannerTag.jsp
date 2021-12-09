@@ -5,28 +5,12 @@
 <section class="row">
 				<div class="col-12">
 					<div class="hero owl-carousel" id="hero">
-						<div class="hero__slide" data-bg="${pageContext.request.contextPath }/resources/user/img/home/slide1.jpg">
-							<h1 class="hero__title">Record Label & Music streaming</h1>
-							<p class="hero__text">There are many variations of passages
-								of Lorem Ipsum available, but the majority have suffered
-								alteration in some form, by injected humour, or randomised words
-								which don't look even slightly believable</p>
-						</div>
-
-						<div class="hero__slide" data-bg="${pageContext.request.contextPath }/resources/user/img/home/slide2.jpg">
-							<h2 class="hero__title">Metallica and Slipknot feature in
-								trailer for ?Long Live Rock? documentary</h2>
-							<p class="hero__text">It also features Rage Against The
-								Machine, Guns N' Roses and a number of others</p>
-						</div>
-
-						<div class="hero__slide" data-bg="${pageContext.request.contextPath }/resources/user/img/home/slide3.jpg">
-							<h2 class="hero__title">New Artist of Our Label</h2>
-							<p class="hero__text">There are many variations of passages
-								of Lorem Ipsum available, but the majority have suffered
-								alteration in some form, by injected humour, or randomised words
-								which don't look even slightly believable</p>
-						</div>
+						<c:forEach var="banner" items="${banners }">
+							<div class="hero__slide" data-bg="${pageContext.request.contextPath }/uploads/images/banner/${banner.image }">
+								<h1 class="hero__title">${banner.title }</h1>
+								<p class="hero__text">${banner.description }</p>
+							</div>
+						</c:forEach>
 					</div>
 
 					<button class="main__nav main__nav--hero main__nav--prev"

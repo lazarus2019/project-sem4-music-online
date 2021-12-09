@@ -31,8 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable() ; 
 		
 		http.authorizeRequests()
-			.antMatchers("/oauth2/**").permitAll() 			
-			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/oauth2/**").permitAll()
+			.antMatchers("/admin/manageAdmin").access("hasRole('ROLE_MANAGER')")
+			.antMatchers("/admin/manageAdmin/addNewAdmin").access("hasRole('ROLE_MANAGER')")
+			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
 			.and()
 			.formLogin()
 				.loginPage("/user/login/login")

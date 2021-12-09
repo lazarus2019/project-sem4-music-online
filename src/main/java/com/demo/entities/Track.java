@@ -1,5 +1,4 @@
 package com.demo.entities;
-// Generated Dec 6, 2021, 9:25:23 AM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -248,4 +247,12 @@ public class Track implements java.io.Serializable {
 		this.artistTracks = artistTracks;
 	}
 
+	public Set<Account> findAccountThroughAtristTrack() {
+		Set<Account> accounts = new HashSet<Account>(0) ; 
+		for(ArtistTrack artistTrack: artistTracks) {
+			accounts.add(artistTrack.getAccount()) ; 
+		}
+		return accounts ;
+	}
 }
+

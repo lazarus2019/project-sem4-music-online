@@ -1,5 +1,8 @@
 package com.demo.services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,8 +19,11 @@ import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.AuthenticationProvider;
+import com.demo.entities.Playlist;
 import com.demo.entities.Role;
+import com.demo.entities.Track;
 import com.demo.helpers.SendMailHelper;
+import com.demo.models.ArtistChartModel;
 import com.demo.models.ArtistDetail;
 import com.demo.models.ArtistInfo;
 import com.demo.models.ArtistsInfor;
@@ -34,8 +40,8 @@ public class AccountServiceImpl implements AccountService {
     public JavaMailSender emailSender;
 
 	@Override
-	public List<Account> getAllPopularArtists() {
-		return accountRepository.getAllPopularArtists();
+	public List<Account> getAllPopularArtists(int n) {
+		return accountRepository.getAllPopularArtists(n);
 	}
 
 	@Override
@@ -210,8 +216,72 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
+	public long countArtist() {
+		return accountRepository.countArtist();
+	}
+
+	@Override
+	public long countUser() {
+		return accountRepository.count();
+	}
+
+	@Override
+	public List<ArtistChartModel> getAccountChart() {
+		List<ArtistChartModel> artistChartModels = new ArrayList<ArtistChartModel>();
+		//get 10 best artist
+		for (Account account : getAllPopularArtists(10)) {
+			ArtistChartModel artistChartModel = new ArtistChartModel();
+			artistChartModel.setAccountId(account.getId());
+			artistChartModel.setNickname(account.getNickname());
+			int trackLike = 0;
+			for (Track track: account.findTrackThroughAtristTrack()) {
+				trackLike += track.getLikes();
+			}
+			artistChartModel.setTrackLike(trackLike);
+			int albumLike = 0;
+			for (Playlist playlist: account.findPlaylistThroughAccountPlaylist()) {
+				albumLike += playlist.getLikes();
+			}
+			artistChartModel.setAlbumLike(albumLike);
+		}
+		return null;
+	}
+	
+	@Override
 	public ArtistDetail getArtistByIdAccount(int id) {
 		return accountRepository.getArtistByIdAccount(id);
+		
+	}
+	
+	@Override
+	public Account addNewAdmin(Account account , String image) {
+		account.setUsername(account.getEmail()); 
+		account.setJoinDate(new Date());
+		account.setIsActive(true);
+		account.setIsArtist(true);
+
+		Role role = new Role();
+		role.setId(2);
+		account.getRoles().add(role);
+		account.setImage(image);
+		account.setFollower(0);
+		account.setAuthProvider(AuthenticationProvider.LOCAL);
+		SendMailHelper mailHelper = new SendMailHelper() ;
+		String emailContent = "<h3>Congratulaion, you are an admin from now</h3> <br> Dear " + account.getNickname()  ;
+		emailContent += ".  We send you your account password. Use your email and password to login <br>";
+		emailContent += "Your password here : <b><i>" + account.getPassword() + "</b></i>"; 
+		
+		account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
+		String subject = " Announcement about becoming the admin of the website Muzik" ; 
+		
+		try {
+			mailHelper.sendSimpleEmail(account.getEmail(), subject, emailContent , emailSender);
+		} catch (MessagingException e) {
+			System.err.println(e.getMessage());
+		}
+		
+		
+		return accountRepository.save(account);
 	}
 }
 

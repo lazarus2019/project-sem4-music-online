@@ -33,7 +33,8 @@ public class PopularArtistsTag extends RequestContextAwareTag {
 		try {
 			String jspPage = "../mytags/artist/popularArtistsTag.jsp";
 			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-			request.setAttribute("popularArtists", accountService.getAllPopularArtists());
+			//get artist by follower limit 10
+			request.setAttribute("popularArtists", accountService.getAllPopularArtists(10));
 			request.getRequestDispatcher(jspPage);
 			pageContext.include(jspPage);
 		}catch(Exception e){

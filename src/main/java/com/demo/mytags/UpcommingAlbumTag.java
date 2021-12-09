@@ -34,7 +34,6 @@ public class UpcommingAlbumTag extends RequestContextAwareTag {
 			String jspPage = "../mytags/playlist/upcommingAlbumTag.jsp";
 			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 			request.setAttribute("upcommingAlbums", playlistService.getAllUpcommingAlbum());
-			System.out.println(playlistService.getAllUpcommingAlbum().size());
 			request.getRequestDispatcher(jspPage);
 			pageContext.include(jspPage);
 		}catch(Exception e){

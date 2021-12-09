@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" uri="http://mytags.com" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
             <div class="header__action header__action--signin">
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
@@ -32,13 +33,18 @@
 									alt="profile-bg" class="user__avatar">
 							</c:if>	
                             <div class="dropdown__user-menu">
+                            	<sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')">
+	                            <a href="${pageContext.request.contextPath }/admin">
+	                            	<i class="ri-album-line iq-arrow-left"></i>Admin Panel
+	                            </a>
+								</sec:authorize>
                                 <a href="${pageContext.request.contextPath }/user/profile/index">
                                     <i class="lar la-user-circle"></i> Profile
                                 </a>
-                                <a href="${pageContext.request.contextPath }/artist/yourtrack">
+                                <a href="${pageContext.request.contextPath }/track/manage">
                                     <i class="las la-music"></i> Your Tracks
                                 </a>
-                                <a href="${pageContext.request.contextPath }/artist/youralbum">
+                                <a href="${pageContext.request.contextPath }/playlist/manage">
                                     <i class="las la-record-vinyl"></i> Your Albums
                                 </a>
                                 <a href="${pageContext.request.contextPath }/package">
@@ -48,6 +54,15 @@
                                 <a href="#">
                                     <i class="las la-user-cog"></i> Settings
                                 </a>
+                                
+                                <a href="${pageContext.request.contextPath }/aboutus">
+                                    <i class="far fa-address-card"></i> About Us
+                                </a>
+                                
+                                <a href="${pageContext.request.contextPath }/contact">
+                                    <i class="far fa-envelope"></i> Contact
+                                </a>
+                                
                                 <a href="${pageContext.request.contextPath }/user/login/logout">
                                     <i class="las la-sign-out-alt"></i> Log out
                                 </a>

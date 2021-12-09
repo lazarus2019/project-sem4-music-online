@@ -446,3 +446,26 @@ function moveToElement(childEl, parentEl){
 	    return null;
 	}
 	//alert( getAccIdInCookie('acc_id') );
+	function search_playlist(e){
+var keyword = $(e).val();
+$.ajax({
+	type: 'GET',
+    data: {
+    	keyword: keyword
+    },
+    url: '${pageContext.request.contextPath}/artist/search-playlist',
+    success: function (playlists) {	
+        var result = "";
+        if(playlists.length == 0){
+	        var text = "Have no result";
+	        result += "<button class='dropdown-item'>" + text + "</button>";
+        	$('.show-btn').html(result);
+		}
+        for (var i = 0; i < playlists.length; i++){
+			result += "<button class='dropdown-item' onclick='add_to_playlist(this)' data-id='" + playlists[i].id + "'>" + playlists[i].title + "</button>";
+        }
+		$('.show-btn').html(result);
+    } 
+});
+}
+

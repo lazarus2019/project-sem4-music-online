@@ -92,6 +92,29 @@ const MODAL_CONTENT = {
         title: "It's Done",
         html: 'We will return you to the manage page <b></b>s.',
         timer: 2
+    },
+    must_sign_in:{
+        icon: 'info',
+        title: "You must sign in first",
+        html: 'We will return you to the login page <b></b>s.',
+        timer: 2
+    },
+    not_allow:{
+        icon: 'warning',
+        title: "You not allow to be here!",
+        html: 'We will return you to the manage page <b></b>s.',
+        timer: 2
+    },
+    send_mail_success: {
+        icon: 'success',
+        title: 'Sent!',
+        text: 'Your mail was sent!'
+    },
+    send_mail_error: {
+        icon: 'error',
+        title: 'Failed!',
+        text: 'Please check your request and try again'
+
     }
 }
 
@@ -189,5 +212,5 @@ export function redirectAlertURLCustom(modal, url){
     // })
 }
 
-export default {MODAL_CONTENT}
 
+export default {MODAL_CONTENT}

@@ -36,11 +36,21 @@ public interface TrackService {
 	public List<TrackInfo> searchByTitle(String keyword, Pageable pageable);
 
 	public TrackInfo findByTrackId(int trackId);
+	
+	public List<TrackInfor> getAll();
+	
+	//public List<Track> getAll();
 
 	public List<TrackInfo> getWaitingTrackByGenres(int id, int genresId, Pageable pageable);
 	
 	public boolean updateWeeklyListens();
 
 	public void updateBaseListens();
+	
+	public long countTrack();
+	
+	public List<Track> getBestTrack(int n);
+
+	public List<TrackInfo> searchTrackInManage(String option, String keyword, int artistId);
 }
 
