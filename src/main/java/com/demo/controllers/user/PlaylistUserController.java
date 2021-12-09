@@ -384,10 +384,7 @@ public class PlaylistUserController implements ServletContextAware{
 						for (Track track : album.getTracks()) {
 							album.getTracks().remove(track);
 							playlistService.save(album);
-						}
-						
-//						playlistService.delete(albumId);
-						
+						}						
 						result = "OK";					
 					}
 				}			

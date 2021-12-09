@@ -20,14 +20,7 @@
                               <label for="title">Title:</label>
                               <input type="text" class="form-control" id="title" name="title" required="required">
                            </div>
-                           <div class="form-group">
-                              <label>Thumbnail:</label>
-                              <input type="file" name="photo">
-                              <!-- <div class="custom-file">
-                                 <input type="file" class="custom-file-input" id="customFile"  name="photo">
-                                 <label class="custom-file-label" for="customFile"></label>
-                              </div> -->
-                           </div>
+                           
                            <div class="form-group">
                               <label>Playlist Category:</label>
                               <select class="form-control" id="exampleFormControlSelect1" name="playlistCategory.id">
@@ -41,12 +34,8 @@
                               <textarea class="form-control" rows="4" name="description" required="required"></textarea>
                            </div>
                            <div class="form-group">
-                              <label>Thumbnail:</label>
-                              <input type="file" name="photo" onchange="previewChangeAccountImage(this)">
-                              <!-- <div class="custom-file">
-                                 <input type="file" class="custom-file-input" id="customFile"  name="photo">
-                                 <label class="custom-file-label" for="customFile"></label>
-                              </div> -->
+                              <label for="inputGenres" >Thumbnail:</label>
+                              <input class="file-upload" id="inputGenres" type="file" name="photo" onchange="previewChangeAccountImage(this)" required="required">
                               <br>
                               <img src="" id="thumbnail" class="img-responsive rounded " width="300" height="300">
                            </div>

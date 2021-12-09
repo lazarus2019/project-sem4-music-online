@@ -43,6 +43,7 @@
 
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png" sizes="32x32">
+	
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath }/resources/user/icon/favicon-32x32.png">
 
 	<script src="${pageContext.request.contextPath }/resources/user/js/jquery-3.5.1.min.js"></script>
@@ -50,7 +51,7 @@
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="Dmitry Volkov">
-	<title>Volna - Record label & Music streaming HTML Template</title>
+	<title>Netfzik - Record label & Music streaming HTML Template</title>
 
 </head>
 
@@ -78,8 +79,8 @@
                 <a href="#" class="link">Library</a>
                 <div class="dropdown-menu">
                     <a href="${pageContext.request.contextPath }/track/all"><i class="las la-music"></i> New Release</a>
-                    <a href="custom_playlist.html"><i class="las la-stream"></i> Playlist</a>
 					<c:if test="${pageContext.request.userPrincipal.name  != null }">
+                    	<a href="${pageContext.request.contextPath }/customPlaylist"><i class="las la-stream"></i> Playlist</a>
                     	<a href="${pageContext.request.contextPath }/liked"><i class="las la-heart"></i> Liked</a>
                     	<a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
                     </c:if>
@@ -88,8 +89,9 @@
                 </div>
             </li>
 
-
-            <a href="${pageContext.request.contextPath }/artist">Artist</a>
+			<li>
+            	<a href="${pageContext.request.contextPath }/artist">Artist</a>
+			</li>
         </ul>
 
 		<!-- base search -->
@@ -175,9 +177,12 @@
 			</div>
 		</div>
 		<div class="audio-info">
+			<button id="lyrics" class="default-btn" onclick="toggleComment()">
+				<i class="ri-discuss-line audio__icon"></i>
+			</button>
 			<button id="lyrics" class="default-btn" onclick="toggleLyrics()">
 				<i class="las la-file-alt audio__icon"></i>
-			</button>
+			</button> 
 			<span class="duration-info">
 				<span class="current-time">00:00</span> /
 				<span class="base-duration">03:22</span>
@@ -237,6 +242,29 @@
 	</div>
 	<!-- end Lyric box -->
 
+	<div class="comment-box ">
+		<button class="default-btn hide-lyric-box" onclick="hideComment()">
+			<i class="las la-angle-down audio__icon"></i>
+		</button>
+		<div class="row row--grid">
+			<div class="col-6">
+				<div class="comment-thumbnail">
+					<img id="trackImageComment" src="https://yt3.ggpht.com/IbzRdnm7aoMvV_fdLAAmL1D7IlJ3fQ-FA5kuRujQst_1MnQTNRO1wlrvjEVocAmsqIOLP6D34Q=s900-c-k-c0x00ffffff-no-rj"
+						alt="">
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="comment-content">	
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Comment Box -->
+
+	<!-- End Comment Box -->
 	<!-- Playlist box -->
 	<div class="playlist__box">
 		<div class="playlist-title">
@@ -1619,6 +1647,8 @@
 	// replaceNewPlaylist(waitingPlaylist)
 
 		
+		// Get comment of this track 
+	
 		//==== Click functions: Track - Album ====
 
  function getTrackById(e){
@@ -1630,8 +1660,14 @@
             },
             url: '${pageContext.request.contextPath }/home/getTrackById',
             success: function (track) {
+            	 
                 if (track) {
                      console.log(track) 
+	                 console.log('${pageContext.request.contextPath }/uploads/images/track/' + track.thumbnail )
+	                 // Thu dung ke 
+	                 const img = document.getElementById("trackImageComment") || null
+	                 img.src = '${pageContext.request.contextPath }/uploads/images/track/' + track.thumbnail ; 
+	                 ///////
                    
                     let flag = false
                     for(let i = 0; i < songPlaylist.length; i++){
@@ -1646,11 +1682,57 @@
 	                    playSong(track.id)
 	                    plusListenForTrack(track.id)
 	                    addEventRemoveSong()
+                    	 var singer = ""
+                         if(track.artist){
+                            singer = track.artist.map(artist => artist.nickname + " - ")
+                         }
+                         var playTrack = {
+         						id: track.id,
+         						title:track.title,
+         						image: '${pageContext.request.contextPath }/uploads/images/track/' + track.thumbnail,
+         						path: '${pageContext.request.contextPath }/uploads/audio/track/' + track.fileName,
+         						duration: track.duration,
+         						singer: singer,
+         						lyrics: track.lyrics,
+         						genresId: track.genresId
+                            }
+                             
+	                    addSongs(playTrack)
 	                    var lyrics = renderLyrics(track.lyrics)
 	                    var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
 	                    $(".lyric-content").html(songTitle + lyrics)
+	                    
                     }
                 }
+
+                $.ajax({
+                    type: 'GET',
+                    data: {
+                        trackId: trackId
+                    },
+                    url: '${pageContext.request.contextPath }/home/getCommentByTrackId',
+                    success: function (comments) {
+						var result = "" ; 
+						 for (var i = 0; i < comments.length; i++) {
+							result += '<li class="comments__item">' ;
+							result += '<div class="comments__autor">' ; 
+							result += '<img class="comments__avatar" src="${pageContext.request.contextPath }/uploads/images/artist/' + comments[i].accountImage +'" alt="">'
+							result += '<span class="comments__name">'+comments[i].accountName+'</span>' ;
+							result += '<span class="comments__time">'+ comments[i].date +'</span>' ; 		
+							result += '</div> <p class="comments__text">'+ comments[i].message+'</p> </li>' ;		
+							result += '' ; 
+								
+							$(".comment-content").html(result)	
+
+						}
+                        
+                        console.log("ok")
+                    },
+                    error: function() {
+                        console.log("error")
+                       
+                    }
+                })
             }
         })
 }
@@ -1681,6 +1763,7 @@
             success: function (waitingTrack) {
                 addSongToWaiting(track)   
             	createTrack(track)
+
                 playSong(waitingPlaylist[0].id)             
             }
         })

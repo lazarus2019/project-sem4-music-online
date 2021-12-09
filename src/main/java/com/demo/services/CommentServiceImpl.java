@@ -1,5 +1,7 @@
 package com.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,11 @@ public class CommentServiceImpl implements CommentService{
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public List<Comment> findByTrackId(int id) {
+		return commentRepository.findByTrackId(id);
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.demo.controllers.user;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,6 +56,7 @@ public class PlayerController {
 	@Autowired
 	private AdvertisementService advertisementService;
 	
+
 	@RequestMapping(value = {"plusListenTrack" }, method = RequestMethod.GET, produces = MimeTypeUtils.TEXT_PLAIN_VALUE)
 	public ResponseEntity<Void> searchTopArtist(@RequestParam("trackId") int trackId) {
 		Track track = trackService.findById(trackId);

@@ -2,15 +2,10 @@ package com.demo.models;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.demo.entities.Account;
 import com.demo.entities.Genres;
-import com.demo.entities.Status;
-
-import javassist.expr.NewArray;
 
 public class TrackInfo {
 

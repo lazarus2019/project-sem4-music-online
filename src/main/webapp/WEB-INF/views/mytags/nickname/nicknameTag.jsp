@@ -4,7 +4,7 @@
 <%@ taglib prefix="t" uri="http://mytags.com" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-            <div class="header__action header__action--signin pl-0">
+            <div class="header__action header__action--signin">
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <a class="header__action-btn" href="${pageContext.request.contextPath }/user/login/login">
                         <span>Sign in</span>
@@ -15,9 +15,11 @@
                     </a>
                 </c:if>
                 <div class="header__action-btn">
-                    <c:if test="${pageContext.request.userPrincipal.name  != null }">                   
-                        
-                         <div class="user__box">
+                    <c:if test="${pageContext.request.userPrincipal.name  != null }">
+                    
+                        <span>${ accountSignined.nickname }</span>
+    
+                        <div class="user__box">
                         	<c:if test="${accountPackage.servicePackage.name != 'Basic' }">
                                <i class="las la-crown"></i> 
                             </c:if>
@@ -52,12 +54,12 @@
                                 <a href="#">
                                     <i class="las la-user-cog"></i> Settings
                                 </a>
+                                
                                 <a href="${pageContext.request.contextPath }/user/login/logout">
                                     <i class="las la-sign-out-alt"></i> Log out
                                 </a>
                             </div>
                         </div>
-                    	<span class="ml-2">${ accountSignined.nickname }</span>
                     </c:if>
                 </div>
             

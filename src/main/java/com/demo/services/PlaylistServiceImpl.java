@@ -11,13 +11,10 @@ import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
 import com.demo.entities.Playlist;
 import com.demo.entities.Status;
-import com.demo.entities.Track;
 import com.demo.models.AlbumInfo;
 import com.demo.models.PlaylistInfor;
 import com.demo.models.PlaylistModel;
-import com.demo.models.TrackInfo;
 import com.demo.repositories.PlaylistRepository;
-import com.demo.repositories.TrackRepository;
 
 @Service("playlistService")
 public class PlaylistServiceImpl implements PlaylistService {

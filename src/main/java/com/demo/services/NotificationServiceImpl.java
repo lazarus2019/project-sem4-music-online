@@ -51,6 +51,7 @@ public class NotificationServiceImpl implements NotificationService {
 		return notificationRepository.findById(id).get();
 	}
 
+
 	@Override
 	public void sendNotification(int accountId, String message) {
 		Notification notification = new Notification();

@@ -58,9 +58,10 @@ public class ManageTrackController implements ServletContextAware {
 
 	@Autowired
 	private CommentService commentService;
-
+	
 	@Autowired
 	private NotificationService notificationService;
+
 
 	@RequestMapping(value = { "", "index" }, method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {

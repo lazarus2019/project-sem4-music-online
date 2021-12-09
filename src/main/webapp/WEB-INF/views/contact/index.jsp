@@ -40,7 +40,7 @@
 
 							<div class="col-12 col-md-6">
 								<div class="sign__group">
-									<input type="text" name="email" class="sign__input" placeholder="Email" required="required">
+									<input type="email" name="email" class="sign__input" placeholder="Email" required="required">
 								</div>
 							</div>
 

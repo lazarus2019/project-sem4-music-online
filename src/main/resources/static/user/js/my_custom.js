@@ -42,11 +42,19 @@ function togglePlaylist() {
 }
 
 function toggleLyrics() {
+	hideComment();
 	document.querySelector('.lyric-box').classList.toggle('show');
+}
+function toggleComment() {
+	hideLyrics();
+	document.querySelector('.comment-box').classList.toggle('show');
 }
 
 function hideLyrics() {
 	document.querySelector('.lyric-box').classList.remove('show');
+}
+function hideComment() {
+	document.querySelector('.comment-box').classList.remove('show');
 }
 
 function changeVolumeIcon(e) {

@@ -6,13 +6,13 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.demo.entities.Account;
 import com.demo.entities.ArtistTrack;
-import com.demo.entities.ServicePackage;
 import com.demo.entities.Status;
 import com.demo.entities.Track;
 import com.demo.helpers.CalculateDateTimeHelper;
@@ -20,9 +20,8 @@ import com.demo.models.ArtistInfo;
 import com.demo.models.TrackInfo;
 import com.demo.models.TrackInfor;
 import com.demo.models.WeeklyTrackModel;
-import com.demo.repositories.TrackRepository;
-
 import com.demo.repositories.AccountRepository;
+import com.demo.repositories.TrackRepository;
 
 @Service("trackService")
 public class TrackServiceImpl implements TrackService {

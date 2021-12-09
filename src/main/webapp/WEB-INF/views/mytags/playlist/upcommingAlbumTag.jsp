@@ -18,7 +18,7 @@
 								<div class="event" data-bg="${pageContext.request.contextPath }/uploads/images/playlist/${upcommingAlbum.thumbnail }">
 									<span class="event__date"><fmt:formatDate value="${upcommingAlbum.publishDate }" type="date" pattern="MMM-dd-yyyy"/></span>
 									<h3 class="event__title">
-										<a href="event.html">${upcommingAlbum.title }</a>
+										<a href="${pageContext.request.contextPath }/customPlaylist/playlistDetail/${upcommingAlbum.id}">${upcommingAlbum.title }</a>
 									</h3>
 									<p class="event__address">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
 								</div>
