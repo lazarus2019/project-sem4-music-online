@@ -239,17 +239,11 @@
 
 	<!-- Playlist box -->
 	<form class="playlist__box" method="post" action="${pageContext.request.contextPath}/player/savePlaylistToLibrary">
-			<input class="playlist-id-modelMap" value="${id }" style="display: none">
-		<div class="playlist-title">
+					<div class="playlist-title">
 			<div class="playlist-title-content d-flex align-items-center">
 				<button class="btn-save-playlist mr-2" type="button"><i class="las la-save audio__icon clr-white"></i></button> 
 				<span class="playlist-title-text">
-				<c:set var="playlistTitleFinal" value="Listen Special"/>
-					<input class="playlist-title-modelMap" value="${playlistTitle }" style="display: none">
-				<c:if test="${playlistTitle not empty }">
-					<c:set var="playlistTitleFinal" value="${playlistTitle }"/>
-				</c:if>
-				${ playlistTitleFinal}				
+				Listen Special			
 				</span>
 				<input name="title" class="playlist-title-input" style="display: none" value="">
 			</div>
