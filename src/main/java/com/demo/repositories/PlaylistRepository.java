@@ -20,14 +20,17 @@ public interface PlaylistRepository extends CrudRepository<Playlist, Integer> {
 	@Query(value = "select * from Playlist where category_id != 1 and category_id != 2 and category_id != 3 order by publish_date desc", nativeQuery = true)
 	public List<Playlist> getAllPlaylist();
 	
-	@Query("from Playlist where title like %:keyword% and category_id != 1 and category_id != 2 and category_id != 3 order by publish_date desc")
+	@Query("from Playlist where title like %:keyword% and category_id != 1 and category_id != 2 and category_id != 3 and category_id != 4 order by publish_date desc")
 	public List<Playlist> searchByTitle(@Param("keyword") String keyword);
 	
 	@Query(value = "select * from Playlist where category_id = 3 order by publish_date desc", nativeQuery = true)
 	public List<Playlist> getAllAlbum();
 	
-	@Query(value = "select * from Playlist where category_id = 2  ", nativeQuery = true)
+	@Query(value = "select * from Playlist where category_id = 2", nativeQuery = true)
 	public List<Playlist> getLikedPlaylist();
+	
+	@Query(value = "select * from Playlist where category_id = 3 order by likes desc limit 4", nativeQuery = true)
+	public List<Playlist> getBestAlbum();
 	//A-2/12
 	@Query("select new com.demo.models.PlaylistInfor(playlistCategory.id ,title, thumbnail, likes) from Playlist where id = :id and playlistCategory.id = 2")
 	public PlaylistInfor getLikedPlaylistByAccountId(@Param("id") int id);

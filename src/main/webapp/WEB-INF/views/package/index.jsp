@@ -45,20 +45,39 @@
 											<input type="hidden" name="amount_1" value="${pack.price }"> 
 											<input type="hidden" name="quantity_1" value="1">
 											
-											<button class="plan__btn" type="submit" data-id="${pack.id }">Buy Now!</button>
+											<button class="plan__btn" type="submit" onclick="buy(this)" data-id="${pack.id }">Buy Now!</button>
 										</form>
 									</div>
 								</div>
 							</c:forEach>
 						</div>
 						<!-- end package -->
+<script src="${pageContext.request.contextPath }/resources/user/js/jquery.min.js"></script>
+						
 <script>
-	$(document).ready(function() {
-		$('.plan__btn').click(function() {
-			var id = $(this).data("id");
-			console.log("packId: " + id);
-			localStorage.setItem("packageId", id);
-		});
+	function buy(e){
+		console.log("id: " + $(e).data("id"))
+		var id = $(e).data("id");
+		window.localStorage.setItem('packageId', id);
+	}
+	
+	$(document).ready(function(){
+		var id = window.localStorage.getItem('packageId');
+		if(id != null){
+			console.log("pack id: " + id);
+			$.ajax({
+				type: 'GET',
+				data: {
+					id: id
+				},
+				url: '${pageContext.request.contextPath}/package/add-pack-info',
+				success: function(response){
+					if(response){
+						window.localStorage.removeItem('packageId');
+					}
+				}
+			})
+		}
 	})
 </script>
 	</jsp:attribute>

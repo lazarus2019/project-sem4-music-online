@@ -224,28 +224,6 @@ public class AccountServiceImpl implements AccountService {
 	public long countUser() {
 		return accountRepository.count();
 	}
-
-	@Override
-	public List<ArtistChartModel> getAccountChart() {
-		List<ArtistChartModel> artistChartModels = new ArrayList<ArtistChartModel>();
-		//get 10 best artist
-		for (Account account : getAllPopularArtists(10)) {
-			ArtistChartModel artistChartModel = new ArtistChartModel();
-			artistChartModel.setAccountId(account.getId());
-			artistChartModel.setNickname(account.getNickname());
-			int trackLike = 0;
-			for (Track track: account.findTrackThroughAtristTrack()) {
-				trackLike += track.getLikes();
-			}
-			artistChartModel.setTrackLike(trackLike);
-			int albumLike = 0;
-			for (Playlist playlist: account.findPlaylistThroughAccountPlaylist()) {
-				albumLike += playlist.getLikes();
-			}
-			artistChartModel.setAlbumLike(albumLike);
-		}
-		return null;
-	}
 	
 	@Override
 	public ArtistDetail getArtistByIdAccount(int id) {

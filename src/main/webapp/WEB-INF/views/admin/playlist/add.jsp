@@ -17,16 +17,8 @@
                      <div class="iq-card-body">
                         <s:form method="post" action="${pageContext.request.contextPath }/admin/playlist/add" modelAttribute="playlist" enctype="multipart/form-data">
                            <div class="form-group">
-                              <label>Title:</label>
-                              <input type="text" class="form-control" name="title">
-                           </div>
-                           <div class="form-group">
-                              <label>Thumbnail:</label>
-                              <input type="file" name="photo">
-                              <!-- <div class="custom-file">
-                                 <input type="file" class="custom-file-input" id="customFile"  name="photo">
-                                 <label class="custom-file-label" for="customFile"></label>
-                              </div> -->
+                              <label for="title">Title:</label>
+                              <input type="text" class="form-control" id="title" name="title" required="required">
                            </div>
                            <div class="form-group">
                               <label>Playlist Category:</label>
@@ -38,7 +30,17 @@
                            </div>
                            <div class="form-group">
                               <label>Description:</label>
-                              <textarea class="form-control" rows="4" name="description"></textarea>
+                              <textarea class="form-control" rows="4" name="description" required="required"></textarea>
+                           </div>
+                           <div class="form-group">
+                              <label>Thumbnail:</label>
+                              <input type="file" name="photo" onchange="previewChangeAccountImage(this)">
+                              <!-- <div class="custom-file">
+                                 <input type="file" class="custom-file-input" id="customFile"  name="photo">
+                                 <label class="custom-file-label" for="customFile"></label>
+                              </div> -->
+                              <br>
+                              <img src="" id="thumbnail" class="img-responsive rounded " width="300" height="300">
                            </div>
                            <button type="submit" class="btn btn-primary">Submit</button>
                            <button type="reset" class="btn btn-danger">Reset</button>
@@ -47,5 +49,23 @@
                   </div>
                </div>
             </div>
+            
+     <script>
+	     function previewChangeAccountImage(e) {
+	  	    const img = document.getElementById("thumbnail") || null
+	  	    const file = e.files[0];
+	  	    if (file) {
+	  	        const reader = new FileReader();
+	  	        reader.onload = function() {
+	  	            const result = reader.result;
+	  	            if (img) {
+	  	                img.src = result
+	  	            }
+	  	        }
+	
+	  	        reader.readAsDataURL(file);
+	  	    }
+	  	 }
+     </script>
 	</jsp:attribute>
 </mt:adminTemplate>	

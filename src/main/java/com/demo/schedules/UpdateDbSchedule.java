@@ -16,7 +16,8 @@ public class UpdateDbSchedule {
 	private TrackService trackService;
 
 	// second, minute, hour, day of month, month and day of week.
-	@Scheduled(cron = "0 0 0 * * *", zone = "Asia/Ho_Chi_Minh")
+	//@Scheduled(cron = "0 0 0 * * ?", zone = "Asia/Ho_Chi_Minh")
+	@Scheduled(cron = "@midnight")
 	public void mondaySchedule() {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -25,20 +26,13 @@ public class UpdateDbSchedule {
 		System.out.println("monday: " + monday);
 		System.out.println("today: " + today);
 		System.out.println("hello new day");
-		int result = today.compareTo(monday);
-		System.out.println(result);
-
-		if (result == 0) {
-			if (trackService.updateWeeklyListens()) {
-				trackService.updateBaseListens();
-			} else {
-				System.out.println("Update Failed");
-				mondaySchedule();
-			}
-			System.out.println("Updated db: " + new Date());
-		}
-
+		/*
+		 * int result = today.compareTo(monday); System.out.println(result);
+		 * 
+		 * if (result == 0) { if (trackService.updateWeeklyListens()) {
+		 * trackService.updateBaseListens(); System.out.println("Updated db"); } else {
+		 * System.out.println("Update Failed"); } }
+		 */
 	}
 
 }
-

@@ -17,5 +17,7 @@ public interface NotificationService {
 	public void delete(int[] ids);
 	
 	public Notification findById(int id);
+	
+	public void sendNotification(int accountId, String message);
 
 }

@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.demo.entities.Account;
 import com.demo.entities.AccountPlaylist;
+import com.demo.entities.ArtistTrack;
 import com.demo.entities.Playlist;
 import com.demo.entities.PlaylistCategory;
 import com.demo.entities.Status;
@@ -30,6 +31,7 @@ import com.demo.helpers.FileUploadHelper;
 import com.demo.models.PlaylistModel;
 import com.demo.models.TrackInfo;
 import com.demo.services.AccountPlaylistService;
+import com.demo.services.NotificationService;
 import com.demo.services.PlaylistCategoryService;
 import com.demo.services.PlaylistService;
 import com.demo.services.TrackService;
@@ -42,7 +44,7 @@ public class PlaylistController implements ServletContextAware {
 
 	@Autowired
 	private PlaylistService playlistService;
-	
+
 	@Autowired
 	private TrackService trackService;
 
@@ -53,8 +55,11 @@ public class PlaylistController implements ServletContextAware {
 	private PlaylistCategoryService playlistCategoryService;
 
 	@Autowired
+	private NotificationService notificationService;
+
+	@Autowired
 	private HttpSession session;
-	
+
 	@RequestMapping(value = { "", "index" })
 	public String index(ModelMap modelMap) {
 		List<PlaylistModel> playlistModels = new ArrayList<PlaylistModel>();
@@ -138,7 +143,22 @@ public class PlaylistController implements ServletContextAware {
 		newPlaylist.setTitle(playlist.getTitle());
 		newPlaylist.setDescription(playlist.getDescription());
 		newPlaylist.setLastUpdated(new Date());
-		playlistService.save(newPlaylist);
+		Playlist editPlaylist = playlistService.save(newPlaylist);
+
+		// send notification
+		if (editPlaylist.getPlaylistCategory().getId() == 3) {
+			int accountId = 0;
+			for (AccountPlaylist accountPlaylist : editPlaylist.getAccountPlaylists()) {
+				if (accountPlaylist.isIsOwn() == true) {
+					accountId = accountPlaylist.getAccount().getId();
+				}
+			}
+			if (editPlaylist != null) {
+				String message = "Your album " + playlist.getTitle().toUpperCase()
+						+ " was changed by admin. If you unsatisfied, send feedback please!";
+				notificationService.sendNotification(accountId, message);
+			}
+		}
 		return "redirect:/admin/playlist/index";
 	}
 
@@ -160,12 +180,12 @@ public class PlaylistController implements ServletContextAware {
 			return new ResponseEntity<List<TrackInfo>>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(value = "delete-track", method = RequestMethod.GET)
 	public ResponseEntity<List<TrackInfo>> deleteTrack(@RequestParam(value = "id", required = false) int id) {
 		try {
 			int playlistId = (Integer) session.getAttribute("playlistId");
-			
+
 			Playlist playlist = playlistService.find(playlistId);
 			playlist.getTracks().remove(trackService.findById(id));
 			playlistService.save(playlist);
@@ -177,7 +197,7 @@ public class PlaylistController implements ServletContextAware {
 				trackInfo.setStatusId(track.getStatus().getId());
 				tracks.add(trackInfo);
 			}
-			
+
 			return new ResponseEntity<List<TrackInfo>>(tracks, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<List<TrackInfo>>(HttpStatus.BAD_REQUEST);
@@ -203,22 +223,33 @@ public class PlaylistController implements ServletContextAware {
 			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(value = { "delete" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> delete(@RequestParam("id") int playlistId) {
-		boolean result = false;
-		Playlist album = playlistService.find(playlistId);
-
-		accountPlaylistService.removeAccountHasAlbum(album);
-
-		for (Track track : album.getTracks()) {
-			album.getTracks().remove(track);
-		}
-
-		playlistService.delete(playlistId);
-
-		result = true;
 		try {
+			boolean result = false;
+			Playlist playlist = playlistService.find(playlistId);
+			accountPlaylistService.removeAccountHasAlbum(playlist);
+			for (Track track : playlist.getTracks()) {
+				playlist.getTracks().remove(track);
+			}
+			playlistService.delete(playlistId);
+
+			// send notification
+			if (playlist.getPlaylistCategory().getId() == 3) {
+				int accountId = 0;
+				for (AccountPlaylist accountPlaylist : playlist.getAccountPlaylists()) {
+					if (accountPlaylist.isIsOwn() == true) {
+						accountId = accountPlaylist.getAccount().getId();
+						System.out.println("Account Id: " + accountId);
+					}
+				}
+				String message = "Your album " + playlist.getTitle().toUpperCase()
+						+ " was deleted by admin. If you unsatisfied, send feedback please!";
+				notificationService.sendNotification(accountId, message);
+			}
+			
+			result = true;
 			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);

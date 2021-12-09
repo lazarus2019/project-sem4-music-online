@@ -14,8 +14,11 @@ public interface PackageInfoService {
 	public List<PackageInfo> getPackageInfosById(int packageId);
 	
 	public Iterable<PackageInfo> findAll();
+
+	public PackageInfo save(PackageInfo packageInfo);
 	
 	public List<PackageChartModel> getPackageChart(); 
 
-	public List<PackageInfo> countByPackageId(int packageId);
+	public List<Double> getTotalPricePerMonth();
+	
 }
