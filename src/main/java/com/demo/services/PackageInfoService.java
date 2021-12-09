@@ -1,5 +1,6 @@
 package com.demo.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.demo.entities.Account;
@@ -24,4 +25,6 @@ public interface PackageInfoService {
 	public List<PackageInfo> countByPackageId(int packageId);
 	
 	public boolean checkPremiumByAccountId(int accountId);
+	
+	public PackageInfo checkPackage(int accountId);
 }

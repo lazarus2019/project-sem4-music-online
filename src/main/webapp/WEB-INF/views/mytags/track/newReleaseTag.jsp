@@ -37,7 +37,7 @@
 							</span>
 						</div>
 						<div class="album__title">
-							<h3>
+							<h3 class="clr-dark">
 								<a onclick="getTrackById(this)" data-id="${profile.id}" >${newRelease.title }</a>
 							</h3>
 							<span class="artist-nickname">

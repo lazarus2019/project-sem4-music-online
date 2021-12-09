@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -389,11 +390,12 @@ public class TrackController implements ServletContextAware{
 					if(artistTrackService.checkTrackOwner(artistId, trackId)) {
 						Track track = trackService.findById(trackId);
 						
+						if(track.getPlaylists() != null) {
+							track.setPlaylists(new HashSet<Playlist>(0));
+						}
+						
 						artistTrackService.removeAllArtistFromTrack(track);
 						
-						for (Playlist album : track.getPlaylists()) {
-							track.getPlaylists().remove(album);
-						}
 						
 						commentService.removeAllCommentInTrack(track);
 						

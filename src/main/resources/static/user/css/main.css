@@ -7616,8 +7616,8 @@ body::-webkit-scrollbar-thumb {
 
 .grid-tl-6 {
   display: grid;
-  grid-template-columns: repeat(6, minmax(120px, 1fr));
-  column-gap: 1.5rem;
+  grid-template-columns: repeat(6, minmax(110px, 1fr));
+  column-gap: 1.1rem;
 }
 
 .grid-tl-3 {
@@ -7637,8 +7637,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .artist-image-box {
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
 }
 
 .artist-image-box img {
@@ -7698,7 +7698,7 @@ body::-webkit-scrollbar-thumb {
   transition: opacity .5s ease;
   opacity: 0;
   pointer-events: none;
-  z-index: -1;
+  z-index: -1;  
 }
 
 .result-layout-fixed-bg.show {
@@ -7711,6 +7711,7 @@ body::-webkit-scrollbar-thumb {
   opacity: 1;
   display: block;
   pointer-events: auto;
+  overflow-x: hidden;
 }
 
 .btn-add-new-track {

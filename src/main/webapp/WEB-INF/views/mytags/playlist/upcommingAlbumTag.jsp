@@ -2,7 +2,8 @@
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-			<section class="row row--grid">
+				<c:if test="${upcommingAlbums.size() > 0 }">
+				<section class="row row--grid">
 				<!-- title -->
 				<div class="col-12">
 					<div class="main__title">
@@ -10,7 +11,6 @@
 					</div>
 				</div>
 				<!-- end title -->
-				
 				<div class="col-12">
 					<div class="main__carousel-wrap">
 						<div class="main__carousel main__carousel--events owl-carousel" id="events">
@@ -18,7 +18,7 @@
 								<div class="event" data-bg="${pageContext.request.contextPath }/uploads/images/playlist/${upcommingAlbum.thumbnail }">
 									<span class="event__date"><fmt:formatDate value="${upcommingAlbum.publishDate }" type="date" pattern="MMM-dd-yyyy"/></span>
 									<h3 class="event__title">
-										<a href="${pageContext.request.contextPath }/customPlaylist/playlistDetail/${upcommingAlbum.id}">${upcommingAlbum.title }</a>
+										<a href="${pageContext.request.contextPath }/customPlaylist/albumDetail/${upcommingAlbum.id}">${upcommingAlbum.title }</a>
 									</h3>
 									<p class="event__address">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
 								</div>
@@ -42,3 +42,5 @@
 					</div>
 				</div>
 			</section>
+				</c:if>
+			

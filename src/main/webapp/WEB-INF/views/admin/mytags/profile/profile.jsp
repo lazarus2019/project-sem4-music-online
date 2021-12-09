@@ -27,39 +27,7 @@
 							<p class="mb-0 font-size-12">View personal profile details.</p>
 						</div>
 					</div>
-				</a> <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
-					<div class="media align-items-center">
-						<div class="rounded iq-card-icon iq-bg-primary">
-							<i class="ri-profile-line"></i>
-						</div>
-						<div class="media-body ml-3">
-							<h6 class="mb-0 ">Edit Profile</h6>
-							<p class="mb-0 font-size-12">Modify your personal details.</p>
-						</div>
-					</div>
-				</a> <a href="account-setting.html"
-					class="iq-sub-card iq-bg-primary-hover">
-					<div class="media align-items-center">
-						<div class="rounded iq-card-icon iq-bg-primary">
-							<i class="ri-account-box-line"></i>
-						</div>
-						<div class="media-body ml-3">
-							<h6 class="mb-0 ">Account settings</h6>
-							<p class="mb-0 font-size-12">Manage your account parameters.</p>
-						</div>
-					</div>
-				</a> <a href="privacy-setting.html"
-					class="iq-sub-card iq-bg-primary-hover">
-					<div class="media align-items-center">
-						<div class="rounded iq-card-icon iq-bg-primary">
-							<i class="ri-lock-line"></i>
-						</div>
-						<div class="media-body ml-3">
-							<h6 class="mb-0 ">Privacy Settings</h6>
-							<p class="mb-0 font-size-12">Control your privacy parameters.</p>
-						</div>
-					</div>
-				</a>
+				</a> 
 				<div class="d-inline-block w-100 text-center p-3">
 					<a class="bg-primary iq-sign-btn"
 						href="${pageContext.request.contextPath }/user/login/logout"

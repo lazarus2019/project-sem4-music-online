@@ -128,4 +128,9 @@ public class PackageInfoServiceImpl implements PackageInfoService {
 		return result;
 	}
 
+	@Override
+	public PackageInfo checkPackage(int accountId) {
+		return packageInfoRepository.getTheLastSignPackage(accountId);
+	}
+
 }

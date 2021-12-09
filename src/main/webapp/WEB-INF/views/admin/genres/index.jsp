@@ -46,11 +46,7 @@
                                     	<a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" 
 					                        href="${pageContext.request.contextPath }/admin/genres/edit?id=${gen.id }">
                                         	 <i class="ri-pencil-line"></i>
-                                        </a>
-                                        <a class="bg-primary delete-btn" onclick="delete_genres(this)" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" 
-                                        	 data-id="${gen.id}">
-                                        	 <i class="ri-delete-bin-line"></i>
-                                        </a>
+                                        </a>                                        
                                        </div>
                                     </td>
                                  </tr>

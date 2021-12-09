@@ -50,10 +50,7 @@
                                 <a href="${pageContext.request.contextPath }/package">
                                     <i class="las la-crown yellow__icon"></i> Upgrade to Premium <i
                                         class="las la-crown yellow__icon"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="las la-user-cog"></i> Settings
-                                </a>
+                                </a>                            
                                 
                                 <a href="${pageContext.request.contextPath }/user/login/logout">
                                     <i class="las la-sign-out-alt"></i> Log out

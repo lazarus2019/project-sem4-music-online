@@ -351,7 +351,6 @@ public class TrackServiceImpl implements TrackService {
 
 	@Override
 	public List<TrackInfo> searchByTitle(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		return trackRepository.searchByTitle(keyword);
 	}
 }

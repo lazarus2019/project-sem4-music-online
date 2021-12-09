@@ -179,100 +179,13 @@
                             <li><a href="albums.html">Albums</a></li>
                         </ul> -->
                         <ul class="navbar-nav ml-auto navbar-list">
-                            <li class="nav-item nav-icon">
-                                <div class="iq-search-bar">
-                                    <form action="#" class="searchbox">
-                                        <input type="text" class="text search-input" placeholder="Search Here..">
-                                        <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
-                                        <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
-                                    </form>
-                                </div>
-                            </li>
-                            <li class="nav-item nav-icon search-content">
-                                <a href="#" class="search-toggle iq-waves-effect text-gray rounded"><span
-                              class="ripple rippleEffect "></span>
-                           <i class="ri-search-line text-black"></i>
-                        </a>
-                                <form action="#" class="search-box p-0">
-                                    <input type="text" class="text search-input" placeholder="Type here to search...">
-                                    <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
-                                    <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
-                                </form>
-                            </li>
-                            <li class="nav-item nav-icon">
-                                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
-                                    <i class="las la-cog"></i>
-                                    <span class=" dots"></span>
-                                </a>
-                            </li>
+                                                        
+                            
                             
                             <!-- mailbox -->
                             <mailbox></mailbox>
                             <!-- mailbox end -->
-                            
-                            <li class="nav-item nav-icon">
-                                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
-                                    <i class="ri-notification-line block"></i>
-                                    <span class="notice-icon dots badge badge-primary">+</span>
-                                </a>
-                                <div class="iq-sub-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                        <div class="iq-card-body p-0">
-                                            <div class="bg-primary p-3">
-                                                <h5 class="mb-0 text-white">All Notifications<small class="badge  badge-light float-right pt-1">4</small></h5>
-                                            </div>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded img-fluid" src="${pageContext.request.contextPath }/resources/admin/images/user/01.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Emma Watson Barry</h6>
-                                                        <small class="float-right">Just Now</small>
-                                                        <p class="mb-0">95 MB</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded img-fluid" src="${pageContext.request.contextPath }/resources/admin/images/user/02.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">New customer is join</h6>
-                                                        <small class="float-right">5 days ago</small>
-                                                        <p class="mb-0">Cyst Barry</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded img-fluid" src="${pageContext.request.contextPath }/resources/admin/images/user/03.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">Two customer is left</h6>
-                                                        <small class="float-right">2 days ago</small>
-                                                        <p class="mb-0">Cyst Barry</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="iq-sub-card">
-                                                <div class="media align-items-center">
-                                                    <div class="">
-                                                        <img class="avatar-40 rounded img-fluid" src="${pageContext.request.contextPath }/resources/admin/images/user/04.jpg" alt="">
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                                        <small class="float-right">3 days ago</small>
-                                                        <p class="mb-0">Cyst Barry</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+
                             <t:profile/>
                         
                         </ul>

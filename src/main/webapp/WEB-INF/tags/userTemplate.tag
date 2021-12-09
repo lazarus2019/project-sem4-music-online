@@ -116,10 +116,12 @@
             <a href="${pageContext.request.contextPath }/contact">Contact</a>
             </li>
         </ul>
-    
-            <!-- notification button -->
-            <t:notification />
-            <!-- end notification button -->
+    		
+    		<c:if test="${pageContext.request.userPrincipal.name != null}">
+	            <!-- notification button -->
+	            <t:notification />
+	            <!-- end notification button -->
+            </c:if>
 
 
     		<t:nickname/> 
@@ -209,7 +211,7 @@
 						<i class="las la-plus small__icon"></i>
 						<span>Add to Playlist</span>
 					</a>
-					<a href="${pageContext.request.contextPath }/uploads/audio/tracks/song1.mp3" download class="dropdown-song-link share-link" href="abc.com">
+					<a href="${pageContext.request.contextPath }/uploads/audio/tracks/song1.mp3" download class="dropdown-song-link share-link" id="download-song-url">
 						<i class="las la-share small__icon"></i>
 						<span>Dowload</span>
 					</a>
@@ -1097,6 +1099,7 @@
 	            audio.load()
 	            audio.autoplay = true
 	        }
+	        document.querySelector('#download-song-url').href = this.currentSong.path
 	        this.renderLyrics()
 	        lyricThumbnail.src = this.currentSong.image
 	    }
@@ -1460,6 +1463,7 @@
 	    }
 	    this.renderLyrics()
 	    lyricThumbnail.src = this.currentSong.image
+	    document.querySelector('#download-song-url').href = this.currentSong.path
 	},
 	activeSong: function () {
 	    const oldSong = document.querySelector('.playlist__list-item.active')
@@ -1914,7 +1918,7 @@
 	                for (var i = 0; i < artists.length; i++) {
 
 	                    htmls += "<a href='${pageContext.request.contextPath}/artist/id/" + artists[i].id + "' class='artist-box'><div class='artist-image-box'>" +
-	                        "<img src='${pageContext.request.contextPath}/resources/user/img/artists/" + artists[i].image + "'></div>" +
+	                        "<img src='${pageContext.request.contextPath}/uploads/images/artist/" + artists[i].image + "'></div>" +
 	                        "<p class='artist-name'>" + artists[i].nickname + "</p></a>"
 	                }
 	                $("#artist-container").html(htmls);
@@ -1950,7 +1954,7 @@
                        }
 	                    htmls += "<div class='track-box' data-id='" + tracks[i].id + "' onclick='getTrackById(this)'><div class='track-box-image'>" +
 	                        "<img src='${pageContext.request.contextPath}/uploads/images/track/" + tracks[i].thumbnail + "' /></div>" +
-	                        "<div class='track-box-content'><p>" + tracks[i].title + "</p><span>"+ singer + "</span></div></div>"
+	                        "<div class='track-box-content' style='width: 150px;'><p>" + tracks[i].title + "</p><span class='no-wrap'>"+ singer + "</span></div></div>"
 	                }
 	                $("#track-container").html(htmls);
 	            }

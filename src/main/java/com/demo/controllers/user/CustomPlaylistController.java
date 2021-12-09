@@ -95,6 +95,22 @@ public class CustomPlaylistController {
 
 		return "customPlaylist/playlistDetail";
 	}
+	
+	@RequestMapping(value = { "albumDetail/{id}" }, method = RequestMethod.GET)
+	public String albumDetail(@PathVariable("id") int id, ModelMap modelMap) {
+		
+		Playlist playlist = playlistService.find(id);
+		CustomPlaylistModel customPlaylistModel = new CustomPlaylistModel(playlist);
+		modelMap.put("playlist", customPlaylistModel);
+		List<TrackCustomModel> trackCustomModels = new ArrayList<TrackCustomModel>();
+		for (Track track : playlist.getTracks()) {
+			TrackCustomModel trackCustomModel = new TrackCustomModel(track);
+			trackCustomModels.add(trackCustomModel);
+		}
+		modelMap.put("tracks", trackCustomModels);
+		
+		return "album/albumDetail";
+	}
 
 	@RequestMapping(value = { "delete/{id}" }, method = RequestMethod.GET)
 	public String delete(@PathVariable("id") int id, ModelMap modelMap) {

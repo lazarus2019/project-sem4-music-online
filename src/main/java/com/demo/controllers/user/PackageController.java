@@ -1,11 +1,15 @@
 package com.demo.controllers.user;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.time.ZoneId;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.naming.java.javaURLContextFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -23,6 +27,7 @@ import com.demo.entities.PackageInfo;
 import com.demo.entities.Playlist;
 import com.demo.entities.ServicePackage;
 import com.demo.entities.Status;
+import com.demo.helpers.CalculateDateTimeHelper;
 import com.demo.paypal.PayPalConfig;
 import com.demo.paypal.PayPalResult;
 import com.demo.paypal.PayPalSucess;
@@ -93,9 +98,18 @@ public class PackageController {
 			"add-pack-info" }, method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> addPackageInfo(@RequestParam(value = "id", required = false) int id) {
 		try {
+			CalculateDateTimeHelper dateTimeHelper = new CalculateDateTimeHelper();
+			int accountId = Integer.parseInt(cookieService.getValue("acc_id", null));
+			PackageInfo lastPackageInfo = packageInfoService.checkPackage(accountId);
+			long expiration = 0;
+			if(packageInfoService.checkPremiumByAccountId(accountId)) {
+				Date date = lastPackageInfo.getExpirationDate();
+				LocalDate currentDate = LocalDate.now();
+				LocalDate pastDate = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+				expiration = dateTimeHelper.differentOfDay(pastDate, currentDate);
+			}
 			boolean flag = false;
 			ServicePackage servicePackage = packageService.findById(id);
-			int accountId = Integer.parseInt(cookieService.getValue("acc_id", null));
 			PackageInfo packageInfo = new PackageInfo();
 			packageInfo.setAccount(accountService.findById(accountId));
 			packageInfo.setServicePackage(servicePackage);
@@ -103,7 +117,7 @@ public class PackageController {
 			Date purchaseDate = new Date();
 			packageInfo.setPurchaseDate(purchaseDate);
 			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.MONTH, servicePackage.getDuration());
+			calendar.add(Calendar.DATE, (int) (servicePackage.getDuration()*30 + expiration));
 			Date expirationDate = calendar.getTime();
 			packageInfo.setExpirationDate(expirationDate);
 			PackageInfo savePackageInfo = packageInfoService.save(packageInfo);

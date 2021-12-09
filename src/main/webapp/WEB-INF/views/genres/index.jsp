@@ -27,7 +27,7 @@
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="post">
                         <a href="${pageContext.request.contextPath }/track/id/${genres.id}" class="post__img">
-                            <img src="${pageContext.request.contextPath }/uploads/images/posts/${genres.thumbnail }" alt="">
+                            <img src="${pageContext.request.contextPath }/uploads/images/genres/${genres.thumbnail }" alt="">
                         </a>
 
 						<!-- 

@@ -1,6 +1,7 @@
 package com.demo.controllers.admin;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -277,10 +278,10 @@ public class ManageTrackController implements ServletContextAware {
 	public ResponseEntity<Boolean> delete(@RequestParam("id") int trackId) {
 		boolean result = false;
 		Track track = trackService.findById(trackId);
-		artistTrackService.removeAllArtistFromTrack(track);
-		for (Playlist album : track.getPlaylists()) {
-			track.getPlaylists().remove(album);
+		if(track.getPlaylists() != null) {
+			track.setPlaylists(new HashSet<Playlist>(0));
 		}
+		artistTrackService.removeAllArtistFromTrack(track);
 		commentService.removeAllCommentInTrack(track);
 		trackService.delete(trackId);
 

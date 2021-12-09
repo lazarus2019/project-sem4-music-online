@@ -27,7 +27,7 @@
                                 <a href="${pageContext.request.contextPath}/artist/id/${artist.id}" class="artist-box"
                                     data-id="${artist.id }">
                                     <div class="artist-image-box">
-                                        <img src="${pageContext.request.contextPath}/uploads/images/artists/${artist.image}"
+                                        <img src="${pageContext.request.contextPath}/uploads/images/artist/${artist.image}"
                                             alt="">
                                     </div>
                                     <p class="artist-name">${artist.nickname }</p>
@@ -51,9 +51,9 @@
                                         <img
                                             src="${pageContext.request.contextPath}/uploads/images/track/${track.thumbnail}" />
                                     </div>
-                                    <div class="track-box-content">
+                                    <div class="track-box-content" style="width: 150px;">
                                         <p>${track.title }</p>
-                                        <span>
+                                        <span class="no-wrap">
                                         <c:forEach var="artist" items="${track.accounts }" varStatus="j">
 		                                    <a href="${pageContext.request.contextPath }/artist/id/${artist.id }">${artist.nickname}</a>
 		                                    <c:if test="${(j.index+1) < track.artistLength}">, </c:if>
@@ -82,7 +82,7 @@
                                             alt="">
                                     </div>
                                     <div class="album-box-content">
-                                        <a href="${pageContext.request.contextPath}/customPlaylist/playlistDetail/${album.id}"><p>${album.title}</p></a>
+                                        <a href="${pageContext.request.contextPath}/customPlaylist/albumDetail/${album.id}"><p>${album.title}</p></a>
                                         <span>                                       
                                             <a href="${pageContext.request.contextPath}/artist/id/${album.artistId}">J${album.artistNickName }</a>
                                         </span>

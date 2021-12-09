@@ -1236,3 +1236,7 @@ ul.iq-edit-profile li:last-child a {
     color: white;
 
 }
+
+.no-wrap{
+	white-space: nowrap;
+}

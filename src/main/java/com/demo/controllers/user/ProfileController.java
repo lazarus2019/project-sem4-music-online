@@ -127,7 +127,6 @@ public class ProfileController implements ServletContextAware {
 					newAccount.setNickname(account.getNickname());
 					newAccount.setFirstname(account.getFirstname());
 					newAccount.setLastname(account.getLastname());
-					newAccount.setEmail(account.getEmail());
 					newAccount.setBirthday(account.getBirthday());
 					newAccount.setGender(account.getGender());
 					newAccount.setCountry(account.getCountry());
