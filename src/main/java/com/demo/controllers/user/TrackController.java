@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.poi.openxml4j.opc.internal.FileHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -388,19 +389,25 @@ public class TrackController implements ServletContextAware{
 					modelMap.put("accountSignined", account) ; 
 					int artistId = account.getId();
 					if(artistTrackService.checkTrackOwner(artistId, trackId)) {
+						String directionAudio = "audio/track/";
+						String directionThumbnail = "images/track/";
+						
 						Track track = trackService.findById(trackId);
-						
-						if(track.getPlaylists() != null) {
-							track.setPlaylists(new HashSet<Playlist>(0));
-						}
-						
-						artistTrackService.removeAllArtistFromTrack(track);
-						
-						
-						commentService.removeAllCommentInTrack(track);
-						
-						trackService.delete(trackId);
-						result = "OK";						
+						boolean isDeleteAudio = FileUploadHelper.deleteFile(track.getFileName(), directionAudio, servletContext);
+						boolean isDeleteThumbnail = FileUploadHelper.deleteFile(track.getThumbnail(), directionThumbnail, servletContext);
+						if(isDeleteAudio && isDeleteThumbnail) {
+							if(track.getPlaylists() != null) {
+								track.setPlaylists(new HashSet<Playlist>(0));
+							}
+							
+							artistTrackService.removeAllArtistFromTrack(track);
+							
+							
+							commentService.removeAllCommentInTrack(track);
+							
+							trackService.delete(trackId);							
+							result = "OK";						
+						}						
 					}
 				}			
 			}

@@ -127,7 +127,7 @@
 				                     <p>
 				                     <c:set var="total" value="0"></c:set>
 				                     <c:forEach var="packageInfo" items="${packageInfos }">
-				                     	<c:set var="total" value="${total + packageInfo.servicePackage.price}"></c:set>
+				                     	<c:set var="total" value="${total + packageInfo.price}"></c:set>
 				                     </c:forEach>
 				                     <fmt:formatNumber var="totalOk" value="${total}"  maxFractionDigits="2" />
 				                     Total: ${totalOk }
@@ -149,7 +149,7 @@
 				                              		<tr>
 				                              		<td class="text-center">${i.index + 1 }</td>
 				                              		<td>${packageInfo.servicePackage.name }</td>
-				                              		<td>$${packageInfo.servicePackage.price }</td>
+				                              		<td>$${packageInfo.price }</td>
 				                              		<td>${packageInfo.account.nickname }</td>
 				                              		<td>${packageInfo.purchaseDate }</td>
 				                              		<td>${packageInfo.expirationDate }</td>
@@ -197,6 +197,7 @@
 				                              <thead>
 				                                 <tr>
 				                                    <th>No</th>
+				                                    <th>Price</th>
 				                                    <th>Nickname</th>
 				                                    <th>Purchase Date</th>
 				                                    <th>Expiration Date</th>
@@ -284,13 +285,15 @@
 	        },
 	        url: '${pageContext.request.contextPath}/admin/package/getAccountsSign',
 	        success: function (packageInfos) {
-		        if(packageInfos){
+		        if(packageInfos){			        
 			        if(packageInfos.length > 0){
+				        let total = 0
 				        let htmls = ""
 				        	htmls += "<table class='table table-striped table-bordered' id='table-accounts' style='width:100%'>"
 				        		htmls += "<thead>"
 				        		htmls += "<tr>"
 				        		htmls += "<th>No</th>"
+				        		htmls += "<th>Price</th>"
 				        		htmls += "<th>Nickname</th>"
 				        		htmls += "<th>Purchase Date</th>"
 				        		htmls += "<th>Expiration Date</th>"
@@ -298,9 +301,11 @@
 				        		htmls += "</thead>"
 				        		htmls += "<tbody class='list-accounts-body'>"
 				        for(let i = 0; i < packageInfos.length; i++){
+					        total += packageInfos[i].price
 				        	htmls += "<tr>"
 				        	htmls += "<td>"+ (i+1) +"</td>"
 				        	htmls += "<td>"+ packageInfos[i].account_nickname +"</td>"
+				        	htmls += "<td>"+ packageInfos[i].price +"</td>"
 				        	htmls += "<td>"+ packageInfos[i].purchase_date +"</td>"
 				        	htmls += "<td>"+ packageInfos[i].expiration_date +"</td>"
 				        	htmls += "</tr>"
@@ -308,7 +313,7 @@
 					   	}
 				        		htmls += "</tbody>"
 				        			htmls += "</table>"
-				        $('.package-total').text(Math.round(packageInfos[0].price * packageInfos.length * 100) / 100)
+				        $('.package-total').text(Math.round(total * 100) / 100)
 					   	$('.package-amount').text(packageInfos.length)
 					   	$('.table-here').html(htmls)
 					   	$('#table-accounts').DataTable();

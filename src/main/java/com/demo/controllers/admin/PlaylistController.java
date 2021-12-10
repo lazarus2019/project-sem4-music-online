@@ -2,6 +2,7 @@ package com.demo.controllers.admin;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -230,9 +231,7 @@ public class PlaylistController implements ServletContextAware {
 			boolean result = false;
 			Playlist playlist = playlistService.find(playlistId);
 			accountPlaylistService.removeAccountHasAlbum(playlist);
-			for (Track track : playlist.getTracks()) {
-				playlist.getTracks().remove(track);
-			}
+			playlist.setTracks(new HashSet<Track>(0));
 			playlistService.delete(playlistId);
 
 			// send notification

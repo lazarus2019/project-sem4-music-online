@@ -378,14 +378,16 @@ public class PlaylistUserController implements ServletContextAware{
 					int artistId = account.getId();
 					if(accountPlaylistService.checkAlbumOwner(artistId, albumId)) {
 						Playlist album = playlistService.find(albumId);
-						
-						accountPlaylistService.removeAccountHasAlbum(album);
-						
-						for (Track track : album.getTracks()) {
-							album.getTracks().remove(track);
-							playlistService.save(album);
-						}						
-						result = "OK";					
+						String directionThumbnail = "images/playlist/";
+						boolean isDelete = FileUploadHelper.deleteFile(album.getThumbnail(), directionThumbnail, servletContext);
+						if(isDelete) {							
+							accountPlaylistService.removeAccountHasAlbum(album);
+							
+							album.setTracks(new HashSet<Track>(0));
+							
+							playlistService.delete(albumId);
+							result = "OK";					
+						}	
 					}
 				}			
 			}

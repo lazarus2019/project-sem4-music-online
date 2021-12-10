@@ -1,8 +1,12 @@
+<%-- <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %> --%>
 <%@ tag language="java" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ attribute name="title" required="true"  rtexprvalue="true"%> 
 <%@ attribute name="content" fragment="true" %> 
 <%@ taglib prefix="t" uri="http://mytags.com" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- Hien thi chu co dau -->
+<%-- <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"  %> --%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +14,8 @@
 <!-- Mirrored from dmitryvolkov.me/demo/volna/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Nov 2021 02:08:35 GMT -->
 
 <head>
-	<meta charset="utf-8">
+	<!-- Hien thi chu co dau -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- CSS -->
@@ -203,7 +208,7 @@
 					<i class="las la-braille audio__icon"></i>
 				</button>
 				<div class="dropdown-song-menu">
-					<a class="dropdown-song-link favorite-link" data-favorite="true">
+					<a onclick="add_to_liked(this)" class="dropdown-song-link favorite-link add-to-liked-btn" data-favorite="true">
 						<i class="las la-heart"></i>
 						<span>Favorite</span>
 					</a>
@@ -213,7 +218,7 @@
 					</a>
 					<a href="${pageContext.request.contextPath }/uploads/audio/tracks/song1.mp3" download class="dropdown-song-link share-link" id="download-song-url">
 						<i class="las la-share small__icon"></i>
-						<span>Dowload</span>
+						<span>Download</span>
 					</a>
 					
 				</div>
@@ -660,10 +665,12 @@
 	        this.elements.singer = this.elements.root.querySelector('.playlist__song-content span')
 	        this.elements.removeBtn = this.elements.root.querySelector('.remove-song')
 	        this.elements.songInfo = this.elements.root.querySelector('.song-info-player')
+	        this.elements.addToLike = this.elements.root.querySelector('.playlist-add-like-btn')
 
 	        this.elements.root.dataset.id = id
 	        this.elements.songInfo.value = id
 	        this.elements.removeBtn.dataset.id = id
+	        this.elements.addToLike.dataset.id = id
 	        this.elements.image.src = image
 	        this.elements.title.textContent = title
 	        this.elements.singer.textContent = singer
@@ -691,9 +698,9 @@
 	                    <button class="btn-dropdown-playlist-menu default-btn" type="button">
 	                        <i class="las la-braille audio__icon"></i>
 	                        <div class="dropdown__playlist-item-menu">
-	                <a class="dropdown-song-link favorite-link" data-favorite="true">
+	                <a onclick="add_to_liked(this)" class="dropdown-song-link favorite-link playlist-add-like-btn" data-favorite="true">
 	                    <i class="las la-heart"></i>
-	                    <span>Favorite</span>
+	                    <span>Add to Favorite</span>
 	                    </a>
 	                    <a class="dropdown-song-link">
 	                    <i class="las la-plus small__icon"></i>
@@ -702,11 +709,7 @@
 	                    <a class="dropdown-song-link share-link" href="abc.com">
 	                    <i class="las la-share small__icon"></i>
 	                    <span>Share</span>
-	                </a>
-	                <a class="dropdown-song-link" href="#">
-	                    <i class="las la-info-circle small__icon"></i>
-	                    <span>Song Info</span>
-	                    </a>
+	                </a>	                
 	                <a class="dropdown-song-link remove-song">
 	                    <i class="las la-minus-circle small__icon"></i>
 	                    <span>Remove Song</span>
@@ -1100,6 +1103,7 @@
 	            audio.autoplay = true
 	        }
 	        document.querySelector('#download-song-url').href = this.currentSong.path
+	        document.querySelector('.add-to-liked-btn').dataset.id = this.currentSong.id
 	        this.renderLyrics()
 	        lyricThumbnail.src = this.currentSong.image
 	    }
@@ -1464,6 +1468,7 @@
 	    this.renderLyrics()
 	    lyricThumbnail.src = this.currentSong.image
 	    document.querySelector('#download-song-url').href = this.currentSong.path
+	    document.querySelector('.add-to-liked-btn').dataset.id = this.currentSong.id
 	},
 	activeSong: function () {
 	    const oldSong = document.querySelector('.playlist__list-item.active')

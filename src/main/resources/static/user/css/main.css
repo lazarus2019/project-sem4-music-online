@@ -7666,7 +7666,7 @@ body::-webkit-scrollbar-thumb {
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
-    width: 200px;
+    width: 180px;
     overflow: hidden;
 }
 

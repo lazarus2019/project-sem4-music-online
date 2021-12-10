@@ -44,7 +44,7 @@
 												<i class="las la-edit small__icon"></i>
 												<span>Edit Track</span>
 									</a>
-									<a class="dropdown-song-link-menu favorite-link"
+									<a onclick="add_to_liked(this)" data-id="${track.id }" class="dropdown-song-link-menu favorite-link"
 										data-favorite="true">
 										<i class="las la-heart"></i>
 										<span>Favorite</span>
@@ -52,7 +52,18 @@
 									<a class="dropdown-song-link-menu">
 										<i class="las la-plus small__icon"></i>
 										<span>Add to Playlist</span>
-									</a>																		
+									</a>	
+									<!-- Start add playlist -->
+                                                <a class="dropdown-song-link-menu dropleft check-action text-center">
+                                                    <a class="bg-primary dropdown-toggle toggle-show-playlist" type="button" id="dropdownMenu1-1" title="Add to playlist" data-toggle="dropdown" data-id="${track.id }">
+														<i class="ri-add-fill"></i>
+													</a>
+													<!--Menu-->
+                                                    <div class="dropdown-primary show-playlist-body scrollable-menu" style="top: 60px;width: auto;position: absolute;right: 180px;background: #fff; box-shadow: 0 2px 6px 2px rgb(34 38 41 / 15%); padding: 10px; border-radius: 15px;" id="your-custom-id">
+														<!-- Show menu by call ajax -->
+													</div>
+                                                </a>
+                                                <!-- END add playlist -->																	
 								</div>
 							</button>
 						<div class="album__cover">
