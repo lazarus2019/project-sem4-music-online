@@ -81,7 +81,7 @@
                                         <img src="${pageContext.request.contextPath}/uploads/images/playlist/${album.thumbnail}"
                                             alt="">
                                     </div>
-                                    <div class="album-box-content">
+                                    <div class="album-box-content" style="width: 150px;">
                                         <a href="${pageContext.request.contextPath}/customPlaylist/albumDetail/${album.id}"><p>${album.title}</p></a>
                                         <span>                                       
                                             <a href="${pageContext.request.contextPath}/artist/id/${album.artistId}">J${album.artistNickName }</a>

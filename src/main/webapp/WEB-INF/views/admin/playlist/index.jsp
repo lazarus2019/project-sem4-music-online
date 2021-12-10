@@ -153,7 +153,7 @@
 					                                    	<c:if test="${album.status == 3 }"><button type="button" class="badge iq-bg-danger toggle-album-status" data-id="${album.id}">Hidden</button></c:if>
 					                                    </td>
 					                                    <td>
-					                                       <p class="mb-0">${album.description }</p>
+					                                       <p class="mb-0" style="height: 156px; overflow-y: auto">${album.description }</p>
 					                                    </td>
 					                                    <td>
 					                                       <div class="flex align-items-center text-center list-user-action">

@@ -37,7 +37,7 @@
                                 <h3 class="text-large">${arti.nickname }</h3>
                                 <p class="nickname">${arti.countryname }</p>
                                 <p class="follower clr-blue">
-										<i class="las la-users audio__icon"></i>${arti.follower } k followers</p>
+										<i class="las la-users audio__icon"></i>${arti.follower } followers</p>
                                 <button
 										class="btn-artist-play-all btn-glow">PLAY ALL</button>
                             </div>
@@ -65,8 +65,9 @@
                             </div>
                             <ul class="list__tracks">
                             	<c:forEach var="bs" items="${trac }">
-                                <li class="list-track-item">
-                                    <div class="track-left">
+                            	<c:if test="${bs.status.id == 1 }">
+                            		<li class="list-track-item">
+                                    <div class="track-left" onclick="getTrackById(this)" data-id="${bs.id}">
                                         <div class="track-image mr-3">
                                             <img src="${pageContext.request.contextPath }/uploads/images/track/${bs.thumbnail}"
 														alt="">
@@ -113,6 +114,8 @@
                                         </button>
                                     </div>
                                 </li>
+                            	</c:if>
+                                
                                 </c:forEach>
                                
                             </ul>
@@ -125,56 +128,57 @@
                             <ul class="list__tracks">
                             	<c:forEach var="bf" items="${album }">
                             	
-                            	
-                                <li class="list-track-item">
-                                    <div class="track-left">
-                                        <div class="track-image mr-3">
-                                            <img src="${pageContext.request.contextPath }/uploads/images/track/${bf.thumbnail}"
-														alt="">
-                                        </div>
-                                        <div class="track-content">
-                                            <h3>${bf.title }</h3>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                    <div class="track-right">
-                                      <!--   <button
-													class="circle-icon-sm bg-clr-red mr-3">
-                                            <i class="las la-heart"></i>
-                                        </button> -->
-            	                        
-                                        <div class="duration-track">${bf.likes } k <i
-														class="las la-heart"></i>
-												</div>
-                                        <button class="btn-song-menu">
-                                            <i class="las la-braille audio__icon"></i>
-                                            <div class="song__menu-list">
-                                                 <a onclick="add_to_liked(this)" data-id="${bf.id }" class="dropdown-song-link-menu favorite-link " data-favorite="true">
-                                                    <i class="las la-heart"></i>
-                                                    <span>Favorite</span>
-                                                </a>
-                                                
-                                                <!-- Start add playlist -->
-                                                <a class="dropdown-song-link-menu dropleft check-action text-center">
-                                                    <a class="bg-primary dropdown-toggle toggle-show-playlist" type="button" id="dropdownMenu1-1" title="Add to playlist" data-toggle="dropdown" data-id="${bf.id }">
-														<i class="ri-add-fill"></i>
-													</a>
-													<!--Menu-->
-                                                    <div class="dropdown-primary show-playlist-body scrollable-menu" style="top: 60px;width: auto;position: absolute;right: 180px;background: #fff; box-shadow: 0 2px 6px 2px rgb(34 38 41 / 15%); padding: 10px; border-radius: 15px;" id="your-custom-id">
-														<!-- Show menu by call ajax -->
+                            	<c:if test="${bf.playlistCategory.id == 3 && bf.status.id == 1 }">
+	                                <li class="list-track-item">
+	                                    <div class="track-left" data-id="${bf.id}" onclick="getListTrackByAlbumId(this)">
+	                                        <div class="track-image mr-3">
+	                                            <img src="${pageContext.request.contextPath }/uploads/images/playlist/${bf.thumbnail}"
+															alt="">
+	                                        </div>
+	                                        <div class="track-content">
+	                                            <h3>${bf.title }</h3>
+	                                            <p></p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="track-right">
+	                                      <!--   <button
+														class="circle-icon-sm bg-clr-red mr-3">
+	                                            <i class="las la-heart"></i>
+	                                        </button> -->
+	            	                        
+	                                        <div class="duration-track">${bf.likes } k <i
+															class="las la-heart"></i>
 													</div>
-                                                </a>
-                                                <!-- END add playlist -->
-                                                 
-                                              
-                                            </div>
-                                             <div class="dropleft check-action text-center">
-												
-												
-											</div>
-                                        </button>
-                                    </div>
-                                </li>
+	                                        <button class="btn-song-menu">
+	                                            <i class="las la-braille audio__icon"></i>
+	                                            <div class="song__menu-list">
+	                                                 <a onclick="add_to_liked(this)" data-id="${bf.id }" class="dropdown-song-link-menu favorite-link " data-favorite="true">
+	                                                    <i class="las la-heart"></i>
+	                                                    <span>Favorite</span>
+	                                                </a>
+	                                                
+	                                                <!-- Start add playlist -->
+	                                                <a class="dropdown-song-link-menu dropleft check-action text-center">
+	                                                    <a class="bg-primary dropdown-toggle toggle-show-playlist" type="button" id="dropdownMenu1-1" title="Add to playlist" data-toggle="dropdown" data-id="${bf.id }">
+															<i class="ri-add-fill"></i>
+														</a>
+														<!--Menu-->
+	                                                    <div class="dropdown-primary show-playlist-body scrollable-menu" style="top: 60px;width: auto;position: absolute;right: 180px;background: #fff; box-shadow: 0 2px 6px 2px rgb(34 38 41 / 15%); padding: 10px; border-radius: 15px;" id="your-custom-id">
+															<!-- Show menu by call ajax -->
+														</div>
+	                                                </a>
+	                                                <!-- END add playlist -->
+	                                                 
+	                                              
+	                                            </div>
+	                                             <div class="dropleft check-action text-center">
+													
+													
+												</div>
+	                                        </button>
+	                                    </div>
+	                                </li>
+                            	</c:if>
                             </c:forEach>
                             </ul>
                         </div>

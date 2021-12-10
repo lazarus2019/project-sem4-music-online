@@ -175,12 +175,12 @@ public class PlayerController {
 			Status status = new Status();
 			status.setId(1);
 			PlaylistCategory playlistCategory = new PlaylistCategory();
-			playlistCategory.setId(1);
+			playlistCategory.setId(4);
 			playlist.setDescription(title);
 			playlist.setLikes(0);
 			playlist.setPublishDate(new Date());
 			playlist.setLastUpdated(new Date());
-			playlist.setThumbnail(title);
+			playlist.setThumbnail("custom.jpg");
 			playlist.setStatus(status);
 			playlist.setTitle(title);
 			playlist.setPlaylistCategory(playlistCategory);

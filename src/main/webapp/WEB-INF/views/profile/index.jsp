@@ -334,8 +334,7 @@
                                                 <div class="sign__group">
                                                     <s:label
 															path="username" class="sign__label">Username</s:label>
-                                                    <s:input
-															path="username" class="sign__input"  />
+                                                    <input value ="${accountUpdate.username }" class="sign__input" required="required" readonly/>
                                                 </div>
                                             </div> 
                                             </c:if>
@@ -376,8 +375,7 @@
                                                 <div class="sign__group">
                                                 	<s:label path="email"
 															class="sign__label">Email</s:label>
-                                                    <s:input
-															path="email" class="sign__input" required="required"/>
+                                                    <input value ="${accountUpdate.email }" class="sign__input" required="required" readonly/>
                                                 </div>
                                             </div>
                                             </c:if>

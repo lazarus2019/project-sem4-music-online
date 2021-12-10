@@ -75,7 +75,6 @@ public class BannerController implements ServletContextAware {
 		}
 		newBanner.setTitle(banner.getTitle());
 		newBanner.setDescription(banner.getDescription());
-		newBanner.setStatus(banner.isStatus());
 		bannerService.save(newBanner);
 		return "redirect:/admin/banner/index";
 	}

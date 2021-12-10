@@ -37,7 +37,10 @@
                            </div>
                            <div class="form-group">
                               <label>Thumbnail:</label>
-                              <input type="file" name="photo">
+                              <div class="file-upload-wrapper">
+							  <input type="file" name="photo">
+							</div>
+                              
                               <br>
                               <span>
                               	<img src="${pageContext.request.contextPath }/uploads/images/track/${thumbnail }" class="img-responsive rounded "  alt="thumbnail" width="300" height="300">

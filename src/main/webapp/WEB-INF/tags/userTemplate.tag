@@ -85,7 +85,7 @@
                     	<a href="${pageContext.request.contextPath }/recentplay"><i class="las la-headphones"></i> Recently Played</a>
                     </c:if>
                     <a href="${pageContext.request.contextPath }/record-chart"><i class="las la-sort-numeric-down"></i> Record Chart</a>
-
+					<a href="${pageContext.request.contextPath }/track/all"><i class="las la-stream"></i> Track</a>
                 </div>
             </li>
 
@@ -1760,10 +1760,25 @@
                             }
                              
 	                    addSongs(playTrack)
+			              Swal.fire({
+				    		  position: 'center',
+			        		  icon: 'success',
+			        		  title: 'The track now in listen playlist!',
+			        		  showConfirmButton: false,
+			        		  timer: 1500
+			        	});
 	                    var lyrics = renderLyrics(track.lyrics)
 	                    var songTitle = "<p>Song: " + track.title + " - " + singer + "</p>"
 	                    $(".lyric-content").html(songTitle + lyrics)
 	                    
+                    }else{
+                    	 Swal.fire({
+   			    		  position: 'center',
+   		        		  icon: 'info',
+   		        		  title: 'The track already in listen playlist!',
+   		        		  showConfirmButton: false,
+   		        		  timer: 1500
+   		        	});
                     }
                 }
 
@@ -1842,6 +1857,10 @@
             success: function (album) {
                 console.log(album)
                 if(album){
+                    
+                	songPlaylist = []
+                	updatePlaylist(PLAYLIST_STORAGE_KEY, songPlaylist)
+                	document.querySelector('.playlist__list').innerHTML = ""
                 	localStorage.setItem("album_id", album.id)
                     $('.playlist-title-text').text("Playing: " + album.title)
                     isAlbum = true
@@ -1859,6 +1878,13 @@
                 		playSong(songPlaylist[0].id)
 	                    plusListenForTrack(songPlaylist[0].id)
                 	}
+                	  Swal.fire({
+			    		  position: 'center',
+		        		  icon: 'success',
+		        		  title: 'Album now is the listen playlist!',
+		        		  showConfirmButton: false,
+		        		  timer: 1500
+		        	});
                 }
             }
         })
@@ -1977,8 +2003,8 @@
 	                for (var i = 0; i < albums.length; i++) {
 	                    htmls += "<div href='${pageContext.request.contextPath}/album/" + albums[i].id + "' class='album-box' data-id='" + albums[i].id + "' onclick='getListTrackByAlbumId(this)'><div class='album-box-image'>" +
 
-	                        "<img src='${pageContext.request.contextPath}/resources/user/img/playlist/" + albums[i].thumbnail + "'/></div>" +
-	                        "<div class='album-box-content'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/id/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
+	                        "<img src='${pageContext.request.contextPath}/uploads/images/playlist/" + albums[i].thumbnail + "'/></div>" +
+	                        "<div class='album-box-content' style='width: 150px;'><p>" + albums[i].title + "</p><a href='${pageContext.request.contextPath}/artist/id/" + albums[i].artistId + "'>" + albums[i].artistNickName + "</a></div></div>"
 	                }
 	                $("#album-container").html(htmls);
 	            }

@@ -122,10 +122,10 @@ public class AccountServiceImpl implements AccountService {
 		Status status = new Status();
 		status.setId(3);
 		liked.setStatus(status);
-		liked.setThumbnail("event1.jpg");
+		liked.setThumbnail("favorite.jpg");
 		liked.setPublishDate(new Date());
 		liked.setLastUpdated(new Date());
-		liked.setDescription("");
+		liked.setDescription("Favorite " + account.getId());
 		Playlist albumTmp = playlistService.save(liked);
 		if (albumTmp.getId() != null) {
 			accountPlaylistService.setOwnerAlbum(albumTmp, account.getId());
@@ -140,10 +140,10 @@ public class AccountServiceImpl implements AccountService {
 		Status status2 = new Status();
 		status2.setId(3);
 		recently.setStatus(status2);
-		recently.setThumbnail("event2.jpg");
+		recently.setThumbnail("recently.jpg");
 		recently.setPublishDate(new Date());
 		recently.setLastUpdated(new Date());
-		recently.setDescription("");
+		recently.setDescription("Recently " + account.getId());
 		Playlist albumTmp2 = playlistService.save(recently);
 		if (albumTmp2.getId() != null) {
 			accountPlaylistService.setOwnerAlbum(albumTmp2, account.getId());
